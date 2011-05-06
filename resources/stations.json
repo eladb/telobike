@@ -1,0 +1,634 @@
+[
+ {
+  "available_spaces": "0", 
+  "name": "\u05d0\u05d9\u05d9\u05e0\u05e9\u05d8\u05d9\u05d9\u05df 41", 
+  "available_bike": "0", 
+  "longitude": "34.796787405", 
+  "sid": "111", 
+  "latitude": "32.112894512"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d3\u05e8\u05da \u05e0\u05de\u05d9\u05e8-\u05e1\u05de\u05d9\u05e0\u05e8 \u05d4\u05e7\u05d9\u05d1\u05d5\u05e6\u05d9\u05dd", 
+  "available_bike": "0", 
+  "longitude": "34.7922633200001", 
+  "sid": "117", 
+  "latitude": "32.100912162"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d4\u05d3\u05e8 \u05d9\u05d5\u05e1\u05e3 - \u05de\u05e8\u05db\u05d6 \u05de\u05e1\u05d7\u05e8\u05d9", 
+  "available_bike": "0", 
+  "longitude": "34.818891944", 
+  "sid": "210", 
+  "latitude": "32.109852588"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d4\u05de\u05db\u05dc\u05dc\u05d4 \u05dc\u05d4\u05e0\u05d3\u05e1\u05d0\u05d9\u05dd", 
+  "available_bike": "0", 
+  "longitude": "34.818852367", 
+  "sid": "207", 
+  "latitude": "32.1142261320001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d7\u05d5\u05e3 \u05ea\u05dc \u05d1\u05e8\u05d5\u05da", 
+  "available_bike": "0", 
+  "longitude": "34.783310618", 
+  "sid": "107", 
+  "latitude": "32.121958423"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05dc\u05d5\u05d9 \u05d0\u05e9\u05db\u05d5\u05dc 26", 
+  "available_bike": "0", 
+  "longitude": "34.7890643200001", 
+  "sid": "114", 
+  "latitude": "32.1045776330001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e9\u05d9 \u05e2\u05d2\u05e0\u05d5\u05df 59", 
+  "available_bike": "0", 
+  "longitude": "34.7852221250001", 
+  "sid": "116", 
+  "latitude": "32.102326869"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05ea\u05d7\u05e0\u05ea \u05e8\u05db\u05d1\u05ea \u05d0\u05d5\u05e0\u05d1\u05e8\u05e1\u05d9\u05d8\u05d4", 
+  "available_bike": "0", 
+  "longitude": "34.8051153380001", 
+  "sid": "216", 
+  "latitude": "32.103199793"
+ }, 
+ {
+  "available_spaces": "9", 
+  "name": "\u05d0\u05d1\u05df \u05d2\u05d1\u05d9\u05e8\u05d5\u05dc 106-\u05d1\u05d9\u05ea \u05d4\u05d3\u05d5\u05d0\u05e8", 
+  "available_bike": "4", 
+  "longitude": "34.781789071", 
+  "sid": "324", 
+  "latitude": "32.084213608"
+ }, 
+ {
+  "available_spaces": "14", 
+  "name": "\u05d0\u05d1\u05df \u05d2\u05d1\u05d9\u05e8\u05d5\u05dc 124", 
+  "available_bike": "6", 
+  "longitude": "34.7822842640001", 
+  "sid": "319", 
+  "latitude": "32.0870919650001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d0\u05d1\u05df \u05d2\u05d1\u05d9\u05e8\u05d5\u05dc 182", 
+  "available_bike": "0", 
+  "longitude": "34.783461775", 
+  "sid": "311", 
+  "latitude": "32.0936428640001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d0\u05d1\u05df \u05d2\u05d1\u05d9\u05e8\u05d5\u05dc 28", 
+  "available_bike": "0", 
+  "longitude": "34.7819694990001", 
+  "sid": "346", 
+  "latitude": "32.0749257800001"
+ }, 
+ {
+  "available_spaces": "8", 
+  "name": "\u05d0\u05d5\u05e9\u05d9\u05e1\u05e7\u05d9\u05df 48", 
+  "available_bike": "9", 
+  "longitude": "34.778411142", 
+  "sid": "303", 
+  "latitude": "32.095411514"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d0\u05dc\u05e0\u05d1\u05d9 53", 
+  "available_bike": "0", 
+  "longitude": "34.770468565", 
+  "sid": "361", 
+  "latitude": "32.070215637"
+ }, 
+ {
+  "available_spaces": "16", 
+  "name": "\u05d0\u05dc\u05e0\u05d1\u05d9 90 \u05e4\u05d9\u05e0\u05ea \u05de\u05d0\u05d6\u05d4", 
+  "available_bike": "4", 
+  "longitude": "34.771511391", 
+  "sid": "368", 
+  "latitude": "32.066918651"
+ }, 
+ {
+  "available_spaces": "12", 
+  "name": "\u05d0\u05e8\u05dc\u05d5\u05d6\u05d5\u05e8\u05d5\u05d1 62", 
+  "available_bike": "6", 
+  "longitude": "34.7774045630001", 
+  "sid": "337", 
+  "latitude": "32.0863451600001"
+ }, 
+ {
+  "available_spaces": "17", 
+  "name": "\u05d1\u05d1\u05dc\u05d9 \u05e4\u05e2\u05de\u05d5\u05e0\u05d9 2", 
+  "available_bike": "2", 
+  "longitude": "34.7972374190001", 
+  "sid": "328", 
+  "latitude": "32.09505862"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d1\u05d2\u05d9\u05df 48 \u05e4\u05d9\u05e0\u05ea \u05d4\u05e8\u05db\u05d1\u05ea", 
+  "available_bike": "0", 
+  "longitude": "34.7799377000001", 
+  "sid": "371", 
+  "latitude": "32.0630965120001"
+ }, 
+ {
+  "available_spaces": "16", 
+  "name": "\u05d1\u05d5\u05d2\u05e8\u05e9\u05d5\u05d1 45 \u05e4\u05d9\u05e0\u05ea \u05e4\u05d9\u05e0\u05e1\u05e7\u05e8", 
+  "available_bike": "3", 
+  "longitude": "34.7714788870001", 
+  "sid": "347", 
+  "latitude": "32.0760626910001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d1\u05d9\u05ea \u05e8\u05d5\u05d1\u05d9\u05e0\u05e9\u05d8\u05d9\u05d9\u05df-\u05e6. \u05de\u05e2\u05e8\u05d9\u05d1", 
+  "available_bike": "0", 
+  "longitude": "34.78326079", 
+  "sid": "363", 
+  "latitude": "32.0658670820001"
+ }, 
+ {
+  "available_spaces": "13", 
+  "name": "\u05d1\u05df \u05d2\u05d5\u05e8\u05d9\u05d5\u05df 55 -\u05d1\u05e9\u05d3\u05e8\u05d4", 
+  "available_bike": "7", 
+  "longitude": "34.7749142270001", 
+  "sid": "336", 
+  "latitude": "32.084316734"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d1\u05df \u05d9\u05d4\u05d5\u05d3\u05d4 1", 
+  "available_bike": "0", 
+  "longitude": "34.7683037150001", 
+  "sid": "354", 
+  "latitude": "32.0731870860001"
+ }, 
+ {
+  "available_spaces": "12", 
+  "name": "\u05d1\u05df \u05d9\u05d4\u05d5\u05d3\u05d4 192", 
+  "available_bike": "9", 
+  "longitude": "34.7739059900001", 
+  "sid": "318", 
+  "latitude": "32.0892551100001"
+ }, 
+ {
+  "available_spaces": "13", 
+  "name": "\u05d1\u05df \u05d9\u05d4\u05d5\u05d3\u05d4 86", 
+  "available_bike": "7", 
+  "longitude": "34.7708077070001", 
+  "sid": "334", 
+  "latitude": "32.08138095"
+ }, 
+ {
+  "available_spaces": "16", 
+  "name": "\u05d1\u05e0\u05d9 \u05d3\u05df 56", 
+  "available_bike": "4", 
+  "longitude": "34.7905890490001", 
+  "sid": "307", 
+  "latitude": "32.096443859"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d1\u05e8\u05e0\u05d3\u05d9\u05e1 20", 
+  "available_bike": "0", 
+  "longitude": "34.787285909", 
+  "sid": "310", 
+  "latitude": "32.0936555170001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d2\u05d9\u05e0\u05ea \u05e9\u05d9\u05e0\u05e7\u05d9\u05df-\u05d9 \u05e0\u05e4\u05d7\u05d0 \u05de\u05d5\u05dc 1", 
+  "available_bike": "0", 
+  "longitude": "34.7729066410001", 
+  "sid": "364", 
+  "latitude": "32.0695596150001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d2\u05dc\u05d5\u05e1\u05e7\u05d9\u05df 1", 
+  "available_bike": "0", 
+  "longitude": "34.793557422", 
+  "sid": "322", 
+  "latitude": "32.086497781"
+ }, 
+ {
+  "available_spaces": "14", 
+  "name": "\u05d3\u05d4 \u05d4\u05d0\u05d6 30", 
+  "available_bike": "3", 
+  "longitude": "34.7865551030001", 
+  "sid": "315", 
+  "latitude": "32.091299442"
+ }, 
+ {
+  "available_spaces": "14", 
+  "name": "\u05d3\u05d5\u05d3 \u05d4\u05de\u05dc\u05da 30", 
+  "available_bike": "6", 
+  "longitude": "34.7847001650001", 
+  "sid": "332", 
+  "latitude": "32.0799668430001"
+ }, 
+ {
+  "available_spaces": "8", 
+  "name": "\u05d3\u05d9\u05d6\u05e0\u05d2\u05d5\u05e3 126", 
+  "available_bike": "12", 
+  "longitude": "34.773921424", 
+  "sid": "335", 
+  "latitude": "32.081445677"
+ }, 
+ {
+  "available_spaces": "15", 
+  "name": "\u05d3\u05d9\u05d6\u05e0\u05d2\u05d5\u05e3 280", 
+  "available_bike": "8", 
+  "longitude": "34.77651674", 
+  "sid": "343", 
+  "latitude": "32.092744856"
+ }, 
+ {
+  "available_spaces": "12", 
+  "name": "\u05d3\u05d9\u05d6\u05e0\u05d2\u05d5\u05e3 342", 
+  "available_bike": "5", 
+  "longitude": "34.7760723530001", 
+  "sid": "302", 
+  "latitude": "32.097171127"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d4\u05dc\u05e1\u05d9\u05e0\u05e7\u05d9 3", 
+  "available_bike": "0", 
+  "longitude": "34.791906618", 
+  "sid": "325", 
+  "latitude": "32.0837780310001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d4\u05e8\u05d1\u05e8\u05d8 \u05e1\u05de\u05d5\u05d0\u05dc 32", 
+  "available_bike": "0", 
+  "longitude": "34.7640144900001", 
+  "sid": "355", 
+  "latitude": "32.0711312280001"
+ }, 
+ {
+  "available_spaces": "17", 
+  "name": "\u05d4\u05e9\u05dc\"\u05d4 1", 
+  "available_bike": "3", 
+  "longitude": "34.779134415", 
+  "sid": "320", 
+  "latitude": "32.090210632"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d5\u05d9\u05e6\u05de\u05df 1 -  \u05d1\u05d9\u05ea \u05d4\u05de\u05e9\u05e4\u05d8", 
+  "available_bike": "0", 
+  "longitude": "34.7884835560001", 
+  "sid": "345", 
+  "latitude": "32.0771567200001"
+ }, 
+ {
+  "available_spaces": "15", 
+  "name": "\u05d5\u05d9\u05e6\u05de\u05df 60", 
+  "available_bike": "4", 
+  "longitude": "34.790847586", 
+  "sid": "316", 
+  "latitude": "32.090790494"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d9\u05d3 \u05d7\u05e8\u05d5\u05e6\u05d9\u05dd 17 \u05e4\u05d9\u05e0\u05ea \u05d4\u05de\u05e1\u05d2\u05e8", 
+  "available_bike": "0", 
+  "longitude": "34.784518237", 
+  "sid": "372", 
+  "latitude": "32.0618402470001"
+ }, 
+ {
+  "available_spaces": "19", 
+  "name": "\u05d9\u05d4\u05d5\u05d3\u05d4 \u05d4\u05dc\u05d5\u05d9 43 \u05e4\u05d9\u05e0\u05ea \u05d0\u05dc\u05e0\u05d1\u05d9", 
+  "available_bike": "1", 
+  "longitude": "34.7729432460001", 
+  "sid": "375", 
+  "latitude": "32.0619456490001"
+ }, 
+ {
+  "available_spaces": "12", 
+  "name": "\u05d9\u05d4\u05d5\u05d3\u05d4 \u05de\u05db\u05d1\u05d9 81", 
+  "available_bike": "8", 
+  "longitude": "34.792760236", 
+  "sid": "309", 
+  "latitude": "32.094196466"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d9\u05e6\u05d7\u05e7 \u05e9\u05d3\u05d4 17 -\u05d1\u05d9\u05d8\u05d5\u05d7 \u05dc\u05d0\u05d5\u05de\u05d9", 
+  "available_bike": "0", 
+  "longitude": "34.7857513220001", 
+  "sid": "365", 
+  "latitude": "32.0654605120001"
+ }, 
+ {
+  "available_spaces": "8", 
+  "name": "\u05db\u05d9\u05db\u05e8 \u05e8\u05d1\u05d9\u05df", 
+  "available_bike": "12", 
+  "longitude": "34.7810803680001", 
+  "sid": "331", 
+  "latitude": "32.0817042690001"
+ }, 
+ {
+  "available_spaces": "14", 
+  "name": "\u05db\u05db\u05e8 \u05d3\u05d9\u05d6\u05e0\u05d2\u05d5\u05e3 \u05e4\u05d9\u05e0\u05ea \u05e8\u05d9\u05d9\u05e0\u05e1", 
+  "available_bike": "6", 
+  "longitude": "34.7855016720001", 
+  "sid": "342", 
+  "latitude": "32.0760827820001"
+ }, 
+ {
+  "available_spaces": "17", 
+  "name": "\u05db\u05e8\u05de\u05dc\u05d9\u05ea \u05e4\u05d9\u05e0\u05ea \u05d4\u05db\u05e8\u05de\u05dc", 
+  "available_bike": "3", 
+  "longitude": "34.7662915220001", 
+  "sid": "366", 
+  "latitude": "32.0666842800001"
+ }, 
+ {
+  "available_spaces": "19", 
+  "name": "\u05de\u05d5\u05dc \u05d4 \u05d1\u05d0\u05d9\u05d9\u05e8 38", 
+  "available_bike": "1", 
+  "longitude": "34.7884595560001", 
+  "sid": "321", 
+  "latitude": "32.086944031"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05de\u05dc\u05d5\u05df \u05e7\u05e8\u05dc\u05d8\u05d5\u05df \u05d1\u05d8\u05d9\u05d9\u05dc\u05ea", 
+  "available_bike": "0", 
+  "longitude": "34.769500479", 
+  "sid": "329", 
+  "latitude": "32.086787197"
+ }, 
+ {
+  "available_spaces": "11", 
+  "name": "\u05de\u05ea\u05d7\u05dd \u05d4\u05ea\u05d7\u05e0\u05d4", 
+  "available_bike": "9", 
+  "longitude": "34.7620783470001", 
+  "sid": "377", 
+  "latitude": "32.0597258540001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e0\u05d5\u05e8\u05d3\u05d0\u05d5 101\u05d1\u05e9\u05d3\u05e8\u05d4", 
+  "available_bike": "0", 
+  "longitude": "34.782686251", 
+  "sid": "314", 
+  "latitude": "32.091818673"
+ }, 
+ {
+  "available_spaces": "18", 
+  "name": "\u05e0\u05de\u05dc \u05ea\u05dc \u05d0\u05d1\u05d9\u05d1 12", 
+  "available_bike": "2", 
+  "longitude": "34.772683826", 
+  "sid": "312", 
+  "latitude": "32.094607565"
+ }, 
+ {
+  "available_spaces": "13", 
+  "name": "\u05e0\u05de\u05dc \u05ea\u05dc \u05d0\u05d1\u05d9\u05d1 \u05db\u05d9\u05db\u05e8 \u05e9\u05dc\u05d5\u05d5\u05ea\u05d4", 
+  "available_bike": "7", 
+  "longitude": "34.774553849", 
+  "sid": "301", 
+  "latitude": "32.100638159"
+ }, 
+ {
+  "available_spaces": "12", 
+  "name": "\u05e0\u05e6\u05d7 \u05d9\u05e9\u05e8\u05d0\u05dc 4 \u05e4\u05d9\u05e0\u05ea \u05de\u05e1\u05e8\u05d9\u05e7", 
+  "available_bike": "8", 
+  "longitude": "34.7784817240001", 
+  "sid": "344", 
+  "latitude": "32.0779170610001"
+ }, 
+ {
+  "available_spaces": "13", 
+  "name": "\u05e4\u05e0\u05e7\u05e1  69", 
+  "available_bike": "7", 
+  "longitude": "34.7946052290001", 
+  "sid": "317", 
+  "latitude": "32.0914339600001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e7\u05d5\u05d9\u05e4\u05de\u05df 2-\u05dc\u05d9\u05d3 \u05ea\u05d7\u05e0\u05ea \u05d4\u05d3\u05dc\u05e7", 
+  "available_bike": "0", 
+  "longitude": "34.7615847970001", 
+  "sid": "367", 
+  "latitude": "32.0632591500001"
+ }, 
+ {
+  "available_spaces": "15", 
+  "name": "\u05e7\u05d5\u05e1\u05d5\u05d1\u05e1\u05e7\u05d9 34", 
+  "available_bike": "5", 
+  "longitude": "34.7977419870001", 
+  "sid": "308", 
+  "latitude": "32.098333731"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e7\u05e4\u05dc\u05df \u05e4\u05d9\u05e0\u05ea \u05d0\u05e8\u05e0\u05d9\u05d4", 
+  "available_bike": "0", 
+  "longitude": "34.7860952250001", 
+  "sid": "359", 
+  "latitude": "32.073265216"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e8\u05d5\u05d8\u05e9\u05d9\u05dc\u05d3 108", 
+  "available_bike": "0", 
+  "longitude": "34.7783237030001", 
+  "sid": "362", 
+  "latitude": "32.0686010380001"
+ }, 
+ {
+  "available_spaces": "13", 
+  "name": "\u05e8\u05d5\u05d8\u05e9\u05d9\u05dc\u05d3 11 \u05e4\u05d9\u05e0\u05ea \u05d4\u05e8\u05e6\u05dc", 
+  "available_bike": "7", 
+  "longitude": "34.7703541270001", 
+  "sid": "369", 
+  "latitude": "32.0630550280001"
+ }, 
+ {
+  "available_spaces": "15", 
+  "name": "\u05e8\u05d5\u05d8\u05e9\u05d9\u05dc\u05d3 140", 
+  "available_bike": "5", 
+  "longitude": "34.7792732290001", 
+  "sid": "357", 
+  "latitude": "32.0716703160001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e8\u05d5\u05d8\u05e9\u05d9\u05dc\u05d3 65", 
+  "available_bike": "0", 
+  "longitude": "34.7766019320001", 
+  "sid": "370", 
+  "latitude": "32.0653668250001"
+ }, 
+ {
+  "available_spaces": "20", 
+  "name": "\u05e9\u05d0\u05d5\u05dc \u05d4\u05de\u05dc\u05da 21 -  \u05e7\u05d0\u05de\u05e8\u05d9", 
+  "available_bike": "0", 
+  "longitude": "34.774646139", 
+  "sid": "313", 
+  "latitude": "32.078228751"
+ }, 
+ {
+  "available_spaces": "10", 
+  "name": "\u05e9\u05d3\u05e8\u05d5\u05ea \u05d1\u05df \u05d2\u05d5\u05e8\u05d9\u05d5\u05df 68", 
+  "available_bike": "10", 
+  "longitude": "34.777409656", 
+  "sid": "330", 
+  "latitude": "32.0829724880001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e9\u05d3\u05e8\u05d5\u05ea \u05d1\u05df \u05e6\u05d9\u05d5\u05df  1", 
+  "available_bike": "0", 
+  "longitude": "34.775766961", 
+  "sid": "348", 
+  "latitude": "32.074093335"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e9\u05d3\u05e8\u05d5\u05ea \u05e8\u05d5\u05e7\u05d7 - \u05e1\u05e4\u05d5\u05e8\u05d8\u05e7", 
+  "available_bike": "0", 
+  "longitude": "34.789221943", 
+  "sid": "305", 
+  "latitude": "32.0989012630001"
+ }, 
+ {
+  "available_spaces": "15", 
+  "name": "\u05e9\u05d3\u05e8\u05d5\u05ea \u05e8\u05d5\u05e7\u05d7-\u05d7\u05e0\u05d9\u05d5\u05df \u05e8\u05d9\u05d3\u05d9\u05e0\u05d2", 
+  "available_bike": "5", 
+  "longitude": "34.7812972180001", 
+  "sid": "304", 
+  "latitude": "32.0990012830001"
+ }, 
+ {
+  "available_spaces": "16", 
+  "name": "\u05e9\u05e4\u05e8\u05d9\u05e0\u05e6\u05e7 1 - \u05e1\u05d9\u05e0\u05d9\u05de\u05d8\u05e7", 
+  "available_bike": "3", 
+  "longitude": "34.7828465750001", 
+  "sid": "358", 
+  "latitude": "32.070744394"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05ea\u05d7\u05e0\u05ea \u05e8\u05db\u05d1\u05ea \u05e1\u05d1\u05d9\u05d3\u05d5\u05e8", 
+  "available_bike": "0", 
+  "longitude": "34.7966736390001", 
+  "sid": "326", 
+  "latitude": "32.083658197"
+ }, 
+ {
+  "available_spaces": "11", 
+  "name": "\u05ea\u05e9\"\u05d7 2", 
+  "available_bike": "9", 
+  "longitude": "34.786764969", 
+  "sid": "323", 
+  "latitude": "32.08475315"
+ }, 
+ {
+  "available_spaces": "19", 
+  "name": "\u05d4\u05e8\u05e6\u05dc 155 - \u05d2\u05e0\u05d9 \u05d4\u05d8\u05d1\u05e2", 
+  "available_bike": "0", 
+  "longitude": "34.769801821", 
+  "sid": "406", 
+  "latitude": "32.048337437"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d9\u05e1\u05d5\u05d3 \u05d4\u05de\u05e2\u05dc\u05d4-\u05ea\u05d7\u05e0\u05d4 \u05de\u05e8\u05db\u05d6\u05d9\u05ea", 
+  "available_bike": "0", 
+  "longitude": "34.781270663", 
+  "sid": "401", 
+  "latitude": "32.056490834"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05dc\u05d5\u05d9\u05e0\u05e1\u05e7\u05d9 83\u05d0", 
+  "available_bike": "0", 
+  "longitude": "34.775192335", 
+  "sid": "402", 
+  "latitude": "32.057671326"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05de\u05e0\u05d3\u05e1 \u05e4\u05e8\u05e0\u05e1 - \u05d2\u05d9\u05e0\u05ea \u05d8\u05d5\u05dc\u05d5\u05d6", 
+  "available_bike": "0", 
+  "longitude": "34.7473502080001", 
+  "sid": "422", 
+  "latitude": "32.04206033"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e0\u05de\u05dc \u05d9\u05e4\u05d5 \u05de\u05d1\u05e0\u05d4 \u05d4\u05de\u05d2\u05d3\u05dc\u05d5\u05e8", 
+  "available_bike": "0", 
+  "longitude": "34.750398929", 
+  "sid": "409", 
+  "latitude": "32.0527200440001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e7\u05d3\u05dd 49", 
+  "available_bike": "0", 
+  "longitude": "34.7490129560001", 
+  "sid": "423", 
+  "latitude": "32.0463620890001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e8\u05e6\u05d9\u05e3 \u05e2. \u05e9\u05e0\u05d9\u05d4-\u05db\u05d9\u05db\u05e8 \u05d4\u05e9\u05e2\u05d5\u05df", 
+  "available_bike": "0", 
+  "longitude": "34.7555223580001", 
+  "sid": "403", 
+  "latitude": "32.0556588310001"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05e9\u05d3 \u05d9\u05e8\u05d5\u05e9\u05dc\u05d9\u05dd \u05e4\u05d9\u05e0\u05ea \u05d1\u05df \u05e6\u05d1\u05d9 1", 
+  "available_bike": "0", 
+  "longitude": "34.759561578", 
+  "sid": "420", 
+  "latitude": "32.050779162"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d9\u05d2\u05d0\u05dc \u05d0\u05dc\u05d5\u05df 96", 
+  "available_bike": "0", 
+  "longitude": "34.793881691", 
+  "sid": "503", 
+  "latitude": "32.069496848"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05d9\u05dc\u05e7\u05d5\u05d8 \u05d4\u05e8\u05d5\u05e2\u05d9\u05dd 2-\u05e0\u05d7\u05dc\u05ea \u05d9\u05e6\u05d7\u05e7", 
+  "available_bike": "0", 
+  "longitude": "34.799950252", 
+  "sid": "519", 
+  "latitude": "32.074380402"
+ }, 
+ {
+  "available_spaces": "0", 
+  "name": "\u05de\u05e9\u05d4 \u05d3\u05d9\u05d9\u05df \u05e4\u05d9\u05e0\u05ea \u05d9\u05e6\u05d7\u05e7 \u05e9\u05d3\u05d4", 
+  "available_bike": "0", 
+  "longitude": "34.7985746960001", 
+  "sid": "508", 
+  "latitude": "32.0645743740001"
+ }
+]

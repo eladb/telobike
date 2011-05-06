@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface telobikeAppDelegate : NSObject <UIApplicationDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate> {
 
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UITabBarController *mainController;
 
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
++ (AppDelegate*)app;
+
 
 @end

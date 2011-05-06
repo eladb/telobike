@@ -1,23 +1,52 @@
 //
 //  RootViewController.m
-//  telobike
+//  telofun
 //
-//  Created by eladb on 5/6/11.
+//  Created by eladb on 4/30/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "RootViewController.h"
+#import "JSON.h"
+#import "StationTableViewCell.h"
+#import "AppDelegate.h"
+#import "StationList.h"
+#import "MapViewController.h"
+
+@interface RootViewController (Private)
+
+- (void)reloadStations;
+
+@end
 
 @implementation RootViewController
 
+@synthesize tableView=_tableView;
+
+- (void)dealloc
+{
+    [_tableView release];
+    [locationManager release];
+    [stations release];
+    [filter release];
+    [super dealloc];
+}
+
 - (void)viewDidLoad
 {
+    locationManager = [CLLocationManager new];
+    [locationManager startUpdatingLocation];
+    
+    _tableView.rowHeight = [StationTableViewCell cell].frame.size.height;
+    
     [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self reloadStations];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -51,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [stations count];
 }
 
 // Customize the appearance of table view cells.
@@ -59,65 +88,25 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    StationTableViewCell *cell = (StationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [StationTableViewCell cell];
     }
+    
+    NSDictionary* station = [stations objectAtIndex:[indexPath row]];
+    [cell setStation:station];
 
-    // Configure the cell.
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert)
-    {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-	*/
+    NSDictionary* station = [stations objectAtIndex:[indexPath row]];
+    
+    MapViewController* mapViewController = [[[AppDelegate app].mainController viewControllers] objectAtIndex:1];
+    [mapViewController selectStation:station];
+    
+    [[AppDelegate app].mainController setSelectedIndex:1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,9 +125,111 @@
     // For example: self.myOutlet = nil;
 }
 
-- (void)dealloc
+#pragma mark UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    [super dealloc];
+    [filter release];
+    filter = nil;
+    
+    if (searchText && searchText.length) filter = [searchText retain];
+    [self reloadStations];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    searchBar.text = nil;
+    [filter release];
+    filter = nil;
+    [self reloadStations];
+}
+
+
+#pragma mark CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"Location acquired");
+    
+    // stop getting location updates
+    locationManager.delegate = nil;
+    
+    // reload stations
+    [self reloadStations];
+}
+
+- (IBAction)refreshStations:(id)sender
+{
+    [[StationList instance] refreshStationsWithCompletion:^{
+        [self reloadStations];
+    }];
+}
+
+@end
+
+@implementation RootViewController (Private)
+
+NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
+{
+    NSDictionary* station1 = stationObj1;
+    NSDictionary* station2 = stationObj2;
+
+    double dist1 = [[station1 objectForKey:@"distance"] doubleValue];
+    double dist2 = [[station2 objectForKey:@"distance"] doubleValue];
+    return dist1 - dist2;
+}
+
+- (void)reloadStations
+{
+    NSArray* rawStations = [[StationList instance] stations];
+    
+    // calcaulte the distance of each station from our current location (if we have)
+    CLLocation* currentLocation = locationManager.location;
+    if (!currentLocation)
+    {
+        [locationManager startUpdatingLocation];
+        locationManager.delegate = self;
+    }
+    else
+    {
+        for (NSDictionary* station in rawStations)
+        {
+            NSNumber* latitudeNumber = [station objectForKey:@"latitude"];
+            NSNumber* longitudeNumber = [station objectForKey:@"longitude"];
+            
+            CLLocation* stationLocation = [[CLLocation new] initWithLatitude:[latitudeNumber doubleValue] longitude:[longitudeNumber doubleValue]];
+            CLLocationDistance distance = [currentLocation distanceFromLocation:stationLocation];
+            [station setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
+        }
+    }
+    
+    // sort stations by distance from current location
+    NSArray* sortedStations = [rawStations sortedArrayUsingFunction:compareDistance context:nil];
+    
+    NSMutableArray* newStations = [NSMutableArray array];
+    for (NSDictionary* station in sortedStations) 
+    {
+        NSString* stationName = [station objectForKey:@"name"];
+
+        BOOL includeStation = YES;
+        
+        if (filter) 
+        {
+            NSRange r = [stationName rangeOfString:filter];
+            includeStation = r.length > 0;
+        }
+        
+        if (includeStation) 
+        {
+            [newStations addObject:station];
+        }
+    }
+    
+    [stations release];
+    stations = [newStations retain];
+    
+    [self.tableView reloadData];
 }
 
 @end

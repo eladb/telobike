@@ -6,20 +6,19 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "telobikeAppDelegate.h"
+#import "AppDelegate.h"
 
-@implementation telobikeAppDelegate
+@implementation AppDelegate
 
 
 @synthesize window=_window;
 
-@synthesize navigationController=_navigationController;
+@synthesize mainController=_mainController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    // Add the navigation controller's view to the window and display.
-    self.window.rootViewController = self.navigationController;
+    self.mainController.selectedIndex = 2;
+    self.window.rootViewController = self.mainController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -66,8 +65,13 @@
 - (void)dealloc
 {
     [_window release];
-    [_navigationController release];
+    [_mainController release];
     [super dealloc];
+}
+
++ (AppDelegate*)app
+{
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
 @end
