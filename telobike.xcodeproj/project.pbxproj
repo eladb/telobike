@@ -362,6 +362,8 @@
 		0495412D137495DD00F98DC0 /* telobike */ = {
 			isa = PBXGroup;
 			children = (
+				04954136137495DD00F98DC0 /* AppDelegate.h */,
+				04954137137495DD00F98DC0 /* AppDelegate.m */,
 				04746C5C137499DD00D9CBDA /* MainWindow.xib */,
 				040AB1F0137498DC001FF38F /* StationCalloutView.h */,
 				040AB1F1137498DC001FF38F /* StationCalloutView.m */,
@@ -380,8 +382,6 @@
 				04954130137495DD00F98DC0 /* InfoPlist.strings */,
 				04954133137495DD00F98DC0 /* telobike-Prefix.pch */,
 				04954134137495DD00F98DC0 /* main.m */,
-				04954136137495DD00F98DC0 /* AppDelegate.h */,
-				04954137137495DD00F98DC0 /* AppDelegate.m */,
 				0495413C137495DE00F98DC0 /* RootViewController.h */,
 				0495413D137495DE00F98DC0 /* RootViewController.m */,
 				0495413F137495DE00F98DC0 /* RootViewController.xib */,

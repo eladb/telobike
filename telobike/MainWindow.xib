@@ -81,6 +81,7 @@
 							<string key="NSResourceName">07-map-marker.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUITabBar" ref="391997367"/>
 					</object>
 					<object class="IBUINavigationItem" key="IBUINavigationItem" id="394667715">
 						<string key="IBUITitle">תחנות</string>
@@ -106,6 +107,7 @@
 								<string key="NSResourceName">189-plant.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="391997367"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="685681059"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -124,6 +126,7 @@
 								<string key="NSResourceName">103-map.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="391997367"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="685681059"/>
 						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -136,14 +139,23 @@
 					<reference ref="619226028"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="391997367">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					<object class="NSMutableArray" key="IBUIItems">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<reference ref="249815341"/>
+						<reference ref="653113001"/>
+						<reference ref="190404716"/>
+					</object>
+					<reference key="IBUISelectedItem" ref="190404716"/>
 				</object>
 			</object>
 		</object>
