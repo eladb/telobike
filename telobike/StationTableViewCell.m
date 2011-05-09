@@ -91,6 +91,10 @@
     
     _availSpaceLabel.text = [station availSpaceDesc];
     _availBikeLabel.text = [station availBikeDesc];
+    
+    if ([station availSpaceColor]) _availSpaceLabel.textColor = [station availSpaceColor];
+    if ([station availBikeColor]) _availBikeLabel.textColor = [station availBikeColor];
+    
     _icon.image = [station listImage];
 }
 

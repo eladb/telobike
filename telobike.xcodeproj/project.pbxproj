@@ -60,6 +60,7 @@
 		040AB1F4137498DC001FF38F /* StationCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040AB1F2137498DC001FF38F /* StationCalloutView.xib */; };
 		04746C5B1374990B00D9CBDA /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04746C5A1374990B00D9CBDA /* libMapView.a */; };
 		04746C5D137499DD00D9CBDA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04746C5C137499DD00D9CBDA /* MainWindow.xib */; };
+		04746C5F1375543A00D9CBDA /* myLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 04746C5E1375543A00D9CBDA /* myLocation.png */; };
 		04954128137495DD00F98DC0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04954127137495DD00F98DC0 /* UIKit.framework */; };
 		0495412A137495DD00F98DC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04954129137495DD00F98DC0 /* Foundation.framework */; };
 		0495412C137495DD00F98DC0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0495412B137495DD00F98DC0 /* CoreGraphics.framework */; };
@@ -177,6 +178,7 @@
 		040AB1F2137498DC001FF38F /* StationCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationCalloutView.xib; sourceTree = "<group>"; };
 		04746C5A1374990B00D9CBDA /* libMapView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMapView.a; sourceTree = SOURCE_ROOT; };
 		04746C5C137499DD00D9CBDA /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		04746C5E1375543A00D9CBDA /* myLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLocation.png; sourceTree = "<group>"; };
 		04954123137495DD00F98DC0 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04954127137495DD00F98DC0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		04954129137495DD00F98DC0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -217,6 +219,7 @@
 		040AAAD513749677001FF38F /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				04746C5E1375543A00D9CBDA /* myLocation.png */,
 				040AB1E6137497B4001FF38F /* stations.json */,
 				040AAAD613749677001FF38F /* 07-map-marker.png */,
 				040AAAD713749677001FF38F /* 103-map.png */,
@@ -322,26 +325,77 @@
 			name = "json-framework";
 			sourceTree = "<group>";
 		};
+		04746C60137559EF00D9CBDA /* map */ = {
+			isa = PBXGroup;
+			children = (
+				040AB1DE13749785001FF38F /* MapViewController.h */,
+				040AB1DF13749785001FF38F /* MapViewController.m */,
+				040AB1E013749785001FF38F /* MapViewController.xib */,
+				040AB1F0137498DC001FF38F /* StationCalloutView.h */,
+				040AB1F1137498DC001FF38F /* StationCalloutView.m */,
+				040AB1F2137498DC001FF38F /* StationCalloutView.xib */,
+			);
+			name = map;
+			sourceTree = "<group>";
+		};
+		04746C6113755A0000D9CBDA /* list */ = {
+			isa = PBXGroup;
+			children = (
+				0495413C137495DE00F98DC0 /* RootViewController.h */,
+				0495413D137495DE00F98DC0 /* RootViewController.m */,
+				0495413F137495DE00F98DC0 /* RootViewController.xib */,
+				040AB1E8137497BB001FF38F /* StationTableViewCell.h */,
+				040AB1E9137497BB001FF38F /* StationTableViewCell.m */,
+				040AB1EA137497BB001FF38F /* StationTableViewCell.xib */,
+			);
+			name = list;
+			sourceTree = "<group>";
+		};
+		04746C6213755A1500D9CBDA /* model */ = {
+			isa = PBXGroup;
+			children = (
+				040AB1ED137497D1001FF38F /* NSDictionary+Station.h */,
+				040AB1EE137497D1001FF38F /* NSDictionary+Station.m */,
+				040AB1E3137497AE001FF38F /* StationList.h */,
+				040AB1E4137497AE001FF38F /* StationList.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		04746C6313755A2E00D9CBDA /* app */ = {
+			isa = PBXGroup;
+			children = (
+				04954136137495DD00F98DC0 /* AppDelegate.h */,
+				04954137137495DD00F98DC0 /* AppDelegate.m */,
+				04746C5C137499DD00D9CBDA /* MainWindow.xib */,
+				0495412F137495DD00F98DC0 /* telobike-Info.plist */,
+				04954130137495DD00F98DC0 /* InfoPlist.strings */,
+				04954133137495DD00F98DC0 /* telobike-Prefix.pch */,
+				04954134137495DD00F98DC0 /* main.m */,
+			);
+			name = app;
+			sourceTree = "<group>";
+		};
 		04954118137495DD00F98DC0 = {
 			isa = PBXGroup;
 			children = (
-				040AAAF913749689001FF38F /* ext */,
-				040AAAD513749677001FF38F /* resources */,
 				0495412D137495DD00F98DC0 /* telobike */,
-				04954126137495DD00F98DC0 /* Frameworks */,
-				04954124137495DD00F98DC0 /* Products */,
+				040AAAD513749677001FF38F /* resources */,
+				040AAAF913749689001FF38F /* ext */,
+				04954126137495DD00F98DC0 /* frameworks */,
+				04954124137495DD00F98DC0 /* products */,
 			);
 			sourceTree = "<group>";
 		};
-		04954124137495DD00F98DC0 /* Products */ = {
+		04954124137495DD00F98DC0 /* products */ = {
 			isa = PBXGroup;
 			children = (
 				04954123137495DD00F98DC0 /* telobike.app */,
 			);
-			name = Products;
+			name = products;
 			sourceTree = "<group>";
 		};
-		04954126137495DD00F98DC0 /* Frameworks */ = {
+		04954126137495DD00F98DC0 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				04746C5A1374990B00D9CBDA /* libMapView.a */,
@@ -356,35 +410,16 @@
 				04954129137495DD00F98DC0 /* Foundation.framework */,
 				0495412B137495DD00F98DC0 /* CoreGraphics.framework */,
 			);
-			name = Frameworks;
+			name = frameworks;
 			sourceTree = "<group>";
 		};
 		0495412D137495DD00F98DC0 /* telobike */ = {
 			isa = PBXGroup;
 			children = (
-				04954136137495DD00F98DC0 /* AppDelegate.h */,
-				04954137137495DD00F98DC0 /* AppDelegate.m */,
-				04746C5C137499DD00D9CBDA /* MainWindow.xib */,
-				040AB1F0137498DC001FF38F /* StationCalloutView.h */,
-				040AB1F1137498DC001FF38F /* StationCalloutView.m */,
-				040AB1F2137498DC001FF38F /* StationCalloutView.xib */,
-				040AB1ED137497D1001FF38F /* NSDictionary+Station.h */,
-				040AB1EE137497D1001FF38F /* NSDictionary+Station.m */,
-				040AB1E8137497BB001FF38F /* StationTableViewCell.h */,
-				040AB1E9137497BB001FF38F /* StationTableViewCell.m */,
-				040AB1EA137497BB001FF38F /* StationTableViewCell.xib */,
-				040AB1E3137497AE001FF38F /* StationList.h */,
-				040AB1E4137497AE001FF38F /* StationList.m */,
-				040AB1DE13749785001FF38F /* MapViewController.h */,
-				040AB1DF13749785001FF38F /* MapViewController.m */,
-				040AB1E013749785001FF38F /* MapViewController.xib */,
-				0495412F137495DD00F98DC0 /* telobike-Info.plist */,
-				04954130137495DD00F98DC0 /* InfoPlist.strings */,
-				04954133137495DD00F98DC0 /* telobike-Prefix.pch */,
-				04954134137495DD00F98DC0 /* main.m */,
-				0495413C137495DE00F98DC0 /* RootViewController.h */,
-				0495413D137495DE00F98DC0 /* RootViewController.m */,
-				0495413F137495DE00F98DC0 /* RootViewController.xib */,
+				04746C6313755A2E00D9CBDA /* app */,
+				04746C6213755A1500D9CBDA /* model */,
+				04746C6113755A0000D9CBDA /* list */,
+				04746C60137559EF00D9CBDA /* map */,
 			);
 			path = telobike;
 			sourceTree = "<group>";
@@ -423,7 +458,7 @@
 				English,
 			);
 			mainGroup = 04954118137495DD00F98DC0;
-			productRefGroup = 04954124137495DD00F98DC0 /* Products */;
+			productRefGroup = 04954124137495DD00F98DC0 /* products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
@@ -491,6 +526,7 @@
 				040AB1EC137497BB001FF38F /* StationTableViewCell.xib in Resources */,
 				040AB1F4137498DC001FF38F /* StationCalloutView.xib in Resources */,
 				04746C5D137499DD00D9CBDA /* MainWindow.xib in Resources */,
+				04746C5F1375543A00D9CBDA /* myLocation.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +600,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -578,7 +614,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};

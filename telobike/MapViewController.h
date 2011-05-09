@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "RMMapView.h"
 
 @class RMMarker;
 
-@interface MapViewController : UIViewController <RMMapViewDelegate> {
+@interface MapViewController : UIViewController <RMMapViewDelegate, CLLocationManagerDelegate> {
     RMMarker* _openMarker;
+    RMMarker* _myLocation;
     NSDictionary* _selectedStation;
+    CLLocationManager* _locationManager;
 }
 
 @property (nonatomic, retain) IBOutlet RMMapView* mapView;

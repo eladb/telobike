@@ -13,7 +13,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UITabBarController *mainController;
+@property (nonatomic, retain) IBOutlet UINavigationController *mainController;
 
 + (AppDelegate*)app;
 

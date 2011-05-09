@@ -46,9 +46,11 @@
     _stationName.text = [station stationName];
     _image.image = [station listImage];
     _notActive.hidden = [station isActive];
-    _spacesAvail.hidden = _bikeAvail.hidden = _bikeAvailLabel.hidden = _spacesAvailLabel.hidden = ![station isActive];
+    
     _spacesAvail.text = [station availSpaceDesc];
     _bikeAvail.text = [station availBikeDesc];
+    if ([station availSpaceColor]) _spacesAvail.textColor = [station availSpaceColor];
+    if ([station availBikeColor]) _bikeAvail.textColor = [station availBikeColor];
 }
 
 @end

@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.mainController.selectedIndex = 2;
+ //   self.mainController.selectedIndex = 2;
     self.window.rootViewController = self.mainController;
     [self.window makeKeyAndVisible];
     return YES;

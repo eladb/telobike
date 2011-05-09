@@ -40,6 +40,8 @@
     [_selectedStation release];
     [_openMarker release];
     [_mapView release];
+    [_myLocation release];
+    [_locationManager release];
     [super dealloc];
 }
 
@@ -51,9 +53,15 @@
     [RMMapView class]; // needed to avoid: 'Interface builder does not recognize RMMapView'
 
     [super viewDidLoad];
+    
+    _locationManager = [CLLocationManager new];
+    [_locationManager startUpdatingLocation];
+    _locationManager.delegate = self;
 
+    self.navigationItem.title = @"מפה";
     _mapView.delegate = self;
     [_mapView moveToLatLong:CLLocationCoordinate2DMake(32.069629,34.777222)];
+
     
     RMMarkerManager* markerManager = [_mapView markerManager];
     
@@ -89,6 +97,9 @@
 
 - (void)tapOnMarker:(RMMarker*)marker onMap:(RMMapView*)map
 {
+    // don't do anything if the marker is my location.
+    if (marker == _myLocation) return;
+    
     [self hideOpenedMarker];
 
     marker.zPosition = 999;
@@ -121,14 +132,37 @@
     RMMarker* marker = [self markerForStation:station];
     if (!marker) return;
 
-    // move map to marker
-    [_mapView moveToLatLong:[station coords]];
+    // move map to current location or marker (if we don't have current location)
+    if (_locationManager.location)
+    {
+        [_mapView moveToLatLong:_locationManager.location.coordinate];
+    }
+    else
+    {
+        [_mapView moveToLatLong:[station coords]];
+    }
+    
     [_mapView contents].zoom = 17;
 
-   // simulate tap
+    // simulate tap
     [self tapOnMarker:marker onMap:_mapView];
 }
 
+#pragma mark CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    if (!_myLocation) 
+    {
+        _myLocation = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"myLocation.png"] anchorPoint:CGPointMake(0.5, 0.5)];
+        RMProjection* proj = [_mapView markerManager].contents.projection;
+        [[_mapView markerManager] addMarker:_myLocation atProjectedPoint:[proj latLongToPoint:newLocation.coordinate]];
+    }
+    else 
+    {
+        [[_mapView markerManager] moveMarker:_myLocation AtLatLon:newLocation.coordinate];
+    }
+}
 
 @end
 

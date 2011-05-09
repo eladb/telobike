@@ -21,8 +21,13 @@
 - (NSInteger)availSpace;
 - (NSString*)availBikeDesc;
 - (NSString*)availSpaceDesc;
+- (UIColor*)availSpaceColor;
+- (UIColor*)availBikeColor;
 
 - (UIImage*)markerImage;
 - (UIImage*)listImage;
+
+- (NSArray*)tags;
+- (NSString*)address;
 
 @end

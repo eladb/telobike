@@ -47,14 +47,14 @@
 
 - (NSString*)availBikeDesc
 {
-    if ([self availBike] == -1) return @"?";
-    else return [NSString stringWithFormat:@"%d", [self availBike]];
+    if (![self isActive]) return @"התחנה אינה פעילה";
+    else return [NSString stringWithFormat:@"אופניים: %d", [self availBike]];
 }
 
 - (NSString*)availSpaceDesc
 {
-    if ([self availSpace] == -1) return @"?";
-    else return [NSString stringWithFormat:@"%d", [self availSpace]];
+    if (![self isActive]) return @"";
+    else return [NSString stringWithFormat:@"חניות: %d", [self availSpace]];
 }
 
 - (UIImage*)markerImage
@@ -73,6 +73,30 @@
     else if ([self availBike] == 0) image = [UIImage imageNamed:@"RedEmptyMenu.png"];
     else if ([self availSpace] == 0) image = [UIImage imageNamed:@"RedFullMenu.png"];
     return image;
+}
+
+- (UIColor*)availSpaceColor
+{
+    if (![self isActive]) return nil;
+    if ([self availSpace] == 0) return [UIColor redColor];
+    return nil;
+}
+
+- (UIColor*)availBikeColor
+{
+    if (![self isActive]) return nil;
+    if ([self availBike] == 0) return [UIColor redColor];
+    return nil;
+}
+
+- (NSArray*)tags
+{
+    return [self objectForKey:@"tags"];    
+}
+
+- (NSString*)address
+{
+    return [self objectForKey:@"address"];
 }
 
 @end

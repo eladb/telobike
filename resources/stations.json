@@ -5,7 +5,8 @@
   "available_bike": "0", 
   "longitude": "34.796787405", 
   "sid": "111", 
-  "latitude": "32.112894512"
+  "latitude": "32.112894512",
+  "tags": [ "nir", "elad" ]
  }, 
  {
   "available_spaces": "0", 
@@ -37,7 +38,9 @@
   "available_bike": "0", 
   "longitude": "34.783310618", 
   "sid": "107", 
-  "latitude": "32.121958423"
+  "latitude": "32.121958423",
+  "tags": [ "hello", "world" ],
+  "address": "booboo"
  }, 
  {
   "available_spaces": "0", 
@@ -61,7 +64,8 @@
   "available_bike": "0", 
   "longitude": "34.8051153380001", 
   "sid": "216", 
-  "latitude": "32.103199793"
+  "latitude": "32.103199793",
+  "address": "googoo"
  }, 
  {
   "available_spaces": "9", 
