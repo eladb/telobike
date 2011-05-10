@@ -1,0 +1,4 @@
+cron:
+- description: refresh stations
+  url: /stations/refresh
+  schedule: every 5 minutes

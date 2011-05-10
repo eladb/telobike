@@ -1,0 +1,11 @@
+application: telobike
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /stations(/.*)?
+  script: stations_endpoint.py
+
+builtins:
+- datastore_admin: on

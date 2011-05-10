@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Stations</title>
+	</head>
+	<body>
+		<form method='post'>
+			<input type='submit' value='refresh stations'/>
+		</form>
+		
+		<table border='1'>
+			
+			<tr>
+				<th>name</th> 
+				<th>location</th>
+				<th>available_bike</th>
+				<th>available_spaces</th>
+				<th>last_update</th>
+			</tr>
+			
+			{% for s in stations %}
+			
+			<tr>
+				<td><a href='/stations/{{s.sid}}'>{{s.name}}</a></td>
+				<td>{{s.latitude}},{{s.longitude}}</td>
+				<td>{{s.available_bike}}</td>
+				<td>{{s.available_spaces}}</td>
+				<td>{{s.last_update}}</td>
+			</tr>
+			
+			{% endfor %}
+			
+		</table>
+		
+	</body>
+</html>
