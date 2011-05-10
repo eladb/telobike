@@ -10,7 +10,14 @@
 #import <CoreLocation/CoreLocation.h>
 #import "MapViewController.h"
 
-@interface RootViewController : UIViewController <CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface RootViewController : UIViewController 
+    <CLLocationManagerDelegate, 
+     UITableViewDelegate, 
+     UITableViewDataSource, 
+     UISearchBarDelegate, 
+     UIAlertViewDelegate, 
+     MFMailComposeViewControllerDelegate,
+     UINavigationControllerDelegate>
 {
     CLLocationManager* locationManager;
     NSArray* stations;

@@ -15,8 +15,9 @@
 @interface MapViewController : UIViewController <RMMapViewDelegate, CLLocationManagerDelegate> {
     RMMarker* _openMarker;
     RMMarker* _myLocation;
-    NSDictionary* _selectedStation;
+    NSDictionary* _selectWhenViewAppears;
     CLLocationManager* _locationManager;
+    BOOL visible;
 }
 
 @property (nonatomic, retain) IBOutlet RMMapView* mapView;

@@ -7,6 +7,7 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
+#import <MessageUI/MessageUI.h>
 #import "RootViewController.h"
 #import "JSON.h"
 #import "StationTableViewCell.h"
@@ -14,6 +15,7 @@
 #import "StationList.h"
 #import "MapViewController.h"
 #import "NSDictionary+Station.h"
+
 
 static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
@@ -23,9 +25,15 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (BOOL)doesStation:(NSDictionary*)station containKeyword:(NSString*)keyword;
 - (BOOL)filterStation:(NSDictionary*)station;
 
+- (void)openFeedbackMail;
+
 // navigation bar icon handlers
 - (void)refreshStations:(id)sender;
 - (void)about:(id)sender;
+
+// keyboard events
+- (void)keyboardDidShow:(NSNotification*)n;
+- (void)keyboardWillHide:(NSNotification*)n;
 
 @end
 
@@ -49,10 +57,14 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     locationManager = [CLLocationManager new];
     [locationManager startUpdatingLocation];
     
-    self.navigationItem.rightBarButtonItem.target = self;
-    self.navigationItem.rightBarButtonItem.action = @selector(refreshStations:);
-    self.navigationItem.leftBarButtonItem.target = self;
-    self.navigationItem.leftBarButtonItem.action = @selector(about:);
+    self.navigationItem.title = NSLocalizedString(@"Tel-o-fun Stations", @"title of list view");
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+                                                                                            target:self action:@selector(refreshStations:)] autorelease];
+    
+    NSString* aboutTitle = NSLocalizedString(@"About", @"about button");
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:aboutTitle style:UIBarButtonItemStylePlain 
+                                                                             target:self action:@selector(about:)] autorelease];
     
     _tableView.rowHeight = [StationTableViewCell cell].frame.size.height;
     
@@ -60,6 +72,10 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     {
         mapView = [MapViewController new];
     }
+    
+    // register for keyboard notifications so we can change the size of the list view
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     [super viewDidLoad];
 }
@@ -131,16 +147,13 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Relinquish ownership any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark UISearchBarDelegate
@@ -169,6 +182,30 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     [self sortStations];
+}
+
+#pragma mark UIAlertViewDelegate
+
+// about alert view delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 1: // send feedback
+            [self openFeedbackMail];
+            break;
+            
+            
+        default:
+            break;
+    }
+    
+}
+
+#pragma mark MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [controller dismissModalViewControllerAnimated:NO];
 }
 
 @end
@@ -287,9 +324,15 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 {
     NSString* version = @"1.0";
     NSString* aboutTitle = NSLocalizedString(@"Telobike", @"title for the about message");
-    NSString* aboutContents = [NSString stringWithFormat:
-                               NSLocalizedString(@"Version: %@\nBy: nirsa & eladb", @"contents of the about message"),
-                               version];
+    
+    NSMutableString* aboutContents = [NSMutableString string];
+    [aboutContents appendFormat:@"Version: %@\n", version];
+    [aboutContents appendFormat:@"By: nirsa & eladb\n"];
+    [aboutContents appendFormat:@"\n"];
+    [aboutContents appendString:@"(c) 2008-2011 Route-Me Contr.\n"];
+    [aboutContents appendString:@"(c) 2009-2010 Stig Brautaset\n"];
+    [aboutContents appendString:@"(c) 2007-2011 All-Seeing Interactive\n"];
+    [aboutContents appendString:@"(c) Maps Icons Collection (google)"];
     
     NSString* aboutCancel = @"OK";
     NSString* aboutFeedback = @"Feedback";
@@ -300,6 +343,33 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
                                           cancelButtonTitle:aboutCancel 
                                           otherButtonTitles:aboutFeedback,nil] autorelease];
     [about show];
+}
+
+- (void)keyboardDidShow:(NSNotification*)n
+{
+    CGRect keyboardRect = [[[n userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    _tableView.frame = CGRectMake(_tableView.frame.origin.x, 
+                                  _tableView.frame.origin.y, 
+                                  _tableView.frame.size.width, 
+                                  _tableView.frame.size.height - keyboardRect.size.height);
+}
+
+- (void)keyboardWillHide:(NSNotification*)n
+{
+    CGRect keyboardRect = [[[n userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    _tableView.frame = CGRectMake(_tableView.frame.origin.x, 
+                                  _tableView.frame.origin.y, 
+                                  _tableView.frame.size.width, 
+                                  _tableView.frame.size.height + keyboardRect.size.height);
+}
+
+- (void)openFeedbackMail
+{
+    MFMailComposeViewController* mailCompose = [[[MFMailComposeViewController alloc] init] autorelease];
+    [mailCompose setToRecipients:[NSArray arrayWithObject:@"telobike@citylifeapps.com"]];
+    [mailCompose setSubject:NSLocalizedString(@"telobike Feedback", @"feedback mail subject")];
+    mailCompose.mailComposeDelegate = self;
+    [self presentModalViewController:mailCompose animated:YES];
 }
 
 @end

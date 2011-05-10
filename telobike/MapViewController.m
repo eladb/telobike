@@ -16,6 +16,7 @@
 #import "StationTableViewCell.h"
 #import "StationCalloutView.h"
 #import "NSDictionary+Station.h"
+#import "RMYahooMapSource.h"
 
 @interface RMMarker (Station)
 
@@ -28,6 +29,7 @@
 
 - (void)hideOpenedMarker;
 - (RMMarker*)markerForStation:(NSDictionary*)station;
+- (void)showMyLocation:(id)sender;
 
 @end
 
@@ -37,7 +39,7 @@
 
 - (void)dealloc
 {
-    [_selectedStation release];
+    [_selectWhenViewAppears release];
     [_openMarker release];
     [_mapView release];
     [_myLocation release];
@@ -51,20 +53,35 @@
 - (void)viewDidLoad
 {
     [RMMapView class]; // needed to avoid: 'Interface builder does not recognize RMMapView'
-
     [super viewDidLoad];
-    
+
     _locationManager = [CLLocationManager new];
-    [_locationManager startUpdatingLocation];
     _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [_locationManager startUpdatingLocation];
 
-    self.navigationItem.title = @"מפה";
+    self.navigationItem.title = NSLocalizedString(@"Map", @"title of map view");
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"My Position", @"my position button on map") 
+                                                                              style:UIBarButtonItemStylePlain 
+                                                                             target:self action:@selector(showMyLocation:)] autorelease];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+
+    
     _mapView.delegate = self;
+    
+    // center tel-aviv
     [_mapView moveToLatLong:CLLocationCoordinate2DMake(32.069629,34.777222)];
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    visible = YES;
     
     RMMarkerManager* markerManager = [_mapView markerManager];
-    
+
     // load stations
     NSArray* stations = [StationList instance].stations;
     
@@ -72,25 +89,48 @@
     {
         UIImage* image = [station markerImage];
         CGPoint anchorPoint = CGPointMake(16.0 / (double)image.size.width, 35.0 / (double)image.size.height);
-        RMMarker* marker = [[[RMMarker alloc] initWithUIImage:image anchorPoint:anchorPoint] autorelease];
         
-        StationCalloutView* label = [[StationCalloutView new] autorelease];
-        label.view.frame = CGRectMake(-85-16, -100, label.view.frame.size.width, label.view.frame.size.height);
-        marker.data = label;
-        marker.label = label.view;
-        marker.zPosition = [station isActive];
+        // try to find an existing marker for this station
+        RMMarker* marker = [self markerForStation:station];
 
-        label.station = station;
-        
-        [marker hideLabel];
-        RMProjection* proj = markerManager.contents.projection;
-        [markerManager addMarker:marker atProjectedPoint:[proj latLongToPoint:[station coords]]];
+        // if we couldn't find the marker, create it.
+        if (!marker) 
+        {
+            marker = [[[RMMarker alloc] initWithUIImage:image anchorPoint:anchorPoint] autorelease];
+            StationCalloutView* label = [[StationCalloutView new] autorelease];
+            label.view.frame = CGRectMake(-85/*-16*/, -95, label.view.frame.size.width, label.view.frame.size.height);
+            marker.data = label;
+            marker.label = label.view;
+            marker.zPosition = [station isActive];
+            [marker hideLabel];
+            RMProjection* proj = markerManager.contents.projection;
+            [markerManager addMarker:marker atProjectedPoint:[proj latLongToPoint:[station coords]]];
+        }
+
+        // update station.
+        ((StationCalloutView*)marker.data).station = station;
     }
     
-    if (_selectedStation)
+    // if we have a location from the location manager, add 'my location' now.
+    if (_locationManager.location) 
     {
-        [self selectStation:_selectedStation];
+        [self locationManager:_locationManager didUpdateToLocation:_locationManager.location fromLocation:nil];
     }
+
+    // only used in the first load
+    if (_selectWhenViewAppears)
+    {
+        NSLog(@"selecting station after view appears");
+        [self selectStation:_selectWhenViewAppears];
+        [_selectWhenViewAppears release];
+        _selectWhenViewAppears = nil;
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    visible = NO;
 }
 
 #pragma mark RMMapViewDelegate
@@ -103,7 +143,6 @@
     [self hideOpenedMarker];
 
     marker.zPosition = 999;
-    [marker replaceUIImage:nil];
     
     [marker showLabel];
     _openMarker = [marker retain];
@@ -116,14 +155,11 @@
 
 - (void)selectStation:(NSDictionary*)station
 {
-    [_selectedStation release];
-    _selectedStation = nil;
-
     // if map view was not initialized yet, we just reain the station and get back here
     // from viewDidLoad.
-    if (!_mapView)
+    if (!visible)
     {
-        _selectedStation = [station retain];
+        _selectWhenViewAppears = [station retain];
         return;
     }
     
@@ -132,16 +168,8 @@
     RMMarker* marker = [self markerForStation:station];
     if (!marker) return;
 
-    // move map to current location or marker (if we don't have current location)
-    if (_locationManager.location)
-    {
-        [_mapView moveToLatLong:_locationManager.location.coordinate];
-    }
-    else
-    {
-        [_mapView moveToLatLong:[station coords]];
-    }
-    
+    // move map to show station
+    [_mapView moveToLatLong:[station coords]];
     [_mapView contents].zoom = 17;
 
     // simulate tap
@@ -154,7 +182,7 @@
 {
     if (!_myLocation) 
     {
-        _myLocation = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"myLocation.png"] anchorPoint:CGPointMake(0.5, 0.5)];
+        _myLocation = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"MyLocation.png"] anchorPoint:CGPointMake(0.5, 0.5)];
         RMProjection* proj = [_mapView markerManager].contents.projection;
         [[_mapView markerManager] addMarker:_myLocation atProjectedPoint:[proj latLongToPoint:newLocation.coordinate]];
     }
@@ -162,6 +190,8 @@
     {
         [[_mapView markerManager] moveMarker:_myLocation AtLatLon:newLocation.coordinate];
     }
+    
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 @end
@@ -204,6 +234,9 @@
     {
         NSDictionary* markerStation = [marker station];
         
+        // skip non stations (e.g. my location)
+        if (!markerStation) continue;
+        
         if ([[markerStation stationName] isEqualToString:[station stationName]]) 
         {
             // found it
@@ -212,6 +245,12 @@
     }
     
     return nil;
+}
+
+- (void)showMyLocation:(id)sender
+{
+    if (!_locationManager.location) return;
+    [_mapView moveToLatLong:_locationManager.location.coordinate];
 }
 
 @end

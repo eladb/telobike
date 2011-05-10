@@ -10,6 +10,14 @@
 #import "JSON.h"
 #import "ASIHTTPRequest.h"
 
+static NSString* const kServiceUrl = @"http://telobike.appspot.com";
+
+@interface StationList (Private)
+
+- (NSString*)deviceId;
+
+@end
+
 @implementation StationList
 
 +(StationList*)instance
@@ -44,10 +52,20 @@
 
 -(void)refreshStationsWithCompletion:(void(^)())completionBlock
 {
-    ASIHTTPRequest* req = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://telobike.appspot.com/stations?alt=json"]];
+    NSString* urlQuery = [NSString stringWithFormat:@"/stations?alt=json&id=%@", [self deviceId]];
+    NSURL* url = [NSURL URLWithString:urlQuery relativeToURL:[NSURL URLWithString:kServiceUrl]];
+    NSLog(@"GET %@", url);
+    
+    ASIHTTPRequest* req = [ASIHTTPRequest requestWithURL:url];
+    [req setNumberOfTimesToRetryOnTimeout:3];
     
     [req setCompletionBlock:^
     {
+        if ([req responseStatusCode] != 200) {
+            NSLog(@"Error: %@", [req responseString]);
+            return;
+        }
+        
         NSLog(@"%@", [req responseString]);
         
         [_stations release];
@@ -62,6 +80,24 @@
 - (NSArray*)stations
 {
     return _stations;
+}
+
+@end
+
+@implementation StationList (Private)
+
+- (NSString*)deviceId
+{
+    NSString* deviceId = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceId"];
+    if (!deviceId) 
+    {
+        int x = arc4random() % 10000000;
+        deviceId = [NSString stringWithFormat:@"%d", x];
+        NSLog(@"Generated device id: %@", deviceId);
+        [[NSUserDefaults standardUserDefaults] setValue:deviceId forKey:@"deviceId"];
+    }
+    
+    return deviceId;
 }
 
 @end

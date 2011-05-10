@@ -7,12 +7,19 @@
 //
 
 #import "NSDictionary+Station.h"
+#import "Utils.h"
+
+@interface NSDictionary (StationPrivate)
+
+- (NSString*)localizedStringForKey:(NSString*)key;
+
+@end
 
 @implementation NSDictionary (Station)
 
 - (NSString*)stationName
 {
-    return [self objectForKey:@"name"];
+    return [self localizedStringForKey:@"name"];
 }
 
 - (double)latitude
@@ -30,9 +37,15 @@
     return CLLocationCoordinate2DMake([self latitude], [self longitude]);
 }
 
+- (BOOL)isOnline
+{
+    return [self objectForKey:@"last_update"] != nil;
+}
+
 - (BOOL)isActive
 {
-    return [self availBike] > 0 || [self availSpace] > 0;
+    return ![self isOnline] || 
+           [self availBike] > 0 || [self availSpace] > 0;
 }
 
 - (NSInteger)availBike
@@ -47,20 +60,23 @@
 
 - (NSString*)availBikeDesc
 {
-    if (![self isActive]) return @"התחנה אינה פעילה";
-    else return [NSString stringWithFormat:@"אופניים: %d", [self availBike]];
+    if (![self isOnline]) return NSLocalizedString(@"Offline", @"indicates that the station is offline");
+    if (![self isActive]) return NSLocalizedString(@"Inactive station", @"indicates that the station is inactive");
+    else return [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Bicycle", @"Number of bicycle"), [self availBike]];
 }
 
 - (NSString*)availSpaceDesc
 {
+    if (![self isOnline]) return @"";
     if (![self isActive]) return @"";
-    else return [NSString stringWithFormat:@"חניות: %d", [self availSpace]];
+    else return [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Slots", @"number of slots available"), [self availSpace]];
 }
 
 - (UIImage*)markerImage
 {
     UIImage* image = [UIImage imageNamed:@"Green.png"];
-    if (![self isActive]) image = [UIImage imageNamed:@"Gray.png"];
+    if (![self isOnline]) image = [UIImage imageNamed:@"cycling.png"];
+    else if (![self isActive]) image = [UIImage imageNamed:@"Gray.png"];
     else if ([self availBike] == 0) image = [UIImage imageNamed:@"RedEmpty.png"];
     else if ([self availSpace] == 0) image = [UIImage imageNamed:@"RedFull.png"];
     return image;
@@ -69,7 +85,8 @@
 - (UIImage*)listImage
 {
     UIImage* image = [UIImage imageNamed:@"GreenMenu.png"];
-    if (![self isActive]) image = [UIImage imageNamed:@"GrayMenu.png"];
+    if (![self isOnline]) image = [UIImage imageNamed:@"cycling.png"];
+    else if (![self isActive]) image = [UIImage imageNamed:@"GrayMenu.png"];
     else if ([self availBike] == 0) image = [UIImage imageNamed:@"RedEmptyMenu.png"];
     else if ([self availSpace] == 0) image = [UIImage imageNamed:@"RedFullMenu.png"];
     return image;
@@ -77,6 +94,7 @@
 
 - (UIColor*)availSpaceColor
 {
+    if (![self isOnline]) return nil;
     if (![self isActive]) return nil;
     if ([self availSpace] == 0) return [UIColor redColor];
     return nil;
@@ -84,6 +102,7 @@
 
 - (UIColor*)availBikeColor
 {
+    if (![self isOnline]) return nil;
     if (![self isActive]) return nil;
     if ([self availBike] == 0) return [UIColor redColor];
     return nil;
@@ -96,7 +115,27 @@
 
 - (NSString*)address
 {
-    return [self objectForKey:@"address"];
+    return [self localizedStringForKey:@"address"];
+}
+
+@end
+
+@implementation NSDictionary (StationPrivate)
+
+- (NSString*)localizedStringForKey:(NSString*)key
+{
+    NSString* result;
+
+    // try 'key.lang' first as the key
+    NSString* lang = [Utils currentLanguage];
+    result = [self objectForKey:[NSString stringWithFormat:@"%@.%@", key,lang]];
+    
+    // if we couldn't find this, fall back to the non-localized version
+    if (!result) {
+        result = [self objectForKey:key];
+    }
+        
+    return result;
 }
 
 @end
