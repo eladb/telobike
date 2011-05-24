@@ -44,6 +44,7 @@
     [_mapView release];
     [_myLocation release];
     [_locationManager release];
+    [_markers release];
     [super dealloc];
 }
 
@@ -54,6 +55,8 @@
 {
     [RMMapView class]; // needed to avoid: 'Interface builder does not recognize RMMapView'
     [super viewDidLoad];
+
+    _markers = [NSMutableDictionary new];
 
     _locationManager = [CLLocationManager new];
     _locationManager.delegate = self;
@@ -71,7 +74,7 @@
     _mapView.delegate = self;
     
     // center tel-aviv
-    [_mapView moveToLatLong:CLLocationCoordinate2DMake(32.069629,34.777222)];
+    [_mapView moveToLatLong:[StationList instance].center];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -105,10 +108,12 @@
             [marker hideLabel];
             RMProjection* proj = markerManager.contents.projection;
             [markerManager addMarker:marker atProjectedPoint:[proj latLongToPoint:[station coords]]];
+            [_markers setValue:marker forKey:[station sid]];
         }
 
         // update station.
         ((StationCalloutView*)marker.data).station = station;
+        [marker replaceUIImage:image anchorPoint:anchorPoint];
     }
     
     // if we have a location from the location manager, add 'my location' now.
@@ -229,22 +234,7 @@
 
 - (RMMarker*)markerForStation:(NSDictionary*)station
 {
-    // find station to select by iterating the markers
-    for (RMMarker* marker in _mapView.markerManager.markers)
-    {
-        NSDictionary* markerStation = [marker station];
-        
-        // skip non stations (e.g. my location)
-        if (!markerStation) continue;
-        
-        if ([[markerStation stationName] isEqualToString:[station stationName]]) 
-        {
-            // found it
-            return marker;
-        }
-    }
-    
-    return nil;
+    return [_markers objectForKey:[station sid]];
 }
 
 - (void)showMyLocation:(id)sender

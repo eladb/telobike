@@ -118,6 +118,11 @@
     return [self localizedStringForKey:@"address"];
 }
 
+- (NSString*)sid
+{
+    return [self objectForKey:@"sid"];
+}
+
 @end
 
 @implementation NSDictionary (StationPrivate)

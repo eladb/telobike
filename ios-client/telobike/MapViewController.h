@@ -16,6 +16,7 @@
     RMMarker* _openMarker;
     RMMarker* _myLocation;
     NSDictionary* _selectWhenViewAppears;
+    NSMutableDictionary* _markers;
     CLLocationManager* _locationManager;
     BOOL visible;
 }

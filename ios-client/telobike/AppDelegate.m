@@ -7,6 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "StationList.h"
+
+@interface AppDelegate (Private)
+
+- (void)showDisclaimerFirstTime;
+
+@end
 
 @implementation AppDelegate
 
@@ -17,6 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self showDisclaimerFirstTime];
     self.window.rootViewController = self.mainController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -67,6 +75,21 @@
 + (AppDelegate*)app
 {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
+@end
+
+@implementation AppDelegate (Private)
+
+- (void)showDisclaimerFirstTime
+{
+    NSUserDefaults* d = [NSUserDefaults standardUserDefaults];
+    if ([d objectForKey:@"disclaimer"]) return;
+    
+    NSString* disclaimerMessage = [[StationList instance] disclaimer];
+    [[[[UIAlertView alloc] initWithTitle:nil message:disclaimerMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];
+    [d setValue:@"Yes" forKey:@"disclaimer"];
+    [d synchronize];
 }
 
 @end

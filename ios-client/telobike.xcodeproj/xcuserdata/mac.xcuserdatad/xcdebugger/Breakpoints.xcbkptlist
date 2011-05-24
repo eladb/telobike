@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "telobike/MapViewController.m"
-         timestampString = "326687690.540661"
+         timestampString = "327887202.111583"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "253"
-         endingLineNumber = "253"
+         startingLineNumber = "243"
+         endingLineNumber = "243"
          landmarkName = "-showMyLocation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "telobike/MapViewController.m"
-         timestampString = "326687690.540661"
+         timestampString = "327887202.111583"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "252"
-         endingLineNumber = "252"
+         startingLineNumber = "242"
+         endingLineNumber = "242"
          landmarkName = "-showMyLocation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "telobike/MapViewController.m"
-         timestampString = "326687690.540661"
+         timestampString = "327887202.111583"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "183"
-         endingLineNumber = "183"
+         startingLineNumber = "188"
+         endingLineNumber = "188"
          landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "telobike/MapViewController.m"
-         timestampString = "326687690.540661"
+         timestampString = "327887202.111583"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "140"
-         endingLineNumber = "140"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
          landmarkName = "-tapOnMarker:onMap:"
          landmarkType = "5">
       </FileBreakpoint>

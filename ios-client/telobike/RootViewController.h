@@ -17,7 +17,8 @@
      UISearchBarDelegate, 
      UIAlertViewDelegate, 
      MFMailComposeViewControllerDelegate,
-     UINavigationControllerDelegate>
+     UINavigationControllerDelegate,
+     UIScrollViewDelegate>
 {
     CLLocationManager* locationManager;
     NSArray* stations;
@@ -27,5 +28,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
+@property (nonatomic, retain) IBOutlet UISearchBar* searchBar;
 
 @end
