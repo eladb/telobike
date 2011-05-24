@@ -10,7 +10,7 @@
 #import "JSON.h"
 #import "ASIHTTPRequest.h"
 
-static NSString* const kServiceUrl = @"http://telobike.appspot.com";
+static NSString* const kServiceUrl = @"http://telobike.citylifeapps.com";
 
 @interface StationList (Private)
 
@@ -19,6 +19,12 @@ static NSString* const kServiceUrl = @"http://telobike.appspot.com";
 @end
 
 @implementation StationList
+
+- (void)dealloc
+{
+    [_stations release];
+    [super dealloc];
+}
 
 +(StationList*)instance
 {
@@ -36,23 +42,31 @@ static NSString* const kServiceUrl = @"http://telobike.appspot.com";
     self = [super init];
     if (self)
     {
-        NSURL* stationsFileUrl = [[NSBundle mainBundle] URLForResource:@"stations" withExtension:@"json"];
+        NSString* bootstrapName = [NSString stringWithFormat:@"stations-%@", [self city]];
+        NSURL* stationsFileUrl = [[NSBundle mainBundle] URLForResource:bootstrapName withExtension:@"json"];
         NSLog(@"file url = %@", stationsFileUrl);
         NSString* fileContents = [NSString stringWithContentsOfURL:stationsFileUrl encoding:NSUTF8StringEncoding error:nil];
-        _stations = [[fileContents JSONValue] retain];
+        NSArray* bootstrapStations = [[fileContents JSONValue] retain];
+        
+        // delete the availabity information from the bootstrap data since we do not really know it.
+        NSMutableArray* stations = [NSMutableArray arrayWithCapacity:[bootstrapStations count]];
+        for (NSDictionary* d in bootstrapStations)
+        {
+            NSMutableDictionary* d2 = [NSMutableDictionary dictionaryWithDictionary:d];
+            [d2 removeObjectForKey:@"available_bike"];
+            [d2 removeObjectForKey:@"available_spaces"];
+            [d2 removeObjectForKey:@"last_update"];
+            [stations addObject:d2];
+        }
+        
+        _stations = [stations retain];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [_stations release];
-    [super dealloc];
-}
-
 -(void)refreshStationsWithCompletion:(void(^)())completionBlock
 {
-    NSString* urlQuery = [NSString stringWithFormat:@"/stations?alt=json&id=%@", [self deviceId]];
+    NSString* urlQuery = [NSString stringWithFormat:@"/stations?city=%@&id=%@&alt=json", [self city], [self deviceId]];
     NSURL* url = [NSURL URLWithString:urlQuery relativeToURL:[NSURL URLWithString:kServiceUrl]];
     NSLog(@"GET %@", url);
     
@@ -70,7 +84,7 @@ static NSString* const kServiceUrl = @"http://telobike.appspot.com";
         
         [_stations release];
         _stations = [[[req responseString] JSONValue] retain];
-        
+
         if (completionBlock) completionBlock();
     }];
     

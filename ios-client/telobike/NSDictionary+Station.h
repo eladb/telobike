@@ -30,4 +30,6 @@
 - (NSArray*)tags;
 - (NSString*)address;
 
+- (NSString*)sid;
+
 @end

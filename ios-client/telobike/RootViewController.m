@@ -16,7 +16,6 @@
 #import "MapViewController.h"
 #import "NSDictionary+Station.h"
 
-
 static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 @interface RootViewController (Private)
@@ -35,15 +34,19 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)keyboardDidShow:(NSNotification*)n;
 - (void)keyboardWillHide:(NSNotification*)n;
 
+- (void)hideSearchBarAnimated:(BOOL)animated;
+
 @end
 
 @implementation RootViewController
 
 @synthesize tableView=_tableView;
+@synthesize searchBar=_searchBar;
 
 - (void)dealloc
 {
     [_tableView release];
+    [_searchBar release];
     [mapView release];
     [locationManager release];
     [stations release];
@@ -57,7 +60,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     locationManager = [CLLocationManager new];
     [locationManager startUpdatingLocation];
     
-    self.navigationItem.title = NSLocalizedString(@"Tel-o-fun Stations", @"title of list view");
+    self.navigationItem.title = [StationList instance].listTitle;
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
                                                                                             target:self action:@selector(refreshStations:)] autorelease];
@@ -76,6 +79,8 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     // register for keyboard notifications so we can change the size of the list view
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    [self hideSearchBarAnimated:NO];
     
     [super viewDidLoad];
 }
@@ -158,6 +163,11 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 #pragma mark UISearchBarDelegate
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     [filter release];
@@ -170,12 +180,30 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [self hideSearchBarAnimated:YES];
     searchBar.text = nil;
     [filter release];
     filter = nil;
     [self sortStations];
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+
+    // ugly hack to enable cancel button:
+    // http://stackoverflow.com/questions/4348351/uisearchbar-disable-auto-disable-of-cancel-button
+    for (UIView* possibleButton in searchBar.subviews)
+    {
+        if ([possibleButton isKindOfClass:[UIButton class]])
+        {
+            UIButton *cancelButton = (UIButton*)possibleButton;
+            cancelButton.enabled = YES;
+            break;
+        }
+    }
+}
 
 #pragma mark CLLocationManagerDelegate
 
@@ -206,6 +234,13 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [controller dismissModalViewControllerAnimated:NO];
+}
+
+#pragma mark UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self searchBarSearchButtonClicked:_searchBar];
 }
 
 @end
@@ -277,17 +312,17 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 - (BOOL)doesStation:(NSDictionary*)station containKeyword:(NSString*)keyword 
 {
     // check if the filter text is in the station name
-    if ([station stationName] && [[station stationName] rangeOfString:keyword].length) return YES;
+    if ([station stationName] && [[station stationName] rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
     
     // check if the filter text is in the address
-    if ([station address] && [[station address] rangeOfString:keyword].length) return YES;
+    if ([station address] && [[station address] rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
     
     if ([station tags]) 
     {
         // check if any of the tags match
         for (NSString* tag in [station tags])
         {
-            if ([tag rangeOfString:keyword].length) return YES;
+            if ([tag rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
         }
     }
     
@@ -322,8 +357,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 
 - (void)about:(id)sender
 {
-    NSString* version = @"1.0";
-    NSString* aboutTitle = NSLocalizedString(@"Telobike", @"title for the about message");
+    NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
     NSMutableString* aboutContents = [NSMutableString string];
     [aboutContents appendFormat:@"Version: %@\n", version];
@@ -332,12 +366,13 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     [aboutContents appendString:@"(c) 2008-2011 Route-Me Contr.\n"];
     [aboutContents appendString:@"(c) 2009-2010 Stig Brautaset\n"];
     [aboutContents appendString:@"(c) 2007-2011 All-Seeing Interactive\n"];
-    [aboutContents appendString:@"(c) Maps Icons Collection (google)"];
+    [aboutContents appendString:@"(c) Map Icons Collection (google)\n"];
+    [aboutContents appendString:@"(c) Map Data OpenStreetMap contr.\n"];
     
     NSString* aboutCancel = @"OK";
     NSString* aboutFeedback = @"Feedback";
     
-    UIAlertView* about = [[[UIAlertView alloc] initWithTitle:aboutTitle 
+    UIAlertView* about = [[[UIAlertView alloc] initWithTitle:nil 
                                                     message:aboutContents 
                                                    delegate:self 
                                           cancelButtonTitle:aboutCancel 
@@ -370,6 +405,11 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     [mailCompose setSubject:NSLocalizedString(@"telobike Feedback", @"feedback mail subject")];
     mailCompose.mailComposeDelegate = self;
     [self presentModalViewController:mailCompose animated:YES];
+}
+
+- (void)hideSearchBarAnimated:(BOOL)animated
+{
+    [_tableView setContentOffset:CGPointMake(0, _searchBar.frame.size.height) animated:animated];
 }
 
 @end
