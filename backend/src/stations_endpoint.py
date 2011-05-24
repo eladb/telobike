@@ -2,12 +2,9 @@
 
 import logging
 from google.appengine.ext import db
-from google.appengine.api import urlfetch
 from utils import model as modelutils
 from django.utils import simplejson as json
 import restapp
-
-import scrape
 
 class Station(db.Model):
     """Represents a stations
@@ -18,6 +15,10 @@ class Station(db.Model):
     location = db.GeoPtProperty()
     available_bike = db.IntegerProperty()
     available_spaces = db.IntegerProperty()
+    city = db.StringProperty()
+    address = db.StringProperty()
+    tags = db.StringListProperty()
+    name_en = db.StringProperty()
     
 class StationsEndpoint(restapp.Endpoint):
     def _to_dict(self, stored_station):
@@ -27,6 +28,11 @@ class StationsEndpoint(restapp.Endpoint):
         d.pop('location')
         if not d.has_key('available_spaces'): d['available_spaces'] = 0
         if not d.has_key('available_bike'): d['available_bike'] = 0
+        
+        if d.has_key('name_en'):
+            d['name.en'] = d['name_en']
+            d.pop('name_en')
+            
         return d
     
     def alt_html(self, ctx, obj):
@@ -36,11 +42,12 @@ class StationsEndpoint(restapp.Endpoint):
         s = Station.get_by_key_name(ctx.resource_path)
         if not s:
             raise restapp.errors.NotFoundError('station %s not found' % ctx.resource_path)
-        
         return self._to_dict(s)
     
     def query(self, ctx):
-        all_stations = Station.all()
+        city = ctx.request.get('city')
+        if not city or city == '': city = 'tlv'
+        all_stations = Station.all().filter('city =', city)
         return [ self._to_dict(s) for s in all_stations];
 
 from restapp import apidocs
@@ -76,20 +83,57 @@ class StationsRequestHandler(restapp.RequestHandler):
     def __init__(self):
         super(StationsRequestHandler, self).__init__('/stations', StationsEndpoint)
 
+import tlv
+import paris
+from google.appengine.ext import deferred
+import refresh
+
 class RefreshStationsRequestHandler(webapp.RequestHandler):
     def get(self):
-        stations = scrape.refresh()
-        for station in stations:
-            logging.info('storing station: %s' % station)
-            stored_station = Station.get_or_insert(station['sid'])
-            stored_station.name = station['name']
-            stored_station.location = '%s,%s' % (station['latitude'], station['longitude'])
-            stored_station.available_bike = int(station['available_bike'])
-            stored_station.available_spaces = int(station['available_spaces'])
-            stored_station.put()
+        city = self.request.get('city')
+        if not city or city == '': city = 'tlv'
+        deferred.defer(refresh.deferred_read_stations, city)
+        self.response.out.write('<p>Started refresh for city %s</p>' % city)
 
+class RefreshStationStatusRequestHandler(webapp.RequestHandler):
+    def get(self):
+        self.post()
+        self.response.out.write("<p>Station %s in city '%s' refreshed</p>" % (self.request.get('sid'), self.request.get('city')))
+        
+    def post(self):
+        city = self.request.get('city')
+        sid = self.request.get('sid')
+        
+        if not city or city == '' or not sid or sid == '':
+            self.error(404)
+            return
+            
+        logging.info('refresh station status. city = %s, sid = %s' % (city, sid))
+        result = None
+        
+        if city == 'tlv': result = tlv.read_station(sid)
+        if city == 'paris': result = paris.read_station(sid)
+        
+        if not result:
+            logging.error('Empty result from reading station')
+            return
+        
+        logging.info('result = %s' % result)
+        
+        stored_station = Station.get_by_key_name(sid)
+        if not stored_station:
+            logging.error('unable to find station with sid %s' % sid)
+            self.error(500)
+            return
+        
+        stored_station.available_bike = result['available_bike']
+        stored_station.available_spaces = result['available_spaces']
+        stored_station.put()
+            
 def main():
-    application = webapp.WSGIApplication([('/stations/refresh', RefreshStationsRequestHandler), ('.*', StationsRequestHandler)], debug=True)
+    application = webapp.WSGIApplication([('/stations/refresh-station', RefreshStationStatusRequestHandler), 
+                                          ('/stations/refresh', RefreshStationsRequestHandler), 
+                                          ('.*', StationsRequestHandler)], debug=True)
     run_wsgi_app(application)
 
 if __name__ == "__main__":

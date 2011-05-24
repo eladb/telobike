@@ -5,28 +5,28 @@
 		<title>Stations</title>
 	</head>
 	<body>
-		<form method='post'>
-			<input type='submit' value='refresh stations'/>
-		</form>
-		
 		<table border='1'>
 			
 			<tr>
+				<th>city</th>
 				<th>name</th> 
 				<th>location</th>
 				<th>available_bike</th>
 				<th>available_spaces</th>
 				<th>last_update</th>
+				<th>refresh</th>
 			</tr>
 			
 			{% for s in stations %}
 			
 			<tr>
+				<td>{{s.city}}</td>
 				<td><a href='/stations/{{s.sid}}'>{{s.name}}</a></td>
 				<td>{{s.latitude}},{{s.longitude}}</td>
 				<td>{{s.available_bike}}</td>
 				<td>{{s.available_spaces}}</td>
 				<td>{{s.last_update}}</td>
+				<td><a href='/stations/refresh-station?city={{s.city}}&sid={{s.sid}}'>refresh</a></td>
 			</tr>
 			
 			{% endfor %}
