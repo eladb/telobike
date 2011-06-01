@@ -6,6 +6,10 @@ api_version: 1
 handlers:
 - url: /stations(/.*)?
   script: stations_endpoint.py
+  
+- url: /
+  script: index.py
+  
 
 builtins:
 - datastore_admin: on
