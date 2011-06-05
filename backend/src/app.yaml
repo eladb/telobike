@@ -1,15 +1,18 @@
 application: telobike
-version: 2
+version: 3
 runtime: python
 api_version: 1
 
 handlers:
 - url: /stations(/.*)?
   script: stations_endpoint.py
-  
+
+- url: /cities(/.*)?
+  script: cities_endpoint.py 
+
 - url: /
   script: index.py
-  
+
 
 builtins:
 - datastore_admin: on

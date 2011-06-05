@@ -3,8 +3,8 @@
 import logging
 from google.appengine.ext import db
 from utils import model as modelutils
-from django.utils import simplejson as json
 import restapp
+from datetime import timedelta
 
 class Station(db.Model):
     """Represents a stations
@@ -19,13 +19,16 @@ class Station(db.Model):
     address = db.StringProperty()
     tags = db.StringListProperty()
     name_en = db.StringProperty()
+    is_broken = db.BooleanProperty()
+    is_broken_since= db.DateTimeProperty()
     
 class StationsEndpoint(restapp.Endpoint):
+    root_url = '/stations'
+    
     def _to_dict(self, stored_station):
         d = modelutils.to_dict(stored_station, 'sid')
         d['latitude'] = stored_station.location.lat
         d['longitude'] = stored_station.location.lon
-        d.pop('location')
         if not d.has_key('available_spaces'): d['available_spaces'] = 0
         if not d.has_key('available_bike'): d['available_bike'] = 0
         
@@ -35,58 +38,26 @@ class StationsEndpoint(restapp.Endpoint):
             
         return d
     
-    def alt_html(self, ctx, obj):
-        super(StationsEndpoint, self).alt_html(ctx, {'stations':obj})
-    
     def get(self, ctx):
         s = Station.get_by_key_name(ctx.resource_path)
-        if not s:
-            raise restapp.errors.NotFoundError('station %s not found' % ctx.resource_path)
+        if not s: raise restapp.errors.NotFoundError('station %s not found' % ctx.resource_path)
+        ctx.cache_expires_in(timedelta(minutes = 5))
         return self._to_dict(s)
     
     def query(self, ctx):
         city = ctx.request.get('city')
         if not city or city == '': city = 'tlv'
         all_stations = Station.all().filter('city =', city)
+        ctx.cache_expires_in(timedelta(minutes = 5))
         return [ self._to_dict(s) for s in all_stations];
-
-from restapp import apidocs
-
-def get_apidocs():
-    """Describes this API"""
-    doc = apidocs.RequestDoc()
-    doc.title = "Stations"
-    doc.url = "/stations"
-    doc.doc = "Stations information"
-    
-    u1 = apidocs.UsageDoc()
-    u1.usage = '/stations/<i>station-id</i>'
-    u1.args = [ apidocs.UsageArgument('alt=json', doc='output JSON format'),
-                apidocs.UsageArgument('alt=html', doc='output HTML format') ]
-    u1.doc = "Retrieves station information"
-    u1.sample = '/station/312'
-    
-    u2 = apidocs.UsageDoc()
-    u2.usage = '/stations'
-    u2.args = [ apidocs.UsageArgument('alt=json', doc='output JSON format'),
-                apidocs.UsageArgument('alt=html', doc='output HTML format') ]
-    u2.doc = 'Retreives information about all stations'
-    u2.sample = '/stations'
-    
-    doc.usage = u2 
-    doc.usages = [u1, u2]
-    return doc
-            
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
-class StationsRequestHandler(restapp.RequestHandler):
-    def __init__(self):
-        super(StationsRequestHandler, self).__init__('/stations', StationsEndpoint)
 
 import tlv
 import paris
 from google.appengine.ext import deferred
 import refresh
+
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp.util import run_wsgi_app
 
 class RefreshStationsRequestHandler(webapp.RequestHandler):
     def get(self):
@@ -129,11 +100,12 @@ class RefreshStationStatusRequestHandler(webapp.RequestHandler):
         stored_station.available_bike = result['available_bike']
         stored_station.available_spaces = result['available_spaces']
         stored_station.put()
-            
+
+           
 def main():
     application = webapp.WSGIApplication([('/stations/refresh-station', RefreshStationStatusRequestHandler), 
                                           ('/stations/refresh', RefreshStationsRequestHandler), 
-                                          ('.*', StationsRequestHandler)], debug=True)
+                                          ('.*', StationsEndpoint.request_handler_class())], debug=True)
     run_wsgi_app(application)
 
 if __name__ == "__main__":

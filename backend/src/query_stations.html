@@ -17,11 +17,11 @@
 				<th>refresh</th>
 			</tr>
 			
-			{% for s in stations %}
+			{% for s in results %}
 			
 			<tr>
 				<td>{{s.city}}</td>
-				<td><a href='/stations/{{s.sid}}'>{{s.name}}</a></td>
+				<td>{{s.name}}</td>
 				<td>{{s.latitude}},{{s.longitude}}</td>
 				<td>{{s.available_bike}}</td>
 				<td>{{s.available_spaces}}</td>
