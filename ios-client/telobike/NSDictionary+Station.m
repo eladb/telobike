@@ -32,6 +32,11 @@
     return [[self objectForKey:@"longitude"] doubleValue];
 }
 
+- (CLLocation*)location
+{
+    return [self locationForKey:@"location"];
+}
+
 - (CLLocationCoordinate2D)coords
 {
     return CLLocationCoordinate2DMake([self latitude], [self longitude]);
@@ -44,8 +49,7 @@
 
 - (BOOL)isActive
 {
-    return ![self isOnline] || 
-           [self availBike] > 0 || [self availSpace] > 0;
+    return ![self isOnline] || [self availBike] > 0 || [self availSpace] > 0;
 }
 
 - (NSInteger)availBike
@@ -121,26 +125,6 @@
 - (NSString*)sid
 {
     return [self objectForKey:@"sid"];
-}
-
-@end
-
-@implementation NSDictionary (StationPrivate)
-
-- (NSString*)localizedStringForKey:(NSString*)key
-{
-    NSString* result;
-
-    // try 'key.lang' first as the key
-    NSString* lang = [Utils currentLanguage];
-    result = [self objectForKey:[NSString stringWithFormat:@"%@.%@", key,lang]];
-    
-    // if we couldn't find this, fall back to the non-localized version
-    if (!result) {
-        result = [self objectForKey:key];
-    }
-        
-    return result;
 }
 
 @end

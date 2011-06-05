@@ -21,13 +21,3 @@
 - (void)refreshStationsWithCompletion:(void(^)())completionBlock;
 
 @end
-
-@interface StationList (City)
-
-- (NSString*)city;
-- (CLLocationCoordinate2D)center;
-- (NSString*)listTitle;
-- (NSString*)disclaimer;
-
-@end
-

@@ -14,6 +14,7 @@
 - (NSString*)stationName;
 - (double)latitude;
 - (double)longitude;
+- (CLLocation*)location;
 - (CLLocationCoordinate2D)coords;
 - (BOOL)isActive;
 

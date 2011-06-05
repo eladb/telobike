@@ -8,12 +8,13 @@
 
 #import "StationList.h"
 #import "JSON.h"
-#import "ASIHTTPRequest.h"
-
-static NSString* const kServiceUrl = @"http://telobike.citylifeapps.com";
+#import "Globals.h"
+#import "ASIHTTPRequest+Telobike.h"
+#import "NSDictionary+Station.h"
 
 @interface StationList (Private)
 
+- (NSString*)city;
 - (NSString*)deviceId;
 
 @end
@@ -42,37 +43,15 @@ static NSString* const kServiceUrl = @"http://telobike.citylifeapps.com";
     self = [super init];
     if (self)
     {
-        NSString* bootstrapName = [NSString stringWithFormat:@"stations-%@", [self city]];
-        NSURL* stationsFileUrl = [[NSBundle mainBundle] URLForResource:bootstrapName withExtension:@"json"];
-        NSLog(@"file url = %@", stationsFileUrl);
-        NSString* fileContents = [NSString stringWithContentsOfURL:stationsFileUrl encoding:NSUTF8StringEncoding error:nil];
-        NSArray* bootstrapStations = [[fileContents JSONValue] retain];
-        
-        // delete the availabity information from the bootstrap data since we do not really know it.
-        NSMutableArray* stations = [NSMutableArray arrayWithCapacity:[bootstrapStations count]];
-        for (NSDictionary* d in bootstrapStations)
-        {
-            NSMutableDictionary* d2 = [NSMutableDictionary dictionaryWithDictionary:d];
-            [d2 removeObjectForKey:@"available_bike"];
-            [d2 removeObjectForKey:@"available_spaces"];
-            [d2 removeObjectForKey:@"last_update"];
-            [stations addObject:d2];
-        }
-        
-        _stations = [stations retain];
+        _stations = nil;
     }
     return self;
 }
 
 -(void)refreshStationsWithCompletion:(void(^)())completionBlock
 {
-    NSString* urlQuery = [NSString stringWithFormat:@"/stations?city=%@&id=%@&alt=json", [self city], [self deviceId]];
-    NSURL* url = [NSURL URLWithString:urlQuery relativeToURL:[NSURL URLWithString:kServiceUrl]];
-    NSLog(@"GET %@", url);
-    
-    ASIHTTPRequest* req = [ASIHTTPRequest requestWithURL:url];
-    [req setNumberOfTimesToRetryOnTimeout:3];
-    
+    ASIHTTPRequest* req = [ASIHTTPRequest telobikeRequestWithQuery:[NSString stringWithFormat:@"/stations?city=%@",[Globals city]]];
+
     [req setCompletionBlock:^
     {
         if ([req responseStatusCode] != 200) {
@@ -82,11 +61,25 @@ static NSString* const kServiceUrl = @"http://telobike.citylifeapps.com";
         
         NSLog(@"%@", [req responseString]);
         
+        NSArray* newStations = [[req responseString] JSONValue];
+        NSMutableArray* filteredStations = [NSMutableArray array];
+        BOOL showInactiveStations = [[NSUserDefaults standardUserDefaults] boolForKey:@"showInactiveStations"];
+        for (NSDictionary* s in newStations)
+        {
+            if (![s isActive] && !showInactiveStations) continue; // filter inactive stations (if setting is enabled)
+            [filteredStations addObject:s];
+        }
+        
         [_stations release];
-        _stations = [[[req responseString] JSONValue] retain];
+        _stations = [filteredStations retain];
 
         if (completionBlock) completionBlock();
     }];
+    
+    [req setFailedBlock:^
+     {
+         NSLog(@"Request failed: %@", [req error]);
+     }];
     
     [req startAsynchronous];
 }
@@ -94,24 +87,6 @@ static NSString* const kServiceUrl = @"http://telobike.citylifeapps.com";
 - (NSArray*)stations
 {
     return _stations;
-}
-
-@end
-
-@implementation StationList (Private)
-
-- (NSString*)deviceId
-{
-    NSString* deviceId = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceId"];
-    if (!deviceId) 
-    {
-        int x = arc4random() % 10000000;
-        deviceId = [NSString stringWithFormat:@"%d", x];
-        NSLog(@"Generated device id: %@", deviceId);
-        [[NSUserDefaults standardUserDefaults] setValue:deviceId forKey:@"deviceId"];
-    }
-    
-    return deviceId;
 }
 
 @end

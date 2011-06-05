@@ -7,10 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <CoreLocation/CoreLocation.h>
 
 @interface Utils : NSObject 
 
 + (NSString*)currentLanguage;
+
+@end
+
+@interface NSDictionary (Extensions)
+
+- (NSString*)localizedStringForKey:(NSString*)key;
+- (CLLocation*)locationForKey:(NSString*)key;
+- (NSURL*)urlForKey:(NSString*)key;
 
 @end

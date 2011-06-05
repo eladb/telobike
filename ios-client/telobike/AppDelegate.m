@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 #import "StationList.h"
+#import "City.h"
+#import "LoadingViewController.h"
+#import "IASKAppSettingsViewController.h"
+#import "Appirater.h"
 
 @interface AppDelegate (Private)
 
@@ -24,9 +28,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self showDisclaimerFirstTime];
-    self.window.rootViewController = self.mainController;
+    LoadingViewController* vc = [[LoadingViewController new] autorelease];
+    self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
+    
+    [[City instance] refreshWithCompletion:^
+     {
+         [[StationList instance] refreshStationsWithCompletion:^
+         {
+             UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
+             UIViewController* infoVC = [self.mainController.viewControllers objectAtIndex:1];
+             IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:2];
+
+             stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
+             infoVC.navigationItem.title = infoVC.tabBarItem.title = NSLocalizedString(@"INFO_TITLE", nil);
+             settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);
+
+             [self showDisclaimerFirstTime];
+             self.window.rootViewController = self.mainController;
+
+             [self.window makeKeyAndVisible];
+         }];
+     }];
+    
+    [Appirater appLaunched:YES];
+    
     return YES;
 }
 
@@ -44,9 +70,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    /*
-     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -76,7 +100,6 @@
 {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
-
 @end
 
 @implementation AppDelegate (Private)
@@ -86,7 +109,7 @@
     NSUserDefaults* d = [NSUserDefaults standardUserDefaults];
     if ([d objectForKey:@"disclaimer"]) return;
     
-    NSString* disclaimerMessage = [[StationList instance] disclaimer];
+    NSString* disclaimerMessage = [[City instance] disclaimer];
     [[[[UIAlertView alloc] initWithTitle:nil message:disclaimerMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];
     [d setValue:@"Yes" forKey:@"disclaimer"];
     [d synchronize];

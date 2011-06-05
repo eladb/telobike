@@ -14,6 +14,7 @@
 }
 
 @property (nonatomic, retain) NSDictionary* station;
+@property (nonatomic, retain) UIViewController* parentController;
 
 @property (nonatomic, retain) IBOutlet UILabel* stationName;
 @property (nonatomic, retain) IBOutlet UIImageView* image;
@@ -22,5 +23,8 @@
 @property (nonatomic, retain) IBOutlet UILabel* spacesAvail;
 @property (nonatomic, retain) IBOutlet UILabel* bikeAvailLabel;
 @property (nonatomic, retain) IBOutlet UILabel* spacesAvailLabel;
+
+- (IBAction)navigate:(id)sender;
+- (IBAction)reportProblem:(id)sender;
 
 @end

@@ -9,22 +9,25 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "MapViewController.h"
+#import "EGORefreshTableHeaderView.h"
 
 @interface RootViewController : UIViewController 
     <CLLocationManagerDelegate, 
      UITableViewDelegate, 
      UITableViewDataSource, 
      UISearchBarDelegate, 
-     UIAlertViewDelegate, 
-     MFMailComposeViewControllerDelegate,
      UINavigationControllerDelegate,
-     UIScrollViewDelegate>
+     UIScrollViewDelegate,
+     EGORefreshTableHeaderDelegate>
 {
     CLLocationManager* locationManager;
     NSArray* stations;
     NSString* filter;
     MapViewController* mapView;
     NSDate* lastRefresh;
+
+    EGORefreshTableHeaderView* _refreshHeaderView;
+    BOOL _isLoading;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;

@@ -7,14 +7,16 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import <MessageUI/MessageUI.h>
 #import "RootViewController.h"
 #import "JSON.h"
 #import "StationTableViewCell.h"
 #import "AppDelegate.h"
+#import "City.h"
 #import "StationList.h"
 #import "MapViewController.h"
 #import "NSDictionary+Station.h"
+#import "SendFeedback.h"
+#import "IASKSettingsReader.h"
 
 static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
@@ -23,8 +25,6 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)sortStations;
 - (BOOL)doesStation:(NSDictionary*)station containKeyword:(NSString*)keyword;
 - (BOOL)filterStation:(NSDictionary*)station;
-
-- (void)openFeedbackMail;
 
 // navigation bar icon handlers
 - (void)refreshStations:(id)sender;
@@ -35,6 +35,8 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)keyboardWillHide:(NSNotification*)n;
 
 - (void)hideSearchBarAnimated:(BOOL)animated;
+
+- (void)settingsChanged:(NSNotification*)n;
 
 @end
 
@@ -57,15 +59,22 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)viewDidLoad
 {
+    //[self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kIASKAppSettingChanged object:nil];
+    
     locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
     [locationManager startUpdatingLocation];
     
-    self.navigationItem.title = [StationList instance].listTitle;
+    [[City instance] refreshWithCompletion:^
+     {
+         self.navigationItem.title = [City instance].serviceName;
+     }];
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
                                                                                             target:self action:@selector(refreshStations:)] autorelease];
     
-    NSString* aboutTitle = NSLocalizedString(@"About", @"about button");
+    NSString* aboutTitle = NSLocalizedString(@"SEND_FEEDBACK_BUTTON", nil);
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:aboutTitle style:UIBarButtonItemStylePlain 
                                                                              target:self action:@selector(about:)] autorelease];
     
@@ -82,6 +91,17 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
     [self hideSearchBarAnimated:NO];
     
+    
+    if (!_refreshHeaderView) 
+    {
+		_refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 
+                                                                                         -_tableView.bounds.size.height, 
+                                                                                         self.view.frame.size.width, 
+                                                                                         _tableView.bounds.size.height)];
+		_refreshHeaderView.delegate = self;
+		[_tableView addSubview:_refreshHeaderView];
+	}
+	
     [super viewDidLoad];
 }
 
@@ -90,7 +110,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     [super viewWillAppear:animated];
     
     // if the last refresh was more than 5 minutes ago, refresh. otherwise, just just sort by distance.
-    if (!lastRefresh || [[NSDate date] timeIntervalSinceDate:lastRefresh] > kMinimumAutorefreshInterval) 
+    if (!lastRefresh || [[NSDate date] timeIntervalSinceDate:lastRefresh] > kMinimumAutorefreshInterval)
     {
         [self refreshStations:nil];
     }
@@ -212,35 +232,40 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     [self sortStations];
 }
 
-#pragma mark UIAlertViewDelegate
-
-// about alert view delegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 1: // send feedback
-            [self openFeedbackMail];
-            break;
-            
-            
-        default:
-            break;
-    }
-    
-}
-
-#pragma mark MFMailComposeViewControllerDelegate
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    [controller dismissModalViewControllerAnimated:NO];
-}
-
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self searchBarSearchButtonClicked:_searchBar];
+}
+
+#pragma mark EGORefreshTableHeaderDelegate
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+    [self refreshStations:nil];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+    return _isLoading;
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
+{
+    return lastRefresh;
+}
+
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
 @end
@@ -249,10 +274,15 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)refreshStations:(id)sender
 {
+    _isLoading = YES;
     [[StationList instance] refreshStationsWithCompletion:^{
         [lastRefresh release];
         lastRefresh = [NSDate new];
         [self sortStations];
+        _isLoading = NO;
+
+        [_refreshHeaderView refreshLastUpdatedDate];
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     }];
 }
 
@@ -357,27 +387,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 
 - (void)about:(id)sender
 {
-    NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    
-    NSMutableString* aboutContents = [NSMutableString string];
-    [aboutContents appendFormat:@"Version: %@\n", version];
-    [aboutContents appendFormat:@"By: nirsa & eladb\n"];
-    [aboutContents appendFormat:@"\n"];
-    [aboutContents appendString:@"(c) 2008-2011 Route-Me Contr.\n"];
-    [aboutContents appendString:@"(c) 2009-2010 Stig Brautaset\n"];
-    [aboutContents appendString:@"(c) 2007-2011 All-Seeing Interactive\n"];
-    [aboutContents appendString:@"(c) Map Icons Collection (google)\n"];
-    [aboutContents appendString:@"(c) Map Data OpenStreetMap contr.\n"];
-    
-    NSString* aboutCancel = @"OK";
-    NSString* aboutFeedback = @"Feedback";
-    
-    UIAlertView* about = [[[UIAlertView alloc] initWithTitle:nil 
-                                                    message:aboutContents 
-                                                   delegate:self 
-                                          cancelButtonTitle:aboutCancel 
-                                          otherButtonTitles:aboutFeedback,nil] autorelease];
-    [about show];
+    [SendFeedback open];
 }
 
 - (void)keyboardDidShow:(NSNotification*)n
@@ -398,18 +408,14 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
                                   _tableView.frame.size.height + keyboardRect.size.height);
 }
 
-- (void)openFeedbackMail
-{
-    MFMailComposeViewController* mailCompose = [[[MFMailComposeViewController alloc] init] autorelease];
-    [mailCompose setToRecipients:[NSArray arrayWithObject:@"telobike@citylifeapps.com"]];
-    [mailCompose setSubject:NSLocalizedString(@"telobike Feedback", @"feedback mail subject")];
-    mailCompose.mailComposeDelegate = self;
-    [self presentModalViewController:mailCompose animated:YES];
-}
-
 - (void)hideSearchBarAnimated:(BOOL)animated
 {
     [_tableView setContentOffset:CGPointMake(0, _searchBar.frame.size.height) animated:animated];
+}
+
+- (void)settingsChanged:(NSNotification*)n
+{
+    [self refreshStations:nil];
 }
 
 @end

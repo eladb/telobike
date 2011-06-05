@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "RMMapView.h"
+#import "StationCalloutView.h"
 
 @class RMMarker;
 
@@ -18,11 +19,16 @@
     NSDictionary* _selectWhenViewAppears;
     NSMutableDictionary* _markers;
     CLLocationManager* _locationManager;
+    StationCalloutView* _calloutView;
     BOOL visible;
 }
 
 @property (nonatomic, retain) IBOutlet RMMapView* mapView;
+@property (nonatomic, retain) IBOutlet UIView* detailsPane;
+@property (nonatomic, retain) IBOutlet UIButton* myLocationButton;
 
 - (void)selectStation:(NSDictionary*)station;
+- (IBAction)showMyLocation:(id)sender;
+- (IBAction)refresh:(id)sender;
 
 @end
