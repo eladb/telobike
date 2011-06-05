@@ -1,3 +1,26 @@
 [submodule "backend/ext/restapp"]
 	path = backend/ext/restapp
 	url = git@github.com:eladb/restapp.git
+
+[submodule "ios-client/ext/EGOTableViewPullRefresh"]
+	path = ios-client/ext/EGOTableViewPullRefresh
+	url = https://github.com/enormego/EGOTableViewPullRefresh.git
+
+[submodule "ios-client/ext/InAppSettingsKit"]
+	path = ios-client/ext/InAppSettingsKit
+	url = https://github.com/futuretap/InAppSettingsKit.git
+
+[submodule "ios-client/ext/appirater"]
+	path = ios-client/ext/appirater
+	url = https://github.com/arashpayan/appirater.git
+
+[submodule "ios-client/ext/json-framework"]
+	path = ios-client/ext/json-framework
+	url = https://github.com/stig/json-framework.git
+
+[submodule "ios-client/ext/route-me"]
+	path = ios-client/ext/route-me
+	url = https://github.com/route-me/route-me.git
+
+
+
