@@ -12,6 +12,7 @@
 @interface Utils : NSObject 
 
 + (NSString*)currentLanguage;
++ (NSString*)formattedDistance:(CLLocationDistance)distance;
 
 @end
 

@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
     self.navigationItem.title = NSLocalizedString(@"INFO_TITLE", nil);
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     _webView.delegate = self;

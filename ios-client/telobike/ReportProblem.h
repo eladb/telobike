@@ -15,7 +15,8 @@
 @property (nonatomic, retain) NSDictionary* station;
 
 - (id)initWithParent:(UIViewController*)parentViewController station:(NSDictionary*)station;
-
 - (void)show;
+
++ (void)openWithParent:(UIViewController*)parentViewController station:(NSDictionary*)station;
 
 @end

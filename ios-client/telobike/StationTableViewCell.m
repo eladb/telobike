@@ -8,6 +8,7 @@
 
 #import "StationTableViewCell.h"
 #import "NSDictionary+Station.h"
+#import "Utils.h"
 
 @implementation StationTableViewCell
 
@@ -49,10 +50,12 @@
     if (distance)
     {    
         double distance = [[station objectForKey:@"distance"] doubleValue];
-
-        NSString* dist;
-        if (distance < 1000) dist = [NSString stringWithFormat:@"%.0fm", distance];
-        else dist = [NSString stringWithFormat:@"%.1fkm", (distance/1000.0)];
+        NSString* dist = [Utils formattedDistance:distance];
+        
+        if ([station isMyLocation])
+        {
+            dist = NSLocalizedString(@"MYLOCATION_DISTANCE", nil);
+        }
         
         _distanceLabel.text = dist;
     }
@@ -80,6 +83,17 @@
     if ([station availBikeColor]) _availBikeLabel.textColor = [station availBikeColor];
     
     _icon.image = [station listImage];
+    
+    if ([station isMyLocation])
+    {
+        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 13, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
+        _icon.frame = CGRectMake(_icon.frame.origin.x, 14, _icon.frame.size.width, _icon.frame.size.height);
+    }
+    else
+    {
+        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 4, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
+        _icon.frame = CGRectMake(_icon.frame.origin.x, 11, _icon.frame.size.width, _icon.frame.size.height);
+    }
 }
 
 @end

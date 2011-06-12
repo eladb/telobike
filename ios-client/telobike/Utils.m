@@ -23,6 +23,14 @@
     return preferredLang;
 }
 
++ (NSString*)formattedDistance:(CLLocationDistance)distance
+{
+    NSString* dist;
+    if (distance < 1000) dist = [NSString stringWithFormat:@"%.0f%@", distance, NSLocalizedString(@"DISTANCE_METERS", nil)];
+    else dist = [NSString stringWithFormat:@"%.1f%@", (distance/1000.0), NSLocalizedString(@"DISTANCE_KM", nil)];
+    return dist;
+}
+
 @end
 
 @implementation NSDictionary (Extensions)
@@ -41,7 +49,7 @@
         result = [self objectForKey:key];
     }
     
-    return [NSString stringWithFormat:@"%@.%@", lang, result];
+    return result; //[NSString stringWithFormat:@"%@.%@", lang, result];
 }
 
 - (CLLocation*)locationForKey:(NSString *)key

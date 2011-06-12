@@ -13,6 +13,8 @@
 #import "IASKAppSettingsViewController.h"
 #import "Appirater.h"
 
+NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
+
 @interface AppDelegate (Private)
 
 - (void)showDisclaimerFirstTime;
@@ -23,11 +25,27 @@
 
 
 @synthesize window=_window;
-
 @synthesize mainController=_mainController;
+
+- (void)dealloc
+{
+    [_window release];
+    [_mainController release];
+    [_locationManager release];
+    [super dealloc];
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (!_locationManager)
+    {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [_locationManager startUpdatingLocation];
+    }
+    
     LoadingViewController* vc = [[LoadingViewController new] autorelease];
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
@@ -39,11 +57,13 @@
              UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
              UIViewController* infoVC = [self.mainController.viewControllers objectAtIndex:1];
              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:2];
+             [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+
 
              stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
              infoVC.navigationItem.title = infoVC.tabBarItem.title = NSLocalizedString(@"INFO_TITLE", nil);
              settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);
-
+             
              [self showDisclaimerFirstTime];
              self.window.rootViewController = self.mainController;
 
@@ -56,50 +76,43 @@
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
-}
-
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [Appirater appEnteredForeground:YES];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
-}
-
-- (void)dealloc
-{
-    [_window release];
-    [_mainController release];
-    [super dealloc];
 }
 
 + (AppDelegate*)app
 {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
+
+#pragma mark Location
+
+- (CLLocation*)currentLocation
+{
+#if TARGET_IPHONE_SIMULATOR
+    return [[[CLLocation alloc] initWithLatitude:32.0699 longitude:34.7772] autorelease];
+#else   
+    return _locationManager.location;
+#endif
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLocationChangedNotification object:nil];
+}
+
+- (void)addLocationChangeObserver:(id)target selector:(SEL)selector
+{
+    [[NSNotificationCenter defaultCenter] addObserver:target selector:selector name:kLocationChangedNotification object:nil];
+}
+
+- (void)removeLocationChangeObserver:(id)target
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:target name:kLocationChangedNotification object:nil];
+}
+
+
 @end
 
 @implementation AppDelegate (Private)

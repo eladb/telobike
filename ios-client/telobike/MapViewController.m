@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
 #import "MapViewController.h"
 #import "City.h"
 #import "StationList.h"
@@ -15,9 +16,11 @@
 #import "RMMapContents.h"
 #import "RMProjection.h"
 #import "StationTableViewCell.h"
-#import "StationCalloutView.h"
 #import "NSDictionary+Station.h"
 #import "RMYahooMapSource.h"
+#import "Utils.h"
+#import "ReportProblem.h"
+#import "NavigateToStation.h"
 
 @interface RMMarker (Station)
 
@@ -34,6 +37,7 @@
 - (void)showDetailsPane;
 - (void)reloadStations;
 
+- (void)locationChanged:(NSNotification*)n;
 
 @end
 
@@ -43,16 +47,36 @@
 @synthesize detailsPane=_detailsPane;
 @synthesize myLocationButton=_myLocationButton;
 
+@synthesize availBikeLabel=_availBikeLabel;
+@synthesize availParkLabel=_availParkLabel;
+@synthesize bikeBox=_bikeBox;
+@synthesize parkBox=_parkBox;
+@synthesize stationName=_stationName;
+@synthesize navigateToStationButton=_navigateToStationButton;
+@synthesize reportProblemButton=_reportProblemButton;
+@synthesize stationDistanceLabel=_stationDistanceLabel;
+@synthesize stationBoxesPanel=_stationBoxesPanel;
+@synthesize inactiveStationLabel=_inactiveStationLabel;
+
 - (void)dealloc
 {
+    [[AppDelegate app] removeLocationChangeObserver:self];
+    
+    [_stationBoxesPanel release];
+    [_inactiveStationLabel release];
+    [_stationDistanceLabel release];
+    [_navigateToStationButton release];
+    [_reportProblemButton release];
+    [_availBikeLabel release];
+    [_availParkLabel release];
+    [_bikeBox release];
+    [_parkBox release];
+    [_stationName release];
     [_myLocationButton release];
-    [_calloutView release];
     [_detailsPane release];
-    [_selectWhenViewAppears release];
     [_openMarker release];
     [_mapView release];
     [_myLocation release];
-    [_locationManager release];
     [_markers release];
     [super dealloc];
 }
@@ -62,16 +86,20 @@
 
 - (void)viewDidLoad
 {
+    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+
     [RMMapView class]; // needed to avoid: 'Interface builder does not recognize RMMapView'
     [super viewDidLoad];
 
     _markers = [NSMutableDictionary new];
 
-    _locationManager = [CLLocationManager new];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [_locationManager startUpdatingLocation];
+    [_navigateToStationButton setTitle:NSLocalizedString(@"STATION_BUTTON_NAVIGATE", nil) forState:UIControlStateNormal];
+    [_reportProblemButton setTitle:NSLocalizedString(@"STATION_BUTTON_REPORT", nil) forState:UIControlStateNormal];
+    
+    _inactiveStationLabel.text = NSLocalizedString(@"Inactive station", nil);
 
+    [[AppDelegate app] addLocationChangeObserver:self selector:@selector(locationChanged:)];
+    
     self.navigationItem.title = NSLocalizedString(@"Map", @"title of map view");
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
@@ -82,51 +110,30 @@
     // center tel-aviv
     [_mapView moveToLatLong:[City instance].cityCenter.coordinate];
     
-    _calloutView = [[StationCalloutView alloc] init];
-    _calloutView.view.frame = _detailsPane.bounds;
-    _calloutView.parentController = self;
-    
-    UIColor* tintColor = self.navigationController.navigationBar.tintColor;
-    if (tintColor)
-    {
-        _calloutView.view.backgroundColor = [tintColor colorWithAlphaComponent:0.7];
-    }
-    
-    
-    [_detailsPane addSubview:_calloutView.view];
-    
     [self hideDetailsPane];
+    
+    [self reloadStations];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    visible = YES;
-    
     [self reloadStations];
     
     // if we have a location from the location manager, add 'my location' now.
-    if (_locationManager.location) 
-    {
-        [self locationManager:_locationManager didUpdateToLocation:_locationManager.location fromLocation:nil];
-    }
-
-    // only used in the first load
-    if (_selectWhenViewAppears)
-    {
-        NSLog(@"selecting station after view appears");
-        [self selectStation:_selectWhenViewAppears];
-        [_selectWhenViewAppears release];
-        _selectWhenViewAppears = nil;
-    }
+    [self locationChanged:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    visible = NO;
     [self hideOpenedMarker];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
 }
 
 #pragma mark RMMapViewDelegate
@@ -142,7 +149,6 @@
     
     [marker showLabel];
     _openMarker = [marker retain];
-    _calloutView.station = marker.station;
     
     [self showDetailsPane];
 }
@@ -154,52 +160,35 @@
 
 - (void)selectStation:(NSDictionary*)station
 {
-    // if map view was not initialized yet, we just reain the station and get back here
-    // from viewDidLoad.
-    if (!visible)
-    {
-        _selectWhenViewAppears = [station retain];
-        return;
-    }
+    [self view]; // load nib
     
     [self hideOpenedMarker];
+    
+    if ([station isMyLocation])
+    {
+        [self showMyLocation:nil];
+        return;
+    }
     
     RMMarker* marker = [self markerForStation:station];
     if (!marker) return;
 
     // move map to show station
-    [_mapView moveToLatLong:[station coords]];
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(station.coords.latitude + 0.002, station.coords.longitude);
+    [_mapView moveToLatLong:coords];
     [_mapView contents].zoom = 15;
 
     // simulate tap
     [self tapOnMarker:marker onMap:_mapView];
 }
 
-#pragma mark CLLocationManagerDelegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    if (!_myLocation) 
-    {
-        _myLocation = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"MyLocation.png"] anchorPoint:CGPointMake(0.5, 0.5)];
-        _myLocation.zPosition = 9999;
-        RMProjection* proj = [_mapView markerManager].contents.projection;
-        [[_mapView markerManager] addMarker:_myLocation atProjectedPoint:[proj latLongToPoint:newLocation.coordinate]];
-    }
-    else 
-    {
-        [[_mapView markerManager] moveMarker:_myLocation AtLatLon:newLocation.coordinate];
-    }
-    
-    _myLocationButton.hidden = NO;
-}
-
 #pragma mark IBActions
 
 - (IBAction)showMyLocation:(id)sender
 {
-    if (!_locationManager.location) return;
-    [_mapView moveToLatLong:_locationManager.location.coordinate];
+    CLLocation* loc = [[AppDelegate app] currentLocation];
+    if (!loc) return;
+    [_mapView moveToLatLong:loc.coordinate];
 }
 
 
@@ -209,6 +198,21 @@
      {
          [self reloadStations];
      }];
+}
+
+- (IBAction)navigateToStation:(id)sender
+{
+    NavigateToStation* n = [[NavigateToStation new] autorelease];
+    n.viewController = self;
+    n.station = _openMarker.station;
+    
+    [n show];
+}
+
+- (IBAction)reportProblemInStation:(id)sender
+{
+    ReportProblem* r = [[[ReportProblem alloc] initWithParent:self station:_openMarker.station] autorelease];
+    [r show];
 }
 
 @end
@@ -259,13 +263,46 @@
     [UIView commitAnimations];
 }
 
+- (UIImage*)imageForAvailability:(NSInteger)avail
+{
+    if (avail == 0) return [UIImage imageNamed:@"redbox.png"];
+    return [UIImage imageNamed:@"greenbox.png"];
+}
+
+- (void)showDistanceForStation
+{
+    CLLocation* currentLocation = [[AppDelegate app] currentLocation];
+    
+    if (!currentLocation)
+    {
+        _stationDistanceLabel.hidden = YES;
+        return;
+    }
+    
+    _stationDistanceLabel.hidden = NO;
+    CLLocationDistance distance = [_openMarker.station distanceFromLocation:currentLocation];
+    _stationDistanceLabel.text = [Utils formattedDistance:distance];
+}
+
 - (void)showDetailsPane
 {
     [self hideDetailsPane];
-//    _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, -_detailsPane.frame.size.height, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
-//    _detailsPane.hidden = NO;
+    
+    _stationBoxesPanel.hidden = !_openMarker.station.isActive;
+    _inactiveStationLabel.hidden = _openMarker.station.isActive;
+    
+    _stationName.text = _openMarker.station.stationName;
+    _availBikeLabel.text = [NSString stringWithFormat:@"%d", [_openMarker.station availBike]];
+    _availParkLabel.text = [NSString stringWithFormat:@"%d", [_openMarker.station availSpace]];
+    
+    [self showDistanceForStation];
+    
+    // set the color of the boxes based on the amount of avail bike/park
+    _parkBox.image = [self imageForAvailability:[_openMarker.station availSpace]];
+    _bikeBox.image = [self imageForAvailability:[_openMarker.station availBike]];
+    
     [UIView beginAnimations:nil context:nil];
-    _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, 0, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
+    _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, -5.0, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
     [UIView commitAnimations];
 }
 
@@ -278,6 +315,8 @@
     
     for (NSDictionary* station in stations)
     {
+        if ([station isMyLocation]) continue; // do not display the 'my location' station.
+        
         UIImage* image = [station markerImage];
         CGPoint anchorPoint = CGPointMake(16.0 / (double)image.size.width, 35.0 / (double)image.size.height);
         
@@ -288,7 +327,8 @@
         if (!marker) 
         {
             marker = [[[RMMarker alloc] initWithUIImage:image anchorPoint:anchorPoint] autorelease];
-            marker.label = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cycling.png"]] autorelease];
+            marker.label = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SelectedMarker.png"]] autorelease];
+            marker.label.frame = CGRectMake(-9, -9, marker.label.frame.size.width + 1, marker.label.frame.size.height + 1);
             marker.zPosition = [station isActive];
             [marker hideLabel];
             RMProjection* proj = markerManager.contents.projection;
@@ -299,7 +339,29 @@
         // update station.
         marker.data = station;
         [marker replaceUIImage:image anchorPoint:anchorPoint];
+        
     }
+}
+
+- (void)locationChanged:(NSNotification*)n
+{
+    CLLocation* newLocation = [[AppDelegate app] currentLocation];
+    
+    if (!newLocation) return;
+    
+    if (!_myLocation) 
+    {
+        _myLocation = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"MyLocation.png"] anchorPoint:CGPointMake(0.5, 0.5)];
+        _myLocation.zPosition = 9999;
+        RMProjection* proj = [_mapView markerManager].contents.projection;
+        [[_mapView markerManager] addMarker:_myLocation atProjectedPoint:[proj latLongToPoint:newLocation.coordinate]];
+    }
+    else 
+    {
+        [[_mapView markerManager] moveMarker:_myLocation AtLatLon:newLocation.coordinate];
+    }
+    
+    _myLocationButton.hidden = NO;
 }
 
 @end

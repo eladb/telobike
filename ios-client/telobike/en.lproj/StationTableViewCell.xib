@@ -51,7 +51,7 @@
 							<object class="IBUILabel" id="206727467">
 								<reference key="NSNextResponder" ref="1024079281"/>
 								<int key="NSvFlags">290</int>
-								<string key="NSFrame">{{42, 6}, {196, 27}}</string>
+								<string key="NSFrame">{{42, 4}, {196, 27}}</string>
 								<reference key="NSSuperview" ref="1024079281"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="634974160"/>
@@ -101,7 +101,7 @@
 							<object class="IBUILabel" id="634974160">
 								<reference key="NSNextResponder" ref="1024079281"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{44, 28}, {140, 22}}</string>
+								<string key="NSFrame">{{43, 27}, {194, 22}}</string>
 								<reference key="NSSuperview" ref="1024079281"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="188790217"/>
@@ -125,7 +125,7 @@
 							<object class="IBUILabel" id="188790217">
 								<reference key="NSNextResponder" ref="1024079281"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{120, 29}, {66, 22}}</string>
+								<string key="NSFrame">{{120, 28}, {66, 22}}</string>
 								<reference key="NSSuperview" ref="1024079281"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="910580976"/>
@@ -408,7 +408,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">GreenMenu.png</string>
-			<string key="NS.object.0">{32, 37}</string>
+			<string key="NS.object.0">{30, 30}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">301</string>
 	</data>

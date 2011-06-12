@@ -8,7 +8,6 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import "RootViewController.h"
-#import "JSON.h"
 #import "StationTableViewCell.h"
 #import "AppDelegate.h"
 #import "City.h"
@@ -38,6 +37,8 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)settingsChanged:(NSNotification*)n;
 
+- (void)locationChanged:(NSNotification*)n;
+
 @end
 
 @implementation RootViewController
@@ -47,10 +48,11 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)dealloc
 {
+    [[AppDelegate app] removeLocationChangeObserver:self];
+    
     [_tableView release];
     [_searchBar release];
     [mapView release];
-    [locationManager release];
     [stations release];
     [filter release];
     [lastRefresh release];
@@ -59,18 +61,13 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)viewDidLoad
 {
-    //[self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    [[AppDelegate app] addLocationChangeObserver:self selector:@selector(locationChanged:)];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kIASKAppSettingChanged object:nil];
     
-    locationManager = [CLLocationManager new];
-    locationManager.delegate = self;
-    [locationManager startUpdatingLocation];
-    
-    [[City instance] refreshWithCompletion:^
-     {
-         self.navigationItem.title = [City instance].serviceName;
-     }];
-    
+    self.navigationItem.title = [City instance].serviceName;
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
                                                                                             target:self action:@selector(refreshStations:)] autorelease];
     
@@ -94,10 +91,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     
     if (!_refreshHeaderView) 
     {
-		_refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 
-                                                                                         -_tableView.bounds.size.height, 
-                                                                                         self.view.frame.size.width, 
-                                                                                         _tableView.bounds.size.height)];
+		_refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, -_tableView.bounds.size.height, self.view.frame.size.width, _tableView.bounds.size.height)];
 		_refreshHeaderView.delegate = self;
 		[_tableView addSubview:_refreshHeaderView];
 	}
@@ -133,7 +127,6 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 	[super viewDidDisappear:animated];
 }
 
-// Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -144,13 +137,13 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     return [stations count];
 }
 
-// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
     StationTableViewCell *cell = (StationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil) 
+    {
         cell = [StationTableViewCell cell];
     }
     
@@ -225,13 +218,6 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     }
 }
 
-#pragma mark CLLocationManagerDelegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    [self sortStations];
-}
-
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -291,8 +277,14 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     NSDictionary* station1 = stationObj1;
     NSDictionary* station2 = stationObj2;
 
+    
+    
     double dist1 = [[station1 objectForKey:@"distance"] doubleValue];
     double dist2 = [[station2 objectForKey:@"distance"] doubleValue];
+    
+    if ([station1 isMyLocation]) dist1 = 0.0;
+    if ([station2 isMyLocation]) dist2 = 0.0;
+    
     return dist1 - dist2;
 }
 
@@ -301,7 +293,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     NSArray* rawStations = [[StationList instance] stations];
     
     // calcaulte the distance of each station from our current location (if we have)
-    CLLocation* currentLocation = locationManager.location;
+    CLLocation* currentLocation = [AppDelegate app].currentLocation;
     
     // if we have current location, add the distance of each station to the current
     // location and then it will be used for sorting.
@@ -309,11 +301,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     {
         for (NSDictionary* station in rawStations)
         {
-            NSNumber* latitudeNumber = [station objectForKey:@"latitude"];
-            NSNumber* longitudeNumber = [station objectForKey:@"longitude"];
-            
-            CLLocation* stationLocation = [[CLLocation new] initWithLatitude:[latitudeNumber doubleValue] longitude:[longitudeNumber doubleValue]];
-            CLLocationDistance distance = [currentLocation distanceFromLocation:stationLocation];
+            CGFloat distance = [station distanceFromLocation:currentLocation];
             [station setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
         }
     }
@@ -323,6 +311,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     
     // filter stations based on filter string.
     NSMutableArray* newStations = [NSMutableArray array];
+    
     for (NSDictionary* station in sortedStations) 
     {
         if ([self filterStation:station]) 
@@ -416,6 +405,11 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 - (void)settingsChanged:(NSNotification*)n
 {
     [self refreshStations:nil];
+}
+
+- (void)locationChanged:(NSNotification*)n
+{
+    [self sortStations];
 }
 
 @end

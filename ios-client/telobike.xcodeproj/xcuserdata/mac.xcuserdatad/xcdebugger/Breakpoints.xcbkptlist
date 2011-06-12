@@ -4,17 +4,17 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "telobike/MapViewController.m"
-         timestampString = "328843621.514167"
+         filePath = "telobike/RootViewController.m"
+         timestampString = "329513768.865457"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
-         landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
+         startingLineNumber = "412"
+         endingLineNumber = "412"
+         landmarkName = "-locationChanged:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

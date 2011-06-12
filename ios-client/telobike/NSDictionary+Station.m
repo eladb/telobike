@@ -19,6 +19,7 @@
 
 - (NSString*)stationName
 {
+    if ([self isMyLocation]) return NSLocalizedString(@"MYLOCATION_TITLE", nil);
     return [self localizedStringForKey:@"name"];
 }
 
@@ -64,6 +65,7 @@
 
 - (NSString*)availBikeDesc
 {
+    if ([self isMyLocation]) return NSLocalizedString(@"MYLOCATION_DESC", nil);
     if (![self isOnline]) return NSLocalizedString(@"Offline", @"indicates that the station is offline");
     if (![self isActive]) return NSLocalizedString(@"Inactive station", @"indicates that the station is inactive");
     else return [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Bicycle", @"Number of bicycle"), [self availBike]];
@@ -71,6 +73,7 @@
 
 - (NSString*)availSpaceDesc
 {
+    if ([self isMyLocation]) return @"";
     if (![self isOnline]) return @"";
     if (![self isActive]) return @"";
     else return [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Slots", @"number of slots available"), [self availSpace]];
@@ -79,7 +82,7 @@
 - (UIImage*)markerImage
 {
     UIImage* image = [UIImage imageNamed:@"Green.png"];
-    if (![self isOnline]) image = [UIImage imageNamed:@"cycling.png"];
+    if (![self isOnline]) image = [UIImage imageNamed:@"Black.png"];
     else if (![self isActive]) image = [UIImage imageNamed:@"Gray.png"];
     else if ([self availBike] == 0) image = [UIImage imageNamed:@"RedEmpty.png"];
     else if ([self availSpace] == 0) image = [UIImage imageNamed:@"RedFull.png"];
@@ -88,8 +91,13 @@
 
 - (UIImage*)listImage
 {
+    if (self.isMyLocation)
+    {
+        return [UIImage imageNamed:@"MyLocation.png"];
+    }
+    
     UIImage* image = [UIImage imageNamed:@"GreenMenu.png"];
-    if (![self isOnline]) image = [UIImage imageNamed:@"cycling.png"];
+    if (![self isOnline]) image = [UIImage imageNamed:@"Black.png"];
     else if (![self isActive]) image = [UIImage imageNamed:@"GrayMenu.png"];
     else if ([self availBike] == 0) image = [UIImage imageNamed:@"RedEmptyMenu.png"];
     else if ([self availSpace] == 0) image = [UIImage imageNamed:@"RedFullMenu.png"];
@@ -125,6 +133,17 @@
 - (NSString*)sid
 {
     return [self objectForKey:@"sid"];
+}
+
+- (CLLocationDistance)distanceFromLocation:(CLLocation*)location
+{
+    CLLocation* stationLocation = [[CLLocation new] initWithLatitude:[self latitude] longitude:[self longitude]];
+    return [location distanceFromLocation:stationLocation];
+}
+
+- (BOOL)isMyLocation
+{
+    return [[self sid] isEqualToString:@"0"];
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "Globals.h"
 #import "Utils.h"
 #import "ASIHTTPRequest+Telobike.h"
-#import "JSON.h"
+#import "SBJson.h"
 #import "City.h"
 
 @implementation City

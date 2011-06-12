@@ -33,4 +33,7 @@
 
 - (NSString*)sid;
 
+- (CLLocationDistance)distanceFromLocation:(CLLocation*)location;
+- (BOOL)isMyLocation;
+
 @end

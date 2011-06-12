@@ -7,15 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
+extern NSString* const kLocationChangedNotification;
 
+@interface AppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate> 
+{
+    CLLocationManager* _locationManager;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *mainController;
+@property (nonatomic, readonly) CLLocation* currentLocation;
 
 + (AppDelegate*)app;
 
+- (void)addLocationChangeObserver:(id)target selector:(SEL)selector;
+- (void)removeLocationChangeObserver:(id)target;
 
 @end

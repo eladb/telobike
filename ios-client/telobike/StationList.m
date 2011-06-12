@@ -7,7 +7,7 @@
 //
 
 #import "StationList.h"
-#import "JSON.h"
+#import "SBJson.h"
 #import "Globals.h"
 #import "ASIHTTPRequest+Telobike.h"
 #import "NSDictionary+Station.h"
@@ -48,6 +48,13 @@
     return self;
 }
 
++ (NSDictionary*)myLocationStation
+{
+    NSMutableDictionary* result = [NSMutableDictionary dictionary];
+    [result setValue:@"0" forKey:@"sid"];
+    return result;
+}
+
 -(void)refreshStationsWithCompletion:(void(^)())completionBlock
 {
     ASIHTTPRequest* req = [ASIHTTPRequest telobikeRequestWithQuery:[NSString stringWithFormat:@"/stations?city=%@",[Globals city]]];
@@ -63,10 +70,20 @@
         
         NSArray* newStations = [[req responseString] JSONValue];
         NSMutableArray* filteredStations = [NSMutableArray array];
-        BOOL showInactiveStations = [[NSUserDefaults standardUserDefaults] boolForKey:@"showInactiveStations"];
+        
+        NSDictionary* myLocStation = [StationList myLocationStation];
+        [filteredStations addObject:myLocStation];
+        
+        BOOL showInactiveStations = YES;
+        id showInactiveValue = [[NSUserDefaults standardUserDefaults] valueForKey:@"showInactiveStations"];
+        if (showInactiveValue)
+        {
+            showInactiveStations = [showInactiveValue boolValue];
+        }
+
         for (NSDictionary* s in newStations)
         {
-            if (![s isActive] && !showInactiveStations) continue; // filter inactive stations (if setting is enabled)
+            if (![s isActive] && !showInactiveStations && !s.isMyLocation) continue; // filter inactive stations (if setting is enabled)
             [filteredStations addObject:s];
         }
         

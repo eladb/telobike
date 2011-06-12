@@ -34,6 +34,11 @@
     [super dealloc];
 }
 
++ (void)openWithParent:(UIViewController*)parentViewController station:(NSDictionary*)station
+{
+    [[[[ReportProblem alloc] initWithParent:parentViewController station:station] autorelease] show];
+}
+
 - (void)show
 {
     UIActionSheet* actionSheet = [[[UIActionSheet alloc] 

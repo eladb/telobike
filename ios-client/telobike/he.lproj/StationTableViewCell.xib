@@ -100,7 +100,7 @@
 							<object class="IBUILabel" id="634974160">
 								<reference key="NSNextResponder" ref="1024079281"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{115, 26}, {140, 22}}</string>
+								<string key="NSFrame">{{46.9961, 26}, {207.004, 22}}</string>
 								<reference key="NSSuperview" ref="1024079281"/>
 								<reference key="NSNextKeyView" ref="106909903"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -338,7 +338,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">GreenMenu.png</string>
-			<string key="NS.object.0">{32, 37}</string>
+			<string key="NS.object.0">{30, 30}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">301</string>
 	</data>

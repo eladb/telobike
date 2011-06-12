@@ -7,20 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 #import "MapViewController.h"
 #import "EGORefreshTableHeaderView.h"
 
 @interface RootViewController : UIViewController 
-    <CLLocationManagerDelegate, 
-     UITableViewDelegate, 
+    <UITableViewDelegate, 
      UITableViewDataSource, 
      UISearchBarDelegate, 
      UINavigationControllerDelegate,
      UIScrollViewDelegate,
      EGORefreshTableHeaderDelegate>
 {
-    CLLocationManager* locationManager;
     NSArray* stations;
     NSString* filter;
     MapViewController* mapView;
