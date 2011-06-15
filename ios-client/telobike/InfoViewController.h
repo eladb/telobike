@@ -11,6 +11,7 @@
 
 @interface InfoViewController : UIViewController <UIWebViewDelegate>
 
+@property (nonatomic, retain) IBOutlet NSURLRequest* urlRequest;
 @property (nonatomic, retain) IBOutlet UIWebView* webView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView* activityIndicator;
 

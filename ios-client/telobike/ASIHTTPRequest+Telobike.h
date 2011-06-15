@@ -11,6 +11,6 @@
 
 @interface ASIHTTPRequest (Telobike)
 
-+ (ASIHTTPRequest*)telobikeRequestWithQuery:(NSString*)query;
++ (ASIHTTPRequest*)telobikeRequestWithQuery:(NSString*)query useCache:(BOOL)useCache;
 
 @end

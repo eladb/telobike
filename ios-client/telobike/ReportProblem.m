@@ -42,7 +42,7 @@
 - (void)show
 {
     UIActionSheet* actionSheet = [[[UIActionSheet alloc] 
-                                   initWithTitle:NSLocalizedString(@"REPORT_PROBLEM_TITLE", nil) 
+                                   initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"REPORT_PROBLEM_TITLE", nil), _station.stationName]
                                    delegate:self 
                                    cancelButtonTitle:NSLocalizedString(@"REPORT_PROBLEM_CANCEL", nil) 
                                    destructiveButtonTitle:nil 

@@ -41,7 +41,9 @@
     
     // try 'key.lang' first as the key
     NSString* lang = [Utils currentLanguage];
-    result = [self objectForKey:[NSString stringWithFormat:@"%@.%@", key,lang]];
+    result = [self objectForKey:[NSString stringWithFormat:@"%@.%@", key, lang]];
+    
+    if (!result) result = [self objectForKey:[NSString stringWithFormat:@"%@_%@", key, lang]];
     
     // if we couldn't find this, fall back to the non-localized version
     if (!result) 
@@ -81,9 +83,59 @@
 
 - (NSURL*)urlForKey:(NSString*)key
 {
-    NSString* s = [self objectForKey:key];
+    NSString* s = [self localizedStringForKey:key];
     if (!s) return nil;
     return [NSURL URLWithString:s];
+}
+
+- (NSDate*)jsonDateForKey:(NSString*)key
+{
+    return [[self objectForKey:key] jsonDate];
+}
+
+@end
+
+@implementation NSString (JsonDate)
+
+- (NSDate*)jsonDate
+{
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    formatter.dateStyle = NSDateFormatterNoStyle;
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    
+    NSString* str = [NSString stringWithString:self];
+    
+    
+    NSRange stringContainsFractionOfsecondRange = [str rangeOfString:@"."];
+    if (stringContainsFractionOfsecondRange.length > 0)
+    {
+        str = [str substringToIndex:stringContainsFractionOfsecondRange.location];
+    }
+    
+    NSDate* gmtDate = [formatter dateFromString:str];
+    
+    NSTimeZone* gmtTimeZone = [NSTimeZone localTimeZone];
+    NSInteger secondsFromGmt = [gmtTimeZone secondsFromGMT];
+    NSDate* localTime = [gmtDate dateByAddingTimeInterval:secondsFromGmt];
+    
+    return localTime;
+}
+
+@end
+
+@implementation NSDate (JsonDate)
+
+- (NSString*)jsonString
+{
+    // self is in local time
+    NSTimeZone* gmtTimeZone = [NSTimeZone localTimeZone];
+    NSInteger secondsFromGmt = [gmtTimeZone secondsFromGMT];
+    NSDate* gmtDate = [self dateByAddingTimeInterval:-secondsFromGmt];
+    
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    formatter.dateStyle = NSDateFormatterNoStyle;
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    return [formatter stringFromDate:gmtDate];
 }
 
 @end

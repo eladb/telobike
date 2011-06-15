@@ -24,6 +24,6 @@
 @property (nonatomic, readonly) NSString* disclaimer;
 @property (nonatomic, readonly) NSURL* infoURL;
 
-- (void)refreshWithCompletion:(void(^)(void))block;
+- (void)refreshWithCompletion:(void(^)(void))block failure:(void(^)(void))failureBlock useCache:(BOOL)useCache;;
 
 @end

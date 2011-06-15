@@ -55,9 +55,9 @@
     return result;
 }
 
--(void)refreshStationsWithCompletion:(void(^)())completionBlock
+- (void)refreshStationsWithCompletion:(void(^)())completionBlock failure:(void(^)(void))failureBlock useCache:(BOOL)useCache
 {
-    ASIHTTPRequest* req = [ASIHTTPRequest telobikeRequestWithQuery:[NSString stringWithFormat:@"/stations?city=%@",[Globals city]]];
+    ASIHTTPRequest* req = [ASIHTTPRequest telobikeRequestWithQuery:[NSString stringWithFormat:@"/stations?city=%@",[Globals city]] useCache:useCache];
 
     [req setCompletionBlock:^
     {
@@ -96,6 +96,7 @@
     [req setFailedBlock:^
      {
          NSLog(@"Request failed: %@", [req error]);
+         if (failureBlock) failureBlock();
      }];
     
     [req startAsynchronous];

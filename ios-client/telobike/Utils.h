@@ -21,5 +21,19 @@
 - (NSString*)localizedStringForKey:(NSString*)key;
 - (CLLocation*)locationForKey:(NSString*)key;
 - (NSURL*)urlForKey:(NSString*)key;
+- (NSDate*)jsonDateForKey:(NSString*)key;
+
+@end
+
+
+@interface NSString (JsonDate)
+
+- (NSDate*)jsonDate;
+
+@end
+
+@interface NSDate (JsonDate)
+
+- (NSString*)jsonString;
 
 @end

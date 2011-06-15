@@ -9,6 +9,8 @@
 #import "NSDictionary+Station.h"
 #import "Utils.h"
 
+static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
+
 @interface NSDictionary (StationPrivate)
 
 - (NSString*)localizedStringForKey:(NSString*)key;
@@ -43,9 +45,19 @@
     return CLLocationCoordinate2DMake([self latitude], [self longitude]);
 }
 
+- (NSDate*)lastUpdate
+{
+    return [self jsonDateForKey:@"last_update"];
+}
+
+- (NSTimeInterval)freshness
+{
+    return -[[self lastUpdate] timeIntervalSinceNow];
+}
+
 - (BOOL)isOnline
 {
-    return [self objectForKey:@"last_update"] != nil;
+    return [self lastUpdate] != nil && [self freshness] < kFreshnessTimeInterval;
 }
 
 - (BOOL)isActive
@@ -63,11 +75,26 @@
     return [[self objectForKey:@"available_spaces"] intValue];
 }
 
+- (NSString*)lastUpdateDesc
+{
+    if (![self lastUpdate]) return NSLocalizedString(@"Offline", nil);
+    return [NSString stringWithFormat:@"Last updated: %.0fmin ago", [self freshness] / 60.0];
+}
+
+- (NSString*)statusText
+{
+    if (!self.isOnline) return NSLocalizedString(@"Offline", nil);
+    if (!self.isActive) return NSLocalizedString(@"Inactive station", nil);
+    return nil;
+}
+
 - (NSString*)availBikeDesc
 {
     if ([self isMyLocation]) return NSLocalizedString(@"MYLOCATION_DESC", nil);
-    if (![self isOnline]) return NSLocalizedString(@"Offline", @"indicates that the station is offline");
-    if (![self isActive]) return NSLocalizedString(@"Inactive station", @"indicates that the station is inactive");
+    
+    NSString* status = [self statusText];
+    if (status) return status;
+    
     else return [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Bicycle", @"Number of bicycle"), [self availBike]];
 }
 
@@ -97,7 +124,7 @@
     }
     
     UIImage* image = [UIImage imageNamed:@"GreenMenu.png"];
-    if (![self isOnline]) image = [UIImage imageNamed:@"Black.png"];
+    if (![self isOnline]) image = [UIImage imageNamed:@"BlackMenu.png"];
     else if (![self isActive]) image = [UIImage imageNamed:@"GrayMenu.png"];
     else if ([self availBike] == 0) image = [UIImage imageNamed:@"RedEmptyMenu.png"];
     else if ([self availSpace] == 0) image = [UIImage imageNamed:@"RedFullMenu.png"];

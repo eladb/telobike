@@ -3,7 +3,7 @@
 
 "SETTINGS_ABOUT_GROUP" = "About";
 "SETTINGS_VERSION_LABEL" = "Version 1.1";
-"SETTINGS_SEND_FEEDBACK_MAIL" = "Send feedback";
+"SETTINGS_SEND_FEEDBACK_MAIL" = "Send App Feedback";
 
 "SETTINGS_OSS_DEVELOPERS_GROUP" = "Created by";
 "SETTINGS_OSS_DEVELOPERS_LABEL" = "nirsa & eladb";

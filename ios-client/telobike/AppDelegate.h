@@ -11,7 +11,7 @@
 
 extern NSString* const kLocationChangedNotification;
 
-@interface AppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate> 
+@interface AppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate, UIAlertViewDelegate> 
 {
     CLLocationManager* _locationManager;
 }

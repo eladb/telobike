@@ -18,6 +18,6 @@
 
 + (StationList*)instance;
 
-- (void)refreshStationsWithCompletion:(void(^)())completionBlock;
+- (void)refreshStationsWithCompletion:(void(^)())completionBlock failure:(void(^)(void))failureBlock useCache:(BOOL)useCache;
 
 @end

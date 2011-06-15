@@ -28,7 +28,7 @@
         instance = [City new];
     }
     
-    [instance refreshWithCompletion:nil];
+    [instance refreshWithCompletion:nil failure:nil useCache:YES];
     
     return instance;
 }
@@ -42,9 +42,9 @@
 - (NSString*)disclaimer { return [_data objectForKey:@"disclaimer"]; }
 - (NSURL*)infoURL { return [_data urlForKey:@"info_url"]; }
 
-- (void)refreshWithCompletion:(void(^)(void))block
+- (void)refreshWithCompletion:(void(^)(void))block failure:(void(^)(void))failureBlock useCache:(BOOL)useCache
 {
-    ASIHTTPRequest* req = [ASIHTTPRequest telobikeRequestWithQuery:[NSString stringWithFormat:@"/cities/%@", [Globals city]]];
+    ASIHTTPRequest* req = [ASIHTTPRequest telobikeRequestWithQuery:[NSString stringWithFormat:@"/cities/%@", [Globals city]] useCache:useCache];
     
     [req setCompletionBlock:^
      {
@@ -64,6 +64,7 @@
     [req setFailedBlock:^
      {
          NSLog(@"Request failed: %@", [req error]);
+         if (failureBlock) failureBlock();
      }];
     
     [req startAsynchronous];

@@ -21,6 +21,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 @interface RootViewController (Private)
 
+- (void)refreshStationsWithError:(BOOL)showError;
 - (void)sortStations;
 - (BOOL)doesStation:(NSDictionary*)station containKeyword:(NSString*)keyword;
 - (BOOL)filterStation:(NSDictionary*)station;
@@ -29,14 +30,8 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)refreshStations:(id)sender;
 - (void)about:(id)sender;
 
-// keyboard events
-- (void)keyboardDidShow:(NSNotification*)n;
-- (void)keyboardWillHide:(NSNotification*)n;
-
 - (void)hideSearchBarAnimated:(BOOL)animated;
-
 - (void)settingsChanged:(NSNotification*)n;
-
 - (void)locationChanged:(NSNotification*)n;
 
 @end
@@ -82,10 +77,6 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
         mapView = [MapViewController new];
     }
     
-    // register for keyboard notifications so we can change the size of the list view
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
     [self hideSearchBarAnimated:NO];
     
     
@@ -106,11 +97,12 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     // if the last refresh was more than 5 minutes ago, refresh. otherwise, just just sort by distance.
     if (!lastRefresh || [[NSDate date] timeIntervalSinceDate:lastRefresh] > kMinimumAutorefreshInterval)
     {
-        [self refreshStations:nil];
+        [self refreshStationsWithError:NO];
     }
 
     [self sortStations];
-}
+}    
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -260,24 +252,13 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)refreshStations:(id)sender
 {
-    _isLoading = YES;
-    [[StationList instance] refreshStationsWithCompletion:^{
-        [lastRefresh release];
-        lastRefresh = [NSDate new];
-        [self sortStations];
-        _isLoading = NO;
-
-        [_refreshHeaderView refreshLastUpdatedDate];
-        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    }];
+    [self refreshStationsWithError:YES];
 }
 
 NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 {
     NSDictionary* station1 = stationObj1;
     NSDictionary* station2 = stationObj2;
-
-    
     
     double dist1 = [[station1 objectForKey:@"distance"] doubleValue];
     double dist2 = [[station2 objectForKey:@"distance"] doubleValue];
@@ -379,24 +360,6 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     [SendFeedback open];
 }
 
-- (void)keyboardDidShow:(NSNotification*)n
-{
-    CGRect keyboardRect = [[[n userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    _tableView.frame = CGRectMake(_tableView.frame.origin.x, 
-                                  _tableView.frame.origin.y, 
-                                  _tableView.frame.size.width, 
-                                  _tableView.frame.size.height - keyboardRect.size.height);
-}
-
-- (void)keyboardWillHide:(NSNotification*)n
-{
-    CGRect keyboardRect = [[[n userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    _tableView.frame = CGRectMake(_tableView.frame.origin.x, 
-                                  _tableView.frame.origin.y, 
-                                  _tableView.frame.size.width, 
-                                  _tableView.frame.size.height + keyboardRect.size.height);
-}
-
 - (void)hideSearchBarAnimated:(BOOL)animated
 {
     [_tableView setContentOffset:CGPointMake(0, _searchBar.frame.size.height) animated:animated];
@@ -410,6 +373,27 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 - (void)locationChanged:(NSNotification*)n
 {
     [self sortStations];
+}
+
+- (void)refreshStationsWithError:(BOOL)showError
+{
+    _isLoading = YES;
+    [[StationList instance] refreshStationsWithCompletion:^
+    {
+        [lastRefresh release];
+        lastRefresh = [NSDate new];
+        [self sortStations];
+        _isLoading = NO;
+        
+        [_refreshHeaderView refreshLastUpdatedDate];
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    } failure:^
+    {
+        if (showError)
+        {
+            [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:NSLocalizedString(@"REFRESH_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"REFRESH_ERROR_BUTTON", nil) otherButtonTitles:nil] autorelease] show];
+        }
+    } useCache:!showError];
 }
 
 @end

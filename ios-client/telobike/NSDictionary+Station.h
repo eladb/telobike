@@ -17,6 +17,10 @@
 - (CLLocation*)location;
 - (CLLocationCoordinate2D)coords;
 - (BOOL)isActive;
+- (NSDate*)lastUpdate;
+- (NSString*)lastUpdateDesc;
+- (BOOL)isOnline;
+- (NSString*)statusText;
 
 - (NSInteger)availBike;
 - (NSInteger)availSpace;

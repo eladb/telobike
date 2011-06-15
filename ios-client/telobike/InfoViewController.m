@@ -14,9 +14,11 @@
 
 @synthesize webView=_webView;
 @synthesize activityIndicator=_activityIndicator;
+@synthesize urlRequest=_urlRequest;
 
 - (void)dealloc
 {
+    [_urlRequest release];
     [_webView release];
     [_activityIndicator release];
     [super dealloc];
@@ -30,6 +32,7 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     _webView.delegate = self;
     _webView.alpha = 0.0;
+    
     [self refresh:nil];
 }
 
@@ -37,6 +40,14 @@
 {
     [_activityIndicator stopAnimating];
     _webView.alpha = 1.0;
+    
+    NSString* js = @"document.getElementsByTagName('title')[0].innerHTML";
+    NSString* title = [_webView stringByEvaluatingJavaScriptFromString:js];
+    
+    if (title)
+    {
+        self.navigationItem.title = title;
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -49,7 +60,34 @@
 {
     _webView.alpha = 0.0;
     [_activityIndicator startAnimating];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[City instance].infoURL]];
+    
+    if (!_urlRequest)
+    {
+        _urlRequest = [[NSURLRequest requestWithURL:[City instance].infoURL] retain];
+    }
+    
+    [_webView loadRequest:_urlRequest];
+}
+
+- (IBAction)back:(id)sender
+{
+    [_webView goBack];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSLog(@"shouldStartLoadWithRequest");
+    
+    if ([[[request URL] absoluteString] isEqualToString:[[_urlRequest URL] absoluteString]])
+    {
+        return YES;
+    }
+
+    // navigate to another window
+    InfoViewController* ivc = [[[InfoViewController alloc] init] autorelease];
+    ivc.urlRequest = request;
+    [self.navigationController pushViewController:ivc animated:YES];
+    return NO;
 }
 
 @end

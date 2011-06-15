@@ -11,4 +11,6 @@
 
 @interface LoadingViewController : UIViewController 
 
+@property (nonatomic, retain) IBOutlet UILabel* loadingText;
+
 @end

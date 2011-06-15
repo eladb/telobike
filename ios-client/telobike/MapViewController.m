@@ -30,6 +30,7 @@
 
 @interface MapViewController (Private)
 
+- (void)refreshStationsWithError:(BOOL)showError;
 - (void)hideOpenedMarker;
 - (RMMarker*)markerForStation:(NSDictionary*)station;
 
@@ -110,9 +111,9 @@
     // center tel-aviv
     [_mapView moveToLatLong:[City instance].cityCenter.coordinate];
     
-    [self hideDetailsPane];
-    
     [self reloadStations];
+
+    [self hideDetailsPane];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -188,16 +189,16 @@
 {
     CLLocation* loc = [[AppDelegate app] currentLocation];
     if (!loc) return;
+    
+    [self hideDetailsPane];
     [_mapView moveToLatLong:loc.coordinate];
+    [_mapView contents].zoom = 16;
 }
 
 
 - (IBAction)refresh:(id)sender
 {
-    [[StationList instance] refreshStationsWithCompletion:^
-     {
-         [self reloadStations];
-     }];
+    [self refreshStationsWithError:YES];
 }
 
 - (IBAction)navigateToStation:(id)sender
@@ -288,8 +289,11 @@
 {
     [self hideDetailsPane];
     
-    _stationBoxesPanel.hidden = !_openMarker.station.isActive;
-    _inactiveStationLabel.hidden = _openMarker.station.isActive;
+    BOOL showBoxes = _openMarker.station.isActive && _openMarker.station.isOnline;
+    
+    _stationBoxesPanel.hidden = !showBoxes;
+    _inactiveStationLabel.hidden = showBoxes;
+    _inactiveStationLabel.text = _openMarker.station.statusText;
     
     _stationName.text = _openMarker.station.stationName;
     _availBikeLabel.text = [NSString stringWithFormat:@"%d", [_openMarker.station availBike]];
@@ -362,6 +366,20 @@
     }
     
     _myLocationButton.hidden = NO;
+}
+
+- (void)refreshStationsWithError:(BOOL)showError
+{
+    [[StationList instance] refreshStationsWithCompletion:^
+     {
+         [self reloadStations];
+     } failure:^
+     {
+         if (showError)
+         {
+             [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:NSLocalizedString(@"REFRESH_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"REFRESH_ERROR_BUTTON", nil) otherButtonTitles:nil] autorelease] show];
+         }
+     } useCache:!showError];
 }
 
 @end

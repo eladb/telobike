@@ -26,7 +26,7 @@ NSString* deviceId()
     return deviceId;
 }
 
-+ (ASIHTTPRequest*)telobikeRequestWithQuery:(NSString*)query
++ (ASIHTTPRequest*)telobikeRequestWithQuery:(NSString*)query useCache:(BOOL)useCache
 {
     NSString* concatChar = [query rangeOfString:@"?"].length == 1 ? @"&" : @"?";
     NSString* urlQuery = [NSString stringWithFormat:@"%@%@id=%@&alt=json", query, concatChar, deviceId()];
@@ -35,9 +35,19 @@ NSString* deviceId()
     
     ASIHTTPRequest* req = [ASIHTTPRequest requestWithURL:url];
     [req setNumberOfTimesToRetryOnTimeout:3];
-    [req setCachePolicy:ASIFallbackToCacheIfLoadFailsCachePolicy | ASIAskServerIfModifiedCachePolicy];
+    
+    if (useCache)
+    {
+        [req setCachePolicy:ASIFallbackToCacheIfLoadFailsCachePolicy | ASIAskServerIfModifiedCachePolicy];
+    }
+    else
+    {
+        [req setCachePolicy:ASIDoNotReadFromCacheCachePolicy];
+    }
+
     [req setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
     [req setDownloadCache:[ASIDownloadCache sharedCache]];
+
     
     return req;
 }

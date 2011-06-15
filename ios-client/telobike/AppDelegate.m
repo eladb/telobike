@@ -17,12 +17,12 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 @interface AppDelegate (Private)
 
+- (void)downloadCityAndStart;
 - (void)showDisclaimerFirstTime;
 
 @end
 
 @implementation AppDelegate
-
 
 @synthesize window=_window;
 @synthesize mainController=_mainController;
@@ -34,7 +34,6 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [_locationManager release];
     [super dealloc];
 }
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -50,26 +49,8 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     
-    [[City instance] refreshWithCompletion:^
-     {
-         [[StationList instance] refreshStationsWithCompletion:^
-         {
-             UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
-             UIViewController* infoVC = [self.mainController.viewControllers objectAtIndex:1];
-             IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:2];
-             [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
-
-
-             stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
-             infoVC.navigationItem.title = infoVC.tabBarItem.title = NSLocalizedString(@"INFO_TITLE", nil);
-             settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);
-             
-             [self showDisclaimerFirstTime];
-             self.window.rootViewController = self.mainController;
-
-             [self.window makeKeyAndVisible];
-         }];
-     }];
+    [self downloadCityAndStart];
+    
     
     [Appirater appLaunched:YES];
     
@@ -112,10 +93,49 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [[NSNotificationCenter defaultCenter] removeObserver:target name:kLocationChangedNotification object:nil];
 }
 
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self downloadCityAndStart];
+}
 
 @end
 
 @implementation AppDelegate (Private)
+
+- (void)downloadCityAndStart
+{
+    void(^failureBlock)(void) = ^
+    {
+        [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) 
+                                     message:NSLocalizedString(@"NETWORK_ERROR", nil) 
+                                    delegate:self 
+                           cancelButtonTitle:NSLocalizedString(@"NETWORK_ERROR_BUTTON", nil) 
+                           otherButtonTitles:nil] autorelease] show];
+    };
+    
+    [[City instance] refreshWithCompletion:^
+     {
+         [[StationList instance] refreshStationsWithCompletion:^
+          {
+              UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
+              UIViewController* infoVC = [self.mainController.viewControllers objectAtIndex:1];
+              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:2];
+              [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+              
+              
+              stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
+              infoVC.navigationItem.title = infoVC.tabBarItem.title = NSLocalizedString(@"INFO_TITLE", nil);
+              settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);
+              
+              [self showDisclaimerFirstTime];
+              self.window.rootViewController = self.mainController;
+              
+              [self.window makeKeyAndVisible];
+          } failure:failureBlock useCache:YES];
+     } failure:failureBlock useCache:YES];
+}
 
 - (void)showDisclaimerFirstTime
 {
