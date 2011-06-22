@@ -8,25 +8,30 @@
 		<table border='1'>
 			
 			<tr>
+				<th>sid</th>
 				<th>city</th>
 				<th>name</th> 
 				<th>location</th>
 				<th>available_bike</th>
 				<th>available_spaces</th>
 				<th>last_update</th>
-				<th>refresh</th>
+				<th>actions</th>
 			</tr>
 			
 			{% for s in results %}
 			
 			<tr>
+				<td>{{s.sid}}</td>
 				<td>{{s.city}}</td>
 				<td>{{s.name}}</td>
 				<td>{{s.latitude}},{{s.longitude}}</td>
 				<td>{{s.available_bike}}</td>
 				<td>{{s.available_spaces}}</td>
 				<td>{{s.last_update}}</td>
-				<td><a href='/stations/refresh-station?city={{s.city}}&sid={{s.sid}}'>refresh</a></td>
+				<td>
+					<a href='/stations/refresh-station?city={{s.city}}&sid={{s.sid}}'>refresh</a>
+					<a href='/history/{{s.sid}}?city={{s.city}}'>history</a>
+				</td>
 			</tr>
 			
 			{% endfor %}

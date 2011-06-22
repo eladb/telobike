@@ -1,27 +1,12 @@
 """Handles the /stations endpoint"""
 
 import logging
-from google.appengine.ext import db
 from utils import model as modelutils
 import restapp
 from datetime import timedelta
 
-class Station(db.Model):
-    """Represents a stations
-    The key().name() is the station ID in the tel-o-fun system.
-    """
-    last_update = db.DateTimeProperty(auto_now=True, required=True)
-    name = db.StringProperty()
-    location = db.GeoPtProperty()
-    available_bike = db.IntegerProperty()
-    available_spaces = db.IntegerProperty()
-    city = db.StringProperty()
-    address = db.StringProperty()
-    tags = db.StringListProperty()
-    name_en = db.StringProperty()
-    is_broken = db.BooleanProperty()
-    is_broken_since= db.DateTimeProperty()
-    
+from model import Station
+
 class StationsEndpoint(restapp.Endpoint):
     root_url = '/stations'
     
@@ -55,6 +40,7 @@ import tlv
 import paris
 from google.appengine.ext import deferred
 import refresh
+from model import StationHistory
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -101,7 +87,10 @@ class RefreshStationStatusRequestHandler(webapp.RequestHandler):
         stored_station.available_spaces = result['available_spaces']
         stored_station.put()
 
-           
+        # append a copy of the stored station to station history        
+        StationHistory.append(stored_station)
+        
+
 def main():
     application = webapp.WSGIApplication([('/stations/refresh-station', RefreshStationStatusRequestHandler), 
                                           ('/stations/refresh', RefreshStationsRequestHandler), 
