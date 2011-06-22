@@ -16,7 +16,6 @@
 #import "RMMapContents.h"
 #import "RMProjection.h"
 #import "StationTableViewCell.h"
-#import "NSDictionary+Station.h"
 #import "RMYahooMapSource.h"
 #import "Utils.h"
 #import "ReportProblem.h"
@@ -24,7 +23,7 @@
 
 @interface RMMarker (Station)
 
-@property (nonatomic, retain) NSDictionary* station;
+@property (nonatomic, retain) Station* station;
 
 @end
 
@@ -32,10 +31,11 @@
 
 - (void)refreshStationsWithError:(BOOL)showError;
 - (void)hideOpenedMarker;
-- (RMMarker*)markerForStation:(NSDictionary*)station;
+- (RMMarker*)markerForStation:(Station*)station;
 
+- (void)populateDetails;
 - (void)hideDetailsPane;
-- (void)showDetailsPane;
+- (void)showDetailsPaneForMarker:(RMMarker*)marker;
 - (void)reloadStations;
 
 - (void)locationChanged:(NSNotification*)n;
@@ -149,9 +149,9 @@
     marker.zPosition = 999;
     
     [marker showLabel];
-    _openMarker = [marker retain];
     
-    [self showDetailsPane];
+    
+    [self showDetailsPaneForMarker:marker];
 }
 
 - (void)singleTapOnMap:(RMMapView*)map At:(CGPoint)point
@@ -159,7 +159,7 @@
     [self hideOpenedMarker];
 }
 
-- (void)selectStation:(NSDictionary*)station
+- (void)selectStation:(Station*)station
 {
     [self view]; // load nib
     
@@ -220,14 +220,14 @@
 
 @implementation RMMarker (Station)
 
-- (void)setStation:(NSDictionary*)station
+- (void)setStation:(Station*)station
 {
     self.data = station;
 }
 
-- (NSDictionary*)station
+- (Station*)station
 {
-    return (NSDictionary*)self.data;
+    return (Station*)self.data;
 }
 
 @end
@@ -238,7 +238,7 @@
 {
     if (_openMarker)
     {
-        NSDictionary* station = [_openMarker station];
+        Station* station = [_openMarker station];
         _openMarker.zPosition = [station isActive];
         UIImage* image = [station markerImage];
         CGPoint anchorPoint = CGPointMake(16.0 / (double)image.size.width, 35.0 / (double)image.size.height);
@@ -251,7 +251,7 @@
     }
 }
 
-- (RMMarker*)markerForStation:(NSDictionary*)station
+- (RMMarker*)markerForStation:(Station*)station
 {
     return [_markers objectForKey:[station sid]];
 }
@@ -262,6 +262,8 @@
     _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, -_detailsPane.frame.size.height, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
     _detailsPane.hidden = NO;
     [UIView commitAnimations];
+    
+    [self hideOpenedMarker];
 }
 
 - (UIImage*)imageForAvailability:(NSInteger)avail
@@ -285,9 +287,9 @@
     _stationDistanceLabel.text = [Utils formattedDistance:distance];
 }
 
-- (void)showDetailsPane
+- (void)populateDetails
 {
-    [self hideDetailsPane];
+    if (!_openMarker) return;
     
     BOOL showBoxes = _openMarker.station.isActive && _openMarker.station.isOnline;
     
@@ -304,6 +306,15 @@
     // set the color of the boxes based on the amount of avail bike/park
     _parkBox.image = [self imageForAvailability:[_openMarker.station availSpace]];
     _bikeBox.image = [self imageForAvailability:[_openMarker.station availBike]];
+}
+
+- (void)showDetailsPaneForMarker:(RMMarker*)marker
+{
+    [self hideDetailsPane];
+
+    [_openMarker release];
+    _openMarker = [marker retain];
+    [self populateDetails];
     
     [UIView beginAnimations:nil context:nil];
     _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, -5.0, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
@@ -317,7 +328,7 @@
     // load stations
     NSArray* stations = [StationList instance].stations;
     
-    for (NSDictionary* station in stations)
+    for (Station* station in stations)
     {
         if ([station isMyLocation]) continue; // do not display the 'my location' station.
         
@@ -343,8 +354,9 @@
         // update station.
         marker.data = station;
         [marker replaceUIImage:image anchorPoint:anchorPoint];
-        
     }
+    
+    [self populateDetails];
 }
 
 - (void)locationChanged:(NSNotification*)n

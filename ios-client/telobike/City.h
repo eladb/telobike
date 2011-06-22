@@ -23,6 +23,7 @@
 @property (nonatomic, readonly) CLLocation* cityCenter;
 @property (nonatomic, readonly) NSString* disclaimer;
 @property (nonatomic, readonly) NSURL* infoURL;
+@property (nonatomic, readonly) NSString* phoneNumber;
 
 - (void)refreshWithCompletion:(void(^)(void))block failure:(void(^)(void))failureBlock useCache:(BOOL)useCache;;
 

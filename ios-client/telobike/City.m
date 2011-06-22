@@ -41,6 +41,7 @@
 - (CLLocation*)cityCenter { return [_data locationForKey:@"city_center"]; }
 - (NSString*)disclaimer { return [_data objectForKey:@"disclaimer"]; }
 - (NSURL*)infoURL { return [_data urlForKey:@"info_url"]; }
+- (NSString*)phoneNumber { return @"+972544604762"; /*[_data objectForKey:@"phone"];*/ }
 
 - (void)refreshWithCompletion:(void(^)(void))block failure:(void(^)(void))failureBlock useCache:(BOOL)useCache
 {

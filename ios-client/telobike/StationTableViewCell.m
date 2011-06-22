@@ -7,7 +7,6 @@
 //
 
 #import "StationTableViewCell.h"
-#import "NSDictionary+Station.h"
 #import "Utils.h"
 
 @implementation StationTableViewCell
@@ -17,10 +16,11 @@
 @synthesize availBikeLabel=_availBikeLabel;
 @synthesize availSpaceLabel=_availSpaceLabel;
 @synthesize icon=_icon;
+@synthesize station=_station;
 
 - (void)dealloc
 {
-    [station release];
+    [_station release];
     [_availBikeLabel release];
     [_availSpaceLabel release];
     [_stationNameLabel release];
@@ -34,37 +34,30 @@
     return [topLevelObjects objectAtIndex:0];
 }
 
-- (NSDictionary*)station
+- (void)setStation:(Station *)newStation
 {
-    return station;
-}
-
-- (void)setStation:(NSDictionary *)newStation
-{
-    [station release];
-    station = [newStation retain];
+    [_station release];
+    _station = [newStation retain];
     
-    _stationNameLabel.text = [station stationName];
+    _stationNameLabel.text = [_station stationName];
     
-    NSNumber* distance = [station objectForKey:@"distance"];
-    if (distance)
-    {    
-        double distance = [[station objectForKey:@"distance"] doubleValue];
-        NSString* dist = [Utils formattedDistance:distance];
-        
-        if ([station isMyLocation])
-        {
-            dist = NSLocalizedString(@"MYLOCATION_DISTANCE", nil);
-        }
-        
-        _distanceLabel.text = dist;
+    if (_station.isMyLocation)
+    {
+        _distanceLabel.text = NSLocalizedString(@"MYLOCATION_DISTANCE", nil);
     }
     else
     {
-        _distanceLabel.hidden = YES;
+        if (_station.distance != 0)
+        {
+            _distanceLabel.text = [Utils formattedDistance:_station.distance];
+        }
+        else
+        {
+            _distanceLabel.hidden = YES;
+        }
     }
 
-    if (![station isActive])
+    if (![_station isActive])
     {
         for (UIView* v in self.contentView.subviews)
         {
@@ -76,15 +69,15 @@
         }
     }
     
-    _availSpaceLabel.text = [station availSpaceDesc];
-    _availBikeLabel.text = [station availBikeDesc];
+    _availSpaceLabel.text = [_station availSpaceDesc];
+    _availBikeLabel.text = [_station availBikeDesc];
     
-    if ([station availSpaceColor]) _availSpaceLabel.textColor = [station availSpaceColor];
-    if ([station availBikeColor]) _availBikeLabel.textColor = [station availBikeColor];
+    if ([_station availSpaceColor]) _availSpaceLabel.textColor = [_station availSpaceColor];
+    if ([_station availBikeColor]) _availBikeLabel.textColor = [_station availBikeColor];
     
-    _icon.image = [station listImage];
+    _icon.image = [_station listImage];
     
-    if ([station isMyLocation])
+    if ([_station isMyLocation])
     {
         _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 13, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
         _icon.frame = CGRectMake(_icon.frame.origin.x, 14, _icon.frame.size.width, _icon.frame.size.height);

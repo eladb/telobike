@@ -7,7 +7,6 @@
 //
 
 #import "NavigateToStation.h"
-#import "NSDictionary+Station.h"
 #import "AppDelegate.h"
 
 static NSString* const kMapsAppSingleShotDefaultsKey = @"mapsAppWarningShown";
@@ -81,10 +80,10 @@ static NSString* const kMapsAppSingleShotDefaultsKey = @"mapsAppWarningShown";
         saddr = [NSString stringWithFormat:@"&saddr=%g,%g(Current+Location)", currLat, currLong];
     }
     
-    NSString* daddr = [NSString stringWithFormat:@"&daddr=%@,%@(%@)", 
-                       [_station objectForKey:@"latitude"], 
-                       [_station objectForKey:@"longitude"], 
-                       [_station stationName]];
+    NSString* daddr = [NSString stringWithFormat:@"&daddr=%g,%g(%@)", 
+                       _station.latitude,
+                       _station.longitude,
+                       _station.stationName];
     
     NSString* urlString = [NSString stringWithFormat:@"http://maps.google.com/maps?dirflg=w%@%@", saddr, daddr];
     NSString* encodedString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

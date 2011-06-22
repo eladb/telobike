@@ -26,7 +26,7 @@
 		040AB1E113749785001FF38F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AB1DF13749785001FF38F /* MapViewController.m */; };
 		040AB1E5137497AE001FF38F /* StationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AB1E4137497AE001FF38F /* StationList.m */; };
 		040AB1EB137497BB001FF38F /* StationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AB1E9137497BB001FF38F /* StationTableViewCell.m */; };
-		040AB1EF137497D1001FF38F /* NSDictionary+Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AB1EE137497D1001FF38F /* NSDictionary+Station.m */; };
+		040AB1EF137497D1001FF38F /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AB1EE137497D1001FF38F /* Station.m */; };
 		040ADD0413A3B695002784A1 /* bike.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD0213A3B695002784A1 /* bike.png */; };
 		040ADD0513A3B695002784A1 /* bike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD0313A3B695002784A1 /* bike@2x.png */; };
 		040ADD0813A3B6A1002784A1 /* parking.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD0613A3B6A1002784A1 /* parking.png */; };
@@ -219,8 +219,8 @@
 		040AB1E4137497AE001FF38F /* StationList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationList.m; sourceTree = "<group>"; };
 		040AB1E8137497BB001FF38F /* StationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationTableViewCell.h; sourceTree = "<group>"; };
 		040AB1E9137497BB001FF38F /* StationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationTableViewCell.m; sourceTree = "<group>"; };
-		040AB1ED137497D1001FF38F /* NSDictionary+Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Station.h"; sourceTree = "<group>"; };
-		040AB1EE137497D1001FF38F /* NSDictionary+Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Station.m"; sourceTree = "<group>"; };
+		040AB1ED137497D1001FF38F /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		040AB1EE137497D1001FF38F /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 		040ADD0213A3B695002784A1 /* bike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bike.png; path = telobike/assets/bike.png; sourceTree = SOURCE_ROOT; };
 		040ADD0313A3B695002784A1 /* bike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bike@2x.png"; path = "telobike/assets/bike@2x.png"; sourceTree = SOURCE_ROOT; };
 		040ADD0613A3B6A1002784A1 /* parking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = parking.png; path = telobike/assets/parking.png; sourceTree = SOURCE_ROOT; };
@@ -596,8 +596,8 @@
 		04746C6213755A1500D9CBDA /* model */ = {
 			isa = PBXGroup;
 			children = (
-				040AB1ED137497D1001FF38F /* NSDictionary+Station.h */,
-				040AB1EE137497D1001FF38F /* NSDictionary+Station.m */,
+				040AB1ED137497D1001FF38F /* Station.h */,
+				040AB1EE137497D1001FF38F /* Station.m */,
 				040AB1E3137497AE001FF38F /* StationList.h */,
 				040AB1E4137497AE001FF38F /* StationList.m */,
 				0481E44D1396311B0046C4D1 /* City.h */,
@@ -1010,7 +1010,7 @@
 				040AB1E113749785001FF38F /* MapViewController.m in Sources */,
 				040AB1E5137497AE001FF38F /* StationList.m in Sources */,
 				040AB1EB137497BB001FF38F /* StationTableViewCell.m in Sources */,
-				040AB1EF137497D1001FF38F /* NSDictionary+Station.m in Sources */,
+				040AB1EF137497D1001FF38F /* Station.m in Sources */,
 				04A732E61378797D000D3A0C /* Utils.m in Sources */,
 				0481E44F1396311B0046C4D1 /* City.m in Sources */,
 				0481E4581396351A0046C4D1 /* ASIHTTPRequest+Telobike.m in Sources */,

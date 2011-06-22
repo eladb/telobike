@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
+#import "Station.h"
 
 @interface ReportProblem : NSObject <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, retain) UIViewController* parentViewController;
-@property (nonatomic, retain) NSDictionary* station;
+@property (nonatomic, retain) Station* station;
 
-- (id)initWithParent:(UIViewController*)parentViewController station:(NSDictionary*)station;
+- (id)initWithParent:(UIViewController*)parentViewController station:(Station*)station;
 - (void)show;
 
-+ (void)openWithParent:(UIViewController*)parentViewController station:(NSDictionary*)station;
++ (void)openWithParent:(UIViewController*)parentViewController station:(Station*)station;
 
 @end

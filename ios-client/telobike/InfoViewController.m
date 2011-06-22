@@ -30,6 +30,7 @@
     [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
     self.navigationItem.title = NSLocalizedString(@"INFO_TITLE", nil);
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
+    
     _webView.delegate = self;
     _webView.alpha = 0.0;
     
@@ -76,9 +77,12 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"shouldStartLoadWithRequest");
-    
     if ([[[request URL] absoluteString] isEqualToString:[[_urlRequest URL] absoluteString]])
+    {
+        return YES;
+    }
+    
+    if ([[request URL].scheme isEqualToString:@"tel"])
     {
         return YES;
     }

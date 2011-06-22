@@ -13,7 +13,7 @@
 #import "City.h"
 #import "StationList.h"
 #import "MapViewController.h"
-#import "NSDictionary+Station.h"
+#import "Station.h"
 #import "SendFeedback.h"
 #import "IASKSettingsReader.h"
 
@@ -23,8 +23,8 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)refreshStationsWithError:(BOOL)showError;
 - (void)sortStations;
-- (BOOL)doesStation:(NSDictionary*)station containKeyword:(NSString*)keyword;
-- (BOOL)filterStation:(NSDictionary*)station;
+- (BOOL)doesStation:(Station*)station containKeyword:(NSString*)keyword;
+- (BOOL)filterStation:(Station*)station;
 
 // navigation bar icon handlers
 - (void)refreshStations:(id)sender;
@@ -139,7 +139,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
         cell = [StationTableViewCell cell];
     }
     
-    NSDictionary* station = [stations objectAtIndex:[indexPath row]];
+    Station* station = [stations objectAtIndex:[indexPath row]];
     [cell setStation:station];
 
     return cell;
@@ -147,7 +147,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* station = [stations objectAtIndex:[indexPath row]];
+    Station* station = [stations objectAtIndex:[indexPath row]];
     
     [mapView selectStation:station];
     [self.navigationController pushViewController:mapView animated:YES];
@@ -257,11 +257,11 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 {
-    NSDictionary* station1 = stationObj1;
-    NSDictionary* station2 = stationObj2;
+    Station* station1 = stationObj1;
+    Station* station2 = stationObj2;
     
-    double dist1 = [[station1 objectForKey:@"distance"] doubleValue];
-    double dist2 = [[station2 objectForKey:@"distance"] doubleValue];
+    double dist1 = station1.distance;
+    double dist2 = station2.distance;
     
     if ([station1 isMyLocation]) dist1 = 0.0;
     if ([station2 isMyLocation]) dist2 = 0.0;
@@ -280,7 +280,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     // location and then it will be used for sorting.
     if (currentLocation)
     {
-        for (NSDictionary* station in rawStations)
+        for (Station* station in rawStations)
         {
             CGFloat distance = [station distanceFromLocation:currentLocation];
             [station setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
@@ -293,7 +293,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     // filter stations based on filter string.
     NSMutableArray* newStations = [NSMutableArray array];
     
-    for (NSDictionary* station in sortedStations) 
+    for (Station* station in sortedStations) 
     {
         if ([self filterStation:station]) 
         {
@@ -309,7 +309,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     [self.tableView reloadData];
 }
 
-- (BOOL)doesStation:(NSDictionary*)station containKeyword:(NSString*)keyword 
+- (BOOL)doesStation:(Station*)station containKeyword:(NSString*)keyword 
 {
     // check if the filter text is in the station name
     if ([station stationName] && [[station stationName] rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
@@ -329,7 +329,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     return NO;
 }
 
-- (BOOL)filterStation:(NSDictionary *)station
+- (BOOL)filterStation:(Station*)station
 {
     if (!filter) return YES;
     

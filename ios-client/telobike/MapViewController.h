@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RMMapView.h"
+#import "Station.h"
 
 @class RMMarker;
 
@@ -33,7 +34,7 @@
 @property (nonatomic, retain) IBOutlet UIView* stationBoxesPanel;
 @property (nonatomic, retain) IBOutlet UILabel* inactiveStationLabel;
 
-- (void)selectStation:(NSDictionary*)station;
+- (void)selectStation:(Station*)station;
 - (IBAction)showMyLocation:(id)sender;
 - (IBAction)refresh:(id)sender;
 

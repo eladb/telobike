@@ -69,7 +69,7 @@
     NSString* latString = [components objectAtIndex:0];
     NSString* lngString = [components objectAtIndex:1];
     
-    if (latString != nil && lngString != nil && latString.length > 0 && lngString.length > 0)
+    if (!latString || !lngString || latString.length == 0 || lngString.length == 0)
     {
         NSLog(@"bad string format for lat/lon (%@)", str);
         return nil;

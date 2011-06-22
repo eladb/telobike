@@ -6,7 +6,6 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "NSDictionary+Station.h"
 #import "City.h"
 #import "ReportProblem.h"
 
@@ -16,7 +15,7 @@
 @synthesize parentViewController=_parentViewController;
 @synthesize station=_station;
 
-- (id)initWithParent:(UIViewController *)parentViewController station:(NSDictionary *)station
+- (id)initWithParent:(UIViewController *)parentViewController station:(Station*)station
 {
     self = [super init];
     if (self)
@@ -34,7 +33,7 @@
     [super dealloc];
 }
 
-+ (void)openWithParent:(UIViewController*)parentViewController station:(NSDictionary*)station
++ (void)openWithParent:(UIViewController*)parentViewController station:(Station*)station
 {
     [[[[ReportProblem alloc] initWithParent:parentViewController station:station] autorelease] show];
 }
