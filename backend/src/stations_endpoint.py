@@ -16,11 +16,6 @@ class StationsEndpoint(restapp.Endpoint):
         d['longitude'] = stored_station.location.lon
         if not d.has_key('available_spaces'): d['available_spaces'] = 0
         if not d.has_key('available_bike'): d['available_bike'] = 0
-        
-        if d.has_key('name_en'):
-            d['name.en'] = d['name_en']
-            d.pop('name_en')
-            
         return d
     
     def get(self, ctx):
@@ -44,6 +39,7 @@ from model import StationHistory
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.api import urlfetch
 
 class RefreshStationsRequestHandler(webapp.RequestHandler):
     def get(self):
@@ -85,8 +81,9 @@ class RefreshStationStatusRequestHandler(webapp.RequestHandler):
         
         stored_station.available_bike = result['available_bike']
         stored_station.available_spaces = result['available_spaces']
+        stored_station.name_en = result['name_en']
         stored_station.put()
-
+        
         # append a copy of the stored station to station history        
         StationHistory.append(stored_station)
         

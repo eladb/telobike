@@ -43,5 +43,16 @@ def read_station(sid):
 
     avail_park = div[0].replace(u'עמודי עגינה פנויים', '').replace(':', '').replace(' ', '')
     print '%s: bike: %s, park: %s' % (sid, avail_bike, avail_park)
+    
+    # grab the english name from the english endpoint
+    en_url = 'http://www.tel-o-fun.co.il/DesktopModules/Locations/StationData.ashx?en=1&sid=%s' % sid
+    en_htmldoc = urlfetch.fetch(en_url)
+    name_en = None
+    if en_htmldoc.status_code == 200:
+        en_soup = BeautifulSoup(en_htmldoc.content)
+        divs = en_soup.findAll('div')
+        name_en = divs[2].text
+        
     return { 'available_bike': int(avail_bike),
-             'available_spaces': int(avail_park) } 
+             'available_spaces': int(avail_park),
+             'name_en': name_en } 
