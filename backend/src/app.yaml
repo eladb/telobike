@@ -4,6 +4,10 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /mapreduce(/.*)?
+  script: mapreduce/main.py
+  login: admin
+
 - url: /stations(/.*)?
   script: stations_endpoint.py
   
@@ -21,7 +25,8 @@ handlers:
 
 - url: /
   script: index.py
-
+  
 builtins:
 - datastore_admin: on
 - deferred: on
+- remote_api: on

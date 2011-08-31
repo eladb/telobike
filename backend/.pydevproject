@@ -13,8 +13,8 @@
 </pydev_pathproperty>
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>${GOOGLE_APP_ENGINE}</path>
-<path>${GOOGLE_APP_ENGINE}/lib/django</path>
 <path>${GOOGLE_APP_ENGINE}/lib/webob</path>
 <path>${GOOGLE_APP_ENGINE}/lib/yaml/lib</path>
+<path>$(GOOGLE_APP_ENGINE)/lib/django_1_2/django</path>
 </pydev_pathproperty>
 </pydev_project>

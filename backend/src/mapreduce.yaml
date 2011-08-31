@@ -1,0 +1,20 @@
+mapreduce:
+- name: average_bikes_per_hour
+  mapper:
+    input_reader: mapreduce.input_readers.DatastoreInputReader
+    handler: mapreducejobs.average_bikes_per_hour
+    params:
+    - name: entity_kind
+      default: model.StationHistory
+
+- name: average_bikes_per_hour_of_day
+  mapper:
+    input_reader: mapreduce.input_readers.DatastoreInputReader
+    handler: mapreducejobs.average_bikes_per_hour_of_day
+    params:
+    - name: entity_kind
+      default: model.StationHistory
+    - name: shard_count
+      default: 64
+    - name: processing_rate
+      default: 1000
