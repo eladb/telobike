@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <AudioToolbox/AudioToolbox.h>
 #import "AppDelegate.h"
 #import "StationList.h"
 #import "City.h"
@@ -26,9 +27,13 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 @synthesize window=_window;
 @synthesize mainController=_mainController;
+@synthesize listView=_listView;
+@synthesize mapView=_mapView;
 
 - (void)dealloc
 {
+    [_mapView release];
+    [_listView release];
     [_window release];
     [_mainController release];
     [_locationManager release];
@@ -51,7 +56,6 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     
     [self downloadCityAndStart];
     
-    
     [Appirater appLaunched:YES];
     
     return YES;
@@ -65,6 +69,14 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 + (AppDelegate*)app
 {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
+#pragma mark Map
+
+- (void)rootViewController:(RootViewController *)viewController didSelectStation:(Station *)station
+{
+    _mainController.selectedIndex = 1;
+    [_mapView selectStation:station];
 }
 
 #pragma mark Location
@@ -100,6 +112,45 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [self downloadCityAndStart];
 }
 
+#pragma mark - Map
+
+- (void)mapViewControllerDidSelectList:(MapViewController *)viewController
+{
+    [self.mainController setSelectedIndex:0];
+}
+
+#pragma mark - Timer
+
+-(void)playSound:(NSString *)fileName ext:(NSString*)ext
+{
+    NSURL* pathURL  = [[NSBundle mainBundle] URLForResource:fileName withExtension:ext];
+    SystemSoundID audioEffect;
+    AudioServicesCreateSystemSoundID((CFURLRef) pathURL, &audioEffect);
+    AudioServicesPlaySystemSound(audioEffect);
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // if we came from the background, we don't need an alert because it was already displayed
+    if (application.applicationState != UIApplicationStateActive) {
+        return;
+    }
+    
+    /* sound attribution:
+     <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://soundcloud.com/soundbyterfreesounds/www-soundbyter-com-bicycle-bell-sound-effect"><span property="dct:title">"www.soundbyter.com-bicycle-bell-sound-effect"</span> (<a rel="cc:attributionURL" property="cc:attributionName" href="http://soundcloud.com/soundbyterfreesounds">soundbyterfreesounds</a>) / <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">CC BY-NC 3.0</a></div>
+     */
+    
+    NSString* soundName = notification.soundName;
+    if (soundName) {
+        [self playSound:soundName ext:nil];
+    }
+    
+    [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) 
+                                 message:notification.alertBody delegate:nil 
+                       cancelButtonTitle:NSLocalizedString(@"OK", nil) 
+                       otherButtonTitles:nil] autorelease] show];
+}
+
 @end
 
 @implementation AppDelegate (Private)
@@ -120,18 +171,27 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
          [[StationList instance] refreshStationsWithCompletion:^
           {
               UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
-              UIViewController* infoVC = [self.mainController.viewControllers objectAtIndex:1];
-              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:2];
+              UIViewController* mapVC = [self.mainController.viewControllers objectAtIndex:1];
+              UIViewController* alarmVC = [self.mainController.viewControllers objectAtIndex:2];
+              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
               [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
               
-              
               stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
-              infoVC.navigationItem.title = infoVC.tabBarItem.title = NSLocalizedString(@"INFO_TITLE", nil);
+              mapVC.navigationItem.title = mapVC.tabBarItem.title = NSLocalizedString(@"MAP_TITLE", nil);
+              alarmVC.navigationItem.title = alarmVC.tabBarItem.title = NSLocalizedString(@"TIMER_TITLE", nil);
               settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);
               
               [self showDisclaimerFirstTime];
               self.window.rootViewController = self.mainController;
+            
+              UINavigationController* nav = [[self.mainController viewControllers] objectAtIndex:0];
+              _listView = (RootViewController*) [[nav topViewController] retain];
+              _listView.delegate = self;
               
+              nav = [[self.mainController viewControllers] objectAtIndex:1];
+              _mapView = (MapViewController*) [[nav topViewController] retain];
+              _mapView.delegate = self;
+            
               [self.window makeKeyAndVisible];
           } failure:failureBlock useCache:YES];
      } failure:failureBlock useCache:YES];

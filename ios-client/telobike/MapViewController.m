@@ -34,7 +34,7 @@
 - (RMMarker*)markerForStation:(Station*)station;
 
 - (void)populateDetails;
-- (void)hideDetailsPane;
+- (void)hideDetailsPaneAnimated:(BOOL)animated;
 - (void)showDetailsPaneForMarker:(RMMarker*)marker;
 - (void)reloadStations;
 
@@ -58,6 +58,7 @@
 @synthesize stationDistanceLabel=_stationDistanceLabel;
 @synthesize stationBoxesPanel=_stationBoxesPanel;
 @synthesize inactiveStationLabel=_inactiveStationLabel;
+@synthesize delegate=_delegate;
 
 - (void)dealloc
 {
@@ -105,6 +106,8 @@
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     _myLocationButton.hidden = YES;
+
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"List" style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
     
     _mapView.delegate = self;
     
@@ -113,7 +116,7 @@
     
     [self reloadStations];
 
-    [self hideDetailsPane];
+    [self hideDetailsPaneAnimated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -139,18 +142,25 @@
 
 #pragma mark RMMapViewDelegate
 
+- (void) beforeMapMove: (RMMapView*) map
+{
+  [self hideDetailsPaneAnimated:YES];
+}
+
+- (void) tapOnLabelForMarker: (RMMarker*) marker onMap: (RMMapView*) map
+{
+  [self hideOpenedMarker];
+}
+
 - (void)tapOnMarker:(RMMarker*)marker onMap:(RMMapView*)map
 {
     // don't do anything if the marker is my location.
     if (marker == _myLocation) return;
-    
+  
     [self hideOpenedMarker];
-
+  
     marker.zPosition = 999;
-    
     [marker showLabel];
-    
-    
     [self showDetailsPaneForMarker:marker];
 }
 
@@ -190,7 +200,7 @@
     CLLocation* loc = [[AppDelegate app] currentLocation];
     if (!loc) return;
     
-    [self hideDetailsPane];
+    [self hideDetailsPaneAnimated:YES];
     [_mapView moveToLatLong:loc.coordinate];
     [_mapView contents].zoom = 16;
 }
@@ -214,6 +224,13 @@
 {
     ReportProblem* r = [[[ReportProblem alloc] initWithParent:self station:_openMarker.station] autorelease];
     [r show];
+}
+
+#pragma mark - List
+
+- (void)openList:(id)sender
+{
+    [_delegate mapViewControllerDidSelectList:self];
 }
 
 @end
@@ -247,7 +264,7 @@
         [_openMarker release];
         _openMarker = nil;
         
-        [self hideDetailsPane];
+        [self hideDetailsPaneAnimated:YES];
     }
 }
 
@@ -256,13 +273,12 @@
     return [_markers objectForKey:[station sid]];
 }
 
-- (void)hideDetailsPane
+- (void)hideDetailsPaneAnimated:(BOOL)animated
 {
-    [UIView beginAnimations:nil context:nil];
+    if (animated) [UIView beginAnimations:nil context:nil];
     _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, -_detailsPane.frame.size.height, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
     _detailsPane.hidden = NO;
-    [UIView commitAnimations];
-    
+    if (animated) [UIView commitAnimations];
     [self hideOpenedMarker];
 }
 
@@ -310,7 +326,7 @@
 
 - (void)showDetailsPaneForMarker:(RMMarker*)marker
 {
-    [self hideDetailsPane];
+    [self hideDetailsPaneAnimated:NO];
 
     [_openMarker release];
     _openMarker = [marker retain];

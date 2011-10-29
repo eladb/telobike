@@ -1,3 +1,8 @@
 *.pyc
 .tmp_*
 .DS_Store
+ios-client/telobike.xcodeproj/project.xcworkspace/xcuserdata/eladb.xcuserdatad/UserInterfaceState.xcuserstate
+ios-client/telobike.xcodeproj/project.xcworkspace/xcuserdata/eladb.xcuserdatad/WorkspaceSettings.xcsettings
+ios-client/telobike.xcodeproj/xcuserdata/eladb.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist
+ios-client/telobike.xcodeproj/xcuserdata/eladb.xcuserdatad/xcschemes/telobike.xcscheme
+ios-client/telobike.xcodeproj/xcuserdata/eladb.xcuserdatad/xcschemes/xcschememanagement.plist

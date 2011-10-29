@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "RootViewController.h"
+#import "MapViewController.h"
 
 extern NSString* const kLocationChangedNotification;
 
-@interface AppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate, UIAlertViewDelegate> 
+@interface AppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, RootViewControllerDelegate, MapViewControllerDelegate> 
 {
     CLLocationManager* _locationManager;
 }
@@ -19,6 +21,9 @@ extern NSString* const kLocationChangedNotification;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *mainController;
 @property (nonatomic, readonly) CLLocation* currentLocation;
+
+@property (nonatomic, readonly) RootViewController* listView;
+@property (nonatomic, readonly) MapViewController* mapView;
 
 + (AppDelegate*)app;
 

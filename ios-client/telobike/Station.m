@@ -125,7 +125,7 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
 
 - (CLLocationDistance)distanceFromLocation:(CLLocation*)aLocation
 {
-    CLLocation* stationLocation = [[CLLocation new] initWithLatitude:self.latitude longitude:self.longitude];
+    CLLocation* stationLocation = [[[CLLocation new] initWithLatitude:self.latitude longitude:self.longitude] autorelease];
     return [aLocation distanceFromLocation:stationLocation];
 }
 
