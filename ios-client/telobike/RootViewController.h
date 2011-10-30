@@ -41,7 +41,6 @@
 - (void)hideSearchBarAnimated:(BOOL)animated;
 
 
-+ (void)showAbout;
 
 @end
 
@@ -50,5 +49,6 @@
 @required
 
 - (void)rootViewController:(RootViewController*)viewController didSelectStation:(Station*)station;
+- (void)rootViewControllerDidTouchFeedback:(RootViewController*)viewController;
 
 @end

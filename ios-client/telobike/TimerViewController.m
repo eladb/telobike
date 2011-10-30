@@ -35,8 +35,8 @@
 
     self.navigationController.navigationBarHidden = YES;
 
-    // default to 30 minutes
-    [timePicker setCountDownDuration:30 * 60];
+    // default to 25 minutes
+    [timePicker setCountDownDuration:25 * 60];
 }
 
 - (void)viewDidUnload

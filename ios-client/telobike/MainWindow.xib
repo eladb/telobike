@@ -73,7 +73,7 @@
 						<string key="IBUITitle">Item</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">alarm.png</string>
+							<string key="NSResourceName">alarmBell.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -599,7 +599,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>alarm.png</string>
+				<string>alarmBell.png</string>
 				<string>gear.png</string>
 				<string>home.png</string>
 				<string>map.png</string>

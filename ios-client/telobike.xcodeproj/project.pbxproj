@@ -164,6 +164,7 @@
 		F4F9B757145C220D007D75F4 /* IASKSpecifierValuesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B742145C220D007D75F4 /* IASKSpecifierValuesView.xib */; };
 		F4F9B75A145C29E1007D75F4 /* alarmBell.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B758145C29E1007D75F4 /* alarmBell.png */; };
 		F4F9B75B145C29E1007D75F4 /* alarmBell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */; };
+		F4F9B75E145CADC3007D75F4 /* FeedbackOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,6 +417,8 @@
 		F4F9B742145C220D007D75F4 /* IASKSpecifierValuesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IASKSpecifierValuesView.xib; sourceTree = "<group>"; };
 		F4F9B758145C29E1007D75F4 /* alarmBell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarmBell.png; path = telobike/assets/alarmBell.png; sourceTree = SOURCE_ROOT; };
 		F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarmBell@2x.png"; path = "telobike/assets/alarmBell@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4F9B75C145CADC3007D75F4 /* FeedbackOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackOptions.h; sourceTree = "<group>"; };
+		F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackOptions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -623,6 +626,8 @@
 				F47DF9CD14531812005DCA1B /* TimerViewController.h */,
 				F47DF9CE14531812005DCA1B /* TimerViewController.m */,
 				F47DF9CF14531812005DCA1B /* TimerViewController.xib */,
+				F4F9B75C145CADC3007D75F4 /* FeedbackOptions.h */,
+				F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -647,9 +652,9 @@
 		04746C6313755A2E00D9CBDA /* app */ = {
 			isa = PBXGroup;
 			children = (
-				04A732F313787D6E000D3A0C /* MainWindow.xib */,
 				04954136137495DD00F98DC0 /* AppDelegate.h */,
 				04954137137495DD00F98DC0 /* AppDelegate.m */,
+				04A732F313787D6E000D3A0C /* MainWindow.xib */,
 				0495412F137495DD00F98DC0 /* telobike-Info.plist */,
 				04954133137495DD00F98DC0 /* telobike-Prefix.pch */,
 				04954134137495DD00F98DC0 /* main.m */,
@@ -1094,6 +1099,7 @@
 				F4F9B74F145C220D007D75F4 /* IASKSlider.m in Sources */,
 				F4F9B750145C220D007D75F4 /* IASKSwitch.m in Sources */,
 				F4F9B751145C220D007D75F4 /* IASKTextField.m in Sources */,
+				F4F9B75E145CADC3007D75F4 /* FeedbackOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

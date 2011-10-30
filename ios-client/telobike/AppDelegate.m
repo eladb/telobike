@@ -37,6 +37,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [_window release];
     [_mainController release];
     [_locationManager release];
+    [_feedbackOptions release];
     [super dealloc];
 }
 
@@ -49,6 +50,9 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         [_locationManager startUpdatingLocation];
     }
+    
+    _feedbackOptions = [[FeedbackOptions alloc] init];
+    _feedbackOptions.delegate = self;
     
     LoadingViewController* vc = [[LoadingViewController new] autorelease];
     self.window.rootViewController = vc;
@@ -119,6 +123,34 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [self.mainController setSelectedIndex:0];
 }
 
+#pragma mark - Feedback
+
+- (void)presentFeedbackViewController
+{
+    [_feedbackOptions showFromTabBar:_mainController.tabBar];
+}
+
++ (void)showFeedback
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app presentFeedbackViewController];
+}
+
+- (void)rootViewControllerDidTouchFeedback:(RootViewController *)viewController
+{
+    [self presentFeedbackViewController];
+}
+
+- (void)presentModalViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [[self mainController] presentModalViewController:viewController animated:animated];
+}
+
+- (void)dismissModalViewControllerAnimated:(BOOL)animated
+{
+    [[self mainController] dismissModalViewControllerAnimated:animated];
+}
+
 #pragma mark - Timer
 
 -(void)playSound:(NSString *)fileName ext:(NSString*)ext
@@ -149,6 +181,28 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
                                  message:notification.alertBody delegate:nil 
                        cancelButtonTitle:NSLocalizedString(@"OK", nil) 
                        otherButtonTitles:nil] autorelease] show];
+}
+
+- (void)presentInfoViewController
+{
+    InfoViewController* infoViewController = [[[InfoViewController alloc] init] autorelease];
+    infoViewController.delegate = self;
+    UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:infoViewController] autorelease];
+    [[self mainController] presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark - Info
+
++ (void)showInfo
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app presentInfoViewController];
+}
+
+- (void)infoViewControllerDidClose:(InfoViewController *)viewController
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [[app mainController] dismissModalViewControllerAnimated:YES];
 }
 
 @end

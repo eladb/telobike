@@ -15,6 +15,7 @@
 @synthesize webView=_webView;
 @synthesize activityIndicator=_activityIndicator;
 @synthesize urlRequest=_urlRequest;
+@synthesize delegate=_delegate;
 
 - (void)dealloc
 {
@@ -27,14 +28,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+//    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+
     self.navigationItem.title = NSLocalizedString(@"INFO_TITLE", nil);
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
+//    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)] autorelease];
     
     _webView.delegate = self;
     _webView.alpha = 0.0;
     
     [self refresh:nil];
+}
+
+- (void)done:(id)sender
+{
+    [_delegate infoViewControllerDidClose:self];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

@@ -62,11 +62,23 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
+			<string>SETTINGS_INFO</string>
+			<key>IASKButtonClass</key>
+			<string>AppDelegate</string>
+			<key>IASKButtonAction</key>
+			<string>showInfo</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
 			<string>SETTINGS_SEND_FEEDBACK_MAIL</string>
 			<key>IASKButtonClass</key>
-			<string>RootViewController</string>
+			<string>AppDelegate</string>
 			<key>IASKButtonAction</key>
-			<string>showAbout</string>
+			<string>showFeedback</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

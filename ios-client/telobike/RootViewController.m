@@ -265,9 +265,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
 - (void)about:(id)sender
 {
-  SendFeedback* sf = [[[SendFeedback alloc] init] autorelease];
-  sf.mailComposeDelegate = self;
-  [self presentModalViewController:sf animated:YES];
+    [_delegate rootViewControllerDidTouchFeedback:self];
 }
 
 + (void)showAbout
