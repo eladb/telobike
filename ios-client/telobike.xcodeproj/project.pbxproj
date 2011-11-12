@@ -135,6 +135,7 @@
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
 		F47DF9D014531812005DCA1B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DF9CE14531812005DCA1B /* TimerViewController.m */; };
 		F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47DF9CF14531812005DCA1B /* TimerViewController.xib */; };
+		F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A994ED146F2E9E009F03F2 /* Favorites.m */; };
 		F4C6A55F1451DD2500732558 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55D1451DD2500732558 /* map.png */; };
 		F4C6A5601451DD2500732558 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55E1451DD2500732558 /* map@2x.png */; };
 		F4C6A5631451DD3B00732558 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A5611451DD3B00732558 /* alarm.png */; };
@@ -373,6 +374,8 @@
 		F47DF9CD14531812005DCA1B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		F47DF9CE14531812005DCA1B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		F47DF9CF14531812005DCA1B /* TimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerViewController.xib; sourceTree = "<group>"; };
+		F4A994EC146F2E9E009F03F2 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
+		F4A994ED146F2E9E009F03F2 /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
 		F4C6A55D1451DD2500732558 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = telobike/assets/map.png; sourceTree = SOURCE_ROOT; };
 		F4C6A55E1451DD2500732558 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "telobike/assets/map@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4C6A5611451DD3B00732558 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarm.png; path = telobike/assets/alarm.png; sourceTree = SOURCE_ROOT; };
@@ -645,6 +648,8 @@
 				0481E4571396351A0046C4D1 /* ASIHTTPRequest+Telobike.m */,
 				0481E459139635AB0046C4D1 /* Globals.h */,
 				0481E45A139635AB0046C4D1 /* Globals.m */,
+				F4A994EC146F2E9E009F03F2 /* Favorites.h */,
+				F4A994ED146F2E9E009F03F2 /* Favorites.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1100,6 +1105,7 @@
 				F4F9B750145C220D007D75F4 /* IASKSwitch.m in Sources */,
 				F4F9B751145C220D007D75F4 /* IASKTextField.m in Sources */,
 				F4F9B75E145CADC3007D75F4 /* FeedbackOptions.m in Sources */,
+				F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

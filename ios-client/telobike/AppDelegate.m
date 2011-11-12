@@ -30,6 +30,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 @synthesize mainController=_mainController;
 @synthesize listView=_listView;
 @synthesize mapView=_mapView;
+@synthesize favorites=_favorites;
 
 - (void)dealloc
 {
@@ -39,6 +40,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [_mainController release];
     [_locationManager release];
     [_feedbackOptions release];
+    [_favorites release];
     [super dealloc];
 }
 
@@ -46,6 +48,8 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _favorites = [[Favorites alloc] init];
+    
     if (!_locationManager)
     {
         _locationManager = [[CLLocationManager alloc] init];
