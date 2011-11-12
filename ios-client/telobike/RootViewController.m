@@ -64,9 +64,10 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kIASKAppSettingChanged object:nil];
     
-    self.navigationItem.titleView = _filters;
+//    self.navigationItem.titleView = _filters;
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshStations:)] autorelease];
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mail.png"] style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
+//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mail.png"] style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Feedback", nil) style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
     
     _tableView.rowHeight = [StationTableViewCell cell].frame.size.height;
     

@@ -7,6 +7,7 @@
 //
 
 #import <AudioToolbox/AudioToolbox.h>
+#import "ASIHTTPRequest.h"
 #import "AppDelegate.h"
 #import "StationList.h"
 #import "City.h"
@@ -41,6 +42,8 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [super dealloc];
 }
 
+#pragma mark - App Events
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     if (!_locationManager)
@@ -61,13 +64,25 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [self downloadCityAndStart];
     
     [Appirater appLaunched:YES];
-    
+  
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+
     return YES;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [Appirater appEnteredForeground:YES];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [_locationManager startUpdatingLocation];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [_locationManager stopUpdatingLocation];
 }
 
 + (AppDelegate*)app
@@ -203,6 +218,36 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 {
     AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [[app mainController] dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - Push
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // send token to server
+
+    NSString* token = [[[[deviceToken description] 
+                         stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                         stringByReplacingOccurrencesOfString: @">" withString: @""]
+                         stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+    NSLog(@"push token: %@", token);
+    NSString* url = [NSString stringWithFormat:@"https://go.urbanairship.com/api/device_tokens/%@", token];
+    
+    ASIHTTPRequest* req = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+    [req setRequestMethod:@"PUT"];
+    [req setUsername:@"yM20oMODRqC8BqFJYhs0Gw"];
+    [req setPassword:@"ToeYI9csTJiI00w95uOMsw"];
+    [req startAsynchronous];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"push recieved: %@", userInfo);
+    NSString* url = [[userInfo objectForKey:@"aps"] objectForKey:@"url"];
+    if (url) {
+        [application openURL:[NSURL URLWithString:url]];
+    }
 }
 
 @end

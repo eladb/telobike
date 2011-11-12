@@ -116,7 +116,7 @@
     }
     else {
         NSTimeInterval interval = [timePicker countDownDuration] + 1.0;
-#ifdef TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
         interval = 5.0;
 #endif
         notification = [[UILocalNotification alloc] init];

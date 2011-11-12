@@ -6,8 +6,6 @@
 	<string>he</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
-	<key>CFBundleDocumentTypes</key>
-	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -15,8 +13,6 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon.png</string>
-		<string>Icon.png</string>
-		<string>Icon@2x.png</string>
 		<string>Icon@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
@@ -31,10 +27,10 @@
 	<string>1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array/>
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.lifestyle</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -43,11 +39,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UTExportedTypeDeclarations</key>
-	<array/>
-	<key>UTImportedTypeDeclarations</key>
-	<array/>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 </dict>
 </plist>
