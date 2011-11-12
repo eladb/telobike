@@ -49,7 +49,11 @@
     [super viewDidAppear:animated];
 
     // if the timer is not started, start it.
-    if (![self timerStarted]) {
+    BOOL autoStartTimerEnabled = YES;
+    NSNumber* autoStartTimer = [[NSUserDefaults standardUserDefaults] objectForKey:@"autoStartTimer"];
+    if (autoStartTimer) autoStartTimerEnabled = [autoStartTimer boolValue];
+    
+    if (autoStartTimerEnabled && ![self timerStarted]) {
         [self startStop:nil]; // start timer
     }
 }
