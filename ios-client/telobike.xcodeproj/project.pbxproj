@@ -102,7 +102,6 @@
 		04A7330C13787E52000D3A0C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04A7330413787E52000D3A0C /* InfoPlist.strings */; };
 		04A7330D13787E52000D3A0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04A7330613787E52000D3A0C /* Localizable.strings */; };
 		04A7330E13787E52000D3A0C /* StationCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A7330813787E52000D3A0C /* StationCalloutView.xib */; };
-		04A7330F13787E52000D3A0C /* StationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A7330A13787E52000D3A0C /* StationTableViewCell.xib */; };
 		04A733421378AD38000D3A0C /* Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A733341378AD38000D3A0C /* Gray.png */; };
 		04A733431378AD38000D3A0C /* GrayMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A733351378AD38000D3A0C /* GrayMenu.png */; };
 		04A733441378AD38000D3A0C /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A733361378AD38000D3A0C /* Green.png */; };
@@ -136,6 +135,7 @@
 		F47DF9D014531812005DCA1B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DF9CE14531812005DCA1B /* TimerViewController.m */; };
 		F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47DF9CF14531812005DCA1B /* TimerViewController.xib */; };
 		F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A994ED146F2E9E009F03F2 /* Favorites.m */; };
+		F4BA7F211473E7CA00730050 /* StationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */; };
 		F4C6A55F1451DD2500732558 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55D1451DD2500732558 /* map.png */; };
 		F4C6A5601451DD2500732558 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55E1451DD2500732558 /* map@2x.png */; };
 		F4C6A5631451DD3B00732558 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A5611451DD3B00732558 /* alarm.png */; };
@@ -333,8 +333,6 @@
 		04A732F513787D6E000D3A0C /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		04A7330513787E52000D3A0C /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = InfoPlist.strings; sourceTree = "<group>"; };
 		04A7330713787E52000D3A0C /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = Localizable.strings; sourceTree = "<group>"; };
-		04A7330B13787E52000D3A0C /* he */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = he; path = StationTableViewCell.xib; sourceTree = "<group>"; };
-		04A7331D1378807C000D3A0C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = telobike/en.lproj/StationTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		04A733211378808F000D3A0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = telobike/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		04A733231378809D000D3A0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = telobike/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		04A733341378AD38000D3A0C /* Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Gray.png; path = telobike/assets/Gray.png; sourceTree = SOURCE_ROOT; };
@@ -376,6 +374,7 @@
 		F47DF9CF14531812005DCA1B /* TimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerViewController.xib; sourceTree = "<group>"; };
 		F4A994EC146F2E9E009F03F2 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
 		F4A994ED146F2E9E009F03F2 /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
+		F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationTableViewCell.xib; sourceTree = "<group>"; };
 		F4C6A55D1451DD2500732558 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = telobike/assets/map.png; sourceTree = SOURCE_ROOT; };
 		F4C6A55E1451DD2500732558 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "telobike/assets/map@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4C6A5611451DD3B00732558 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarm.png; path = telobike/assets/alarm.png; sourceTree = SOURCE_ROOT; };
@@ -610,7 +609,7 @@
 				04A732F413787D6E000D3A0C /* RootViewController.xib */,
 				040AB1E8137497BB001FF38F /* StationTableViewCell.h */,
 				040AB1E9137497BB001FF38F /* StationTableViewCell.m */,
-				04A7330A13787E52000D3A0C /* StationTableViewCell.xib */,
+				F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */,
 				040AB1DE13749785001FF38F /* MapViewController.h */,
 				040AB1DF13749785001FF38F /* MapViewController.m */,
 				04A732F513787D6E000D3A0C /* MapViewController.xib */,
@@ -956,7 +955,6 @@
 				04A7330C13787E52000D3A0C /* InfoPlist.strings in Resources */,
 				04A7330D13787E52000D3A0C /* Localizable.strings in Resources */,
 				04A7330E13787E52000D3A0C /* StationCalloutView.xib in Resources */,
-				04A7330F13787E52000D3A0C /* StationTableViewCell.xib in Resources */,
 				04A733421378AD38000D3A0C /* Gray.png in Resources */,
 				04A733431378AD38000D3A0C /* GrayMenu.png in Resources */,
 				04A733441378AD38000D3A0C /* Green.png in Resources */,
@@ -1039,6 +1037,7 @@
 				F4F9B757145C220D007D75F4 /* IASKSpecifierValuesView.xib in Resources */,
 				F4F9B75A145C29E1007D75F4 /* alarmBell.png in Resources */,
 				F4F9B75B145C29E1007D75F4 /* alarmBell@2x.png in Resources */,
+				F4BA7F211473E7CA00730050 /* StationTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,16 +1147,6 @@
 			name = StationCalloutView.xib;
 			path = "/Users/mac/Desktop/telobike/telobike/ios-client/telobike/he.lproj";
 			sourceTree = "<absolute>";
-		};
-		04A7330A13787E52000D3A0C /* StationTableViewCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				04A7330B13787E52000D3A0C /* he */,
-				04A7331D1378807C000D3A0C /* en */,
-			);
-			name = StationTableViewCell.xib;
-			path = he.lproj;
-			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 

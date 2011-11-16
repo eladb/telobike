@@ -8,6 +8,7 @@
 
 #import "Station.h"
 #import "Utils.h"
+#import "AppDelegate.h"
 
 static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
 
@@ -118,6 +119,18 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     return self;
 }
 
+- (StationState)state
+{
+    StationState state = StationOK;
+    if (!isOnline) state = StationUnknown;
+    else if (!isActive) state = StationInactive;
+    else if (availBike == 0) state = StationEmpty;
+    else if (availSpace == 0) state = StationFull;
+    else if (availBike <= 3) state = StationMarginal;
+    
+    return state;
+}
+
 + (Station*)myLocationStation
 {
     return [[[Station alloc] initWithDictionary:[NSDictionary dictionaryWithObject:@"0" forKey:@"sid"]] autorelease];
@@ -129,17 +142,69 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     return [aLocation distanceFromLocation:stationLocation];
 }
 
+- (BOOL)favorite
+{
+    return [[[AppDelegate app] favorites] isFavoriteStationID:sid];
+}
+
+- (void)setFavorite:(BOOL)isFavorite
+{
+    [[[AppDelegate app] favorites] setStationID:sid favorite:isFavorite];
+}
+
+- (NSString*)favoriteCharacter
+{
+    NSString* yesFavorite = @"💛";//💚💙🌟
+    NSString* noFavorite = @"💔";
+    return [self favorite] ? yesFavorite : noFavorite;
+    /*
+     ❤
+     HEAVY BLACK HEART
+     Unicode: U+2764, UTF-8: E2 9D A4
+     
+     */
+    /*
+     💔
+     BROKEN HEART
+     Unicode: U+1F494 (U+D83D U+DC94), UTF-8: F0 9F 92 94
+     */
+}
+
 @end
 
 @implementation Station (Private)
 
 - (UIImage*)imageWithNameFormat:(NSString*)fmt
 {
-    NSString* name = @"Green";
-    if (!isOnline) name = @"Black";
-    else if (!isActive) name = @"Gray";
-    else if (availBike == 0) name = @"RedEmpty";
-    else if (availSpace == 0) name = @"RedFull";
+    NSString* name = nil;
+
+    switch ([self state]) {
+        case StationOK:
+            name = @"Green";
+            break;
+            
+        case StationEmpty:
+            name = @"RedEmpty";
+            break;
+
+        case StationFull:
+            name = @"RedFull";
+            break;
+
+        case StationInactive:
+            name = @"Gray";
+            break;
+
+        case StationMarginal:
+            name = @"Green"; // TODO
+            break;
+
+        case StationUnknown:
+        default:
+            name = @"Black";
+            break;
+    }
+    
     return [UIImage imageNamed:[NSString stringWithFormat:fmt,name]];
 }
 

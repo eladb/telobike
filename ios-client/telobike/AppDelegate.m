@@ -279,7 +279,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
               IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
               [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
               
-              stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
+              stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"List", nil);
               mapVC.navigationItem.title = mapVC.tabBarItem.title = NSLocalizedString(@"MAP_TITLE", nil);
               alarmVC.navigationItem.title = alarmVC.tabBarItem.title = NSLocalizedString(@"TIMER_TITLE", nil);
               settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);

@@ -17,12 +17,14 @@
 
 - (BOOL)isFavoriteStationID:(NSString*)stationID
 {
+    [[NSUserDefaults standardUserDefaults] synchronize];
     return [[NSUserDefaults standardUserDefaults] boolForKey:[self defaultsKeyForStationID:stationID]];
 }
 
 - (void)setStationID:(NSString*)stationID favorite:(BOOL)isFavorite
 {
     [[NSUserDefaults standardUserDefaults] setBool:isFavorite forKey:[self defaultsKeyForStationID:stationID]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

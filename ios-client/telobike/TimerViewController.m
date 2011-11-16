@@ -35,6 +35,8 @@
 
     self.navigationController.navigationBarHidden = YES;
 
+    [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
+
     // default to 25 minutes
     [timePicker setCountDownDuration:25 * 60];
 }

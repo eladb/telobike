@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+typedef enum {
+    StationFull,     // red (no park)
+    StationEmpty,    // red (no bike)
+    StationOK,       // green
+    StationMarginal, // yellow
+    StationInactive, // gray
+    StationUnknown,  // black
+} StationState;
+
 @interface Station : NSObject
 
 @property (nonatomic, readonly) NSString* stationName;
@@ -28,6 +37,9 @@
 @property (nonatomic, readonly) NSString* availSpaceDesc;
 @property (nonatomic, readonly) UIColor* availSpaceColor;
 @property (nonatomic, readonly) UIColor* availBikeColor;
+@property (nonatomic, assign) BOOL favorite;
+
+@property (nonatomic, readonly) StationState state;
 
 @property (nonatomic, readonly) UIImage* markerImage;
 @property (nonatomic, readonly) UIImage* listImage;
@@ -36,6 +48,7 @@
 @property (nonatomic, readonly) NSString* address;
 @property (nonatomic, readonly) NSString* sid;
 @property (nonatomic, readonly) BOOL isMyLocation;
+@property (nonatomic, readonly) NSString* favoriteCharacter;
 
 @property (nonatomic, assign) double_t distance;
 

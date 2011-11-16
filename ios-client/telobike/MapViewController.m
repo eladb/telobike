@@ -38,6 +38,7 @@
 - (void)showDetailsPaneForMarker:(RMMarker*)marker;
 - (void)reloadStations;
 
+- (void)renderFavoriteButton;
 - (void)locationChanged:(NSNotification*)n;
 
 @end
@@ -59,11 +60,13 @@
 @synthesize stationBoxesPanel=_stationBoxesPanel;
 @synthesize inactiveStationLabel=_inactiveStationLabel;
 @synthesize delegate=_delegate;
+@synthesize favoriteButton=_favoriteButton;
 
 - (void)dealloc
 {
     [[AppDelegate app] removeLocationChangeObserver:self];
     
+    [_favoriteButton release];
     [_stationBoxesPanel release];
     [_inactiveStationLabel release];
     [_stationDistanceLabel release];
@@ -107,7 +110,7 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     _myLocationButton.hidden = YES;
 
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"List" style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"List", nil) style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
     
     _mapView.delegate = self;
     
@@ -226,6 +229,24 @@
     [r show];
 }
 
+- (IBAction)toggleFavorite:(id)sender
+{
+    if (!_openMarker) return;
+    [_openMarker.station setFavorite:!_openMarker.station.favorite];
+    [self renderFavoriteButton];
+
+    NSString* key = @"didDisplayFavoritesTip";
+    BOOL didDisplayFavoritesTip = [[NSUserDefaults standardUserDefaults] boolForKey:key];
+    if (!didDisplayFavoritesTip) {
+        UIAlertView* alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:NSLocalizedString(@"FAVORITES_TIP", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+        [alertView show];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+                                   
+    
+}
+
 #pragma mark - List
 
 - (void)openList:(id)sender
@@ -322,6 +343,8 @@
     // set the color of the boxes based on the amount of avail bike/park
     _parkBox.image = [self imageForAvailability:[_openMarker.station availSpace]];
     _bikeBox.image = [self imageForAvailability:[_openMarker.station availBike]];
+
+    [self renderFavoriteButton];
 }
 
 - (void)showDetailsPaneForMarker:(RMMarker*)marker
@@ -408,6 +431,13 @@
              [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:NSLocalizedString(@"REFRESH_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"REFRESH_ERROR_BUTTON", nil) otherButtonTitles:nil] autorelease] show];
          }
      } useCache:!showError];
+}
+
+- (void)renderFavoriteButton
+{
+    if (!_openMarker) return;
+    NSString* favoriteTitle = _openMarker.station.favoriteCharacter;
+    [_favoriteButton setTitle:favoriteTitle forState:UIControlStateNormal];
 }
 
 @end

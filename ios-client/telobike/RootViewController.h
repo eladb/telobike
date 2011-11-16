@@ -34,12 +34,15 @@
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property (nonatomic, retain) IBOutlet UISearchBar* searchBar;
 @property (nonatomic, retain) IBOutlet UISegmentedControl* filters;
+@property (nonatomic, retain) IBOutlet UIView* noFavorites;
+@property (nonatomic, retain) IBOutlet UILabel* noFavorites1;
+@property (nonatomic, retain) IBOutlet UILabel* noFavorites2;
 @property (nonatomic, assign) id<RootViewControllerDelegate> delegate;
 
 - (void)about:(id)sender;
 - (void)showSearchBarAnimated:(BOOL)animated;
 - (void)hideSearchBarAnimated:(BOOL)animated;
-
+- (IBAction)filterFavoritesChanged:(id)sender;
 
 
 @end

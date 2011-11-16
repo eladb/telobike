@@ -16,6 +16,7 @@
 @property (nonatomic, retain) IBOutlet UILabel* availBikeLabel;
 @property (nonatomic, retain) IBOutlet UILabel* availSpaceLabel;
 @property (nonatomic, retain) IBOutlet UIImageView* icon;
+@property (nonatomic, retain) IBOutlet UILabel* favorite;
 
 @property (nonatomic, retain) Station* station;
 
