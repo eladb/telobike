@@ -108,6 +108,8 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     [_noFavorites1 setText:NSLocalizedString(@"FAVORITES_EMPTY_LIST_1", nil)];
     [_noFavorites2 setText:NSLocalizedString(@"FAVORITES_EMPTY_LIST_2", nil)];
     
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(hideSearchBarFirstTime:) userInfo:nil repeats:NO];
+
     [super viewDidLoad];
 }
 
@@ -130,7 +132,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 {
     [super viewDidAppear:animated];
     [[Analytics shared] pageViewList];
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(hideSearchBarFirstTime:) userInfo:nil repeats:NO];
 }
 
 - (void)hideSearchBarFirstTime:(id)sender

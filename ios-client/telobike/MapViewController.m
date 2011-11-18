@@ -304,23 +304,18 @@
     [self hideOpenedMarker];
 }
 
-- (UIImage*)imageForState:(StationState)state
+- (UIImage*)imageForState:(AmountState)state
 {
     switch (state) {
-        case StationOK:
-            return [UIImage imageNamed:@"greenbox.png"];
-            
-        case StationFull:
-        case StationEmpty:
+        case Red:
             return [UIImage imageNamed:@"redbox.png"];
             
-        case StationMarginal:
+        case Yellow:
             return [UIImage imageNamed:@"yellowbox.png"];
 
+        case Green:
         default:
-        case StationUnknown:
-        case StationInactive:
-            return nil;
+            return [UIImage imageNamed:@"greenbox.png"];
     }
 }
 
@@ -356,8 +351,8 @@
     [self showDistanceForStation];
     
     // set the color of the boxes based on the amount of avail bike/park
-    _parkBox.image = [self imageForState:_openMarker.station.state];
-    _bikeBox.image = [self imageForState:_openMarker.station.state];
+    _parkBox.image = [self imageForState:_openMarker.station.parkState];
+    _bikeBox.image = [self imageForState:_openMarker.station.bikeState];
 
     [self renderFavoriteButton];
 }

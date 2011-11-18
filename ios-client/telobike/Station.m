@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 
 static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
+static const NSInteger kMarginalBikeAmount = 3;
 
 @interface Station (Private)
 
@@ -70,7 +71,6 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     if (self)
     {
         sid = [[dict objectForKey:@"sid"] retain];
-
         
         stationName = [[dict localizedStringForKey:@"name"] retain];
         latitude    = [[dict objectForKey:@"latitude"] doubleValue];
@@ -102,6 +102,7 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
         // set red color for bike and space if either of them is 0.
         if (isActive && availSpace == 0) availSpaceColor = [[UIColor redColor] retain];
         if (isActive && availBike == 0) availBikeColor = [[UIColor redColor] retain];
+        if (isActive && availBike > 0 && availBike <= kMarginalBikeAmount) availBikeColor = [[UIColor colorWithRed:170/255.0 green:140/255.0 blue:0/255.0 alpha:1.0] retain];
         
         // load images for list and markers
         markerImage = [[self imageWithNameFormat:@"%@.png"] retain];
@@ -126,9 +127,26 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     else if (!isActive) state = StationInactive;
     else if (availBike == 0) state = StationEmpty;
     else if (availSpace == 0) state = StationFull;
-    else if (availBike <= 3) state = StationMarginal;
+    else if (availBike <= kMarginalBikeAmount) state = StationMarginal;
     
     return state;
+}
+
+- (AmountState)amountStateForAmount:(NSInteger)amount
+{
+    if (amount == 0) return Red;
+    if (amount <= kMarginalBikeAmount) return Yellow;
+    return Green;
+}
+
+- (AmountState)parkState
+{
+    return [self amountStateForAmount:availSpace];
+}
+
+- (AmountState) bikeState
+{
+    return [self amountStateForAmount:availBike];
 }
 
 + (Station*)myLocationStation

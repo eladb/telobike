@@ -127,6 +127,8 @@
 		04C905EA1399A6C5007489A0 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E81399A6C5007489A0 /* home@2x.png */; };
 		04C905F21399AD5E007489A0 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C905F01399AD5B007489A0 /* LoadingViewController.m */; };
 		04C905F31399AD5E007489A0 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C905F11399AD5D007489A0 /* LoadingViewController.xib */; };
+		F4012D4814766FB200EFA21A /* YellowStar.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4614766FB200EFA21A /* YellowStar.png */; };
+		F4012D4914766FB200EFA21A /* YellowStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4714766FB200EFA21A /* YellowStar@2x.png */; };
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
@@ -374,6 +376,8 @@
 		04C905F01399AD5B007489A0 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		04C905F11399AD5D007489A0 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
 		04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = "route-me/MapView/MapView.xcodeproj"; sourceTree = "<group>"; };
+		F4012D4614766FB200EFA21A /* YellowStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowStar.png; path = telobike/assets/YellowStar.png; sourceTree = SOURCE_ROOT; };
+		F4012D4714766FB200EFA21A /* YellowStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowStar@2x.png"; path = "telobike/assets/YellowStar@2x.png"; sourceTree = SOURCE_ROOT; };
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -786,6 +790,8 @@
 		F4719BBB147663C90055443B /* menu */ = {
 			isa = PBXGroup;
 			children = (
+				F4012D4614766FB200EFA21A /* YellowStar.png */,
+				F4012D4714766FB200EFA21A /* YellowStar@2x.png */,
 				F4719BC1147664390055443B /* MyLocationMenu.png */,
 				F4719BC2147664390055443B /* MyLocationMenu@2x.png */,
 				F4719BC3147664390055443B /* YellowMenu.png */,
@@ -1121,6 +1127,8 @@
 				F4719BD414766C3E0055443B /* WhiteStarButton.png in Resources */,
 				F4719BD514766C3E0055443B /* YellowStarButton.png in Resources */,
 				F4719BD614766C3E0055443B /* YellowStarButton@2x.png in Resources */,
+				F4012D4814766FB200EFA21A /* YellowStar.png in Resources */,
+				F4012D4914766FB200EFA21A /* YellowStar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,12 @@ typedef enum {
     StationUnknown,  // black
 } StationState;
 
+typedef enum {
+    Green,
+    Yellow,
+    Red,
+} AmountState;
+
 @interface Station : NSObject
 
 @property (nonatomic, readonly) NSString* stationName;
@@ -40,6 +46,8 @@ typedef enum {
 @property (nonatomic, assign) BOOL favorite;
 
 @property (nonatomic, readonly) StationState state;
+@property (nonatomic, readonly) AmountState parkState;
+@property (nonatomic, readonly) AmountState bikeState;
 
 @property (nonatomic, readonly) UIImage* markerImage;
 @property (nonatomic, readonly) UIImage* listImage;
