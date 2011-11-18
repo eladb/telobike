@@ -8,6 +8,7 @@
 
 #import "TimerViewController.h"
 #import "TargetConditionals.h"
+#import "Analytics.h"
 
 @implementation TimerViewController
 
@@ -33,10 +34,17 @@
 {
     [super viewDidLoad];
 
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.title = NSLocalizedString(@"Timer", nil);
 
     // default to 25 minutes
     [timePicker setCountDownDuration:25 * 60];
+    
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StartTimer.png"] forState:UIControlStateNormal];
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StartTimerH.png"] forState:UIControlStateHighlighted];
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StopTimer.png"] forState:UIControlStateSelected];
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StopTimerH.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
+    [startStopButton setTitle:NSLocalizedString(@"TIMER_CANCEL", nil) forState:UIControlStateSelected];
 }
 
 - (void)viewDidUnload
@@ -48,8 +56,14 @@
 {
     [super viewDidAppear:animated];
 
+    [[Analytics shared] pageViewTimer];
+
     // if the timer is not started, start it.
-    if (![self timerStarted]) {
+    BOOL autoStartTimerEnabled = YES;
+    NSNumber* autoStartTimer = [[NSUserDefaults standardUserDefaults] objectForKey:@"autoStartTimer"];
+    if (autoStartTimer) autoStartTimerEnabled = [autoStartTimer boolValue];
+    
+    if (autoStartTimerEnabled && ![self timerStarted]) {
         [self startStop:nil]; // start timer
     }
 }
@@ -101,6 +115,8 @@
     // if we have a timer, this is stop. otherwise, start.
     
     if ([self timerStarted]) {
+        [[Analytics shared] eventStopTimer];
+
         [timer invalidate];
         [timer release];
         timer = nil;
@@ -111,10 +127,12 @@
         
         [timePicker setHidden:NO];
         [countdownView setHidden:YES];
-        [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
         
+        startStopButton.selected = NO;
     }
     else {
+        [[Analytics shared] eventStopTimer];
+        
         NSTimeInterval interval = [timePicker countDownDuration] + 1.0;
 #if TARGET_IPHONE_SIMULATOR
         interval = 5.0;
@@ -130,7 +148,7 @@
         [self setElapsedTimeText];
         [timePicker setHidden:YES];
         [countdownView setHidden:NO];
-        [startStopButton setTitle:NSLocalizedString(@"TIMER_CANCEL", nil) forState:UIControlStateNormal];
+        startStopButton.selected = YES;
         
         NSString* endTimeText = [NSDateFormatter localizedStringFromDate:[notification fireDate] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
         [endTimeLabel setText:endTimeText];

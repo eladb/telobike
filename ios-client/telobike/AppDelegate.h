@@ -12,6 +12,8 @@
 #import "MapViewController.h"
 #import "InfoViewController.h"
 #import "FeedbackOptions.h"
+#import "Favorites.h"
+#import "Analytics.h"
 
 extern NSString* const kLocationChangedNotification;
 
@@ -27,6 +29,7 @@ extern NSString* const kLocationChangedNotification;
 
 @property (nonatomic, readonly) RootViewController* listView;
 @property (nonatomic, readonly) MapViewController* mapView;
+@property (nonatomic, readonly) Favorites* favorites;
 
 + (AppDelegate*)app;
 

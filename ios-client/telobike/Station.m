@@ -8,8 +8,10 @@
 
 #import "Station.h"
 #import "Utils.h"
+#import "AppDelegate.h"
 
 static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
+static const NSInteger kMarginalBikeAmount = 3;
 
 @interface Station (Private)
 
@@ -69,7 +71,6 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     if (self)
     {
         sid = [[dict objectForKey:@"sid"] retain];
-
         
         stationName = [[dict localizedStringForKey:@"name"] retain];
         latitude    = [[dict objectForKey:@"latitude"] doubleValue];
@@ -101,6 +102,7 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
         // set red color for bike and space if either of them is 0.
         if (isActive && availSpace == 0) availSpaceColor = [[UIColor redColor] retain];
         if (isActive && availBike == 0) availBikeColor = [[UIColor redColor] retain];
+        if (isActive && availBike > 0 && availBike <= kMarginalBikeAmount) availBikeColor = [[UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0] retain];
         
         // load images for list and markers
         markerImage = [[self imageWithNameFormat:@"%@.png"] retain];
@@ -112,10 +114,39 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
             [stationName release]; stationName = [NSLocalizedString(@"MYLOCATION_TITLE", nil) retain];
             [availBikeDesc release]; availBikeDesc = [NSLocalizedString(@"MYLOCATION_DESC", nil) retain];
             [availSpaceDesc release]; availSpaceDesc = [[NSString string] retain];
-            [listImage release]; listImage = [[UIImage imageNamed:@"MyLocation.png"] retain];
+            [listImage release]; listImage = [[UIImage imageNamed:@"MyLocationMenu.png"] retain];
         }
     }
     return self;
+}
+
+- (StationState)state
+{
+    StationState state = StationOK;
+    if (!isOnline) state = StationUnknown;
+    else if (!isActive) state = StationInactive;
+    else if (availBike == 0) state = StationEmpty;
+    else if (availSpace == 0) state = StationFull;
+    else if (availBike <= kMarginalBikeAmount) state = StationMarginal;
+    
+    return state;
+}
+
+- (AmountState)amountStateForAmount:(NSInteger)amount
+{
+    if (amount == 0) return Red;
+    if (amount <= kMarginalBikeAmount) return Yellow;
+    return Green;
+}
+
+- (AmountState)parkState
+{
+    return [self amountStateForAmount:availSpace];
+}
+
+- (AmountState) bikeState
+{
+    return [self amountStateForAmount:availBike];
 }
 
 + (Station*)myLocationStation
@@ -129,18 +160,52 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     return [aLocation distanceFromLocation:stationLocation];
 }
 
+- (BOOL)favorite
+{
+    return [[[AppDelegate app] favorites] isFavoriteStationID:sid];
+}
+
+- (void)setFavorite:(BOOL)isFavorite
+{
+    [[[AppDelegate app] favorites] setStationID:sid favorite:isFavorite];
+}
+
 @end
 
 @implementation Station (Private)
 
 - (UIImage*)imageWithNameFormat:(NSString*)fmt
 {
-    NSString* name = @"Green";
-    if (!isOnline) name = @"Black";
-    else if (!isActive) name = @"Gray";
-    else if (availBike == 0) name = @"RedEmpty";
-    else if (availSpace == 0) name = @"RedFull";
-    return [UIImage imageNamed:[NSString stringWithFormat:fmt,name]];
+    NSString* name = nil;
+
+    switch ([self state]) {
+        case StationOK:
+            name = @"Green";
+            break;
+            
+        case StationEmpty:
+            name = @"RedEmpty";
+            break;
+
+        case StationFull:
+            name = @"RedFull";
+            break;
+
+        case StationInactive:
+            name = @"Gray";
+            break;
+
+        case StationMarginal:
+            name = @"Yellow";
+            break;
+
+        case StationUnknown:
+        default:
+            name = @"Black";
+            break;
+    }
+    
+    return [UIImage imageNamed:[NSString stringWithFormat:fmt, name]];
 }
 
 @end

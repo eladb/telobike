@@ -33,9 +33,11 @@
 @property (nonatomic, retain) IBOutlet UILabel* stationName;
 @property (nonatomic, retain) IBOutlet UIButton* navigateToStationButton;
 @property (nonatomic, retain) IBOutlet UIButton* reportProblemButton;
+@property (nonatomic, retain) IBOutlet UIButton* favoriteButton;
 @property (nonatomic, retain) IBOutlet UILabel* stationDistanceLabel;
 @property (nonatomic, retain) IBOutlet UIView* stationBoxesPanel;
 @property (nonatomic, retain) IBOutlet UILabel* inactiveStationLabel;
+
 
 - (void)selectStation:(Station*)station;
 - (IBAction)showMyLocation:(id)sender;
@@ -44,6 +46,7 @@
 // station actions
 - (IBAction)navigateToStation:(id)sender;
 - (IBAction)reportProblemInStation:(id)sender;
+- (IBAction)toggleFavorite:(id)sender;
 
 @end
 

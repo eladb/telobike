@@ -20,6 +20,7 @@
 #import "Utils.h"
 #import "ReportProblem.h"
 #import "NavigateToStation.h"
+#import "Analytics.h"
 
 @interface RMMarker (Station)
 
@@ -38,6 +39,7 @@
 - (void)showDetailsPaneForMarker:(RMMarker*)marker;
 - (void)reloadStations;
 
+- (void)renderFavoriteButton;
 - (void)locationChanged:(NSNotification*)n;
 
 @end
@@ -59,11 +61,13 @@
 @synthesize stationBoxesPanel=_stationBoxesPanel;
 @synthesize inactiveStationLabel=_inactiveStationLabel;
 @synthesize delegate=_delegate;
+@synthesize favoriteButton=_favoriteButton;
 
 - (void)dealloc
 {
     [[AppDelegate app] removeLocationChangeObserver:self];
     
+    [_favoriteButton release];
     [_stationBoxesPanel release];
     [_inactiveStationLabel release];
     [_stationDistanceLabel release];
@@ -88,8 +92,6 @@
 
 - (void)viewDidLoad
 {
-    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
-
     [RMMapView class]; // needed to avoid: 'Interface builder does not recognize RMMapView'
     [super viewDidLoad];
 
@@ -107,7 +109,7 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     _myLocationButton.hidden = YES;
 
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"List" style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"List", nil) style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
     
     _mapView.delegate = self;
     
@@ -123,6 +125,8 @@
 {
     [super viewDidAppear:animated];
     
+    [[Analytics shared] pageViewMap];
+
     [self reloadStations];
     
     // if we have a location from the location manager, add 'my location' now.
@@ -226,6 +230,24 @@
     [r show];
 }
 
+- (IBAction)toggleFavorite:(id)sender
+{
+    if (!_openMarker) return;
+    [_openMarker.station setFavorite:!_openMarker.station.favorite];
+    [self renderFavoriteButton];
+
+    NSString* key = @"didDisplayFavoritesTip";
+    BOOL didDisplayFavoritesTip = [[NSUserDefaults standardUserDefaults] boolForKey:key];
+    if (!didDisplayFavoritesTip) {
+        UIAlertView* alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:NSLocalizedString(@"FAVORITES_TIP", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+        [alertView show];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+                                   
+    
+}
+
 #pragma mark - List
 
 - (void)openList:(id)sender
@@ -282,10 +304,19 @@
     [self hideOpenedMarker];
 }
 
-- (UIImage*)imageForAvailability:(NSInteger)avail
+- (UIImage*)imageForState:(AmountState)state
 {
-    if (avail == 0) return [UIImage imageNamed:@"redbox.png"];
-    return [UIImage imageNamed:@"greenbox.png"];
+    switch (state) {
+        case Red:
+            return [UIImage imageNamed:@"redbox.png"];
+            
+        case Yellow:
+            return [UIImage imageNamed:@"yellowbox.png"];
+
+        case Green:
+        default:
+            return [UIImage imageNamed:@"greenbox.png"];
+    }
 }
 
 - (void)showDistanceForStation
@@ -320,8 +351,10 @@
     [self showDistanceForStation];
     
     // set the color of the boxes based on the amount of avail bike/park
-    _parkBox.image = [self imageForAvailability:[_openMarker.station availSpace]];
-    _bikeBox.image = [self imageForAvailability:[_openMarker.station availBike]];
+    _parkBox.image = [self imageForState:_openMarker.station.parkState];
+    _bikeBox.image = [self imageForState:_openMarker.station.bikeState];
+
+    [self renderFavoriteButton];
 }
 
 - (void)showDetailsPaneForMarker:(RMMarker*)marker
@@ -408,6 +441,12 @@
              [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:NSLocalizedString(@"REFRESH_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"REFRESH_ERROR_BUTTON", nil) otherButtonTitles:nil] autorelease] show];
          }
      } useCache:!showError];
+}
+
+- (void)renderFavoriteButton
+{
+    if (!_openMarker) return;
+    _favoriteButton.selected = _openMarker.station.favorite;
 }
 
 @end

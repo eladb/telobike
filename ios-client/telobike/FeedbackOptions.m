@@ -21,8 +21,8 @@
                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
                                                 destructiveButtonTitle:nil 
                                                      otherButtonTitles:
-                                   NSLocalizedString(@"App Feedback", nil), 
                                    NSLocalizedString(@"Service Feedback", nil),
+                                   NSLocalizedString(@"App Feedback", nil), 
                                    nil] autorelease];
     
     [actionSheet showFromTabBar:tabBar];
@@ -37,7 +37,7 @@
     [viewController setMailComposeDelegate:self];
     [viewController setToRecipients:[NSArray arrayWithObject:@"telobike@citylifeapps.com"]];
     [viewController setSubject:NSLocalizedString(@"Telobike App Feedback", @"feedback mail subject")];
-    [viewController setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT", nil), version, deviceid] isHTML:NO];
+    [viewController setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT_APP", nil), version, deviceid] isHTML:NO];
     [delegate presentModalViewController:viewController animated:YES];
 }
 
@@ -63,12 +63,12 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex) {
-        case 0: // app feedback
-            [self openMailForAppFeedback];
+        case 0: // service feedback
+            [self openMailForServiceFeedback];
             break;
             
-        case 1: // service feedback
-            [self openMailForServiceFeedback];
+        case 1: // app feedback
+            [self openMailForAppFeedback];
             break;
             
         default:

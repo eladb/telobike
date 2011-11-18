@@ -7,6 +7,7 @@
 //
 
 #import "StationTableViewCell.h"
+#import "AppDelegate.h"
 #import "Utils.h"
 
 @implementation StationTableViewCell
@@ -17,9 +18,11 @@
 @synthesize availSpaceLabel=_availSpaceLabel;
 @synthesize icon=_icon;
 @synthesize station=_station;
+@synthesize favorite=_favorite;
 
 - (void)dealloc
 {
+    [_favorite release];
     [_station release];
     [_availBikeLabel release];
     [_availSpaceLabel release];
@@ -31,7 +34,38 @@
 + (StationTableViewCell*)cell
 {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"StationTableViewCell" owner:self options:nil];
-    return [topLevelObjects objectAtIndex:0];
+    StationTableViewCell* cell = [topLevelObjects objectAtIndex:0];
+    UIColor* backgroundColor = [UIColor colorWithRed:0 green:230/255.0 blue:0 alpha:0.3];
+
+    UIView* backgroundView = [[[UIView alloc] init] autorelease];
+    [backgroundView setBackgroundColor:backgroundColor];
+    backgroundView.frame = cell.bounds;
+    [cell setBackgroundView:backgroundView];
+    
+    UIView* selectedBackgroundView = [[[UIView alloc] init] autorelease];
+    selectedBackgroundView.frame = cell.bounds;
+    selectedBackgroundView.backgroundColor = [UIColor blackColor];
+    [cell setSelectedBackgroundView:selectedBackgroundView];
+    
+    // this was nice but i'm creating only a single line separator now
+    
+    NSInteger lines = 1;
+    CGFloat y = 0;
+    CGFloat jump = 1;
+    CGFloat alphaJump = 0.1;
+    CGFloat alpha = alphaJump * lines;
+    for (NSInteger i = 0; i < lines; ++i) {
+        UIView* line = [[[UIView alloc] init] autorelease];
+        line.frame = CGRectMake(0, y, cell.frame.size.width, jump);
+        line.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha];
+        [cell addSubview:line];
+        
+        y += jump;
+        alpha -= alphaJump;
+    }
+    
+    
+    return cell;
 }
 
 - (void)setStation:(Station *)newStation
@@ -63,7 +97,6 @@
         {
             if ([v isKindOfClass:[UILabel class]])
             {
-                
                 [((UILabel*)v) setTextColor:[UIColor lightGrayColor]];
             }
         }
@@ -76,17 +109,21 @@
     if ([_station availBikeColor]) _availBikeLabel.textColor = [_station availBikeColor];
     
     _icon.image = [_station listImage];
+
+    UIColor* backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    CGFloat red, green, blue, alpha;
+    [backgroundColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    UIColor* selectedBackgroundColor = [UIColor colorWithRed:red/2 green:green/2 blue:blue/2 alpha:alpha];
+
+    [[self backgroundView] setBackgroundColor:backgroundColor];
+    [[self selectedBackgroundView] setBackgroundColor:selectedBackgroundColor];
     
-    if ([_station isMyLocation])
-    {
-        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 13, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
-        _icon.frame = CGRectMake(_icon.frame.origin.x, 14, _icon.frame.size.width, _icon.frame.size.height);
-    }
-    else
-    {
-        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 4, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
-        _icon.frame = CGRectMake(_icon.frame.origin.x, 11, _icon.frame.size.width, _icon.frame.size.height);
-    }
+    // put avail space next to avail bike based on the actual size of the label
+    [_availBikeLabel sizeToFit];
+    _availSpaceLabel.frame = CGRectMake(_availBikeLabel.frame.origin.x + _availBikeLabel.frame.size.width + 10, _availBikeLabel.frame.origin.y, 400, _availBikeLabel.frame.size.height);
+    
+    // show/hide favorite icon
+    _favorite.hidden = !_station.favorite;
 }
 
 @end

@@ -17,6 +17,7 @@
 
 NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
+
 @interface AppDelegate (Private)
 
 - (void)downloadCityAndStart;
@@ -30,15 +31,19 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 @synthesize mainController=_mainController;
 @synthesize listView=_listView;
 @synthesize mapView=_mapView;
+@synthesize favorites=_favorites;
 
 - (void)dealloc
 {
+    [[Analytics shared] stopTracker];
+    
     [_mapView release];
     [_listView release];
     [_window release];
     [_mainController release];
     [_locationManager release];
     [_feedbackOptions release];
+    [_favorites release];
     [super dealloc];
 }
 
@@ -46,11 +51,17 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[Analytics shared] startTracker];
+    [[Analytics shared] eventAppStart];
+    
+    _favorites = [[Favorites alloc] init];
+    
     if (!_locationManager)
     {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.purpose = NSLocalizedString(@"LOCATION_PURPOSE", nil);
         [_locationManager startUpdatingLocation];
     }
     
@@ -272,10 +283,12 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
               UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
               UIViewController* mapVC = [self.mainController.viewControllers objectAtIndex:1];
               UIViewController* alarmVC = [self.mainController.viewControllers objectAtIndex:2];
-              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
-              [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+              UINavigationController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
+              IASKAppSettingsViewController* svc = (IASKAppSettingsViewController*) [settingsVC topViewController];
+              svc.showCreditsFooter = NO;
+//              [settingsVC.navigationController.navigationBar setTintColor:[UIColor blackColor]];
               
-              stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
+              stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"List", nil);
               mapVC.navigationItem.title = mapVC.tabBarItem.title = NSLocalizedString(@"MAP_TITLE", nil);
               alarmVC.navigationItem.title = alarmVC.tabBarItem.title = NSLocalizedString(@"TIMER_TITLE", nil);
               settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);

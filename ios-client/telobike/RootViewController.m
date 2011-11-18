@@ -17,8 +17,10 @@
 #import "SendFeedback.h"
 #import "IASKSettingsReader.h"
 #import "AppDelegate.h"
+#import "Analytics.h"
 
 static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
+static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 
 @interface RootViewController (Private)
 
@@ -26,6 +28,8 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)sortStations;
 - (BOOL)doesStation:(Station*)station containKeyword:(NSString*)keyword;
 - (BOOL)filterStation:(Station*)station;
+- (BOOL)filterFavorite:(Station*)station;
+- (BOOL)shouldFilterFavorites;
 
 // navigation bar icon handlers
 - (void)refreshStations:(id)sender;
@@ -41,11 +45,17 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 @synthesize searchBar=_searchBar;
 @synthesize filters=_filters;
 @synthesize delegate=_delegate;
+@synthesize noFavorites=_noFavorites;
+@synthesize noFavorites1=_noFavorites1;
+@synthesize noFavorites2=_noFavorites2;
 
 - (void)dealloc
 {
     [[AppDelegate app] removeLocationChangeObserver:self];
     
+    [_noFavorites1 release];
+    [_noFavorites2 release];
+    [_noFavorites release];
     [_filters release];
     [_tableView release];
     [_searchBar release];
@@ -60,13 +70,10 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 {
     [[AppDelegate app] addLocationChangeObserver:self selector:@selector(locationChanged:)];
     
-    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kIASKAppSettingChanged object:nil];
     
-//    self.navigationItem.titleView = _filters;
+    self.navigationItem.titleView = _filters;
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshStations:)] autorelease];
-//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mail.png"] style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Feedback", nil) style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
     
     _tableView.rowHeight = [StationTableViewCell cell].frame.size.height;
@@ -86,20 +93,37 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     }
   
     [self showSearchBarAnimated:NO];
-	
+    
+    BOOL showOnlyFavorites = [[NSUserDefaults standardUserDefaults] boolForKey:kFilterFavoritesDefaultsKey];
+    if (showOnlyFavorites) {
+        [_filters setSelectedSegmentIndex:1];
+    }
+    else {
+        [_filters setSelectedSegmentIndex:0];
+    }
+    
+    [_filters setTitle:NSLocalizedString(@"FILTER_ALL", nil) forSegmentAtIndex:0];
+    [_filters setTitle:NSLocalizedString(@"FILTER_FAVORITES", nil) forSegmentAtIndex:1];
+    
+    [_noFavorites1 setText:NSLocalizedString(@"FAVORITES_EMPTY_LIST_1", nil)];
+    [_noFavorites2 setText:NSLocalizedString(@"FAVORITES_EMPTY_LIST_2", nil)];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(hideSearchBarFirstTime:) userInfo:nil repeats:NO];
+
     [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
+    /*
     // if the last refresh was more than 5 minutes ago, refresh. otherwise, just just sort by distance.
     if (!lastRefresh || [[NSDate date] timeIntervalSinceDate:lastRefresh] > kMinimumAutorefreshInterval)
     {
         [self refreshStationsWithError:NO];
     }
-
+*/
     [self sortStations];
 }    
 
@@ -107,7 +131,7 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(hideSearchBarFirstTime:) userInfo:nil repeats:NO];
+    [[Analytics shared] pageViewList];
 }
 
 - (void)hideSearchBarFirstTime:(id)sender
@@ -125,6 +149,19 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
+}
+
+#pragma mark - Table view
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Station* station = [stations objectAtIndex:[indexPath row]];
+    if ([station isMyLocation]) {
+        return 60;
+    }
+    
+    return 80;
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,6 +198,48 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
     /*
     [mapView selectStation:station];
     [self.navigationController pushViewController:mapView animated:YES];*/
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self shouldFilterFavorites];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StationTableViewCell* cell = (StationTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+    cell.distanceLabel.hidden = NO;
+
+    Station* s = [stations objectAtIndex:[indexPath row]];
+    [s setFavorite:NO];
+
+    [tableView beginUpdates];
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    [self sortStations];
+    [tableView endUpdates];
+}
+
+- (void)tableView:(UITableView*)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StationTableViewCell* cell = (StationTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+    cell.distanceLabel.hidden = YES;
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StationTableViewCell* cell = (StationTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+    cell.distanceLabel.hidden = NO;
+    [tableView setContentOffset:CGPointMake(0, _searchBar.frame.size.height) animated:NO];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NSLocalizedString(@"Remove", nil);
 }
 
 - (void)didReceiveMemoryWarning
@@ -275,6 +354,18 @@ static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
   [app.listView about:nil];
 }
 
+#pragma mark - Filter favorites
+
+-(IBAction)filterFavoritesChanged:(id)sender
+{
+    [self sortStations];
+    
+    // store the value in the defaults so it is persisted
+    BOOL showOnlyFavorites = [self shouldFilterFavorites];
+    [[NSUserDefaults standardUserDefaults] setBool:showOnlyFavorites forKey:kFilterFavoritesDefaultsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end
 
 @implementation RootViewController (Private)
@@ -324,7 +415,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     
     for (Station* station in sortedStations) 
     {
-        if ([self filterStation:station]) 
+        if ([self filterStation:station] && [self filterFavorite:station])
         {
             [newStations addObject:station];
         }
@@ -333,9 +424,15 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     // replace current stations list.
     [stations release];
     stations = [newStations retain];
-    
+
+    // if we are filtering favorites and the list is empty
+    // show the no favorites label
+    _noFavorites.hidden = !(stations.count == 0 && [self shouldFilterFavorites]);
+    _tableView.hidden = !_noFavorites.hidden;
+
     // reload view
     [self.tableView reloadData];
+    
 }
 
 - (BOOL)doesStation:(Station*)station containKeyword:(NSString*)keyword 
@@ -356,6 +453,17 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     }
     
     return NO;
+}
+
+- (BOOL)shouldFilterFavorites
+{
+    return [_filters selectedSegmentIndex] == 1;    
+}
+
+- (BOOL)filterFavorite:(Station*)station
+{
+    if (![self shouldFilterFavorites]) return YES; // show all
+    else return [station favorite];
 }
 
 - (BOOL)filterStation:(Station*)station

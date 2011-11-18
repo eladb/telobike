@@ -8,7 +8,7 @@
 
 #import "City.h"
 #import "ReportProblem.h"
-
+#import "Analytics.h"
 
 @implementation ReportProblem
 
@@ -72,11 +72,13 @@
     switch (buttonIndex) 
     {
         case 0:
+            [[Analytics shared] eventReportProblem:@"station"];
             [self openMail:NSLocalizedString(@"REPORT_PROBLEM_STATION_SUBJECT", nil)
                       body:[NSString stringWithFormat:NSLocalizedString(@"REPORT_PROBLEM_STATION_BODY_FMT", nil), [_station stationName]]];
             break;
             
         case 1:
+            [[Analytics shared] eventReportProblem:@"bike"];
             [self openMail:NSLocalizedString(@"REPORT_PROBLEM_BIKE_SUBJECT", nil)
                       body:[NSString stringWithFormat:NSLocalizedString(@"REPORT_PROBLEM_BIKE_BODY_FMT", nil), [_station stationName]]];
             break;
