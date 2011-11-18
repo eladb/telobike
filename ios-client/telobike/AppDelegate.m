@@ -61,6 +61,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.purpose = NSLocalizedString(@"LOCATION_PURPOSE", nil);
         [_locationManager startUpdatingLocation];
     }
     
@@ -285,7 +286,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
               UINavigationController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
               IASKAppSettingsViewController* svc = (IASKAppSettingsViewController*) [settingsVC topViewController];
               svc.showCreditsFooter = NO;
-              [settingsVC.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+//              [settingsVC.navigationController.navigationBar setTintColor:[UIColor blackColor]];
               
               stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"List", nil);
               mapVC.navigationItem.title = mapVC.tabBarItem.title = NSLocalizedString(@"MAP_TITLE", nil);

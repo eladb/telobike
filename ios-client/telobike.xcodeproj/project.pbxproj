@@ -129,6 +129,16 @@
 		04C905F31399AD5E007489A0 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C905F11399AD5D007489A0 /* LoadingViewController.xib */; };
 		F4012D4814766FB200EFA21A /* YellowStar.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4614766FB200EFA21A /* YellowStar.png */; };
 		F4012D4914766FB200EFA21A /* YellowStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4714766FB200EFA21A /* YellowStar@2x.png */; };
+		F4012D4C1476764900EFA21A /* TimerBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4A1476764900EFA21A /* TimerBackground.png */; };
+		F4012D4D1476764900EFA21A /* TimerBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4B1476764900EFA21A /* TimerBackground@2x.png */; };
+		F4012D5614767EA200EFA21A /* StartTimer.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4E14767EA200EFA21A /* StartTimer.png */; };
+		F4012D5714767EA200EFA21A /* StartTimer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4F14767EA200EFA21A /* StartTimer@2x.png */; };
+		F4012D5814767EA200EFA21A /* StartTimerH.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5014767EA200EFA21A /* StartTimerH.png */; };
+		F4012D5914767EA200EFA21A /* StartTimerH@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5114767EA200EFA21A /* StartTimerH@2x.png */; };
+		F4012D5A14767EA200EFA21A /* StopTimer.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5214767EA200EFA21A /* StopTimer.png */; };
+		F4012D5B14767EA200EFA21A /* StopTimer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5314767EA200EFA21A /* StopTimer@2x.png */; };
+		F4012D5C14767EA200EFA21A /* StopTimerH.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5414767EA200EFA21A /* StopTimerH.png */; };
+		F4012D5D14767EA200EFA21A /* StopTimerH@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5514767EA200EFA21A /* StopTimerH@2x.png */; };
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
@@ -378,6 +388,16 @@
 		04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = "route-me/MapView/MapView.xcodeproj"; sourceTree = "<group>"; };
 		F4012D4614766FB200EFA21A /* YellowStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowStar.png; path = telobike/assets/YellowStar.png; sourceTree = SOURCE_ROOT; };
 		F4012D4714766FB200EFA21A /* YellowStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowStar@2x.png"; path = "telobike/assets/YellowStar@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D4A1476764900EFA21A /* TimerBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TimerBackground.png; path = telobike/assets/TimerBackground.png; sourceTree = SOURCE_ROOT; };
+		F4012D4B1476764900EFA21A /* TimerBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TimerBackground@2x.png"; path = "telobike/assets/TimerBackground@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D4E14767EA200EFA21A /* StartTimer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StartTimer.png; path = telobike/assets/StartTimer.png; sourceTree = SOURCE_ROOT; };
+		F4012D4F14767EA200EFA21A /* StartTimer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StartTimer@2x.png"; path = "telobike/assets/StartTimer@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D5014767EA200EFA21A /* StartTimerH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StartTimerH.png; path = telobike/assets/StartTimerH.png; sourceTree = SOURCE_ROOT; };
+		F4012D5114767EA200EFA21A /* StartTimerH@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StartTimerH@2x.png"; path = "telobike/assets/StartTimerH@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D5214767EA200EFA21A /* StopTimer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StopTimer.png; path = telobike/assets/StopTimer.png; sourceTree = SOURCE_ROOT; };
+		F4012D5314767EA200EFA21A /* StopTimer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopTimer@2x.png"; path = "telobike/assets/StopTimer@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D5414767EA200EFA21A /* StopTimerH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StopTimerH.png; path = telobike/assets/StopTimerH.png; sourceTree = SOURCE_ROOT; };
+		F4012D5514767EA200EFA21A /* StopTimerH@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopTimerH@2x.png"; path = "telobike/assets/StopTimerH@2x.png"; sourceTree = SOURCE_ROOT; };
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -860,6 +880,16 @@
 		F4719BCD147664490055443B /* timer */ = {
 			isa = PBXGroup;
 			children = (
+				F4012D4E14767EA200EFA21A /* StartTimer.png */,
+				F4012D4F14767EA200EFA21A /* StartTimer@2x.png */,
+				F4012D5014767EA200EFA21A /* StartTimerH.png */,
+				F4012D5114767EA200EFA21A /* StartTimerH@2x.png */,
+				F4012D5214767EA200EFA21A /* StopTimer.png */,
+				F4012D5314767EA200EFA21A /* StopTimer@2x.png */,
+				F4012D5414767EA200EFA21A /* StopTimerH.png */,
+				F4012D5514767EA200EFA21A /* StopTimerH@2x.png */,
+				F4012D4A1476764900EFA21A /* TimerBackground.png */,
+				F4012D4B1476764900EFA21A /* TimerBackground@2x.png */,
 				F4F9B758145C29E1007D75F4 /* alarmBell.png */,
 				F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */,
 				F46E1B94145C1C3E00038039 /* bikebell.wav */,
@@ -1129,6 +1159,16 @@
 				F4719BD614766C3E0055443B /* YellowStarButton@2x.png in Resources */,
 				F4012D4814766FB200EFA21A /* YellowStar.png in Resources */,
 				F4012D4914766FB200EFA21A /* YellowStar@2x.png in Resources */,
+				F4012D4C1476764900EFA21A /* TimerBackground.png in Resources */,
+				F4012D4D1476764900EFA21A /* TimerBackground@2x.png in Resources */,
+				F4012D5614767EA200EFA21A /* StartTimer.png in Resources */,
+				F4012D5714767EA200EFA21A /* StartTimer@2x.png in Resources */,
+				F4012D5814767EA200EFA21A /* StartTimerH.png in Resources */,
+				F4012D5914767EA200EFA21A /* StartTimerH@2x.png in Resources */,
+				F4012D5A14767EA200EFA21A /* StopTimer.png in Resources */,
+				F4012D5B14767EA200EFA21A /* StopTimer@2x.png in Resources */,
+				F4012D5C14767EA200EFA21A /* StopTimerH.png in Resources */,
+				F4012D5D14767EA200EFA21A /* StopTimerH@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

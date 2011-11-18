@@ -36,10 +36,15 @@
 
     self.navigationItem.title = NSLocalizedString(@"Timer", nil);
 
-    [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
-
     // default to 25 minutes
     [timePicker setCountDownDuration:25 * 60];
+    
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StartTimer.png"] forState:UIControlStateNormal];
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StartTimerH.png"] forState:UIControlStateHighlighted];
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StopTimer.png"] forState:UIControlStateSelected];
+    [startStopButton setBackgroundImage:[UIImage imageNamed:@"StopTimerH.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
+    [startStopButton setTitle:NSLocalizedString(@"TIMER_CANCEL", nil) forState:UIControlStateSelected];
 }
 
 - (void)viewDidUnload
@@ -122,7 +127,8 @@
         
         [timePicker setHidden:NO];
         [countdownView setHidden:YES];
-        [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
+        
+        startStopButton.selected = NO;
     }
     else {
         [[Analytics shared] eventStopTimer];
@@ -142,7 +148,7 @@
         [self setElapsedTimeText];
         [timePicker setHidden:YES];
         [countdownView setHidden:NO];
-        [startStopButton setTitle:NSLocalizedString(@"TIMER_CANCEL", nil) forState:UIControlStateNormal];
+        startStopButton.selected = YES;
         
         NSString* endTimeText = [NSDateFormatter localizedStringFromDate:[notification fireDate] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
         [endTimeLabel setText:endTimeText];
