@@ -10,4 +10,15 @@
 
 @implementation MyLocationTableViewCell
 
+- (void)dealloc
+{
+    [currentLocationLabel release];
+    [super dealloc];
+}
+
+- (void)viewDidLoad
+{
+    currentLocationLabel.text = NSLocalizedString(@"Current location", nil);
+}
+
 @end

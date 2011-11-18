@@ -139,11 +139,13 @@
 		F4012D641476A50D00EFA21A /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D621476A50D00EFA21A /* list.png */; };
 		F4012D651476A50D00EFA21A /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D631476A50D00EFA21A /* list@2x.png */; };
 		F4012D691476A6FA00EFA21A /* MyLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4012D671476A6F900EFA21A /* MyLocationTableViewCell.m */; };
-		F4012D6A1476A6FA00EFA21A /* MyLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4012D681476A6FA00EFA21A /* MyLocationTableViewCell.xib */; };
 		F4012D6D1476B92800EFA21A /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4012D6C1476B92700EFA21A /* TabBarController.m */; };
 		F4012D7C1476C0AA00EFA21A /* Feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D7A1476C0AA00EFA21A /* Feedback.png */; };
 		F4012D7D1476C0AA00EFA21A /* Feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D7B1476C0AA00EFA21A /* Feedback@2x.png */; };
 		F4012D811476C59600EFA21A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4012D821476C59600EFA21A /* MainWindow.xib */; };
+		F4012D841476D0FF00EFA21A /* alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D831476D0FF00EFA21A /* alarm@2x.png */; };
+		F4012D861476D11000EFA21A /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D851476D10F00EFA21A /* alarm.png */; };
+		F4012D8A1476D19400EFA21A /* MyLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4012D8B1476D19400EFA21A /* MyLocationTableViewCell.xib */; };
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
@@ -167,8 +169,6 @@
 		F4BA7F211473E7CA00730050 /* StationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */; };
 		F4C6A55F1451DD2500732558 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55D1451DD2500732558 /* map.png */; };
 		F4C6A5601451DD2500732558 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55E1451DD2500732558 /* map@2x.png */; };
-		F4C6A5631451DD3B00732558 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A5611451DD3B00732558 /* alarm.png */; };
-		F4C6A5641451DD3B00732558 /* alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A5621451DD3B00732558 /* alarm@2x.png */; };
 		F4F9B743145C220D007D75F4 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B71D145C220D007D75F4 /* IASKAppSettingsViewController.m */; };
 		F4F9B744145C220D007D75F4 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B71F145C220D007D75F4 /* IASKAppSettingsWebViewController.m */; };
 		F4F9B745145C220D007D75F4 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B721145C220D007D75F4 /* IASKSpecifierValuesViewController.m */; };
@@ -190,8 +190,6 @@
 		F4F9B755145C220D007D75F4 /* IASKPSTextFieldSpecifierViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B740145C220D007D75F4 /* IASKPSTextFieldSpecifierViewCell.xib */; };
 		F4F9B756145C220D007D75F4 /* IASKPSToggleSwitchSpecifierViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B741145C220D007D75F4 /* IASKPSToggleSwitchSpecifierViewCell.xib */; };
 		F4F9B757145C220D007D75F4 /* IASKSpecifierValuesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B742145C220D007D75F4 /* IASKSpecifierValuesView.xib */; };
-		F4F9B75A145C29E1007D75F4 /* alarmBell.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B758145C29E1007D75F4 /* alarmBell.png */; };
-		F4F9B75B145C29E1007D75F4 /* alarmBell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */; };
 		F4F9B75E145CADC3007D75F4 /* FeedbackOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */; };
 /* End PBXBuildFile section */
 
@@ -404,12 +402,14 @@
 		F4012D631476A50D00EFA21A /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D661476A6F900EFA21A /* MyLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationTableViewCell.h; sourceTree = "<group>"; };
 		F4012D671476A6F900EFA21A /* MyLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationTableViewCell.m; sourceTree = "<group>"; };
-		F4012D681476A6FA00EFA21A /* MyLocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLocationTableViewCell.xib; sourceTree = "<group>"; };
 		F4012D6B1476B92600EFA21A /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		F4012D6C1476B92700EFA21A /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		F4012D7A1476C0AA00EFA21A /* Feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Feedback.png; path = telobike/assets/Feedback.png; sourceTree = SOURCE_ROOT; };
 		F4012D7B1476C0AA00EFA21A /* Feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Feedback@2x.png"; path = "telobike/assets/Feedback@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D821476C59600EFA21A /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		F4012D831476D0FF00EFA21A /* alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alarm@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D851476D10F00EFA21A /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = SOURCE_ROOT; };
+		F4012D8B1476D19400EFA21A /* MyLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLocationTableViewCell.xib; sourceTree = "<group>"; };
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -437,8 +437,6 @@
 		F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationTableViewCell.xib; sourceTree = "<group>"; };
 		F4C6A55D1451DD2500732558 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = telobike/assets/map.png; sourceTree = SOURCE_ROOT; };
 		F4C6A55E1451DD2500732558 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "telobike/assets/map@2x.png"; sourceTree = SOURCE_ROOT; };
-		F4C6A5611451DD3B00732558 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarm.png; path = telobike/assets/alarm.png; sourceTree = SOURCE_ROOT; };
-		F4C6A5621451DD3B00732558 /* alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm@2x.png"; path = "telobike/assets/alarm@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4F9B71C145C220D007D75F4 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		F4F9B71D145C220D007D75F4 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
 		F4F9B71E145C220D007D75F4 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
@@ -475,8 +473,6 @@
 		F4F9B740145C220D007D75F4 /* IASKPSTextFieldSpecifierViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IASKPSTextFieldSpecifierViewCell.xib; sourceTree = "<group>"; };
 		F4F9B741145C220D007D75F4 /* IASKPSToggleSwitchSpecifierViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IASKPSToggleSwitchSpecifierViewCell.xib; sourceTree = "<group>"; };
 		F4F9B742145C220D007D75F4 /* IASKSpecifierValuesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IASKSpecifierValuesView.xib; sourceTree = "<group>"; };
-		F4F9B758145C29E1007D75F4 /* alarmBell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarmBell.png; path = telobike/assets/alarmBell.png; sourceTree = SOURCE_ROOT; };
-		F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarmBell@2x.png"; path = "telobike/assets/alarmBell@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4F9B75C145CADC3007D75F4 /* FeedbackOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackOptions.h; sourceTree = "<group>"; };
 		F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackOptions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -618,7 +614,7 @@
 				F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */,
 				F4012D661476A6F900EFA21A /* MyLocationTableViewCell.h */,
 				F4012D671476A6F900EFA21A /* MyLocationTableViewCell.m */,
-				F4012D681476A6FA00EFA21A /* MyLocationTableViewCell.xib */,
+				F4012D8B1476D19400EFA21A /* MyLocationTableViewCell.xib */,
 				040AB1DE13749785001FF38F /* MapViewController.h */,
 				040AB1DF13749785001FF38F /* MapViewController.m */,
 				04A732F513787D6E000D3A0C /* MapViewController.xib */,
@@ -915,11 +911,7 @@
 				F4012D5514767EA200EFA21A /* StopTimerH@2x.png */,
 				F4012D4A1476764900EFA21A /* TimerBackground.png */,
 				F4012D4B1476764900EFA21A /* TimerBackground@2x.png */,
-				F4F9B758145C29E1007D75F4 /* alarmBell.png */,
-				F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */,
 				F46E1B94145C1C3E00038039 /* bikebell.wav */,
-				F4C6A5611451DD3B00732558 /* alarm.png */,
-				F4C6A5621451DD3B00732558 /* alarm@2x.png */,
 			);
 			name = timer;
 			sourceTree = "<group>";
@@ -927,6 +919,8 @@
 		F4719BCE147664710055443B /* tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				F4012D851476D10F00EFA21A /* alarm.png */,
+				F4012D831476D0FF00EFA21A /* alarm@2x.png */,
 				04863DF3139B78D100274D50 /* gear.png */,
 				04863DF4139B78D100274D50 /* gear@2x.png */,
 				04C905E11399A64B007489A0 /* info.png */,
@@ -1157,8 +1151,6 @@
 				0493507513A4041F005A5385 /* MyLocation@2x.png in Resources */,
 				F4C6A55F1451DD2500732558 /* map.png in Resources */,
 				F4C6A5601451DD2500732558 /* map@2x.png in Resources */,
-				F4C6A5631451DD3B00732558 /* alarm.png in Resources */,
-				F4C6A5641451DD3B00732558 /* alarm@2x.png in Resources */,
 				F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */,
 				F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */,
 				F4F9B752145C220D007D75F4 /* IASKAppSettingsView.xib in Resources */,
@@ -1167,8 +1159,6 @@
 				F4F9B755145C220D007D75F4 /* IASKPSTextFieldSpecifierViewCell.xib in Resources */,
 				F4F9B756145C220D007D75F4 /* IASKPSToggleSwitchSpecifierViewCell.xib in Resources */,
 				F4F9B757145C220D007D75F4 /* IASKSpecifierValuesView.xib in Resources */,
-				F4F9B75A145C29E1007D75F4 /* alarmBell.png in Resources */,
-				F4F9B75B145C29E1007D75F4 /* alarmBell@2x.png in Resources */,
 				F4BA7F211473E7CA00730050 /* StationTableViewCell.xib in Resources */,
 				F4719BBF1476642C0055443B /* yellowbox.png in Resources */,
 				F4719BC01476642C0055443B /* yellowbox@2x.png in Resources */,
@@ -1196,9 +1186,11 @@
 				F4012D5D14767EA200EFA21A /* StopTimerH@2x.png in Resources */,
 				F4012D641476A50D00EFA21A /* list.png in Resources */,
 				F4012D651476A50D00EFA21A /* list@2x.png in Resources */,
-				F4012D6A1476A6FA00EFA21A /* MyLocationTableViewCell.xib in Resources */,
+				F4012D8A1476D19400EFA21A /* MyLocationTableViewCell.xib in Resources */,
 				F4012D7C1476C0AA00EFA21A /* Feedback.png in Resources */,
 				F4012D7D1476C0AA00EFA21A /* Feedback@2x.png in Resources */,
+				F4012D841476D0FF00EFA21A /* alarm@2x.png in Resources */,
+				F4012D861476D11000EFA21A /* alarm.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

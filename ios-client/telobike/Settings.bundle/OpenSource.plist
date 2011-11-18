@@ -106,6 +106,16 @@
 			<key>File</key>
 			<string>http://soundcloud.com/soundbyterfreesounds</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) Tab bar alarm icon by app-bits</string>
+			<key>File</key>
+			<string>http://app-bits.com</string>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
