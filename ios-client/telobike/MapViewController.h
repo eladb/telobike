@@ -11,12 +11,15 @@
 #import "Station.h"
 
 @class RMMarker;
+@protocol MapViewControllerDelegate;
 
 @interface MapViewController : UIViewController <RMMapViewDelegate> {
     RMMarker* _openMarker;
     RMMarker* _myLocation;
     NSMutableDictionary* _markers;
 }
+
+@property (nonatomic, assign) id<MapViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) IBOutlet RMMapView* mapView;
 @property (nonatomic, retain) IBOutlet UIButton* myLocationButton;
@@ -41,6 +44,13 @@
 // station actions
 - (IBAction)navigateToStation:(id)sender;
 - (IBAction)reportProblemInStation:(id)sender;
+
+@end
+
+@protocol MapViewControllerDelegate <NSObject>
+
+@required
+- (void)mapViewControllerDidSelectList:(MapViewController*)viewController;
 
 @end
 

@@ -9,14 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
 
-@interface SendFeedback : NSObject <MFMailComposeViewControllerDelegate>
-{
-    UIViewController* _viewController;
-}
-
-+ (void)open;
-
-- (id)initWithParentViewController:(UIViewController*)viewController;
-- (void)show;
+@interface SendFeedback : MFMailComposeViewController
 
 @end

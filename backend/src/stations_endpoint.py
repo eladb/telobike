@@ -85,7 +85,7 @@ class RefreshStationStatusRequestHandler(webapp.RequestHandler):
         stored_station.put()
         
         # append a copy of the stored station to station history        
-        StationHistory.append(stored_station)
+        ##StationHistory.append(stored_station)
         
 
 def main():

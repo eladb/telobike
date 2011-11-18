@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <AudioToolbox/AudioToolbox.h>
+#import "ASIHTTPRequest.h"
 #import "AppDelegate.h"
 #import "StationList.h"
 #import "City.h"
@@ -26,14 +28,21 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 @synthesize window=_window;
 @synthesize mainController=_mainController;
+@synthesize listView=_listView;
+@synthesize mapView=_mapView;
 
 - (void)dealloc
 {
+    [_mapView release];
+    [_listView release];
     [_window release];
     [_mainController release];
     [_locationManager release];
+    [_feedbackOptions release];
     [super dealloc];
 }
+
+#pragma mark - App Events
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -45,15 +54,19 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
         [_locationManager startUpdatingLocation];
     }
     
+    _feedbackOptions = [[FeedbackOptions alloc] init];
+    _feedbackOptions.delegate = self;
+    
     LoadingViewController* vc = [[LoadingViewController new] autorelease];
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     
     [self downloadCityAndStart];
     
-    
     [Appirater appLaunched:YES];
-    
+  
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+
     return YES;
 }
 
@@ -62,9 +75,27 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [Appirater appEnteredForeground:YES];
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [_locationManager startUpdatingLocation];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [_locationManager stopUpdatingLocation];
+}
+
 + (AppDelegate*)app
 {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
+#pragma mark Map
+
+- (void)rootViewController:(RootViewController *)viewController didSelectStation:(Station *)station
+{
+    _mainController.selectedIndex = 1;
+    [_mapView selectStation:station];
 }
 
 #pragma mark Location
@@ -100,6 +131,125 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [self downloadCityAndStart];
 }
 
+#pragma mark - Map
+
+- (void)mapViewControllerDidSelectList:(MapViewController *)viewController
+{
+    [self.mainController setSelectedIndex:0];
+}
+
+#pragma mark - Feedback
+
+- (void)presentFeedbackViewController
+{
+    [_feedbackOptions showFromTabBar:_mainController.tabBar];
+}
+
++ (void)showFeedback
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app presentFeedbackViewController];
+}
+
+- (void)rootViewControllerDidTouchFeedback:(RootViewController *)viewController
+{
+    [self presentFeedbackViewController];
+}
+
+- (void)presentModalViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [[self mainController] presentModalViewController:viewController animated:animated];
+}
+
+- (void)dismissModalViewControllerAnimated:(BOOL)animated
+{
+    [[self mainController] dismissModalViewControllerAnimated:animated];
+}
+
+#pragma mark - Timer
+
+-(void)playSound:(NSString *)fileName ext:(NSString*)ext
+{
+    NSURL* pathURL  = [[NSBundle mainBundle] URLForResource:fileName withExtension:ext];
+    SystemSoundID audioEffect;
+    AudioServicesCreateSystemSoundID((CFURLRef) pathURL, &audioEffect);
+    AudioServicesPlaySystemSound(audioEffect);
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // if we came from the background, we don't need an alert because it was already displayed
+    if (application.applicationState != UIApplicationStateActive) {
+        return;
+    }
+    
+    /* sound attribution:
+     <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://soundcloud.com/soundbyterfreesounds/www-soundbyter-com-bicycle-bell-sound-effect"><span property="dct:title">"www.soundbyter.com-bicycle-bell-sound-effect"</span> (<a rel="cc:attributionURL" property="cc:attributionName" href="http://soundcloud.com/soundbyterfreesounds">soundbyterfreesounds</a>) / <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">CC BY-NC 3.0</a></div>
+     */
+    
+    NSString* soundName = notification.soundName;
+    if (soundName) {
+        [self playSound:soundName ext:nil];
+    }
+    
+    [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) 
+                                 message:notification.alertBody delegate:nil 
+                       cancelButtonTitle:NSLocalizedString(@"OK", nil) 
+                       otherButtonTitles:nil] autorelease] show];
+}
+
+- (void)presentInfoViewController
+{
+    InfoViewController* infoViewController = [[[InfoViewController alloc] init] autorelease];
+    infoViewController.delegate = self;
+    UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:infoViewController] autorelease];
+    [[self mainController] presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark - Info
+
++ (void)showInfo
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app presentInfoViewController];
+}
+
+- (void)infoViewControllerDidClose:(InfoViewController *)viewController
+{
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [[app mainController] dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - Push
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // send token to server
+
+    NSString* token = [[[[deviceToken description] 
+                         stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                         stringByReplacingOccurrencesOfString: @">" withString: @""]
+                         stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+    NSLog(@"push token: %@", token);
+    NSString* url = [NSString stringWithFormat:@"https://go.urbanairship.com/api/device_tokens/%@", token];
+    
+    ASIHTTPRequest* req = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+    [req setRequestMethod:@"PUT"];
+    [req setUsername:@"yM20oMODRqC8BqFJYhs0Gw"];
+    [req setPassword:@"ToeYI9csTJiI00w95uOMsw"];
+    [req startAsynchronous];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"push recieved: %@", userInfo);
+    NSString* url = [[userInfo objectForKey:@"aps"] objectForKey:@"url"];
+    if (url) {
+        [application openURL:[NSURL URLWithString:url]];
+    }
+}
+
 @end
 
 @implementation AppDelegate (Private)
@@ -120,18 +270,27 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
          [[StationList instance] refreshStationsWithCompletion:^
           {
               UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
-              UIViewController* infoVC = [self.mainController.viewControllers objectAtIndex:1];
-              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:2];
+              UIViewController* mapVC = [self.mainController.viewControllers objectAtIndex:1];
+              UIViewController* alarmVC = [self.mainController.viewControllers objectAtIndex:2];
+              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
               [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
               
-              
               stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"STATIONS_TITLE", nil);
-              infoVC.navigationItem.title = infoVC.tabBarItem.title = NSLocalizedString(@"INFO_TITLE", nil);
+              mapVC.navigationItem.title = mapVC.tabBarItem.title = NSLocalizedString(@"MAP_TITLE", nil);
+              alarmVC.navigationItem.title = alarmVC.tabBarItem.title = NSLocalizedString(@"TIMER_TITLE", nil);
               settingsVC.navigationItem.title = settingsVC.tabBarItem.title = NSLocalizedString(@"Settings", nil);
               
               [self showDisclaimerFirstTime];
               self.window.rootViewController = self.mainController;
+            
+              UINavigationController* nav = [[self.mainController viewControllers] objectAtIndex:0];
+              _listView = (RootViewController*) [[nav topViewController] retain];
+              _listView.delegate = self;
               
+              nav = [[self.mainController viewControllers] objectAtIndex:1];
+              _mapView = (MapViewController*) [[nav topViewController] retain];
+              _mapView.delegate = self;
+            
               [self.window makeKeyAndVisible];
           } failure:failureBlock useCache:YES];
      } failure:failureBlock useCache:YES];
