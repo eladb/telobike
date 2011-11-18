@@ -35,18 +35,14 @@
 {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"StationTableViewCell" owner:self options:nil];
     StationTableViewCell* cell = [topLevelObjects objectAtIndex:0];
-    UIColor* backgroundColor = [UIColor colorWithRed:0 green:230/255.0 blue:0 alpha:0.3];
-
+    
+    /*
+    UIColor* backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     UIView* backgroundView = [[[UIView alloc] init] autorelease];
     [backgroundView setBackgroundColor:backgroundColor];
     backgroundView.frame = cell.bounds;
     [cell setBackgroundView:backgroundView];
-    
-    UIView* selectedBackgroundView = [[[UIView alloc] init] autorelease];
-    selectedBackgroundView.frame = cell.bounds;
-    selectedBackgroundView.backgroundColor = [UIColor blackColor];
-    [cell setSelectedBackgroundView:selectedBackgroundView];
-    
+
     // this was nice but i'm creating only a single line separator now
     
     NSInteger lines = 1;
@@ -63,7 +59,7 @@
         y += jump;
         alpha -= alphaJump;
     }
-    
+    */
     
     return cell;
 }
@@ -109,15 +105,6 @@
     if ([_station availBikeColor]) _availBikeLabel.textColor = [_station availBikeColor];
     
     _icon.image = [_station listImage];
-
-    UIColor* backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    CGFloat red, green, blue, alpha;
-    [backgroundColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    UIColor* selectedBackgroundColor = [UIColor colorWithRed:red/2 green:green/2 blue:blue/2 alpha:alpha];
-
-    [[self backgroundView] setBackgroundColor:backgroundColor];
-    [[self selectedBackgroundView] setBackgroundColor:selectedBackgroundColor];
-    
     // put avail space next to avail bike based on the actual size of the label
     [_availBikeLabel sizeToFit];
     _availSpaceLabel.frame = CGRectMake(_availBikeLabel.frame.origin.x + _availBikeLabel.frame.size.width + 10, _availBikeLabel.frame.origin.y, 400, _availBikeLabel.frame.size.height);

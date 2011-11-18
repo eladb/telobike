@@ -13,7 +13,7 @@
 @class RMMarker;
 @protocol MapViewControllerDelegate;
 
-@interface MapViewController : UIViewController <RMMapViewDelegate> {
+@interface MapViewController : UIViewController <RMMapViewDelegate, UISearchBarDelegate> {
     RMMarker* _openMarker;
     RMMarker* _myLocation;
     NSMutableDictionary* _markers;
@@ -37,7 +37,7 @@
 @property (nonatomic, retain) IBOutlet UILabel* stationDistanceLabel;
 @property (nonatomic, retain) IBOutlet UIView* stationBoxesPanel;
 @property (nonatomic, retain) IBOutlet UILabel* inactiveStationLabel;
-
+@property (nonatomic, retain) IBOutlet UISearchBar* searchBar;
 
 - (void)selectStation:(Station*)station;
 - (IBAction)showMyLocation:(id)sender;

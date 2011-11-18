@@ -36,8 +36,6 @@
 		040ADD1113A3B6B1002784A1 /* greenbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD0F13A3B6B1002784A1 /* greenbox@2x.png */; };
 		040ADD1413A3B9DC002784A1 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD1213A3B9DC002784A1 /* button.png */; };
 		040ADD1813A3BAFB002784A1 /* NavigateToStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 040ADD1713A3BAFB002784A1 /* NavigateToStation.m */; };
-		040ADD1B13A3C4B1002784A1 /* buttonpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD1913A3C4B1002784A1 /* buttonpressed.png */; };
-		040ADD1C13A3C4B1002784A1 /* buttonpressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD1A13A3C4B1002784A1 /* buttonpressed@2x.png */; };
 		04746C5B1374990B00D9CBDA /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04746C5A1374990B00D9CBDA /* libMapView.a */; };
 		0481E44F1396311B0046C4D1 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E44E1396311B0046C4D1 /* City.m */; };
 		0481E4581396351A0046C4D1 /* ASIHTTPRequest+Telobike.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E4571396351A0046C4D1 /* ASIHTTPRequest+Telobike.m */; };
@@ -96,7 +94,6 @@
 		04954138137495DD00F98DC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04954137137495DD00F98DC0 /* AppDelegate.m */; };
 		0495413E137495DE00F98DC0 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0495413D137495DE00F98DC0 /* RootViewController.m */; };
 		04A732E61378797D000D3A0C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A732E51378797D000D3A0C /* Utils.m */; };
-		04A732F613787D6E000D3A0C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A732F313787D6E000D3A0C /* MainWindow.xib */; };
 		04A732F713787D6E000D3A0C /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A732F413787D6E000D3A0C /* RootViewController.xib */; };
 		04A732F813787D6E000D3A0C /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A732F513787D6E000D3A0C /* MapViewController.xib */; };
 		04A7330C13787E52000D3A0C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04A7330413787E52000D3A0C /* InfoPlist.strings */; };
@@ -139,6 +136,14 @@
 		F4012D5B14767EA200EFA21A /* StopTimer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5314767EA200EFA21A /* StopTimer@2x.png */; };
 		F4012D5C14767EA200EFA21A /* StopTimerH.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5414767EA200EFA21A /* StopTimerH.png */; };
 		F4012D5D14767EA200EFA21A /* StopTimerH@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D5514767EA200EFA21A /* StopTimerH@2x.png */; };
+		F4012D641476A50D00EFA21A /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D621476A50D00EFA21A /* list.png */; };
+		F4012D651476A50D00EFA21A /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D631476A50D00EFA21A /* list@2x.png */; };
+		F4012D691476A6FA00EFA21A /* MyLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4012D671476A6F900EFA21A /* MyLocationTableViewCell.m */; };
+		F4012D6A1476A6FA00EFA21A /* MyLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4012D681476A6FA00EFA21A /* MyLocationTableViewCell.xib */; };
+		F4012D6D1476B92800EFA21A /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4012D6C1476B92700EFA21A /* TabBarController.m */; };
+		F4012D7C1476C0AA00EFA21A /* Feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D7A1476C0AA00EFA21A /* Feedback.png */; };
+		F4012D7D1476C0AA00EFA21A /* Feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D7B1476C0AA00EFA21A /* Feedback@2x.png */; };
+		F4012D811476C59600EFA21A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4012D821476C59600EFA21A /* MainWindow.xib */; };
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
@@ -263,8 +268,6 @@
 		040ADD1213A3B9DC002784A1 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = telobike/assets/button.png; sourceTree = SOURCE_ROOT; };
 		040ADD1613A3BAFA002784A1 /* NavigateToStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigateToStation.h; sourceTree = "<group>"; };
 		040ADD1713A3BAFB002784A1 /* NavigateToStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigateToStation.m; sourceTree = "<group>"; };
-		040ADD1913A3C4B1002784A1 /* buttonpressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = buttonpressed.png; path = telobike/assets/buttonpressed.png; sourceTree = SOURCE_ROOT; };
-		040ADD1A13A3C4B1002784A1 /* buttonpressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "buttonpressed@2x.png"; path = "telobike/assets/buttonpressed@2x.png"; sourceTree = SOURCE_ROOT; };
 		04746C5A1374990B00D9CBDA /* libMapView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMapView.a; sourceTree = SOURCE_ROOT; };
 		0481E44D1396311B0046C4D1 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		0481E44E1396311B0046C4D1 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
@@ -350,7 +353,6 @@
 		0495413D137495DE00F98DC0 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		04A732E41378797D000D3A0C /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		04A732E51378797D000D3A0C /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
-		04A732F313787D6E000D3A0C /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		04A732F413787D6E000D3A0C /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		04A732F513787D6E000D3A0C /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		04A7330513787E52000D3A0C /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -398,6 +400,16 @@
 		F4012D5314767EA200EFA21A /* StopTimer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopTimer@2x.png"; path = "telobike/assets/StopTimer@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D5414767EA200EFA21A /* StopTimerH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StopTimerH.png; path = telobike/assets/StopTimerH.png; sourceTree = SOURCE_ROOT; };
 		F4012D5514767EA200EFA21A /* StopTimerH@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopTimerH@2x.png"; path = "telobike/assets/StopTimerH@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D621476A50D00EFA21A /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = SOURCE_ROOT; };
+		F4012D631476A50D00EFA21A /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D661476A6F900EFA21A /* MyLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationTableViewCell.h; sourceTree = "<group>"; };
+		F4012D671476A6F900EFA21A /* MyLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationTableViewCell.m; sourceTree = "<group>"; };
+		F4012D681476A6FA00EFA21A /* MyLocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLocationTableViewCell.xib; sourceTree = "<group>"; };
+		F4012D6B1476B92600EFA21A /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		F4012D6C1476B92700EFA21A /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		F4012D7A1476C0AA00EFA21A /* Feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Feedback.png; path = telobike/assets/Feedback.png; sourceTree = SOURCE_ROOT; };
+		F4012D7B1476C0AA00EFA21A /* Feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Feedback@2x.png"; path = "telobike/assets/Feedback@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4012D821476C59600EFA21A /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -497,6 +509,7 @@
 		040AAAD513749677001FF38F /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				F4012D791476C09B00EFA21A /* list */,
 				F4719BCE147664710055443B /* tabbar */,
 				F4719BCD147664490055443B /* timer */,
 				F4719BBC147663EC0055443B /* map */,
@@ -603,6 +616,9 @@
 				040AB1E8137497BB001FF38F /* StationTableViewCell.h */,
 				040AB1E9137497BB001FF38F /* StationTableViewCell.m */,
 				F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */,
+				F4012D661476A6F900EFA21A /* MyLocationTableViewCell.h */,
+				F4012D671476A6F900EFA21A /* MyLocationTableViewCell.m */,
+				F4012D681476A6FA00EFA21A /* MyLocationTableViewCell.xib */,
 				040AB1DE13749785001FF38F /* MapViewController.h */,
 				040AB1DF13749785001FF38F /* MapViewController.m */,
 				04A732F513787D6E000D3A0C /* MapViewController.xib */,
@@ -623,6 +639,8 @@
 				F47DF9CF14531812005DCA1B /* TimerViewController.xib */,
 				F4F9B75C145CADC3007D75F4 /* FeedbackOptions.h */,
 				F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */,
+				F4012D6B1476B92600EFA21A /* TabBarController.h */,
+				F4012D6C1476B92700EFA21A /* TabBarController.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -651,7 +669,7 @@
 			children = (
 				04954136137495DD00F98DC0 /* AppDelegate.h */,
 				04954137137495DD00F98DC0 /* AppDelegate.m */,
-				04A732F313787D6E000D3A0C /* MainWindow.xib */,
+				F4012D821476C59600EFA21A /* MainWindow.xib */,
 				0495412F137495DD00F98DC0 /* telobike-Info.plist */,
 				04954133137495DD00F98DC0 /* telobike-Prefix.pch */,
 				04954134137495DD00F98DC0 /* main.m */,
@@ -798,6 +816,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F4012D791476C09B00EFA21A /* list */ = {
+			isa = PBXGroup;
+			children = (
+				F4012D7A1476C0AA00EFA21A /* Feedback.png */,
+				F4012D7B1476C0AA00EFA21A /* Feedback@2x.png */,
+			);
+			name = list;
+			sourceTree = "<group>";
+		};
 		F4719BB114763D1B0055443B /* GoogleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -845,8 +872,6 @@
 				04B09FD613A3B5B800B54D05 /* panel@2x.png */,
 				040ADD1213A3B9DC002784A1 /* button.png */,
 				0493505413A3D7CB005A5385 /* button@2x.png */,
-				040ADD1913A3C4B1002784A1 /* buttonpressed.png */,
-				040ADD1A13A3C4B1002784A1 /* buttonpressed@2x.png */,
 				F4719BC9147664430055443B /* Yellow.png */,
 				F4719BCA147664430055443B /* Yellow@2x.png */,
 				F4719BBD1476642C0055443B /* yellowbox.png */,
@@ -910,6 +935,8 @@
 				04C905E81399A6C5007489A0 /* home@2x.png */,
 				F4C6A55D1451DD2500732558 /* map.png */,
 				F4C6A55E1451DD2500732558 /* map@2x.png */,
+				F4012D621476A50D00EFA21A /* list.png */,
+				F4012D631476A50D00EFA21A /* list@2x.png */,
 			);
 			name = tabbar;
 			sourceTree = "<group>";
@@ -1060,7 +1087,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04A732F613787D6E000D3A0C /* MainWindow.xib in Resources */,
+				F4012D811476C59600EFA21A /* MainWindow.xib in Resources */,
 				04A732F713787D6E000D3A0C /* RootViewController.xib in Resources */,
 				04A732F813787D6E000D3A0C /* MapViewController.xib in Resources */,
 				04A7330C13787E52000D3A0C /* InfoPlist.strings in Resources */,
@@ -1112,8 +1139,6 @@
 				040ADD1013A3B6B1002784A1 /* greenbox.png in Resources */,
 				040ADD1113A3B6B1002784A1 /* greenbox@2x.png in Resources */,
 				040ADD1413A3B9DC002784A1 /* button.png in Resources */,
-				040ADD1B13A3C4B1002784A1 /* buttonpressed.png in Resources */,
-				040ADD1C13A3C4B1002784A1 /* buttonpressed@2x.png in Resources */,
 				0493505513A3D7CB005A5385 /* button@2x.png in Resources */,
 				0493505713A3D81F005A5385 /* Gray@2x.png in Resources */,
 				0493506613A3D830005A5385 /* Black.png in Resources */,
@@ -1169,6 +1194,11 @@
 				F4012D5B14767EA200EFA21A /* StopTimer@2x.png in Resources */,
 				F4012D5C14767EA200EFA21A /* StopTimerH.png in Resources */,
 				F4012D5D14767EA200EFA21A /* StopTimerH@2x.png in Resources */,
+				F4012D641476A50D00EFA21A /* list.png in Resources */,
+				F4012D651476A50D00EFA21A /* list@2x.png in Resources */,
+				F4012D6A1476A6FA00EFA21A /* MyLocationTableViewCell.xib in Resources */,
+				F4012D7C1476C0AA00EFA21A /* Feedback.png in Resources */,
+				F4012D7D1476C0AA00EFA21A /* Feedback@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1237,6 +1267,8 @@
 				F4F9B75E145CADC3007D75F4 /* FeedbackOptions.m in Sources */,
 				F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */,
 				F4719BBA147642780055443B /* Analytics.m in Sources */,
+				F4012D691476A6FA00EFA21A /* MyLocationTableViewCell.m in Sources */,
+				F4012D6D1476B92800EFA21A /* TabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

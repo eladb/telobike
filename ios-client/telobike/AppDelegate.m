@@ -78,6 +78,8 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
   
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
 
+    self.mainController.tabBarControllerDelegate = self;
+    
     return YES;
 }
 
@@ -101,15 +103,29 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
-#pragma mark Map
+#pragma mark - List
 
 - (void)rootViewController:(RootViewController *)viewController didSelectStation:(Station *)station
 {
-    _mainController.selectedIndex = 1;
+    [viewController.navigationController pushViewController:_mapView animated:YES];
     [_mapView selectStation:station];
+    [_mainController setSelectedItemIndex:1];
 }
 
-#pragma mark Location
+- (void)rootViewControllerWillAppear:(RootViewController*)viewController
+{
+    [_mainController setSelectedItemIndex:0];
+}
+
+#pragma mark - Map
+
+
+- (void)mapViewControllerDidSelectList:(MapViewController *)viewController
+{
+    [self.mainController setSelectedIndex:0];
+}
+
+#pragma mark - Location
 
 - (CLLocation*)currentLocation
 {
@@ -140,13 +156,6 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self downloadCityAndStart];
-}
-
-#pragma mark - Map
-
-- (void)mapViewControllerDidSelectList:(MapViewController *)viewController
-{
-    [self.mainController setSelectedIndex:0];
 }
 
 #pragma mark - Feedback
@@ -214,6 +223,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     InfoViewController* infoViewController = [[[InfoViewController alloc] init] autorelease];
     infoViewController.delegate = self;
     UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:infoViewController] autorelease];
+    navigationController.navigationBar.tintColor = _mapView.navigationController.navigationBar.tintColor;
     [[self mainController] presentModalViewController:navigationController animated:YES];
 }
 
@@ -261,7 +271,35 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     }
 }
 
+#pragma mark - Tab bar
+
+- (void)tabBarController:(TabBarController *)tabBarController didSelectItemAtIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+            [[_listView navigationController] popToRootViewControllerAnimated:NO];
+            [_mainController setSelectedIndex:0];
+            break;
+
+        case 1:
+            [[_listView navigationController] popToRootViewControllerAnimated:NO];
+            [[_listView navigationController] pushViewController:_mapView animated:NO];
+            [_mainController setSelectedIndex:0];
+            break;
+            
+        case 2:
+        case 3:
+            [_mainController setSelectedIndex:index];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 @end
+
+#pragma mark -
 
 @implementation AppDelegate (Private)
 

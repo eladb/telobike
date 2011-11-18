@@ -65,6 +65,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 - (void)eventAddFavorite:(NSString*)stationID      { [self event:@"favorite" action:@"add" label:stationID]; }
 - (void)eventRemoveFavorite:(NSString*)stationID   { [self event:@"favorite" action:@"remove" label:stationID]; }
 - (void)eventReportProblem:(NSString*)problemType  { [self event:@"problem" action:problemType label:nil]; }
+- (void)eventListCurrentLocation;                  { [self event:@"list" action:@"currentLocation" label:nil]; }
 
 #pragma mark - GA Delegate
 

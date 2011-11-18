@@ -62,11 +62,13 @@
 @synthesize inactiveStationLabel=_inactiveStationLabel;
 @synthesize delegate=_delegate;
 @synthesize favoriteButton=_favoriteButton;
+@synthesize searchBar=_searchBar;
 
 - (void)dealloc
 {
     [[AppDelegate app] removeLocationChangeObserver:self];
     
+    [_searchBar release];
     [_favoriteButton release];
     [_stationBoxesPanel release];
     [_inactiveStationLabel release];
@@ -106,10 +108,9 @@
     
     self.navigationItem.title = NSLocalizedString(@"Map", @"title of map view");
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
+    //self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
     _myLocationButton.hidden = YES;
-
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"List", nil) style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
+//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"List", nil) style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
     
     _mapView.delegate = self;
     
@@ -255,6 +256,19 @@
     [_delegate mapViewControllerDidSelectList:self];
 }
 
+#pragma mark - Search
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"search: %@", searchBar.text);
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
 @end
 
 @implementation RMMarker (Station)
@@ -270,6 +284,8 @@
 }
 
 @end
+
+#pragma mark - 
 
 @implementation MapViewController (Private)
 
@@ -298,7 +314,7 @@
 - (void)hideDetailsPaneAnimated:(BOOL)animated
 {
     if (animated) [UIView beginAnimations:nil context:nil];
-    _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, -_detailsPane.frame.size.height, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
+    _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, _mapView.frame.origin.y - _detailsPane.frame.size.height, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
     _detailsPane.hidden = NO;
     if (animated) [UIView commitAnimations];
     [self hideOpenedMarker];
@@ -366,7 +382,7 @@
     [self populateDetails];
     
     [UIView beginAnimations:nil context:nil];
-    _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, -5.0, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
+    _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, _mapView.frame.origin.y - 5.0, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
     [UIView commitAnimations];
 }
 

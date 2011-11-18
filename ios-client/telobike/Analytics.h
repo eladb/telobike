@@ -35,5 +35,6 @@
 - (void)eventAddFavorite:(NSString*)stationID;
 - (void)eventRemoveFavorite:(NSString*)stationID;
 - (void)eventReportProblem:(NSString*)problemType;
+- (void)eventListCurrentLocation;
 
 @end

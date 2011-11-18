@@ -43,8 +43,11 @@
     [startStopButton setBackgroundImage:[UIImage imageNamed:@"StartTimerH.png"] forState:UIControlStateHighlighted];
     [startStopButton setBackgroundImage:[UIImage imageNamed:@"StopTimer.png"] forState:UIControlStateSelected];
     [startStopButton setBackgroundImage:[UIImage imageNamed:@"StopTimerH.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    
     [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
+    [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateHighlighted];
     [startStopButton setTitle:NSLocalizedString(@"TIMER_CANCEL", nil) forState:UIControlStateSelected];
+    [startStopButton setTitle:NSLocalizedString(@"TIMER_CANCEL", nil) forState:UIControlStateSelected | UIControlStateHighlighted];
 }
 
 - (void)viewDidUnload

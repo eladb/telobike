@@ -14,17 +14,18 @@
 #import "FeedbackOptions.h"
 #import "Favorites.h"
 #import "Analytics.h"
+#import "TabBarController.h"
 
 extern NSString* const kLocationChangedNotification;
 
-@interface AppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, RootViewControllerDelegate, MapViewControllerDelegate, InfoViewControllerDelegate, FeedbackOptionsDelegate> 
+@interface AppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, RootViewControllerDelegate, MapViewControllerDelegate, InfoViewControllerDelegate, FeedbackOptionsDelegate, TabBarControllerDelegate> 
 {
     CLLocationManager* _locationManager;
     FeedbackOptions* _feedbackOptions;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UITabBarController *mainController;
+@property (nonatomic, retain) IBOutlet TabBarController *mainController;
 @property (nonatomic, readonly) CLLocation* currentLocation;
 
 @property (nonatomic, readonly) RootViewController* listView;

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import "MapViewController.h"
 #import "EGORefreshTableHeaderView.h"
+#import "Station.h"
 
 @protocol RootViewControllerDelegate;
 
@@ -24,11 +24,13 @@
 {
     NSArray* stations;
     NSString* filter;
-    MapViewController* mapView;
     NSDate* lastRefresh;
 
     EGORefreshTableHeaderView* _refreshHeaderView;
     BOOL _isLoading;
+    
+    CGFloat _myLocationCellHeight;
+    CGFloat _stationCellHeight;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
@@ -52,6 +54,7 @@
 @required
 
 - (void)rootViewController:(RootViewController*)viewController didSelectStation:(Station*)station;
+- (void)rootViewControllerWillAppear:(RootViewController*)viewController;
 - (void)rootViewControllerDidTouchFeedback:(RootViewController*)viewController;
 
 @end

@@ -12,12 +12,12 @@
 #import "AppDelegate.h"
 #import "City.h"
 #import "StationList.h"
-#import "MapViewController.h"
 #import "Station.h"
 #import "SendFeedback.h"
 #import "IASKSettingsReader.h"
 #import "AppDelegate.h"
 #import "Analytics.h"
+#import "MyLocationTableViewCell.h"
 
 static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
@@ -59,7 +59,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     [_filters release];
     [_tableView release];
     [_searchBar release];
-    [mapView release];
     [stations release];
     [filter release];
     [lastRefresh release];
@@ -72,17 +71,13 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kIASKAppSettingChanged object:nil];
     
+    _myLocationCellHeight = [[[[[MyLocationTableViewCell alloc] init] autorelease] view] frame].size.height;
+    _stationCellHeight = [StationTableViewCell cell].frame.size.height;
+                             
     self.navigationItem.titleView = _filters;
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshStations:)] autorelease];
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Feedback", nil) style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
-    
-    _tableView.rowHeight = [StationTableViewCell cell].frame.size.height;
-    
-    if (!mapView)
-    {
-        mapView = [MapViewController new];
-    }
-    
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Feedback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
+        
     [self hideSearchBarAnimated:NO];
     
     if (!_refreshHeaderView) 
@@ -125,6 +120,7 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     }
 */
     [self sortStations];
+    [_delegate rootViewControllerWillAppear:self];
 }    
 
 
@@ -157,11 +153,9 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 {
     Station* station = [stations objectAtIndex:[indexPath row]];
     if ([station isMyLocation]) {
-        return 60;
+        return _myLocationCellHeight;
     }
-    
-    return 80;
-    
+    return _stationCellHeight;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -177,6 +171,17 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    static NSString *MyCellIdentifier = @"MyCell";
+
+    Station* station = [stations objectAtIndex:[indexPath row]];
+    if (station.isMyLocation) {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:MyCellIdentifier];
+        if (!cell) {
+            cell = (UITableViewCell*) [[[[MyLocationTableViewCell alloc] init] autorelease] view];
+        }
+        
+        return cell;
+    }
     
     StationTableViewCell *cell = (StationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) 
@@ -184,20 +189,18 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
         cell = [StationTableViewCell cell];
     }
     
-    Station* station = [stations objectAtIndex:[indexPath row]];
     [cell setStation:station];
-
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Station* station = [stations objectAtIndex:[indexPath row]];
-    
+    if (station.isMyLocation) {
+        [[Analytics shared] eventListCurrentLocation];
+    }
+
     [_delegate rootViewController:self didSelectStation:station];
-    /*
-    [mapView selectStation:station];
-    [self.navigationController pushViewController:mapView animated:YES];*/
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
