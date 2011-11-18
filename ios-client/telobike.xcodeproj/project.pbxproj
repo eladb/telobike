@@ -127,13 +127,23 @@
 		04C905EA1399A6C5007489A0 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E81399A6C5007489A0 /* home@2x.png */; };
 		04C905F21399AD5E007489A0 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C905F01399AD5B007489A0 /* LoadingViewController.m */; };
 		04C905F31399AD5E007489A0 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C905F11399AD5D007489A0 /* LoadingViewController.xib */; };
-		04C905F61399B534007489A0 /* flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905F41399B533007489A0 /* flag.png */; };
-		04C905F71399B534007489A0 /* flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905F51399B533007489A0 /* flag@2x.png */; };
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
 		F4719BB414763D5A0055443B /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4719BB314763D5A0055443B /* libGoogleAnalytics.a */; };
 		F4719BBA147642780055443B /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = F4719BB9147642780055443B /* Analytics.m */; };
+		F4719BBF1476642C0055443B /* yellowbox.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BBD1476642C0055443B /* yellowbox.png */; };
+		F4719BC01476642C0055443B /* yellowbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BBE1476642C0055443B /* yellowbox@2x.png */; };
+		F4719BC5147664390055443B /* MyLocationMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BC1147664390055443B /* MyLocationMenu.png */; };
+		F4719BC6147664390055443B /* MyLocationMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BC2147664390055443B /* MyLocationMenu@2x.png */; };
+		F4719BC7147664390055443B /* YellowMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BC3147664390055443B /* YellowMenu.png */; };
+		F4719BC8147664390055443B /* YellowMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BC4147664390055443B /* YellowMenu@2x.png */; };
+		F4719BCB147664430055443B /* Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BC9147664430055443B /* Yellow.png */; };
+		F4719BCC147664430055443B /* Yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BCA147664430055443B /* Yellow@2x.png */; };
+		F4719BD314766C3E0055443B /* WhiteStarButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BCF14766C3D0055443B /* WhiteStarButton@2x.png */; };
+		F4719BD414766C3E0055443B /* WhiteStarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BD014766C3E0055443B /* WhiteStarButton.png */; };
+		F4719BD514766C3E0055443B /* YellowStarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BD114766C3E0055443B /* YellowStarButton.png */; };
+		F4719BD614766C3E0055443B /* YellowStarButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BD214766C3E0055443B /* YellowStarButton@2x.png */; };
 		F47DF9D014531812005DCA1B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DF9CE14531812005DCA1B /* TimerViewController.m */; };
 		F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47DF9CF14531812005DCA1B /* TimerViewController.xib */; };
 		F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A994ED146F2E9E009F03F2 /* Favorites.m */; };
@@ -142,8 +152,6 @@
 		F4C6A5601451DD2500732558 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55E1451DD2500732558 /* map@2x.png */; };
 		F4C6A5631451DD3B00732558 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A5611451DD3B00732558 /* alarm.png */; };
 		F4C6A5641451DD3B00732558 /* alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A5621451DD3B00732558 /* alarm@2x.png */; };
-		F4C6A56B1451E2B500732558 /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A5691451E2B500732558 /* mail.png */; };
-		F4C6A56C1451E2B500732558 /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A56A1451E2B500732558 /* mail@2x.png */; };
 		F4F9B743145C220D007D75F4 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B71D145C220D007D75F4 /* IASKAppSettingsViewController.m */; };
 		F4F9B744145C220D007D75F4 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B71F145C220D007D75F4 /* IASKAppSettingsWebViewController.m */; };
 		F4F9B745145C220D007D75F4 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B721145C220D007D75F4 /* IASKSpecifierValuesViewController.m */; };
@@ -365,8 +373,6 @@
 		04C905EF1399AD5B007489A0 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		04C905F01399AD5B007489A0 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		04C905F11399AD5D007489A0 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
-		04C905F41399B533007489A0 /* flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flag.png; path = telobike/assets/flag.png; sourceTree = SOURCE_ROOT; };
-		04C905F51399B533007489A0 /* flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "flag@2x.png"; path = "telobike/assets/flag@2x.png"; sourceTree = SOURCE_ROOT; };
 		04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = "route-me/MapView/MapView.xcodeproj"; sourceTree = "<group>"; };
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
@@ -375,6 +381,18 @@
 		F4719BB314763D5A0055443B /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = GoogleAnalyticsSDK/Library/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		F4719BB8147642780055443B /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 		F4719BB9147642780055443B /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analytics.m; sourceTree = "<group>"; };
+		F4719BBD1476642C0055443B /* yellowbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowbox.png; path = telobike/assets/yellowbox.png; sourceTree = SOURCE_ROOT; };
+		F4719BBE1476642C0055443B /* yellowbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yellowbox@2x.png"; path = "telobike/assets/yellowbox@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4719BC1147664390055443B /* MyLocationMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MyLocationMenu.png; path = telobike/assets/MyLocationMenu.png; sourceTree = SOURCE_ROOT; };
+		F4719BC2147664390055443B /* MyLocationMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MyLocationMenu@2x.png"; path = "telobike/assets/MyLocationMenu@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4719BC3147664390055443B /* YellowMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowMenu.png; path = telobike/assets/YellowMenu.png; sourceTree = SOURCE_ROOT; };
+		F4719BC4147664390055443B /* YellowMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowMenu@2x.png"; path = "telobike/assets/YellowMenu@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4719BC9147664430055443B /* Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Yellow.png; path = telobike/assets/Yellow.png; sourceTree = SOURCE_ROOT; };
+		F4719BCA147664430055443B /* Yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Yellow@2x.png"; path = "telobike/assets/Yellow@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4719BCF14766C3D0055443B /* WhiteStarButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WhiteStarButton@2x.png"; path = "telobike/assets/WhiteStarButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4719BD014766C3E0055443B /* WhiteStarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WhiteStarButton.png; path = telobike/assets/WhiteStarButton.png; sourceTree = SOURCE_ROOT; };
+		F4719BD114766C3E0055443B /* YellowStarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowStarButton.png; path = telobike/assets/YellowStarButton.png; sourceTree = SOURCE_ROOT; };
+		F4719BD214766C3E0055443B /* YellowStarButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowStarButton@2x.png"; path = "telobike/assets/YellowStarButton@2x.png"; sourceTree = SOURCE_ROOT; };
 		F47DF9CD14531812005DCA1B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		F47DF9CE14531812005DCA1B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		F47DF9CF14531812005DCA1B /* TimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerViewController.xib; sourceTree = "<group>"; };
@@ -385,8 +403,6 @@
 		F4C6A55E1451DD2500732558 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "telobike/assets/map@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4C6A5611451DD3B00732558 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarm.png; path = telobike/assets/alarm.png; sourceTree = SOURCE_ROOT; };
 		F4C6A5621451DD3B00732558 /* alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alarm@2x.png"; path = "telobike/assets/alarm@2x.png"; sourceTree = SOURCE_ROOT; };
-		F4C6A5691451E2B500732558 /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mail.png; path = telobike/assets/mail.png; sourceTree = SOURCE_ROOT; };
-		F4C6A56A1451E2B500732558 /* mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mail@2x.png"; path = "telobike/assets/mail@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4F9B71C145C220D007D75F4 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		F4F9B71D145C220D007D75F4 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
 		F4F9B71E145C220D007D75F4 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
@@ -457,69 +473,14 @@
 		040AAAD513749677001FF38F /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				F4F9B758145C29E1007D75F4 /* alarmBell.png */,
-				F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */,
-				F46E1B94145C1C3E00038039 /* bikebell.wav */,
-				F4C6A5691451E2B500732558 /* mail.png */,
-				F4C6A56A1451E2B500732558 /* mail@2x.png */,
-				0493505813A3D82E005A5385 /* Black.png */,
-				0493505913A3D82E005A5385 /* Black@2x.png */,
-				0493505A13A3D82E005A5385 /* BlackMenu.png */,
-				0493505B13A3D82E005A5385 /* BlackMenu@2x.png */,
-				0493506413A3D830005A5385 /* SelectedMarker.png */,
-				0493506513A3D830005A5385 /* SelectedMarker@2x.png */,
-				040ADD1213A3B9DC002784A1 /* button.png */,
-				0493505413A3D7CB005A5385 /* button@2x.png */,
-				040ADD1913A3C4B1002784A1 /* buttonpressed.png */,
-				040ADD1A13A3C4B1002784A1 /* buttonpressed@2x.png */,
-				04B09FD513A3B5B700B54D05 /* panel.png */,
-				04B09FD613A3B5B800B54D05 /* panel@2x.png */,
-				04863DF3139B78D100274D50 /* gear.png */,
-				04863DF4139B78D100274D50 /* gear@2x.png */,
-				04C905E11399A64B007489A0 /* info.png */,
-				04C905E21399A64B007489A0 /* info@2x.png */,
-				04C905F41399B533007489A0 /* flag.png */,
-				04C905F51399B533007489A0 /* flag@2x.png */,
+				F4719BCE147664710055443B /* tabbar */,
+				F4719BCD147664490055443B /* timer */,
+				F4719BBC147663EC0055443B /* map */,
+				F4719BBB147663C90055443B /* menu */,
 				04A7335F1378B31A000D3A0C /* Default.png */,
 				04A9A7E21378BCFE004A5842 /* Default@2x.png */,
 				04A733591378B208000D3A0C /* Icon.png */,
 				04A7335A1378B208000D3A0C /* Icon@2x.png */,
-				04A733341378AD38000D3A0C /* Gray.png */,
-				0493505613A3D81F005A5385 /* Gray@2x.png */,
-				04A733351378AD38000D3A0C /* GrayMenu.png */,
-				0493505C13A3D82E005A5385 /* GrayMenu@2x.png */,
-				04A733361378AD38000D3A0C /* Green.png */,
-				0493505D13A3D82F005A5385 /* Green@2x.png */,
-				04A733371378AD38000D3A0C /* GreenMenu.png */,
-				0493505E13A3D82F005A5385 /* GreenMenu@2x.png */,
-				04A733381378AD38000D3A0C /* MyLocation.png */,
-				0493507413A4041A005A5385 /* MyLocation@2x.png */,
-				04A7333A1378AD38000D3A0C /* RedEmpty.png */,
-				0493506013A3D82F005A5385 /* RedEmpty@2x.png */,
-				04A7333B1378AD38000D3A0C /* RedEmptyMenu.png */,
-				0493506113A3D82F005A5385 /* RedEmptyMenu@2x.png */,
-				04A7333C1378AD38000D3A0C /* RedFull.png */,
-				0493506213A3D82F005A5385 /* RedFull@2x.png */,
-				04A7333D1378AD38000D3A0C /* RedFullMenu.png */,
-				0493506313A3D830005A5385 /* RedFullMenu@2x.png */,
-				F4C6A5611451DD3B00732558 /* alarm.png */,
-				F4C6A5621451DD3B00732558 /* alarm@2x.png */,
-				F4C6A55D1451DD2500732558 /* map.png */,
-				F4C6A55E1451DD2500732558 /* map@2x.png */,
-				04C905E71399A6C4007489A0 /* home.png */,
-				04C905E81399A6C5007489A0 /* home@2x.png */,
-				04863EAA139BAF3A00274D50 /* LocateMeButton.png */,
-				04863EAB139BAF3A00274D50 /* LocateMeButton@2x.png */,
-				04863EAE139BAF3B00274D50 /* Location.png */,
-				04863EAF139BAF3B00274D50 /* Location@2x.png */,
-				040ADD0213A3B695002784A1 /* bike.png */,
-				040ADD0313A3B695002784A1 /* bike@2x.png */,
-				040ADD0613A3B6A1002784A1 /* parking.png */,
-				040ADD0713A3B6A1002784A1 /* parking@2x.png */,
-				040ADD0A13A3B6A7002784A1 /* redbox.png */,
-				040ADD0B13A3B6A7002784A1 /* redbox@2x.png */,
-				040ADD0E13A3B6B1002784A1 /* greenbox.png */,
-				040ADD0F13A3B6B1002784A1 /* greenbox@2x.png */,
 			);
 			name = assets;
 			path = ../resources;
@@ -822,6 +783,101 @@
 			name = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
+		F4719BBB147663C90055443B /* menu */ = {
+			isa = PBXGroup;
+			children = (
+				F4719BC1147664390055443B /* MyLocationMenu.png */,
+				F4719BC2147664390055443B /* MyLocationMenu@2x.png */,
+				F4719BC3147664390055443B /* YellowMenu.png */,
+				F4719BC4147664390055443B /* YellowMenu@2x.png */,
+				0493505A13A3D82E005A5385 /* BlackMenu.png */,
+				0493505B13A3D82E005A5385 /* BlackMenu@2x.png */,
+				04A733351378AD38000D3A0C /* GrayMenu.png */,
+				0493505C13A3D82E005A5385 /* GrayMenu@2x.png */,
+				04A733371378AD38000D3A0C /* GreenMenu.png */,
+				0493505E13A3D82F005A5385 /* GreenMenu@2x.png */,
+				04A7333B1378AD38000D3A0C /* RedEmptyMenu.png */,
+				0493506113A3D82F005A5385 /* RedEmptyMenu@2x.png */,
+				04A7333D1378AD38000D3A0C /* RedFullMenu.png */,
+				0493506313A3D830005A5385 /* RedFullMenu@2x.png */,
+			);
+			name = menu;
+			sourceTree = "<group>";
+		};
+		F4719BBC147663EC0055443B /* map */ = {
+			isa = PBXGroup;
+			children = (
+				F4719BD014766C3E0055443B /* WhiteStarButton.png */,
+				F4719BCF14766C3D0055443B /* WhiteStarButton@2x.png */,
+				F4719BD114766C3E0055443B /* YellowStarButton.png */,
+				F4719BD214766C3E0055443B /* YellowStarButton@2x.png */,
+				040ADD0613A3B6A1002784A1 /* parking.png */,
+				040ADD0713A3B6A1002784A1 /* parking@2x.png */,
+				040ADD0213A3B695002784A1 /* bike.png */,
+				040ADD0313A3B695002784A1 /* bike@2x.png */,
+				04B09FD513A3B5B700B54D05 /* panel.png */,
+				04B09FD613A3B5B800B54D05 /* panel@2x.png */,
+				040ADD1213A3B9DC002784A1 /* button.png */,
+				0493505413A3D7CB005A5385 /* button@2x.png */,
+				040ADD1913A3C4B1002784A1 /* buttonpressed.png */,
+				040ADD1A13A3C4B1002784A1 /* buttonpressed@2x.png */,
+				F4719BC9147664430055443B /* Yellow.png */,
+				F4719BCA147664430055443B /* Yellow@2x.png */,
+				F4719BBD1476642C0055443B /* yellowbox.png */,
+				F4719BBE1476642C0055443B /* yellowbox@2x.png */,
+				0493505813A3D82E005A5385 /* Black.png */,
+				0493505913A3D82E005A5385 /* Black@2x.png */,
+				0493506413A3D830005A5385 /* SelectedMarker.png */,
+				0493506513A3D830005A5385 /* SelectedMarker@2x.png */,
+				04A733341378AD38000D3A0C /* Gray.png */,
+				0493505613A3D81F005A5385 /* Gray@2x.png */,
+				04A733361378AD38000D3A0C /* Green.png */,
+				0493505D13A3D82F005A5385 /* Green@2x.png */,
+				04A733381378AD38000D3A0C /* MyLocation.png */,
+				0493507413A4041A005A5385 /* MyLocation@2x.png */,
+				04A7333A1378AD38000D3A0C /* RedEmpty.png */,
+				0493506013A3D82F005A5385 /* RedEmpty@2x.png */,
+				04A7333C1378AD38000D3A0C /* RedFull.png */,
+				0493506213A3D82F005A5385 /* RedFull@2x.png */,
+				04863EAA139BAF3A00274D50 /* LocateMeButton.png */,
+				04863EAB139BAF3A00274D50 /* LocateMeButton@2x.png */,
+				04863EAE139BAF3B00274D50 /* Location.png */,
+				04863EAF139BAF3B00274D50 /* Location@2x.png */,
+				040ADD0A13A3B6A7002784A1 /* redbox.png */,
+				040ADD0B13A3B6A7002784A1 /* redbox@2x.png */,
+				040ADD0E13A3B6B1002784A1 /* greenbox.png */,
+				040ADD0F13A3B6B1002784A1 /* greenbox@2x.png */,
+			);
+			name = map;
+			sourceTree = "<group>";
+		};
+		F4719BCD147664490055443B /* timer */ = {
+			isa = PBXGroup;
+			children = (
+				F4F9B758145C29E1007D75F4 /* alarmBell.png */,
+				F4F9B759145C29E1007D75F4 /* alarmBell@2x.png */,
+				F46E1B94145C1C3E00038039 /* bikebell.wav */,
+				F4C6A5611451DD3B00732558 /* alarm.png */,
+				F4C6A5621451DD3B00732558 /* alarm@2x.png */,
+			);
+			name = timer;
+			sourceTree = "<group>";
+		};
+		F4719BCE147664710055443B /* tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				04863DF3139B78D100274D50 /* gear.png */,
+				04863DF4139B78D100274D50 /* gear@2x.png */,
+				04C905E11399A64B007489A0 /* info.png */,
+				04C905E21399A64B007489A0 /* info@2x.png */,
+				04C905E71399A6C4007489A0 /* home.png */,
+				04C905E81399A6C5007489A0 /* home@2x.png */,
+				F4C6A55D1451DD2500732558 /* map.png */,
+				F4C6A55E1451DD2500732558 /* map@2x.png */,
+			);
+			name = tabbar;
+			sourceTree = "<group>";
+		};
 		F4F9B71B145C220D007D75F4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,8 +1049,6 @@
 				04C905E91399A6C5007489A0 /* home.png in Resources */,
 				04C905EA1399A6C5007489A0 /* home@2x.png in Resources */,
 				04C905F31399AD5E007489A0 /* LoadingViewController.xib in Resources */,
-				04C905F61399B534007489A0 /* flag.png in Resources */,
-				04C905F71399B534007489A0 /* flag@2x.png in Resources */,
 				04863D9B139B71D900274D50 /* blackArrow.png in Resources */,
 				04863D9C139B71D900274D50 /* blackArrow@2x.png in Resources */,
 				04863D9D139B71D900274D50 /* blueArrow.png in Resources */,
@@ -1044,8 +1098,6 @@
 				F4C6A5601451DD2500732558 /* map@2x.png in Resources */,
 				F4C6A5631451DD3B00732558 /* alarm.png in Resources */,
 				F4C6A5641451DD3B00732558 /* alarm@2x.png in Resources */,
-				F4C6A56B1451E2B500732558 /* mail.png in Resources */,
-				F4C6A56C1451E2B500732558 /* mail@2x.png in Resources */,
 				F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */,
 				F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */,
 				F4F9B752145C220D007D75F4 /* IASKAppSettingsView.xib in Resources */,
@@ -1057,6 +1109,18 @@
 				F4F9B75A145C29E1007D75F4 /* alarmBell.png in Resources */,
 				F4F9B75B145C29E1007D75F4 /* alarmBell@2x.png in Resources */,
 				F4BA7F211473E7CA00730050 /* StationTableViewCell.xib in Resources */,
+				F4719BBF1476642C0055443B /* yellowbox.png in Resources */,
+				F4719BC01476642C0055443B /* yellowbox@2x.png in Resources */,
+				F4719BC5147664390055443B /* MyLocationMenu.png in Resources */,
+				F4719BC6147664390055443B /* MyLocationMenu@2x.png in Resources */,
+				F4719BC7147664390055443B /* YellowMenu.png in Resources */,
+				F4719BC8147664390055443B /* YellowMenu@2x.png in Resources */,
+				F4719BCB147664430055443B /* Yellow.png in Resources */,
+				F4719BCC147664430055443B /* Yellow@2x.png in Resources */,
+				F4719BD314766C3E0055443B /* WhiteStarButton@2x.png in Resources */,
+				F4719BD414766C3E0055443B /* WhiteStarButton.png in Resources */,
+				F4719BD514766C3E0055443B /* YellowStarButton.png in Resources */,
+				F4719BD614766C3E0055443B /* YellowStarButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

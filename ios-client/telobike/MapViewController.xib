@@ -115,7 +115,7 @@
 								<string key="NSFrame">{{0, -3}, {321, 168}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="73105567"/>
+								<reference key="NSNextKeyView" ref="542996284"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAwIDAuNTAxOTYwODE0IDAAA</bytes>
@@ -134,7 +134,7 @@
 								<string key="NSFrame">{{37, 12}, {245, 25}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="409331726"/>
+								<reference key="NSNextKeyView" ref="73105567"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -164,7 +164,7 @@
 							<object class="IBUIButton" id="1073492703">
 								<reference key="NSNextResponder" ref="460380492"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{36, 108}, {95, 38}}</string>
+								<string key="NSFrame">{{36, 108}, {101, 34}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="142766722"/>
@@ -202,9 +202,10 @@
 							<object class="IBUIButton" id="630559526">
 								<reference key="NSNextResponder" ref="460380492"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{189, 108}, {95, 38}}</string>
+								<string key="NSFrame">{{183, 108}, {101, 34}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -226,7 +227,7 @@
 							<object class="IBUIButton" id="142766722">
 								<reference key="NSNextResponder" ref="460380492"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{134, 108}, {52, 38}}</string>
+								<string key="NSFrame">{{140, 106}, {41, 38}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="630559526"/>
@@ -234,16 +235,20 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUINormalTitle">☆</string>
 								<reference key="IBUIHighlightedTitleColor" ref="340260243"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDAAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="627792784"/>
-								<reference key="IBUIHighlightedBackgroundImage" ref="988311400"/>
-								<reference key="IBUISelectedBackgroundImage" ref="988311400"/>
-								<reference key="IBUINormalBackgroundImage" ref="449061475"/>
+								<object class="NSCustomResource" key="IBUISelectedImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">YellowStarButton.png</string>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">WhiteStarButton.png</string>
+								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<string key="name">ZapfDingbatsITC</string>
 									<string key="family">Zapf Dingbats</string>
@@ -321,7 +326,7 @@
 										<string key="NSFrame">{{196, 5}, {54, 46}}</string>
 										<reference key="NSSuperview" ref="73105567"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
+										<reference key="NSNextKeyView" ref="409331726"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
 										<int key="IBUIContentMode">7</int>
@@ -786,7 +791,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="0.0"/>
+					<real value="2"/>
 					<string>RMMapView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -1009,6 +1014,8 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>LocateMeButton.png</string>
 				<string>Location.png</string>
+				<string>WhiteStarButton.png</string>
+				<string>YellowStarButton.png</string>
 				<string>bike.png</string>
 				<string>button.png</string>
 				<string>buttonpressed.png</string>
@@ -1021,6 +1028,8 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{44, 44}</string>
 				<string>{20, 20}</string>
+				<string>{38, 35}</string>
+				<string>{38, 35}</string>
 				<string>{42, 28}</string>
 				<string>{118, 35}</string>
 				<string>{118, 35}</string>

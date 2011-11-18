@@ -451,8 +451,7 @@
 - (void)renderFavoriteButton
 {
     if (!_openMarker) return;
-    NSString* favoriteTitle = _openMarker.station.favoriteCharacter;
-    [_favoriteButton setTitle:favoriteTitle forState:UIControlStateNormal];
+    _favoriteButton.selected = _openMarker.station.favorite;
 }
 
 @end

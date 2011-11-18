@@ -35,7 +35,6 @@
 {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"StationTableViewCell" owner:self options:nil];
     StationTableViewCell* cell = [topLevelObjects objectAtIndex:0];
-    //153
     UIColor* backgroundColor = [UIColor colorWithRed:0 green:230/255.0 blue:0 alpha:0.3];
 
     UIView* backgroundView = [[[UIView alloc] init] autorelease];
@@ -47,6 +46,8 @@
     selectedBackgroundView.frame = cell.bounds;
     selectedBackgroundView.backgroundColor = [UIColor blackColor];
     [cell setSelectedBackgroundView:selectedBackgroundView];
+    
+    // this was nice but i'm creating only a single line separator now
     
     NSInteger lines = 1;
     CGFloat y = 0;
@@ -135,11 +136,12 @@
     
     if ([_station isMyLocation])
     {
-        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 14, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
+//        _icon.frame = CGRectMake(0, 0, 50, 50);
+//        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 14, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
     }
     else
     {
-        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 11, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
+//        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 14, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
     }
     
     // put avail space next to avail bike based on the actual size of the label
@@ -148,7 +150,7 @@
     
     // show/hide favorite icon
     _favorite.hidden = !_station.favorite;
-    _favorite.text = [_station favoriteCharacter];
+    //_favorite.text = [_station favoriteCharacter];
 }
 
 @end

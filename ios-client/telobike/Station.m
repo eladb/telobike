@@ -152,13 +152,6 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     [[[AppDelegate app] favorites] setStationID:sid favorite:isFavorite];
 }
 
-- (NSString*)favoriteCharacter
-{
-    NSString* yesFavorite = @"💛";//💚💙🌟
-    NSString* noFavorite = @"💔";
-    return [self favorite] ? yesFavorite : noFavorite;
-}
-
 @end
 
 @implementation Station (Private)

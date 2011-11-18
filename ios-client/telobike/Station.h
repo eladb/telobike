@@ -48,7 +48,6 @@ typedef enum {
 @property (nonatomic, readonly) NSString* address;
 @property (nonatomic, readonly) NSString* sid;
 @property (nonatomic, readonly) BOOL isMyLocation;
-@property (nonatomic, readonly) NSString* favoriteCharacter;
 
 @property (nonatomic, assign) double_t distance;
 
