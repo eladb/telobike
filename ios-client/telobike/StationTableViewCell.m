@@ -48,10 +48,10 @@
     selectedBackgroundView.backgroundColor = [UIColor blackColor];
     [cell setSelectedBackgroundView:selectedBackgroundView];
     
-    NSInteger lines = 8;
+    NSInteger lines = 1;
     CGFloat y = 0;
     CGFloat jump = 1;
-    CGFloat alphaJump = 0.02;
+    CGFloat alphaJump = 0.1;
     CGFloat alpha = alphaJump * lines;
     for (NSInteger i = 0; i < lines; ++i) {
         UIView* line = [[[UIView alloc] init] autorelease];
@@ -113,19 +113,12 @@
     UIColor* backgroundColor = nil;
     
     switch ([_station state]) {
-        case StationOK:
-            backgroundColor = [UIColor colorWithRed:209/255.0 green:255/255.0 blue:197.0/255.0 alpha:1.0];
-            break;
-            
+        // backgroundColor = [UIColor colorWithRed:255/255.0 green:180/255.0 blue:182/255.0 alpha:1.0];
+        // backgroundColor = [UIColor colorWithRed:250/255.0 green:255.0/255.0 blue:181.0/255.0 alpha:1.0];
+        case StationMarginal:
         case StationFull:
         case StationEmpty:
-            backgroundColor = [UIColor colorWithRed:255/255.0 green:180/255.0 blue:182/255.0 alpha:1.0];
-            break;
-            
-        case StationMarginal:
-            backgroundColor = [UIColor colorWithRed:250/255.0 green:255.0/255.0 blue:181.0/255.0 alpha:1.0];
-            break;
-            
+        case StationOK:
         case StationUnknown:
         case StationInactive:
         default:
@@ -142,7 +135,7 @@
     
     if ([_station isMyLocation])
     {
-        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 24, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
+        _stationNameLabel.frame = CGRectMake(_stationNameLabel.frame.origin.x, 14, _stationNameLabel.frame.size.width, _stationNameLabel.frame.size.height);
     }
     else
     {

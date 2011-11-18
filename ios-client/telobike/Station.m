@@ -113,7 +113,7 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
             [stationName release]; stationName = [NSLocalizedString(@"MYLOCATION_TITLE", nil) retain];
             [availBikeDesc release]; availBikeDesc = [NSLocalizedString(@"MYLOCATION_DESC", nil) retain];
             [availSpaceDesc release]; availSpaceDesc = [[NSString string] retain];
-            [listImage release]; listImage = [[UIImage imageNamed:@"MyLocation.png"] retain];
+            [listImage release]; listImage = [[UIImage imageNamed:@"MyLocationMenu.png"] retain];
         }
     }
     return self;
@@ -157,17 +157,6 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
     NSString* yesFavorite = @"💛";//💚💙🌟
     NSString* noFavorite = @"💔";
     return [self favorite] ? yesFavorite : noFavorite;
-    /*
-     ❤
-     HEAVY BLACK HEART
-     Unicode: U+2764, UTF-8: E2 9D A4
-     
-     */
-    /*
-     💔
-     BROKEN HEART
-     Unicode: U+1F494 (U+D83D U+DC94), UTF-8: F0 9F 92 94
-     */
 }
 
 @end
@@ -196,7 +185,7 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
             break;
 
         case StationMarginal:
-            name = @"Green"; // TODO
+            name = @"Yellow";
             break;
 
         case StationUnknown:
@@ -205,7 +194,7 @@ static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
             break;
     }
     
-    return [UIImage imageNamed:[NSString stringWithFormat:fmt,name]];
+    return [UIImage imageNamed:[NSString stringWithFormat:fmt, name]];
 }
 
 @end

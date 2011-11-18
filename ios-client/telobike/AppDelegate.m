@@ -17,6 +17,7 @@
 
 NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
+
 @interface AppDelegate (Private)
 
 - (void)downloadCityAndStart;
@@ -34,6 +35,8 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 - (void)dealloc
 {
+    [[Analytics shared] stopTracker];
+    
     [_mapView release];
     [_listView release];
     [_window release];
@@ -48,6 +51,9 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[Analytics shared] startTracker];
+    [[Analytics shared] eventAppStart];
+    
     _favorites = [[Favorites alloc] init];
     
     if (!_locationManager)
@@ -276,8 +282,10 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
               UIViewController* stationsVC = [self.mainController.viewControllers objectAtIndex:0];
               UIViewController* mapVC = [self.mainController.viewControllers objectAtIndex:1];
               UIViewController* alarmVC = [self.mainController.viewControllers objectAtIndex:2];
-              IASKAppSettingsViewController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
-              [settingsVC.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+              UINavigationController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
+              IASKAppSettingsViewController* svc = (IASKAppSettingsViewController*) [settingsVC topViewController];
+              svc.showCreditsFooter = NO;
+              [settingsVC.navigationController.navigationBar setTintColor:[UIColor blackColor]];
               
               stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"List", nil);
               mapVC.navigationItem.title = mapVC.tabBarItem.title = NSLocalizedString(@"MAP_TITLE", nil);

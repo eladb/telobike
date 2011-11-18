@@ -7,6 +7,7 @@
 //
 
 #import "Favorites.h"
+#import "Analytics.h"
 
 @implementation Favorites
 
@@ -23,6 +24,13 @@
 
 - (void)setStationID:(NSString*)stationID favorite:(BOOL)isFavorite
 {
+    if (isFavorite) {
+        [[Analytics shared] eventAddFavorite:stationID];
+    }
+    else {
+        [[Analytics shared] eventRemoveFavorite:stationID];
+    }
+    
     [[NSUserDefaults standardUserDefaults] setBool:isFavorite forKey:[self defaultsKeyForStationID:stationID]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

@@ -8,6 +8,7 @@
 
 #import "NavigateToStation.h"
 #import "AppDelegate.h"
+#import "Analytics.h"
 
 static NSString* const kMapsAppSingleShotDefaultsKey = @"mapsAppWarningShown";
 
@@ -89,6 +90,8 @@ static NSString* const kMapsAppSingleShotDefaultsKey = @"mapsAppWarningShown";
     NSString* encodedString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL* url = [NSURL URLWithString:encodedString];
     [[UIApplication sharedApplication] openURL:url];
+
+    [[Analytics shared] eventNavigate];
 }
                                             
 

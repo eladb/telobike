@@ -13,6 +13,7 @@
 #import "InfoViewController.h"
 #import "FeedbackOptions.h"
 #import "Favorites.h"
+#import "Analytics.h"
 
 extern NSString* const kLocationChangedNotification;
 

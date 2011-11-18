@@ -8,6 +8,7 @@
 
 #import "TimerViewController.h"
 #import "TargetConditionals.h"
+#import "Analytics.h"
 
 @implementation TimerViewController
 
@@ -33,7 +34,7 @@
 {
     [super viewDidLoad];
 
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.title = NSLocalizedString(@"Timer", nil);
 
     [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
 
@@ -49,6 +50,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    [[Analytics shared] pageViewTimer];
 
     // if the timer is not started, start it.
     BOOL autoStartTimerEnabled = YES;
@@ -107,6 +110,8 @@
     // if we have a timer, this is stop. otherwise, start.
     
     if ([self timerStarted]) {
+        [[Analytics shared] eventStopTimer];
+
         [timer invalidate];
         [timer release];
         timer = nil;
@@ -118,9 +123,10 @@
         [timePicker setHidden:NO];
         [countdownView setHidden:YES];
         [startStopButton setTitle:NSLocalizedString(@"TIMER_START", nil) forState:UIControlStateNormal];
-        
     }
     else {
+        [[Analytics shared] eventStopTimer];
+        
         NSTimeInterval interval = [timePicker countDownDuration] + 1.0;
 #if TARGET_IPHONE_SIMULATOR
         interval = 5.0;

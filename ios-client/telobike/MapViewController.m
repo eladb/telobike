@@ -20,6 +20,7 @@
 #import "Utils.h"
 #import "ReportProblem.h"
 #import "NavigateToStation.h"
+#import "Analytics.h"
 
 @interface RMMarker (Station)
 
@@ -91,8 +92,6 @@
 
 - (void)viewDidLoad
 {
-    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
-
     [RMMapView class]; // needed to avoid: 'Interface builder does not recognize RMMapView'
     [super viewDidLoad];
 
@@ -126,6 +125,8 @@
 {
     [super viewDidAppear:animated];
     
+    [[Analytics shared] pageViewMap];
+
     [self reloadStations];
     
     // if we have a location from the location manager, add 'my location' now.
@@ -303,10 +304,24 @@
     [self hideOpenedMarker];
 }
 
-- (UIImage*)imageForAvailability:(NSInteger)avail
+- (UIImage*)imageForState:(StationState)state
 {
-    if (avail == 0) return [UIImage imageNamed:@"redbox.png"];
-    return [UIImage imageNamed:@"greenbox.png"];
+    switch (state) {
+        case StationOK:
+            return [UIImage imageNamed:@"greenbox.png"];
+            
+        case StationFull:
+        case StationEmpty:
+            return [UIImage imageNamed:@"redbox.png"];
+            
+        case StationMarginal:
+            return [UIImage imageNamed:@"yellowbox.png"];
+
+        default:
+        case StationUnknown:
+        case StationInactive:
+            return nil;
+    }
 }
 
 - (void)showDistanceForStation
@@ -341,8 +356,8 @@
     [self showDistanceForStation];
     
     // set the color of the boxes based on the amount of avail bike/park
-    _parkBox.image = [self imageForAvailability:[_openMarker.station availSpace]];
-    _bikeBox.image = [self imageForAvailability:[_openMarker.station availBike]];
+    _parkBox.image = [self imageForState:_openMarker.station.state];
+    _bikeBox.image = [self imageForState:_openMarker.station.state];
 
     [self renderFavoriteButton];
 }

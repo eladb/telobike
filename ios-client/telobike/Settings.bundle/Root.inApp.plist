@@ -8,7 +8,13 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>SETTINGS_STATION_LIST_GROUP</string>
+			<string></string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string></string>
 		</dict>
 		<dict>
 			<key>DefaultValue</key>

@@ -17,6 +17,7 @@
 #import "SendFeedback.h"
 #import "IASKSettingsReader.h"
 #import "AppDelegate.h"
+#import "Analytics.h"
 
 static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
@@ -69,8 +70,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 {
     [[AppDelegate app] addLocationChangeObserver:self selector:@selector(locationChanged:)];
     
-    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kIASKAppSettingChanged object:nil];
     
     self.navigationItem.titleView = _filters;
@@ -130,6 +129,7 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[Analytics shared] pageViewList];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(hideSearchBarFirstTime:) userInfo:nil repeats:NO];
 }
 
@@ -197,6 +197,48 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     /*
     [mapView selectStation:station];
     [self.navigationController pushViewController:mapView animated:YES];*/
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self shouldFilterFavorites];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StationTableViewCell* cell = (StationTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+    cell.distanceLabel.hidden = NO;
+
+    Station* s = [stations objectAtIndex:[indexPath row]];
+    [s setFavorite:NO];
+
+    [tableView beginUpdates];
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    [self sortStations];
+    [tableView endUpdates];
+}
+
+- (void)tableView:(UITableView*)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StationTableViewCell* cell = (StationTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+    cell.distanceLabel.hidden = YES;
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StationTableViewCell* cell = (StationTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+    cell.distanceLabel.hidden = NO;
+    [tableView setContentOffset:CGPointMake(0, _searchBar.frame.size.height) animated:NO];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NSLocalizedString(@"Remove", nil);
 }
 
 - (void)didReceiveMemoryWarning

@@ -132,6 +132,8 @@
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
+		F4719BB414763D5A0055443B /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4719BB314763D5A0055443B /* libGoogleAnalytics.a */; };
+		F4719BBA147642780055443B /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = F4719BB9147642780055443B /* Analytics.m */; };
 		F47DF9D014531812005DCA1B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DF9CE14531812005DCA1B /* TimerViewController.m */; };
 		F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47DF9CF14531812005DCA1B /* TimerViewController.xib */; };
 		F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A994ED146F2E9E009F03F2 /* Favorites.m */; };
@@ -369,6 +371,10 @@
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F4719BB214763D5A0055443B /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GANTracker.h; path = GoogleAnalyticsSDK/Library/GANTracker.h; sourceTree = "<group>"; };
+		F4719BB314763D5A0055443B /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = GoogleAnalyticsSDK/Library/libGoogleAnalytics.a; sourceTree = "<group>"; };
+		F4719BB8147642780055443B /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
+		F4719BB9147642780055443B /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analytics.m; sourceTree = "<group>"; };
 		F47DF9CD14531812005DCA1B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		F47DF9CE14531812005DCA1B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		F47DF9CF14531812005DCA1B /* TimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerViewController.xib; sourceTree = "<group>"; };
@@ -441,6 +447,7 @@
 				04954128137495DD00F98DC0 /* UIKit.framework in Frameworks */,
 				0495412A137495DD00F98DC0 /* Foundation.framework in Frameworks */,
 				0495412C137495DD00F98DC0 /* CoreGraphics.framework in Frameworks */,
+				F4719BB414763D5A0055443B /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +528,7 @@
 		040AAAF913749689001FF38F /* ext */ = {
 			isa = PBXGroup;
 			children = (
+				F4719BB114763D1B0055443B /* GoogleAnalytics */,
 				04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */,
 				04863D8C139B71D800274D50 /* EGOTableViewPullRefresh */,
 				040AB1C11374972D001FF38F /* json-framework */,
@@ -662,6 +670,8 @@
 				0495412F137495DD00F98DC0 /* telobike-Info.plist */,
 				04954133137495DD00F98DC0 /* telobike-Prefix.pch */,
 				04954134137495DD00F98DC0 /* main.m */,
+				F4719BB8147642780055443B /* Analytics.h */,
+				F4719BB9147642780055443B /* Analytics.m */,
 			);
 			name = app;
 			sourceTree = "<group>";
@@ -801,6 +811,15 @@
 				04E5CB44138B13C70056BE73 /* RM Unit Tests.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F4719BB114763D1B0055443B /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				F4719BB214763D5A0055443B /* GANTracker.h */,
+				F4719BB314763D5A0055443B /* libGoogleAnalytics.a */,
+			);
+			name = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 		F4F9B71B145C220D007D75F4 /* Controllers */ = {
@@ -1105,6 +1124,7 @@
 				F4F9B751145C220D007D75F4 /* IASKTextField.m in Sources */,
 				F4F9B75E145CADC3007D75F4 /* FeedbackOptions.m in Sources */,
 				F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */,
+				F4719BBA147642780055443B /* Analytics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1199,6 +1219,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/ext/GoogleAnalyticsSDK/Library\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1218,6 +1239,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/ext/GoogleAnalyticsSDK/Library\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
