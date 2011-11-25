@@ -10,12 +10,13 @@
 #import <CoreLocation/CoreLocation.h>
 
 typedef enum {
-    StationFull,     // red (no park)
-    StationEmpty,    // red (no bike)
-    StationOK,       // green
-    StationMarginal, // yellow
-    StationInactive, // gray
-    StationUnknown,  // black
+    StationFull,         // red (no park)
+    StationEmpty,        // red (no bike)
+    StationOK,           // green
+    StationMarginal,     // yellow
+    StationMarginalFull, // yellow full
+    StationInactive,     // gray
+    StationUnknown,      // black
 } StationState;
 
 typedef enum {

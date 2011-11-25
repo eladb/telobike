@@ -55,9 +55,9 @@
     [super viewDidUnload];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
 
     [[Analytics shared] pageViewTimer];
 
@@ -141,7 +141,7 @@
         interval = 5.0;
 #endif
         notification = [[UILocalNotification alloc] init];
-        notification.fireDate = [[[NSDate date] dateByAddingTimeInterval:interval] retain];;
+        notification.fireDate = [[NSDate date] dateByAddingTimeInterval:interval];
         notification.alertBody = NSLocalizedString(@"ALERT_BODY", nil);
         notification.alertAction = NSLocalizedString(@"ALERT_ACTION", nil);
         notification.soundName = @"bikebell.wav";

@@ -100,9 +100,13 @@ static const NSInteger kMarginalBikeAmount = 3;
         else availSpaceDesc = [[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Slots", @"number of slots available"), availSpace] retain];
 
         // set red color for bike and space if either of them is 0.
-        if (isActive && availSpace == 0) availSpaceColor = [[UIColor redColor] retain];
-        if (isActive && availBike == 0) availBikeColor = [[UIColor redColor] retain];
-        if (isActive && availBike > 0 && availBike <= kMarginalBikeAmount) availBikeColor = [[UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0] retain];
+        if (isActive) {
+            if (availBike == 0) availBikeColor = [[UIColor redColor] retain];
+            else if (availBike <= kMarginalBikeAmount) availBikeColor = [[UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0] retain];
+            
+            if (availSpace == 0) availSpaceColor = [[UIColor redColor] retain];
+            else if (availSpace <= kMarginalBikeAmount) availSpaceColor = [[UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0] retain];
+        }
         
         // load images for list and markers
         markerImage = [[self imageWithNameFormat:@"%@.png"] retain];
@@ -128,6 +132,7 @@ static const NSInteger kMarginalBikeAmount = 3;
     else if (availBike == 0) state = StationEmpty;
     else if (availSpace == 0) state = StationFull;
     else if (availBike <= kMarginalBikeAmount) state = StationMarginal;
+    else if (availSpace <= kMarginalBikeAmount) state = StationMarginalFull;
     
     return state;
 }
@@ -197,6 +202,10 @@ static const NSInteger kMarginalBikeAmount = 3;
 
         case StationMarginal:
             name = @"Yellow";
+            break;
+            
+        case StationMarginalFull:
+            name = @"YellowFull";
             break;
 
         case StationUnknown:

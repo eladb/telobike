@@ -32,8 +32,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 - (BOOL)shouldFilterFavorites;
 
 // navigation bar icon handlers
-- (void)refreshStations:(id)sender;
-
 - (void)settingsChanged:(NSNotification*)n;
 - (void)locationChanged:(NSNotification*)n;
 
@@ -369,14 +367,15 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-@end
-
-@implementation RootViewController (Private)
-
 - (void)refreshStations:(id)sender
 {
     [self refreshStationsWithError:YES];
 }
+
+@end
+
+@implementation RootViewController (Private)
+
 
 NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 {

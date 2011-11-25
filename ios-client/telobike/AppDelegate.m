@@ -86,6 +86,8 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [Appirater appEnteredForeground:YES];
+    
+    [_listView refreshStations:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -324,7 +326,6 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
               UINavigationController* settingsVC = [self.mainController.viewControllers objectAtIndex:3];
               IASKAppSettingsViewController* svc = (IASKAppSettingsViewController*) [settingsVC topViewController];
               svc.showCreditsFooter = NO;
-//              [settingsVC.navigationController.navigationBar setTintColor:[UIColor blackColor]];
               
               stationsVC.navigationItem.title = stationsVC.tabBarItem.title = NSLocalizedString(@"List", nil);
               mapVC.navigationItem.title = mapVC.tabBarItem.title = NSLocalizedString(@"MAP_TITLE", nil);
@@ -350,11 +351,18 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 - (void)showDisclaimerFirstTime
 {
     NSUserDefaults* d = [NSUserDefaults standardUserDefaults];
-    if ([d objectForKey:@"disclaimer"]) return;
+    
+    NSString* currentDisclaimer = [d objectForKey:@"disclaimer_text"];
     
     NSString* disclaimerMessage = [[City instance] disclaimer];
+    if (!disclaimerMessage || disclaimerMessage.length == 0) return;
+    disclaimerMessage = [disclaimerMessage stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+
+    // if we have already shown this, break
+    if ([disclaimerMessage isEqualToString:currentDisclaimer]) return;
+    // display the disclaimer and store so we won't display it again.
     [[[[UIAlertView alloc] initWithTitle:nil message:disclaimerMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease] show];
-    [d setValue:@"Yes" forKey:@"disclaimer"];
+    [d setValue:disclaimerMessage forKey:@"disclaimer_text"];
     [d synchronize];
 }
 

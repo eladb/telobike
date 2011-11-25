@@ -45,6 +45,7 @@
 - (void)showSearchBarAnimated:(BOOL)animated;
 - (void)hideSearchBarAnimated:(BOOL)animated;
 - (IBAction)filterFavoritesChanged:(id)sender;
+- (IBAction)refreshStations:(id)sender;
 
 
 @end

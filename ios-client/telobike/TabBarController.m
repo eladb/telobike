@@ -48,12 +48,10 @@
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    NSInteger selectedItem = -1;
     NSInteger i = 0;
     
     for (UITabBarItem* it in _visibleTabBar.items) {
         if (it == item) {
-            selectedItem = i;
             break;
         }
         i++;

@@ -16,13 +16,13 @@
 
 - (void)showFromTabBar:(UITabBar*)tabBar
 {
-    UIActionSheet* actionSheet = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Feedback", nil) 
+    UIActionSheet* actionSheet = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Send Feedback About...", nil) 
                                                               delegate:self 
                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
                                                 destructiveButtonTitle:nil 
                                                      otherButtonTitles:
-                                   NSLocalizedString(@"Service Feedback", nil),
-                                   NSLocalizedString(@"App Feedback", nil), 
+                                   NSLocalizedString(@"The Bike Service", nil),
+                                   NSLocalizedString(@"This App", nil), 
                                    nil] autorelease];
     
     [actionSheet showFromTabBar:tabBar];

@@ -146,6 +146,10 @@
 		F4012D841476D0FF00EFA21A /* alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D831476D0FF00EFA21A /* alarm@2x.png */; };
 		F4012D861476D11000EFA21A /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D851476D10F00EFA21A /* alarm.png */; };
 		F4012D8A1476D19400EFA21A /* MyLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4012D8B1476D19400EFA21A /* MyLocationTableViewCell.xib */; };
+		F4375EAA147D6D89006EB2E3 /* YellowFull.png in Resources */ = {isa = PBXBuildFile; fileRef = F4375EA8147D6D89006EB2E3 /* YellowFull.png */; };
+		F4375EAB147D6D89006EB2E3 /* YellowFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4375EA9147D6D89006EB2E3 /* YellowFull@2x.png */; };
+		F4375EAE147D6D94006EB2E3 /* YellowFullMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = F4375EAC147D6D94006EB2E3 /* YellowFullMenu.png */; };
+		F4375EAF147D6D94006EB2E3 /* YellowFullMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4375EAD147D6D94006EB2E3 /* YellowFullMenu@2x.png */; };
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
@@ -410,6 +414,10 @@
 		F4012D831476D0FF00EFA21A /* alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alarm@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D851476D10F00EFA21A /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = SOURCE_ROOT; };
 		F4012D8B1476D19400EFA21A /* MyLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLocationTableViewCell.xib; sourceTree = "<group>"; };
+		F4375EA8147D6D89006EB2E3 /* YellowFull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowFull.png; sourceTree = SOURCE_ROOT; };
+		F4375EA9147D6D89006EB2E3 /* YellowFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowFull@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4375EAC147D6D94006EB2E3 /* YellowFullMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowFullMenu.png; sourceTree = SOURCE_ROOT; };
+		F4375EAD147D6D94006EB2E3 /* YellowFullMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowFullMenu@2x.png"; sourceTree = SOURCE_ROOT; };
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -522,8 +530,8 @@
 		040AAAF913749689001FF38F /* ext */ = {
 			isa = PBXGroup;
 			children = (
-				F4719BB114763D1B0055443B /* GoogleAnalytics */,
 				04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */,
+				F4719BB114763D1B0055443B /* GoogleAnalytics */,
 				04863D8C139B71D800274D50 /* EGOTableViewPullRefresh */,
 				040AB1C11374972D001FF38F /* json-framework */,
 				04863DB5139B77D200274D50 /* InAppSettingsKit */,
@@ -839,6 +847,8 @@
 				F4719BC2147664390055443B /* MyLocationMenu@2x.png */,
 				F4719BC3147664390055443B /* YellowMenu.png */,
 				F4719BC4147664390055443B /* YellowMenu@2x.png */,
+				F4375EAC147D6D94006EB2E3 /* YellowFullMenu.png */,
+				F4375EAD147D6D94006EB2E3 /* YellowFullMenu@2x.png */,
 				0493505A13A3D82E005A5385 /* BlackMenu.png */,
 				0493505B13A3D82E005A5385 /* BlackMenu@2x.png */,
 				04A733351378AD38000D3A0C /* GrayMenu.png */,
@@ -870,6 +880,8 @@
 				0493505413A3D7CB005A5385 /* button@2x.png */,
 				F4719BC9147664430055443B /* Yellow.png */,
 				F4719BCA147664430055443B /* Yellow@2x.png */,
+				F4375EA8147D6D89006EB2E3 /* YellowFull.png */,
+				F4375EA9147D6D89006EB2E3 /* YellowFull@2x.png */,
 				F4719BBD1476642C0055443B /* yellowbox.png */,
 				F4719BBE1476642C0055443B /* yellowbox@2x.png */,
 				0493505813A3D82E005A5385 /* Black.png */,
@@ -1191,6 +1203,10 @@
 				F4012D7D1476C0AA00EFA21A /* Feedback@2x.png in Resources */,
 				F4012D841476D0FF00EFA21A /* alarm@2x.png in Resources */,
 				F4012D861476D11000EFA21A /* alarm.png in Resources */,
+				F4375EAA147D6D89006EB2E3 /* YellowFull.png in Resources */,
+				F4375EAB147D6D89006EB2E3 /* YellowFull@2x.png in Resources */,
+				F4375EAE147D6D94006EB2E3 /* YellowFullMenu.png in Resources */,
+				F4375EAF147D6D94006EB2E3 /* YellowFullMenu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1310,8 +1326,11 @@
 		04954142137495DE00F98DC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: ELAD BEN-ISRAEL (MQG3A97854)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1320,7 +1339,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "DC512FD5-F28E-48A9-A528-D0EA38F409A2";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1328,15 +1347,18 @@
 		04954143137495DE00F98DC0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: ELAD BEN-ISRAEL (MQG3A97854)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "DC512FD5-F28E-48A9-A528-D0EA38F409A2";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
