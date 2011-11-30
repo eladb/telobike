@@ -1,7 +1,7 @@
 "SETTINGS_STATION_LIST_GROUP" = "תצוגה";
 "SETTINGS_SHOW_INACTIVE_STATIONS_TOGGLE" = "הצג תחנות לא פעילות";
 
-"SETTINGS_VERSION_LABEL" = "גרסה 1.2";
+"SETTINGS_VERSION_LABEL" = "גרסה 1.2.1";
 "SETTINGS_SEND_FEEDBACK_MAIL" = "פידבק";
 
 "SETTINGS_OSS_DEVELOPERS_LABEL" = "Created by nirsa & eladb";
@@ -12,4 +12,4 @@
 "SETTINGS_STATIONS_LANGUAGE_MULIVALUE" = "שפת שמות תחנות";
 "SETTINGS_INFO" = "מידע";
 
-"SETTINGS_AUTO_START_TIMER_TOGGLE" = "טיימר אוטומאטי";
+"SETTINGS_AUTO_START_TIMER_TOGGLE" = "טיימר אוטומטי";
