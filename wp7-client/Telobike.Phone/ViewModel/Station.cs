@@ -15,185 +15,127 @@ namespace Telobike.Phone
 {
   public class Station : INotifyPropertyChanged
   {
-    public GeoCoordinate GetGeoCoordinate(GeoCoordinate origin)
+    //public GeoCoordinate GetGeoCoordinate(GeoCoordinate origin)
+    //{
+    //  GeoCoordinate gc = new GeoCoordinate(this._latitude, this.longitude);
+    //  this.DistanceFromOrigin = gc.GetDistanceTo(origin);
+    //  return gc;
+    //}
+
+    private StationRawData _rawData = null;
+    public Station(StationRawData stationRaw)
     {
-      GeoCoordinate gc = new GeoCoordinate(this._latitude, this.longitude);
-      this.DistanceFromOrigin = gc.GetDistanceTo(origin);
-      return gc;
+      this._rawData = stationRaw;
+      this.Availability = CalculateAvailability();
+      this._Coordinate = new GeoCoordinate(this.Latitude, this.Longitude);
     }
 
-    public double DistanceFromOrigin { get; set; }
-
-
-    public int sid
+    private GeoCoordinate _currentLocation = null;
+    public void SetCurrentLocation(GeoCoordinate current)
     {
-      get
-      {
-        return _sid;
-      }
-      set
-      {
-        if (value != _sid)
-        {
-          _sid = value;
-          NotifyPropertyChanged("sid");
-        }
-      }
+      this._currentLocation = current;
+      this.DistanceFromOrigin = this.Coordinate.GetDistanceTo(this._currentLocation);
     }
-    private int _sid = default(int);
 
-    public string city
+    public double DistanceFromOrigin
     {
       get
       {
-        return _city;
+        return _DistanceFromOrigin;
       }
       set
       {
-        if (value != _city)
+        if (value != _DistanceFromOrigin)
         {
-          _city = value;
-          NotifyPropertyChanged("city");
+          _DistanceFromOrigin = value;
+          NotifyPropertyChanged("DistanceFromOrigin");
         }
       }
     }
-    private string _city = default(string);
-    
-    public string name
-    {
-      get
-      {
-        return _name;
-      }
-      set
-      {
-        if (value != _name)
-        {
-          _name = value;
-          NotifyPropertyChanged("name");
-        }
-      }
-    }
-    private string _name = default(string);
+    private double _DistanceFromOrigin = default(double);
 
-    public string name_en
+    public GeoCoordinate Coordinate
     {
-      get
-      {
-        return _name_en;
-      }
-      set
-      {
-        if (value != _name_en)
-        {
-          _name_en = value;
-          NotifyPropertyChanged("name_en");
-        }
-      }
+      get { return _Coordinate; }
     }
-    private string _name_en = default(string);
+    private GeoCoordinate _Coordinate = null;
 
-    public double latitude
+    public StationAvailability Availability
     {
       get
       {
-        return _latitude;
+        return _Availability;
       }
       set
       {
-        if (value != _latitude)
+        if (value != _Availability)
         {
-          _latitude = value;
-          NotifyPropertyChanged("latitude");
+          _Availability = value;
+          NotifyPropertyChanged("Availability");
         }
       }
     }
-    private double _latitude = default(double);
+    private StationAvailability _Availability = default(StationAvailability);
 
-    public double longitude
+    public int StationID
     {
-      get
-      {
-        return _longitude;
-      }
-      set
-      {
-        if (value != _longitude)
-        {
-          _longitude = value;
-          NotifyPropertyChanged("longitude");
-        }
-      }
+      get { return this._rawData.sid; }
     }
-    private double _longitude = default(double);
 
-    public string location
+    public string City
     {
-      get
-      {
-        return _location;
-      }
-      set
-      {
-        if (value != _location)
-        {
-          _location = value;
-          NotifyPropertyChanged("location");
-        }
-      }
+      get { return this._rawData.city; }
     }
-    private string _location = default(string);
 
-    public int available_bike
+    public string Name
     {
-      get
-      {
-        return _available_bike;
-      }
-      set
-      {
-        if (value != _available_bike)
-        {
-          _available_bike = value;
-          NotifyPropertyChanged("available_bike");
-        }
-      }
+      get { return this._rawData.name; }
     }
-    private int _available_bike = default(int);
 
-    public int available_spaces
+    public string Name_en
     {
-      get
-      {
-        return _available_spaces;
-      }
-      set
-      {
-        if (value != _available_spaces)
-        {
-          _available_spaces = value;
-          NotifyPropertyChanged("available_spaces");
-        }
-      }
+      get { return this._rawData.name_en; }
     }
-    private int _available_spaces = default(int);
+
+    public double Latitude
+    {
+      get { return this._rawData.latitude; }
+    }
+
+    public double Longitude
+    {
+      get { return this._rawData.longitude; }
+    }
+
+    public int BikesAvailable
+    {
+      get { return this._rawData.available_bike; }
+    }
+
+    public int ParkingAvailable
+    {
+      get { return this._rawData.available_spaces; }
+    }
 
     public DateTime last_update
     {
-      get
-      {
-        return _last_update;
-      }
-      set
-      {
-        if (value != _last_update)
-        {
-          _last_update = value;
-          NotifyPropertyChanged("last_update");
-        }
-      }
+      get { return this._rawData.last_update; }
     }
-    private DateTime _last_update = default(DateTime);
+
+    private StationAvailability CalculateAvailability()
+    {
+      if (this.BikesAvailable == 0)
+        return StationAvailability.NoBikes;
+      if (this.BikesAvailable < 3)
+        return StationAvailability.OnlyFewBikes;
+
+      if (this.ParkingAvailable == 0)
+        return StationAvailability.NoParking;
+      if (this.ParkingAvailable < 3)
+        return StationAvailability.OnlyFewParking;
+
+      return StationAvailability.OK;
+    }
 
     public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     private void NotifyPropertyChanged(String propertyName)

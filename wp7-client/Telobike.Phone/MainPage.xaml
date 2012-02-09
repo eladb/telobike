@@ -14,9 +14,13 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     FlowDirection="RightToLeft"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+  
   <phone:PhoneApplicationPage.Resources>
     <local:DoubleToFriendlyDistanceValueConverter x:Key="DoubleToFriendlyDistanceValueConverter" />
+    <local:AvailabilityToIconValueConverter x:Key="AvailabilityToIconValueConverter" />
+    <local:AvailabilityToColorValueConverter x:Key="AvailabilityToColorValueConverter" />
   </phone:PhoneApplicationPage.Resources>
+  
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
@@ -26,26 +30,40 @@
 
     <!--TitlePanel contains the name of the application and page title-->
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock x:Name="ApplicationTitle" Text="telobike" Style="{StaticResource PhoneTextNormalStyle}"/>
+      <TextBlock x:Name="ApplicationTitle" Text="telobike" Style="{StaticResource PhoneTextTitle2Style}"/>
       <TextBlock x:Name="PageTitle" Text="תחנות" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-      <ListBox x:Name="stationsList">
+      <ListBox x:Name="stationsList" ItemsSource="{Binding Stations}">
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <Grid Margin="0, 3, 3, 3">
+            <Grid Margin="12, 3, 12, 3" Height="100">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="45"/>
+                <ColumnDefinition Width="110"/>
                 <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
-              <Image Grid.Column="0" Source="Images/GreenMenu.png"/>
+              
+              <Image Grid.Column="0" Stretch="None" HorizontalAlignment="Left" Source="{Binding Availability, Converter={StaticResource AvailabilityToIconValueConverter}}"/>
+              
               <StackPanel Grid.Column="1">
-                <TextBlock Text="{Binding name}"/>
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
                 <TextBlock Text="{Binding DistanceFromOrigin, Converter={StaticResource DoubleToFriendlyDistanceValueConverter}}"/>
-                <TextBlock Text="{Binding available_bike}"/>
-                <TextBlock Text="{Binding available_spaces}"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Foreground="{Binding BikesAvailable, Converter={StaticResource AvailabilityToColorValueConverter}}" >
+                  <Run Text="אופניים: "/>
+                  <Run Text="{Binding BikesAvailable}"/>
+                  </TextBlock>
+                  <TextBlock Grid.Column="1" Foreground="{Binding ParkingAvailable, Converter={StaticResource AvailabilityToColorValueConverter}}">
+                  <Run Text="חניות: "/>
+                  <Run Text="{Binding ParkingAvailable}"/>
+                  </TextBlock>
+                </Grid>
               </StackPanel>
             </Grid>
           </DataTemplate>

@@ -17,6 +17,24 @@ namespace Telobike.Phone
 {
   public partial class App : Application
   {
+    private static MainViewModel viewModel = null;
+
+    /// <summary>
+    /// A static ViewModel used by the views to bind against.
+    /// </summary>
+    /// <returns>The MainViewModel object.</returns>
+    public static MainViewModel ViewModel
+    {
+      get
+      {
+        // Delay creation of the view model until necessary
+        if (viewModel == null)
+          viewModel = new MainViewModel();
+
+        return viewModel;
+      }
+    }
+
     /// <summary>
     /// Provides easy access to the root frame of the Phone Application.
     /// </summary>
@@ -57,6 +75,7 @@ namespace Telobike.Phone
         PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
       }
 
+      ViewModel.Initialize();
     }
 
     // Code to execute when the application is launching (eg, from Start)
@@ -96,11 +115,8 @@ namespace Telobike.Phone
     // Code to execute on Unhandled Exceptions
     private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
     {
-      if (System.Diagnostics.Debugger.IsAttached)
-      {
-        // An unhandled exception has occurred; break into the debugger
-        System.Diagnostics.Debugger.Break();
-      }
+      MessageBox.Show(e.ExceptionObject.Message);
+      e.Handled = true;
     }
 
     #region Phone application initialization
