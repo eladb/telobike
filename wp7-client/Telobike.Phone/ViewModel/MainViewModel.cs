@@ -72,7 +72,7 @@ namespace Telobike.Phone
           station.SetCurrentLocation(CurrentPosition);
         }
 
-        var sortedByDistance = query; //.OrderBy(s => s.DistanceFromOrigin);
+        var sortedByDistance = query.OrderBy(s => s.DistanceFromOrigin);
         this.Stations = new ObservableCollection<Station>(sortedByDistance);
         this.StationsView.SortDescriptions.Add(new SortDescription("DistanceFromOrigin", ListSortDirection.Descending));
         //NotifyPropertyChanged("Stations");

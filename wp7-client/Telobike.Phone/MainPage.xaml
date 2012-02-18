@@ -46,7 +46,7 @@
       </controls:PivotItem>
       
       <controls:PivotItem Header="תחנות">
-        <ListBox FlowDirection="RightToLeft" x:Name="stationsList" Margin="0,0,-12,0" ItemsSource="{Binding StationsView}"
+        <ListBox FlowDirection="RightToLeft" x:Name="stationsList" Margin="0,0,-12,0" ItemsSource="{Binding Stations}"
                  SelectionChanged="stationsList_SelectionChanged">
           <ListBox.ItemTemplate>
             <DataTemplate>
