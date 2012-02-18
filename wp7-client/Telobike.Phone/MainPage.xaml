@@ -6,70 +6,84 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:local="clr-namespace:Telobike.Phone"
+    xmlns:local="clr-namespace:Telobike.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:Maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" 
+    xmlns:MSPCMCore="clr-namespace:Microsoft.Phone.Controls.Maps.Core;assembly=Microsoft.Phone.Controls.Maps"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    FlowDirection="RightToLeft"
+    FontFamily="Arial"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
-  
+
   <phone:PhoneApplicationPage.Resources>
     <local:DoubleToFriendlyDistanceValueConverter x:Key="DoubleToFriendlyDistanceValueConverter" />
     <local:AvailabilityToIconValueConverter x:Key="AvailabilityToIconValueConverter" />
     <local:AvailabilityToColorValueConverter x:Key="AvailabilityToColorValueConverter" />
   </phone:PhoneApplicationPage.Resources>
-  
+
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
+      <RowDefinition Height="10"/>
+      <RowDefinition Height="*" />
     </Grid.RowDefinitions>
+    <ProgressBar x:Name="Progress" IsIndeterminate="True"/>
+    <controls:Pivot Grid.Row="1" x:Name="pivot" Title="telobike">
+      <controls:PivotItem Header="מפה">
+        <Maps:Map Name="map" Center="{Binding CurrentPosition}" ZoomLevel="16" Margin="0,0,0,0" CopyrightVisibility="Collapsed" LogoVisibility="Collapsed" ScaleVisibility="Visible" CredentialsProvider="ApBXPZf5IR94SLXE8nh5FYsb5WHKrH1XPY7428-EqQudseivcWhCROIJvGmtnkAV">
+          <Maps:Map.Mode>
+            <MSPCMCore:MercatorMode/>
+          </Maps:Map.Mode>
+          <Maps:MapTileLayer Name="street" Margin="0,0,0,32">
+            <Maps:MapTileLayer.TileSources>
+              <local:GoogleTile TileTypes="Street"/>
+            </Maps:MapTileLayer.TileSources>
+          </Maps:MapTileLayer>
+        </Maps:Map>
+      </controls:PivotItem>
+      
+      <controls:PivotItem Header="תחנות">
+        <ListBox FlowDirection="RightToLeft" x:Name="stationsList" Margin="0,0,-12,0" ItemsSource="{Binding StationsView}"
+                 SelectionChanged="stationsList_SelectionChanged">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid Margin="12, 3, 12, 3" Height="100">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="110"/>
+                  <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-    <!--TitlePanel contains the name of the application and page title-->
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock x:Name="ApplicationTitle" Text="telobike" Style="{StaticResource PhoneTextTitle2Style}"/>
-      <TextBlock x:Name="PageTitle" Text="תחנות" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-    </StackPanel>
+                <Image Grid.Column="0" Stretch="None" HorizontalAlignment="Left" Source="{Binding Availability, Converter={StaticResource AvailabilityToIconValueConverter}}"/>
 
-    <!--ContentPanel - place additional content here-->
-    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-      <ListBox x:Name="stationsList" ItemsSource="{Binding Stations}">
-        <ListBox.ItemTemplate>
-          <DataTemplate>
-            <Grid Margin="12, 3, 12, 3" Height="100">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="110"/>
-                <ColumnDefinition Width="*"/>
-              </Grid.ColumnDefinitions>
-              
-              <Image Grid.Column="0" Stretch="None" HorizontalAlignment="Left" Source="{Binding Availability, Converter={StaticResource AvailabilityToIconValueConverter}}"/>
-              
-              <StackPanel Grid.Column="1">
-                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-                <TextBlock Text="{Binding DistanceFromOrigin, Converter={StaticResource DoubleToFriendlyDistanceValueConverter}}"/>
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="*" />
-                  </Grid.ColumnDefinitions>
-                  <TextBlock Grid.Column="0" Foreground="{Binding BikesAvailable, Converter={StaticResource AvailabilityToColorValueConverter}}" >
+                <StackPanel Grid.Column="1">
+                  <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+                  <TextBlock Text="{Binding DistanceFromOrigin, Converter={StaticResource DoubleToFriendlyDistanceValueConverter}}"/>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="150" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Foreground="{Binding BikesAvailable, Converter={StaticResource AvailabilityToColorValueConverter}}" >
                   <Run Text="אופניים: "/>
                   <Run Text="{Binding BikesAvailable}"/>
-                  </TextBlock>
-                  <TextBlock Grid.Column="1" Foreground="{Binding ParkingAvailable, Converter={StaticResource AvailabilityToColorValueConverter}}">
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" Foreground="{Binding ParkingAvailable, Converter={StaticResource AvailabilityToColorValueConverter}}">
                   <Run Text="חניות: "/>
                   <Run Text="{Binding ParkingAvailable}"/>
-                  </TextBlock>
-                </Grid>
-              </StackPanel>
-            </Grid>
-          </DataTemplate>
-        </ListBox.ItemTemplate>
-      </ListBox>
-    </Grid>
+                    </TextBlock>
+                  </Grid>
+                </StackPanel>
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </controls:PivotItem>
+
+      
+    </controls:Pivot>
   </Grid>
 
   <!--Sample code showing usage of ApplicationBar-->

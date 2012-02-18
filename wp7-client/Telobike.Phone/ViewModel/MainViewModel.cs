@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Device.Location;
 using Newtonsoft.Json;
+using System.Windows.Data;
 
 namespace Telobike.Phone
 {
@@ -20,18 +21,33 @@ namespace Telobike.Phone
   {
     public MainViewModel()
     {
-
+      // Start with Tel Aviv
+      this.CurrentPosition = new GeoCoordinate(latitude: 32.06777, longitude: 34.76472);
     }
 
     public void Initialize()
     {
       _watcher.MovementThreshold = 20; // 20 meters
+      _watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(_watcher_PositionChanged);
       _watcher.Start();
+    }
+
+    void _watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+    {
+      if (!e.Position.Location.IsUnknown)
+      {
+        //this.CurrentPosition = e.Position.Location;
+      }
     }
 
     public void LoadStations()
     {
       CurrentPosition = _watcher.Position.Location;
+      MapCenter = CurrentPosition;
+
+      // Raise the StationsSearching
+      if (StationsSearching != null)
+        StationsSearching(null, EventArgs.Empty);
 
       WebClient client = new WebClient();
       Uri uri = new Uri("http://telobike.citylifeapps.com/stations?alt=json");
@@ -56,13 +72,29 @@ namespace Telobike.Phone
           station.SetCurrentLocation(CurrentPosition);
         }
 
-        var sortedByDistance = query.OrderBy(s => s.DistanceFromOrigin);
+        var sortedByDistance = query; //.OrderBy(s => s.DistanceFromOrigin);
         this.Stations = new ObservableCollection<Station>(sortedByDistance);
+        this.StationsView.SortDescriptions.Add(new SortDescription("DistanceFromOrigin", ListSortDirection.Descending));
         //NotifyPropertyChanged("Stations");
+
+        // Raise the StationsSearching
+        if (StationsSearched != null)
+          StationsSearched(null, EventArgs.Empty);
       }
     }
 
     GeoCoordinateWatcher _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+
+    #region Property StationsView
+    public CollectionViewSource StationsView
+    {
+      get
+      {
+        return _StationsView;
+      }
+    }
+    private CollectionViewSource _StationsView = new CollectionViewSource();
+    #endregion
 
     #region Property Stations
     public ObservableCollection<Station> Stations
@@ -77,6 +109,7 @@ namespace Telobike.Phone
         {
           _Stations = value;
           NotifyPropertyChanged("Stations");
+          this.StationsView.Source = _Stations;
         }
       }
     }
@@ -101,6 +134,28 @@ namespace Telobike.Phone
     }
     private GeoCoordinate _CurrentPosition = default(GeoCoordinate);
     #endregion
+
+    #region Property MapCenter
+    public GeoCoordinate MapCenter
+    {
+      get
+      {
+        return _MapCenter;
+      }
+      set
+      {
+        if (value != _MapCenter)
+        {
+          _MapCenter = value;
+          NotifyPropertyChanged("MapCenter");
+        }
+      }
+    }
+    private GeoCoordinate _MapCenter = default(GeoCoordinate);
+    #endregion
+
+    public event EventHandler StationsSearching;
+    public event EventHandler StationsSearched;
 
     public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     private void NotifyPropertyChanged(String propertyName)
