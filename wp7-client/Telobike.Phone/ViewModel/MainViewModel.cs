@@ -36,7 +36,7 @@ namespace Telobike.Phone
     {
       if (!e.Position.Location.IsUnknown)
       {
-        //this.CurrentPosition = e.Position.Location;
+        this.CurrentPosition = e.Position.Location;
       }
     }
 

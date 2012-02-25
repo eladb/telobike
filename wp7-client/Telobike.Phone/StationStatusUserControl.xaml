@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Telobike.Phone.StationStatusUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Telobike.Phone"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Height="167" Width="276"
+    d:DesignHeight="200" d:DesignWidth="267">
+  <UserControl.Resources>
+    <local:AvailabilityToPanelColorValueConverter x:Key="AvailabilityToPanelColorValueConverter"/>
+  </UserControl.Resources>
+
+  <Grid x:Name="LayoutRoot">
+    <Grid.Background>
+      <ImageBrush ImageSource="/Images/panel.png"/>
+    </Grid.Background>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="{Binding Name}" TextAlignment="Center" FontWeight="Bold" FontSize="{StaticResource PhoneFontSizeMedium}"/>
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- Bikes Panel -->
+      <Grid Grid.Column="0" Margin="5">
+        <Grid.Background>
+          <ImageBrush ImageSource="{Binding BikesAvailable, Converter={StaticResource AvailabilityToPanelColorValueConverter}}"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="/Images/bike.png" Width="42"/>
+        <TextBlock Text="{Binding BikesAvailable}" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+      </Grid>
+
+      <!-- Parking Panel -->
+      <Grid Grid.Column="1" Margin="5">
+        <Grid.Background>
+          <ImageBrush ImageSource="{Binding ParkingAvailable, Converter={StaticResource AvailabilityToPanelColorValueConverter}}"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="/Images/parking.png" Width="39"/>
+        <TextBlock Text="{Binding ParkingAvailable}" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+      </Grid>
+
+    </Grid>
+
+    <!--<Button Click="Button_Click" />-->
+  </Grid>
+</UserControl>

@@ -13,22 +13,22 @@ using System.Globalization;
 
 namespace Telobike.Phone
 {
-  public class DoubleToFriendlyDistanceValueConverter : IValueConverter
+  public class AvailabilityToPanelColorValueConverter : IValueConverter
   {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-      int intDist;
-      double distance = (double)value;
-      if (distance < 1000.0)
-      {
-        intDist = (int)distance;
-        return intDist + " מטר";
-      }
+      int availability = (int)value;
+      string iconName = "";
+
+      if (availability <= 0)
+        iconName = "red";
+      else if (availability < 3)
+        iconName = "yellow";
       else
-      {
-        intDist = (int)(distance / 1000.0);
-        return intDist + " ק\"מ";
-      }
+        iconName = "green";
+
+      iconName = string.Format("Images/{0}box.png", iconName);
+      return iconName;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

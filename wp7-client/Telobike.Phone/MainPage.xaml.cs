@@ -14,12 +14,16 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Device.Location;
 using Microsoft.Phone.Controls.Maps;
+using System.Windows.Controls.Primitives;
 
 namespace Telobike.Phone
 {
   public partial class MainPage : PhoneApplicationPage
   {
     MapLayer stationsLayer;
+    MapLayer selectedStationLayer;
+    Popup buyNowScreen;
+    StationStatusUserControl stationStatus;
 
     // Constructor
     public MainPage()
@@ -28,6 +32,8 @@ namespace Telobike.Phone
 
       stationsLayer = new MapLayer();
       this.map.Children.Add(stationsLayer);
+      selectedStationLayer = new MapLayer();
+      this.map.Children.Add(selectedStationLayer);
 
       DataContext = App.ViewModel;
       App.ViewModel.StationsSearching += new EventHandler(ViewModel_StationsSearching);
@@ -63,7 +69,49 @@ namespace Telobike.Phone
     {
       Image i = (Image)sender;
       Station s = (Station)i.Tag;
-      this.map.Center = s.Coordinate;            
+      SelectStationOnMap(s);
+    }
+
+    void SelectStationOnMap(Station selectedStation)
+    {
+      App.ViewModel.MapCenter = selectedStation.Coordinate;
+      this.map.Center = selectedStation.Coordinate;
+
+      // Show a background behind the selected station
+      selectedStationLayer.Children.Clear();
+      Image selectedStationBackgroundImage = new Image();
+      selectedStationBackgroundImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("Images/SelectedMarker@2x.png", UriKind.Relative));
+      selectedStationBackgroundImage.Opacity = 0.8;
+      selectedStationBackgroundImage.Stretch = System.Windows.Media.Stretch.None;
+      PositionOrigin position = PositionOrigin.Center;
+      selectedStationLayer.AddChild(selectedStationBackgroundImage, selectedStation.Coordinate, position);
+
+
+      GeneralTransform gt = this.TransformToVisual(this.map as UIElement);
+      Point offset = gt.Transform(new Point(0, 0));
+      double controlTop = offset.Y;
+      double controlLeft = offset.X;
+
+      // Show Popup
+      if (stationStatus == null)
+      {
+        stationStatus = new StationStatusUserControl(selectedStation);
+        buyNowScreen = new Popup();
+        buyNowScreen.Child = stationStatus;
+        buyNowScreen.IsOpen = true;
+        buyNowScreen.VerticalOffset = controlTop * (-1) + 30;
+        buyNowScreen.HorizontalOffset = (this.LayoutRoot.ActualWidth + controlLeft - stationStatus.Width) / 2;
+        buyNowScreen.Closed += (s1, e1) =>
+        {
+          // Add you code here to do something
+          // when the Popup is closed
+        };
+      }
+      else
+      {
+        stationStatus.DataContext = selectedStation;
+        buyNowScreen.IsOpen = true;
+      }
     }
 
     void ViewModel_StationsSearching(object sender, EventArgs e)
@@ -92,12 +140,19 @@ namespace Telobike.Phone
     {
       if (e.AddedItems.Count > 0)
       {
-        Station selectedStation = (Station)e.AddedItems[0];
-        App.ViewModel.MapCenter = selectedStation.Coordinate;
-        this.map.Center = selectedStation.Coordinate;
-
         // Switch to the map pivot item
         this.pivot.SelectedIndex = 0;
+
+        Station selectedStation = (Station)e.AddedItems[0];
+        SelectStationOnMap(selectedStation);
+      }
+    }
+
+    private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      if (buyNowScreen != null && buyNowScreen.IsOpen == true)
+      {
+        buyNowScreen.IsOpen = false;
       }
     }
   }

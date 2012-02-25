@@ -31,7 +31,7 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <ProgressBar x:Name="Progress" IsIndeterminate="True"/>
-    <controls:Pivot Grid.Row="1" x:Name="pivot" Title="telobike">
+    <controls:Pivot Grid.Row="1" x:Name="pivot" Title="telobike" SelectionChanged="pivot_SelectionChanged">
       <controls:PivotItem Header="מפה">
         <Maps:Map Name="map" Center="{Binding CurrentPosition}" ZoomLevel="16" Margin="0,0,0,0" CopyrightVisibility="Collapsed" LogoVisibility="Collapsed" ScaleVisibility="Visible" CredentialsProvider="ApBXPZf5IR94SLXE8nh5FYsb5WHKrH1XPY7428-EqQudseivcWhCROIJvGmtnkAV">
           <Maps:Map.Mode>
