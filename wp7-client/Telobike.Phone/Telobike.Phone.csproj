@@ -68,6 +68,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GeoSpatial\GoogleTile.cs" />
+    <Compile Include="LocationServicesPopup.xaml.cs">
+      <DependentUpon>LocationServicesPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StationStatusUserControl.xaml.cs">
       <DependentUpon>StationStatusUserControl.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="LocationServicesPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -44,7 +44,7 @@
           </Maps:MapTileLayer>
         </Maps:Map>
       </controls:PivotItem>
-      
+
       <controls:PivotItem Header="תחנות">
         <ListBox FlowDirection="RightToLeft" x:Name="stationsList" Margin="0,0,-12,0" ItemsSource="{Binding Stations}"
                  SelectionChanged="stationsList_SelectionChanged">
@@ -82,7 +82,28 @@
         </ListBox>
       </controls:PivotItem>
 
-      
+      <controls:PivotItem Header="הגדרות">
+        <StackPanel>
+          <CheckBox IsChecked="{Binding UseLocationServices, Mode=TwoWay}" Content="Use Location Services (GPS)" />
+          <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}">
+      <Run>
+        tel-o-bike uses your current location to show the nearest bike station and improve your experience. 
+        </Run>
+      <LineBreak />
+      <LineBreak />
+      <Run>
+        Your privacy is important to us. Your location is not stored and shared.
+        You may disable Location Services in the settings page. 
+        </Run>
+      <LineBreak />
+
+          </TextBlock>
+          <TextBlock  Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" x:Name="mailToDeveloper" Tap="mailToDeveloper_Tap">
+          If you have questions, contact: &#160;<Underline>bursteg@hotmail.com</Underline>.
+          </TextBlock>
+        </StackPanel>
+      </controls:PivotItem>
+
     </controls:Pivot>
   </Grid>
 

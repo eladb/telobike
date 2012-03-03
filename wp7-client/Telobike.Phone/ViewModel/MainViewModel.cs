@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Device.Location;
 using Newtonsoft.Json;
 using System.Windows.Data;
+using System.IO.IsolatedStorage;
 
 namespace Telobike.Phone
 {
@@ -85,6 +86,28 @@ namespace Telobike.Phone
 
     GeoCoordinateWatcher _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
 
+    #region Property UseLocationServices
+    public bool UseLocationServices
+    {
+      get
+      {
+        if ( IsolatedStorageSettings.ApplicationSettings.Contains("EnableLocation"))
+          return (bool)IsolatedStorageSettings.ApplicationSettings["EnableLocation"];
+        else
+          return false;
+      }
+      set
+      {
+        if (!IsolatedStorageSettings.ApplicationSettings.Contains("EnableLocation") || 
+          value != (bool)IsolatedStorageSettings.ApplicationSettings["EnableLocation"])
+        {
+          IsolatedStorageSettings.ApplicationSettings["EnableLocation"] = value;
+          NotifyPropertyChanged("UseLocationServices");
+        }
+      }
+    }
+    #endregion
+
     #region Property StationsView
     public CollectionViewSource StationsView
     {
@@ -115,7 +138,7 @@ namespace Telobike.Phone
     }
     private ObservableCollection<Station> _Stations = null;
     #endregion
-    
+
     #region Property CurrentPosition
     public GeoCoordinate CurrentPosition
     {

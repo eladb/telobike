@@ -15,6 +15,8 @@ using System.Collections.ObjectModel;
 using System.Device.Location;
 using Microsoft.Phone.Controls.Maps;
 using System.Windows.Controls.Primitives;
+using System.IO.IsolatedStorage;
+using Microsoft.Phone.Tasks;
 
 namespace Telobike.Phone
 {
@@ -122,8 +124,9 @@ namespace Telobike.Phone
 
     private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
     {
-      // Start the progress bar
+      ShowLocationPopup();
 
+      // Start the progress bar
       App.ViewModel.LoadStations();
 
       this.map.Center = App.ViewModel.CurrentPosition;
@@ -134,6 +137,28 @@ namespace Telobike.Phone
       pinImage.Stretch = System.Windows.Media.Stretch.None;
       PositionOrigin position = PositionOrigin.Center;
       stationsLayer.AddChild(pinImage, App.ViewModel.CurrentPosition, position);
+    }
+
+    private void ShowLocationPopup()
+    {
+      // Show the popup only if the user has not confirmed the use
+      if (!App.ViewModel.UseLocationServices)
+      {
+        Popup locationServicesPopup = new Popup();
+
+        LocationServicesPopup popupContent = new LocationServicesPopup();
+        locationServicesPopup = new Popup();
+        locationServicesPopup.Opacity = 1.0;
+        locationServicesPopup.VerticalOffset = 0;
+        locationServicesPopup.HorizontalOffset = 0;
+        locationServicesPopup.Child = popupContent;
+        locationServicesPopup.IsOpen = true;
+        locationServicesPopup.Closed += (s1, e1) =>
+        {
+          // Add you code here to do something
+          // when the Popup is closed
+        };
+      }
     }
 
     private void stationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -154,6 +179,14 @@ namespace Telobike.Phone
       {
         buyNowScreen.IsOpen = false;
       }
+    }
+
+    private void mailToDeveloper_Tap(object sender, GestureEventArgs e)
+    {
+      new EmailComposeTask { 
+          Subject = "Privacy Qeustion",
+          To = "bursteg@hotmail.com"
+      }.Show();
     }
   }
 }

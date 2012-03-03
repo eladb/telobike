@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Telobike.Phone.LocationServicesPopup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+             Height="430" Width="480"
+    >
+
+  <StackPanel x:Name="LayoutRoot" Margin="10" Background="Black">
+    <TextBlock Text="Privacy Policy" Margin="10" Style="{StaticResource PhoneTextTitle2Style}"/>
+    <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}">
+      <Run>
+        tel-o-bike uses your current location to show the nearest bike station and improve your experience. 
+        </Run>
+      <LineBreak />
+      <LineBreak />
+      <Run>
+        Your privacy is important to us. Your location is not stored and shared.
+        You may disable Location Services in the settings page. 
+        </Run>
+      <LineBreak />
+      <LineBreak />
+      <Run>
+        If you have questions, contact bursteg@hotmail.com.
+      </Run>
+    </TextBlock>
+    <StackPanel Orientation="Horizontal">
+      <Button Width="200" Content="Close" Click="Button_Click"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>
