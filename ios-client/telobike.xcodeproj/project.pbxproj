@@ -36,7 +36,6 @@
 		040ADD1113A3B6B1002784A1 /* greenbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD0F13A3B6B1002784A1 /* greenbox@2x.png */; };
 		040ADD1413A3B9DC002784A1 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 040ADD1213A3B9DC002784A1 /* button.png */; };
 		040ADD1813A3BAFB002784A1 /* NavigateToStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 040ADD1713A3BAFB002784A1 /* NavigateToStation.m */; };
-		04746C5B1374990B00D9CBDA /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04746C5A1374990B00D9CBDA /* libMapView.a */; };
 		0481E44F1396311B0046C4D1 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E44E1396311B0046C4D1 /* City.m */; };
 		0481E4581396351A0046C4D1 /* ASIHTTPRequest+Telobike.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E4571396351A0046C4D1 /* ASIHTTPRequest+Telobike.m */; };
 		0481E45B139635AB0046C4D1 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E45A139635AB0046C4D1 /* Globals.m */; };
@@ -198,30 +197,6 @@
 		F4F9B75E145CADC3007D75F4 /* FeedbackOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		04E5CB3F138B13C70056BE73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 17F31EFA1331050A00122B16;
-			remoteInfo = MapView;
-		};
-		04E5CB41138B13C70056BE73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 17157D87133BBC8300E28941;
-			remoteInfo = MapViewTests;
-		};
-		04E5CB43138B13C70056BE73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2BF3078F0F8AC5C0007014EE;
-			remoteInfo = "Unit Tests";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		040AAAFB13749689001FF38F /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		040AAAFC13749689001FF38F /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
@@ -247,7 +222,6 @@
 		040AAB1113749689001FF38F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		040AB1B3137496D1001FF38F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		040AB1B5137496D6001FF38F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		040AB1B7137496DC001FF38F /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		040AB1B9137496E5001FF38F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		040AB1BB137496EC001FF38F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		040AB1BD137496F3001FF38F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -271,7 +245,6 @@
 		040ADD1213A3B9DC002784A1 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = telobike/assets/button.png; sourceTree = SOURCE_ROOT; };
 		040ADD1613A3BAFA002784A1 /* NavigateToStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigateToStation.h; sourceTree = "<group>"; };
 		040ADD1713A3BAFB002784A1 /* NavigateToStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigateToStation.m; sourceTree = "<group>"; };
-		04746C5A1374990B00D9CBDA /* libMapView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMapView.a; sourceTree = SOURCE_ROOT; };
 		0481E44D1396311B0046C4D1 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		0481E44E1396311B0046C4D1 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		0481E4561396351A0046C4D1 /* ASIHTTPRequest+Telobike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+Telobike.h"; sourceTree = "<group>"; };
@@ -390,7 +363,6 @@
 		04C905EF1399AD5B007489A0 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		04C905F01399AD5B007489A0 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		04C905F11399AD5D007489A0 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
-		04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = "route-me/MapView/MapView.xcodeproj"; sourceTree = "<group>"; };
 		F4012D4614766FB200EFA21A /* YellowStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowStar.png; path = telobike/assets/YellowStar.png; sourceTree = SOURCE_ROOT; };
 		F4012D4714766FB200EFA21A /* YellowStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowStar@2x.png"; path = "telobike/assets/YellowStar@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D4A1476764900EFA21A /* TimerBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TimerBackground.png; path = telobike/assets/TimerBackground.png; sourceTree = SOURCE_ROOT; };
@@ -496,7 +468,6 @@
 				F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */,
 				F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */,
 				04A733501378AF31000D3A0C /* MessageUI.framework in Frameworks */,
-				04746C5B1374990B00D9CBDA /* libMapView.a in Frameworks */,
 				040AB1C0137496FD001FF38F /* CoreLocation.framework in Frameworks */,
 				040AB1BE137496F3001FF38F /* QuartzCore.framework in Frameworks */,
 				040AB1BC137496EC001FF38F /* libsqlite3.dylib in Frameworks */,
@@ -531,7 +502,6 @@
 		040AAAF913749689001FF38F /* ext */ = {
 			isa = PBXGroup;
 			children = (
-				04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */,
 				F4719BB114763D1B0055443B /* GoogleAnalytics */,
 				04863D8C139B71D800274D50 /* EGOTableViewPullRefresh */,
 				040AB1C11374972D001FF38F /* json-framework */,
@@ -771,12 +741,10 @@
 				F46E1B96145C1D2400038039 /* AudioToolbox.framework */,
 				F452AFDA1451CF85009F3E0F /* libz.dylib */,
 				04A7334F1378AF30000D3A0C /* MessageUI.framework */,
-				04746C5A1374990B00D9CBDA /* libMapView.a */,
 				040AB1BF137496FD001FF38F /* CoreLocation.framework */,
 				040AB1BD137496F3001FF38F /* QuartzCore.framework */,
 				040AB1BB137496EC001FF38F /* libsqlite3.dylib */,
 				040AB1B9137496E5001FF38F /* CFNetwork.framework */,
-				040AB1B7137496DC001FF38F /* libz.1.2.3.dylib */,
 				040AB1B5137496D6001FF38F /* SystemConfiguration.framework */,
 				040AB1B3137496D1001FF38F /* MobileCoreServices.framework */,
 				04954127137495DD00F98DC0 /* UIKit.framework */,
@@ -810,16 +778,6 @@
 				04863DF9139B7AAA00274D50 /* Settings.bundle */,
 			);
 			name = resources;
-			sourceTree = "<group>";
-		};
-		04E5CB30138B13C60056BE73 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				04E5CB40138B13C70056BE73 /* libMapView.a */,
-				04E5CB42138B13C70056BE73 /* MapViewTests.octest */,
-				04E5CB44138B13C70056BE73 /* RM Unit Tests.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		F4012D791476C09B00EFA21A /* list */ = {
@@ -1046,42 +1004,12 @@
 			mainGroup = 04954118137495DD00F98DC0;
 			productRefGroup = 04954124137495DD00F98DC0 /* products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 04E5CB30138B13C60056BE73 /* Products */;
-					ProjectRef = 04E5CB2F138B13C60056BE73 /* MapView.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				04954122137495DD00F98DC0 /* telobike */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		04E5CB40138B13C70056BE73 /* libMapView.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMapView.a;
-			remoteRef = 04E5CB3F138B13C70056BE73 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		04E5CB42138B13C70056BE73 /* MapViewTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MapViewTests.octest;
-			remoteRef = 04E5CB41138B13C70056BE73 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		04E5CB44138B13C70056BE73 /* RM Unit Tests.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "RM Unit Tests.app";
-			remoteRef = 04E5CB43138B13C70056BE73 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		04954121137495DD00F98DC0 /* Resources */ = {

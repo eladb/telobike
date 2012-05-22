@@ -31,8 +31,6 @@
 @interface MapViewController (Private)
 
 - (void)refreshStationsWithError:(BOOL)showError;
-- (void)hideOpenedMarker;
-- (RMMarker*)markerForStation:(Station*)station;
 
 - (void)populateDetails;
 - (void)hideDetailsPaneAnimated:(BOOL)animated;
@@ -84,7 +82,6 @@
     [_myLocationButton release];
     [_detailsPane release];
     [_map release];
-    [_markers release];
     [_annotations release];
     [super dealloc];
 }
@@ -96,7 +93,6 @@
 {
     [super viewDidLoad];
 
-    _markers = [NSMutableDictionary new];
     _annotations = [NSMutableDictionary new];
 
     [_navigateToStationButton setTitle:NSLocalizedString(@"STATION_BUTTON_NAVIGATE", nil) forState:UIControlStateNormal];
@@ -125,16 +121,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     [[Analytics shared] pageViewMap];
-
     [self reloadStations];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self hideOpenedMarker];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -150,16 +143,10 @@
 //  [self hideDetailsPaneAnimated:YES];
 //}
 //
-//- (void)singleTapOnMap:(RMMapView*)map At:(CGPoint)point
-//{
-//    [self hideOpenedMarker];
-//}
 
 - (void)selectStation:(Station*)station
 {
     [self view]; // load nib
-    
-    [self hideOpenedMarker];
     
     if ([station isMyLocation])
     {
@@ -167,15 +154,16 @@
         return;
     }
     
-    [_map selectAnnotation:[self annotationForStation:station] animated:YES];
-    // TODO: move map to show station
+    id <MKAnnotation> ann = [self annotationForStation:station]; 
+    [_map selectAnnotation:ann animated:NO];
 }
 
 #pragma mark IBActions
 
 - (IBAction)showMyLocation:(id)sender
 {
-    [_map setCenterCoordinate:[_map userLocation].coordinate];
+    [_map setCenterCoordinate:[_map userLocation].coordinate animated:YES];
+    [_map deselectAnnotation:[[_map selectedAnnotations] objectAtIndex:0] animated:NO];
 }
 
 - (IBAction)refresh:(id)sender
@@ -212,8 +200,6 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-                                   
-    
 }
 
 #pragma mark - List
@@ -274,18 +260,14 @@
     [_map setCenterCoordinate:a.coordinate animated:YES];
 }
 
-@end
-
-@implementation RMMarker (Station)
-
-- (void)setStation:(Station*)station
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
 {
-    self.data = station;
+    _myLocationButton.hidden = YES;
 }
 
-- (Station*)station
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    return (Station*)self.data;
+    _myLocationButton.hidden = NO;
 }
 
 @end
@@ -294,25 +276,12 @@
 
 @implementation MapViewController (Private)
 
-- (void)hideOpenedMarker
-{
-    for (id <MKAnnotation> a in [_map selectedAnnotations]) {
-        [_map deselectAnnotation:a animated:NO];
-    }
-}
-
-- (RMMarker*)markerForStation:(Station*)station
-{
-    return [_markers objectForKey:[station sid]];
-}
-
 - (void)hideDetailsPaneAnimated:(BOOL)animated
 {
     if (animated) [UIView beginAnimations:nil context:nil];
     _detailsPane.frame = CGRectMake(_detailsPane.frame.origin.x, _map.frame.origin.y - _detailsPane.frame.size.height, _detailsPane.frame.size.width, _detailsPane.frame.size.height);
     _detailsPane.hidden = NO;
     if (animated) [UIView commitAnimations];
-//    [self hideOpenedMarker];
 }
 
 - (UIImage*)imageForState:(AmountState)state

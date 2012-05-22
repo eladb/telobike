@@ -13,7 +13,6 @@
 @protocol MapViewControllerDelegate;
 
 @interface MapViewController : UIViewController <UISearchBarDelegate, MKMapViewDelegate> {
-    NSMutableDictionary* _markers;
     NSMutableDictionary* _annotations;
 }
 
