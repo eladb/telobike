@@ -18,9 +18,3 @@
 	path = ios-client/ext/json-framework
 	url = https://github.com/stig/json-framework.git
 
-[submodule "ios-client/ext/route-me"]
-	path = ios-client/ext/route-me
-	url = https://github.com/route-me/route-me.git
-
-
-
