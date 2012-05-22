@@ -7,21 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RMMapView.h"
+#import <MapKit/MapKit.h>
 #import "Station.h"
 
-@class RMMarker;
 @protocol MapViewControllerDelegate;
 
-@interface MapViewController : UIViewController <RMMapViewDelegate, UISearchBarDelegate> {
-    RMMarker* _openMarker;
-    RMMarker* _myLocation;
+@interface MapViewController : UIViewController <UISearchBarDelegate, MKMapViewDelegate> {
     NSMutableDictionary* _markers;
+    NSMutableDictionary* _annotations;
 }
 
 @property (nonatomic, assign) id<MapViewControllerDelegate> delegate;
 
-@property (nonatomic, retain) IBOutlet RMMapView* mapView;
+@property (nonatomic, retain) IBOutlet MKMapView* map;
 @property (nonatomic, retain) IBOutlet UIButton* myLocationButton;
 
 // details pane
@@ -57,3 +55,10 @@
 
 @end
 
+@interface StationAnnotation : NSObject <MKAnnotation>
+
+@property (nonatomic, retain) Station* station;
+
+- (id)initWithStation:(Station*)s;
+
+@end

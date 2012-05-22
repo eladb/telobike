@@ -169,6 +169,7 @@
 		F4719BD614766C3E0055443B /* YellowStarButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BD214766C3E0055443B /* YellowStarButton@2x.png */; };
 		F47DF9D014531812005DCA1B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DF9CE14531812005DCA1B /* TimerViewController.m */; };
 		F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47DF9CF14531812005DCA1B /* TimerViewController.xib */; };
+		F4A90465156947E70072FF97 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A90464156947E70072FF97 /* MapKit.framework */; };
 		F4A994EE146F2E9E009F03F2 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A994ED146F2E9E009F03F2 /* Favorites.m */; };
 		F4BA7F211473E7CA00730050 /* StationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */; };
 		F4C6A55F1451DD2500732558 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55D1451DD2500732558 /* map.png */; };
@@ -440,6 +441,7 @@
 		F47DF9CD14531812005DCA1B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		F47DF9CE14531812005DCA1B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		F47DF9CF14531812005DCA1B /* TimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerViewController.xib; sourceTree = "<group>"; };
+		F4A90464156947E70072FF97 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F4A994EC146F2E9E009F03F2 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
 		F4A994ED146F2E9E009F03F2 /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
 		F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationTableViewCell.xib; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A90465156947E70072FF97 /* MapKit.framework in Frameworks */,
 				F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */,
 				F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */,
 				04A733501378AF31000D3A0C /* MessageUI.framework in Frameworks */,
@@ -779,6 +782,7 @@
 				04954127137495DD00F98DC0 /* UIKit.framework */,
 				04954129137495DD00F98DC0 /* Foundation.framework */,
 				0495412B137495DD00F98DC0 /* CoreGraphics.framework */,
+				F4A90464156947E70072FF97 /* MapKit.framework */,
 			);
 			name = frameworks;
 			sourceTree = "<group>";
