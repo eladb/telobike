@@ -51,6 +51,7 @@ typedef enum {
 @property (nonatomic, readonly) AmountState bikeState;
 
 @property (nonatomic, readonly) UIImage* markerImage;
+@property (nonatomic, readonly) UIImage* selectedMarkerImage;
 @property (nonatomic, readonly) UIImage* listImage;
 
 @property (nonatomic, readonly) NSArray* tags;

@@ -11,22 +11,11 @@
 #import "MapViewController.h"
 #import "City.h"
 #import "StationList.h"
-#import "RMMarker.h"
-#import "RMMarkerManager.h"
-#import "RMMapContents.h"
-#import "RMProjection.h"
 #import "StationTableViewCell.h"
-#import "RMYahooMapSource.h"
 #import "Utils.h"
 #import "ReportProblem.h"
 #import "NavigateToStation.h"
 #import "Analytics.h"
-
-@interface RMMarker (Station)
-
-@property (nonatomic, retain) Station* station;
-
-@end
 
 @interface MapViewController (Private)
 
@@ -246,18 +235,18 @@
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
     StationAnnotation* a = (StationAnnotation*) view.annotation;
-    UIImage* image = a.station.markerImage;
-    view.image = image;
+    view.image = a.station.markerImage;
     [self hideDetailsPaneAnimated:YES];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     StationAnnotation* a = (StationAnnotation*) view.annotation;
-    UIImage* image = [UIImage imageNamed:@"SelectedMarker.png"];
-    view.image = image;
+    view.image = a.station.selectedMarkerImage;
     [self showDetailsPane];
-    [_map setCenterCoordinate:a.coordinate animated:YES];
+    
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(a.coordinate.latitude + 0.0005, a.coordinate.longitude);
+    [_map setCenterCoordinate:coord animated:YES];
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error

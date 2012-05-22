@@ -39,12 +39,82 @@ static const NSInteger kMarginalBikeAmount = 3;
 @synthesize availSpaceColor;
 @synthesize availBikeColor;
 @synthesize markerImage;
+@synthesize selectedMarkerImage;
 @synthesize listImage;
 @synthesize tags;
 @synthesize address;
 @synthesize sid;
 @synthesize isMyLocation;
 @synthesize distance;
+
+static NSDictionary* selectedMarkerImages;
+
++ (UIImage*)imageWithNameFormat:(NSString*)fmt state:(StationState)state
+{
+    NSString* name = nil;
+    
+    switch (state) {
+        case StationOK:
+            name = @"Green";
+            break;
+            
+        case StationEmpty:
+            name = @"RedEmpty";
+            break;
+            
+        case StationFull:
+            name = @"RedFull";
+            break;
+            
+        case StationInactive:
+            name = @"Gray";
+            break;
+            
+        case StationMarginal:
+            name = @"Yellow";
+            break;
+            
+        case StationMarginalFull:
+            name = @"YellowFull";
+            break;
+            
+        case StationUnknown:
+        default:
+            name = @"Black";
+            break;
+    }
+    
+    return [UIImage imageNamed:[NSString stringWithFormat:fmt, name]];    
+}
+
++ (UIImage*)markerImageForState:(StationState)state
+{
+    return [Station imageWithNameFormat:@"%@.png" state:state];
+}
+
++ (UIImage*)selectedMarkerImageForState:(StationState)state
+{
+    static NSMutableDictionary* cache = NULL;
+    
+    if (!cache) {
+        cache = [NSMutableDictionary new];
+    }
+    
+    NSNumber* key = [NSNumber numberWithInt:state];
+    UIImage* cachedImage = [cache objectForKey:key];
+    if (!cachedImage) {
+        UIImage* inner = [Station imageWithNameFormat:@"%@.png" state:state];
+        UIImage* overlay = [UIImage imageNamed:@"SelectedMarker.png"];
+        UIGraphicsBeginImageContextWithOptions(overlay.size, NO, 0.0f);
+        [overlay drawAtPoint:CGPointMake(0.0f, 0.0f)];
+        [inner drawAtPoint:CGPointMake(8.5f, 8.5f) blendMode:kCGBlendModeOverlay alpha:1.0];
+        cachedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [cache setObject:cachedImage forKey:key];
+    }
+    
+    return cachedImage;
+}
 
 - (void)dealloc
 {
@@ -58,6 +128,7 @@ static const NSInteger kMarginalBikeAmount = 3;
     [availSpaceColor release];
     [availBikeColor release];
     [markerImage release];
+    [selectedMarkerImage release];
     [listImage release];
     [tags release];
     [address release];
@@ -109,8 +180,9 @@ static const NSInteger kMarginalBikeAmount = 3;
         }
         
         // load images for list and markers
-        markerImage = [[self imageWithNameFormat:@"%@.png"] retain];
-        listImage = [[self imageWithNameFormat:@"%@Menu.png"] retain];
+        listImage = [[Station imageWithNameFormat:@"%@Menu.png" state:[self state]] retain];
+        markerImage = [[Station markerImageForState:[self state]] retain];
+        selectedMarkerImage = [[Station selectedMarkerImageForState:[self state]] retain];
 
         isMyLocation = [sid isEqualToString:@"0"];
         if (isMyLocation) 
@@ -181,40 +253,7 @@ static const NSInteger kMarginalBikeAmount = 3;
 
 - (UIImage*)imageWithNameFormat:(NSString*)fmt
 {
-    NSString* name = nil;
-
-    switch ([self state]) {
-        case StationOK:
-            name = @"Green";
-            break;
-            
-        case StationEmpty:
-            name = @"RedEmpty";
-            break;
-
-        case StationFull:
-            name = @"RedFull";
-            break;
-
-        case StationInactive:
-            name = @"Gray";
-            break;
-
-        case StationMarginal:
-            name = @"Yellow";
-            break;
-            
-        case StationMarginalFull:
-            name = @"YellowFull";
-            break;
-
-        case StationUnknown:
-        default:
-            name = @"Black";
-            break;
-    }
-    
-    return [UIImage imageNamed:[NSString stringWithFormat:fmt, name]];
+    return [Station imageWithNameFormat:fmt state:[self state]];
 }
 
 @end
