@@ -47,8 +47,6 @@ static const NSInteger kMarginalBikeAmount = 3;
 @synthesize isMyLocation;
 @synthesize distance;
 
-static NSDictionary* selectedMarkerImages;
-
 + (UIImage*)imageWithNameFormat:(NSString*)fmt state:(StationState)state
 {
     NSString* name = nil;
@@ -95,10 +93,7 @@ static NSDictionary* selectedMarkerImages;
 + (UIImage*)selectedMarkerImageForState:(StationState)state
 {
     static NSMutableDictionary* cache = NULL;
-    
-    if (!cache) {
-        cache = [NSMutableDictionary new];
-    }
+    if (!cache) cache = [NSMutableDictionary new];
     
     NSNumber* key = [NSNumber numberWithInt:state];
     UIImage* cachedImage = [cache objectForKey:key];
@@ -152,7 +147,7 @@ static NSDictionary* selectedMarkerImages;
         address     = [[dict localizedStringForKey:@"address"] retain];
         availBike   = [[dict objectForKey:@"available_bike"] intValue];
         availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
-
+        
         coords = CLLocationCoordinate2DMake([self latitude], [self longitude]);
         freshness = [lastUpdate timeIntervalSinceNow];
         isOnline = lastUpdate != nil && freshness < kFreshnessTimeInterval;
@@ -178,7 +173,7 @@ static NSDictionary* selectedMarkerImages;
             if (availSpace == 0) availSpaceColor = [[UIColor redColor] retain];
             else if (availSpace <= kMarginalBikeAmount) availSpaceColor = [[UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0] retain];
         }
-        
+                
         // load images for list and markers
         listImage = [[Station imageWithNameFormat:@"%@Menu.png" state:[self state]] retain];
         markerImage = [[Station markerImageForState:[self state]] retain];

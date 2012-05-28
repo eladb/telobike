@@ -27,7 +27,7 @@
 - (void)reloadStations;
 - (Station*)selectedStation;
 - (StationAnnotation*)annotationForStation:(Station*)s;
-
+- (void)updateAnnotationView:(MKAnnotationView*)view forAnnotation:(id <MKAnnotation>)annotation;
 - (void)renderFavoriteButton;
 
 @end
@@ -75,13 +75,14 @@
     [super dealloc];
 }
 
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    _map.touchDelegate = self;
+    
     _annotations = [NSMutableDictionary new];
 
     [_navigateToStationButton setTitle:NSLocalizedString(@"STATION_BUTTON_NAVIGATE", nil) forState:UIControlStateNormal];
@@ -90,10 +91,11 @@
     _inactiveStationLabel.text = NSLocalizedString(@"Inactive station", nil);
     
     self.navigationItem.title = NSLocalizedString(@"Map", @"title of map view");
-    
-    //self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:
+                                               [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease],
+                                               [[[MKUserTrackingBarButtonItem alloc] initWithMapView:self.map] autorelease],
+                                               nil];
     _myLocationButton.hidden = YES;
-//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"List", nil) style:UIBarButtonItemStylePlain target:self action:@selector(openList:)] autorelease];
     
     MKCoordinateRegion region;
     region.center = [City instance].cityCenter.coordinate;
@@ -103,7 +105,6 @@
     _map.showsUserLocation = YES;
     
     [self reloadStations];
-
     [self hideDetailsPaneAnimated:NO];
 }
 
@@ -124,22 +125,19 @@
     return YES;
 }
 
-#pragma mark RMMapViewDelegate
-
-//TODO:
-//- (void) beforeMapMove: (RMMapView*) map
-//{
-//  [self hideDetailsPaneAnimated:YES];
-//}
-//
+- (void)deselectStation
+{
+    [_map deselectAnnotation:[[_map selectedAnnotations] objectAtIndex:0] animated:NO];
+}
 
 - (void)selectStation:(Station*)station
 {
     [self view]; // load nib
     
-    if ([station isMyLocation])
+    if (!station || [station isMyLocation])
     {
-        [self showMyLocation:nil];
+        [self deselectStation];
+        [_map setUserTrackingMode:MKUserTrackingModeFollow];
         return;
     }
     
@@ -148,12 +146,6 @@
 }
 
 #pragma mark IBActions
-
-- (IBAction)showMyLocation:(id)sender
-{
-    [_map setCenterCoordinate:[_map userLocation].coordinate animated:YES];
-    [_map deselectAnnotation:[[_map selectedAnnotations] objectAtIndex:0] animated:NO];
-}
 
 - (IBAction)refresh:(id)sender
 {
@@ -191,13 +183,6 @@
     }
 }
 
-#pragma mark - List
-
-- (void)openList:(id)sender
-{
-    [_delegate mapViewControllerDidSelectList:self];
-}
-
 #pragma mark - Search
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -217,35 +202,43 @@
 {
     MKAnnotationView* view = [mapView dequeueReusableAnnotationViewWithIdentifier:@"Station"];
     if (!view) {
-        view = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil] autorelease];
-        view.centerOffset = CGPointMake(12.0, -18.0);
-    }
-
-    // use default view for user location
-    if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        return nil;
+        view = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Station"] autorelease];
+        view.centerOffset = CGPointMake(6.0, -18.0);
     }
     
-    StationAnnotation* a = (StationAnnotation*)annotation;
-    UIImage* image = a.station.markerImage;
-    view.image = image;
+    // only if this is a station annotation
+    if (![annotation isKindOfClass:[StationAnnotation class]]) {
+        return nil;
+    }    
+    
+    [self updateAnnotationView:view forAnnotation:annotation];
     return view;
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
+    if (![view.annotation isKindOfClass:[StationAnnotation class]]) {
+        return;
+    }
+    
     StationAnnotation* a = (StationAnnotation*) view.annotation;
-    view.image = a.station.markerImage;
+    a.selected = NO;
+    [self updateAnnotationView:view forAnnotation:a];
     [self hideDetailsPaneAnimated:YES];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    if (![view.annotation isKindOfClass:[StationAnnotation class]]) {
+        return;
+    }
+
     StationAnnotation* a = (StationAnnotation*) view.annotation;
-    view.image = a.station.selectedMarkerImage;
+    a.selected = YES;
+    [self updateAnnotationView:view forAnnotation:a];
     [self showDetailsPane];
     
-    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(a.coordinate.latitude + 0.0005, a.coordinate.longitude);
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(a.coordinate.latitude, a.coordinate.longitude);
     [_map setCenterCoordinate:coord animated:YES];
 }
 
@@ -259,11 +252,29 @@
     _myLocationButton.hidden = NO;
 }
 
+- (void)mapViewWillMove:(MKMapView *)mapView
+{
+    [self deselectStation];
+}
+
 @end
 
 #pragma mark - 
 
 @implementation MapViewController (Private)
+
+- (void)updateAnnotationView:(MKAnnotationView*)view forAnnotation:(id <MKAnnotation>)annotation
+{
+    StationAnnotation* a = (StationAnnotation*)annotation;
+    view.annotation = annotation;
+    
+    if (a.selected) {
+        view.image = a.station.selectedMarkerImage;
+    }
+    else {
+        view.image = a.station.markerImage;
+    }
+}
 
 - (void)hideDetailsPaneAnimated:(BOOL)animated
 {
@@ -331,6 +342,7 @@
 {
     StationAnnotation* ann = (StationAnnotation*) [[_map selectedAnnotations] objectAtIndex:0];
     if (!ann) return nil;
+    if (![ann isKindOfClass:[StationAnnotation class]]) return nil;
     
     return ann.station;
 }
@@ -354,6 +366,14 @@
         [_annotations setObject:ann forKey:s.sid];
         [_map addAnnotation:ann];
     }
+    else {
+        ann.station = s;
+        MKAnnotationView* view = [_map viewForAnnotation:ann];
+        if (view) {  
+            [self updateAnnotationView:view forAnnotation:ann];
+        }
+    }
+    
     return ann;
 }
 
@@ -398,6 +418,7 @@
 @implementation StationAnnotation
 
 @synthesize station;
+@synthesize selected;
 
 - (id)initWithStation:(Station*)s;
 {

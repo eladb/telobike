@@ -166,6 +166,7 @@
 		F4719BD414766C3E0055443B /* WhiteStarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BD014766C3E0055443B /* WhiteStarButton.png */; };
 		F4719BD514766C3E0055443B /* YellowStarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BD114766C3E0055443B /* YellowStarButton.png */; };
 		F4719BD614766C3E0055443B /* YellowStarButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BD214766C3E0055443B /* YellowStarButton@2x.png */; };
+		F47D5F0E156C03EC005BC5B3 /* MKMapViewWithTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = F47D5F0D156C03EC005BC5B3 /* MKMapViewWithTouch.m */; };
 		F47DF9D014531812005DCA1B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47DF9CE14531812005DCA1B /* TimerViewController.m */; };
 		F47DF9D114531812005DCA1B /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47DF9CF14531812005DCA1B /* TimerViewController.xib */; };
 		F4A90465156947E70072FF97 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A90464156947E70072FF97 /* MapKit.framework */; };
@@ -410,6 +411,8 @@
 		F4719BD014766C3E0055443B /* WhiteStarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WhiteStarButton.png; path = telobike/assets/WhiteStarButton.png; sourceTree = SOURCE_ROOT; };
 		F4719BD114766C3E0055443B /* YellowStarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowStarButton.png; path = telobike/assets/YellowStarButton.png; sourceTree = SOURCE_ROOT; };
 		F4719BD214766C3E0055443B /* YellowStarButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowStarButton@2x.png"; path = "telobike/assets/YellowStarButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		F47D5F0C156C03EC005BC5B3 /* MKMapViewWithTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapViewWithTouch.h; sourceTree = "<group>"; };
+		F47D5F0D156C03EC005BC5B3 /* MKMapViewWithTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapViewWithTouch.m; sourceTree = "<group>"; };
 		F47DF9CD14531812005DCA1B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		F47DF9CE14531812005DCA1B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		F47DF9CF14531812005DCA1B /* TimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerViewController.xib; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 				F4F9B75D145CADC3007D75F4 /* FeedbackOptions.m */,
 				F4012D6B1476B92600EFA21A /* TabBarController.h */,
 				F4012D6C1476B92700EFA21A /* TabBarController.m */,
+				F47D5F0C156C03EC005BC5B3 /* MKMapViewWithTouch.h */,
+				F47D5F0D156C03EC005BC5B3 /* MKMapViewWithTouch.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1200,6 +1205,7 @@
 				F4719BBA147642780055443B /* Analytics.m in Sources */,
 				F4012D691476A6FA00EFA21A /* MyLocationTableViewCell.m in Sources */,
 				F4012D6D1476B92800EFA21A /* TabBarController.m in Sources */,
+				F47D5F0E156C03EC005BC5B3 /* MKMapViewWithTouch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

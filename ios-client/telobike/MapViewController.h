@@ -9,16 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "Station.h"
+#import "MKMapViewWithTouch.h"
 
 @protocol MapViewControllerDelegate;
 
-@interface MapViewController : UIViewController <UISearchBarDelegate, MKMapViewDelegate> {
+@interface MapViewController : UIViewController <UISearchBarDelegate, MKMapViewDelegate, MKMapViewWithTouchDelegate> {
     NSMutableDictionary* _annotations;
 }
 
 @property (nonatomic, assign) id<MapViewControllerDelegate> delegate;
 
-@property (nonatomic, retain) IBOutlet MKMapView* map;
+@property (nonatomic, retain) IBOutlet MKMapViewWithTouch* map;
 @property (nonatomic, retain) IBOutlet UIButton* myLocationButton;
 
 // details pane
@@ -37,7 +38,7 @@
 @property (nonatomic, retain) IBOutlet UISearchBar* searchBar;
 
 - (void)selectStation:(Station*)station;
-- (IBAction)showMyLocation:(id)sender;
+
 - (IBAction)refresh:(id)sender;
 
 // station actions
@@ -56,6 +57,7 @@
 
 @interface StationAnnotation : NSObject <MKAnnotation>
 
+@property (nonatomic, assign) BOOL selected;
 @property (nonatomic, retain) Station* station;
 
 - (id)initWithStation:(Station*)s;
