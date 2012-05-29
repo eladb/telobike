@@ -29,5 +29,4 @@ server.get('/tlv/stations/:id', function(req, res) {
 
 server.use(express.static(path.join(__dirname, 'public')));
 
-server.listen(5000);
-
+server.listen(process.env.PORT || 5000);
