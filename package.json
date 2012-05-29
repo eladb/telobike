@@ -1,0 +1,23 @@
+{
+  "author": "Elad Ben-Israel",
+  "name": "telobike",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/eladb/telobike.git"
+  },
+  "engines": {
+    "node": "~0.6.10"
+  },
+  "dependencies": {
+    "express": "*",
+    "async": "*",
+    "jsdom": "*",
+    "memory-cache": "*",
+    "memstream": "*",
+    "mkdirp": "*",
+    "request": "*"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
