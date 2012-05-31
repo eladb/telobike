@@ -29,6 +29,7 @@ $(function() {
           s.online = !!s.last_update;
           s.active = !s.online || s.available_bike > 0 || s.available_spaces > 0;
           s.status = determine_status(s);
+          s.last_update_label = prettyDate(s.last_update);
   
           if (current_location) {
             var d = calculate_distance([ s.latitude, s.longitude ], current_location);

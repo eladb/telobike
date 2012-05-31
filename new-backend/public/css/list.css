@@ -1,3 +1,17 @@
 .status_icon {
   height: 40px;
 }
+
+.tabbar .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+.tabbar .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+
+#list     .ui-icon { background: url(../img/navbar_list.png)     50% 50% no-repeat; background-size: 20px 20px; }
+#map      .ui-icon { background: url(../img/navbar_map.png)      50% 50% no-repeat; background-size: 27px 23px;  }
+#settings .ui-icon { background: url(../img/navbar_settings.png) 50% 50% no-repeat; background-size: 24px 24px; }
+
+
+.last_update {
+  color: gray;
+  font-size: x-small;
+
+}

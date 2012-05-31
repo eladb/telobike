@@ -8,22 +8,30 @@
   <script src="js/jquery-1.7.2.min.js"></script>
   <script src="js/jquery.mobile-1.1.0.min.js"></script>
   <script src="js/mustache.js"></script>
+  <script src="js/pretty.js"></script>
   <script src="js/list.js"></script>
 </head> 
 <body> 
 
 <div data-role="page">
 
-  <div data-role="header">
+  <div data-role="header" data-position='fixed'>
     <h1>Telobike</h1>
   </div>
 
   <div data-role="content"> 
-
     <ul data-role="listview" id='stations'></ul>
-
   </div>
 
+  <div data-role='footer' data-position='fixed'>
+    <div data-role="navbar" class='tabbar'>
+      <ul>
+        <li><a href="#" id='list' data-icon='custom'>List</a></li>
+        <li><a href="#" id='map' data-icon='custom'>Map</a></li>
+        <li><a href="#" id='settings' data-icon='custom'>Settings</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <script id="tmpl-station" type="text/template">
@@ -32,6 +40,7 @@
       <img src="img/list_{{status}}.png" alt="{{status}}">
       <h3>{{name}}</h3>
       <p>{{available_bike}} bikes | {{available_spaces}} spaces</p>
+      <p class='last_update'>Updated {{last_update_label}}</p>
       <span class="ui-li-count">{{distance_label}}</span>
     </a>
   </li>
