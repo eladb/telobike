@@ -13,9 +13,8 @@
 </head> 
 <body> 
 
-<div data-role="page">
-
-  <div data-role="header" data-position='fixed'>
+<div data-role="page" id='list'>
+  <div data-role="header" data-position='fixed' data-id='header'>
     <h1>Telobike</h1>
   </div>
 
@@ -23,16 +22,54 @@
     <ul data-role="listview" id='stations'></ul>
   </div>
 
-  <div data-role='footer' data-position='fixed'>
+  <footer data-role='footer' data-position='fixed' data-id='footer'>
     <div data-role="navbar" class='tabbar'>
       <ul>
-        <li><a href="#" id='list' data-icon='custom'>List</a></li>
-        <li><a href="#" id='map' data-icon='custom'>Map</a></li>
-        <li><a href="#" id='settings' data-icon='custom'>Settings</a></li>
+        <li><a href="#list" data-icon='custom' class='navbar-list ui-btn-active ui-state-persist'>List</a></li>
+        <li><a href="#map" data-icon='custom' class='navbar-map'>Map</a></li>
+        <li><a href="#settings" data-icon='custom' class='navbar-settings'>Settings</a></li>
       </ul>
     </div>
-  </div>
+  </footer>
 </div>
+
+<div data-role='page' id='map'>
+  <div data-role="header" data-position='fixed' data-id='header'>
+    <h1>Telobike</h1>
+  </div>
+  <div data-role="content"> 
+    <h2>Hello map</h2>
+  </div>
+  <footer data-role='footer' data-position='fixed' data-id='footer'>
+    <div data-role="navbar" class='tabbar'>
+      <ul>
+        <li><a href="#list" data-icon='custom' class='navbar-list'>List</a></li>
+        <li><a href="#map" data-icon='custom' class='navbar-map ui-btn-active ui-state-persist'>Map</a></li>
+        <li><a href="#settings" data-icon='custom' class='navbar-settings'>Settings</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+
+
+<div data-role='page' id='settings'>
+  <div data-role="header" data-position='fixed' data-id='header'>
+    <h1>Telobike</h1>
+  </div>
+  <div data-role="content"> 
+    <h2>Settings</h2>
+  </div>
+  <footer data-role='footer' data-position='fixed' data-id='footer'>
+    <div data-role="navbar" class='tabbar'>
+      <ul>
+        <li><a href="#list" data-icon='custom' class='navbar-list'>List</a></li>
+        <li><a href="#map" data-icon='custom' class='navbar-map'>Map</a></li>
+        <li><a href="#settings" data-icon='custom' class='navbar-settings ui-btn-active ui-state-persist'>Settings</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+
 
 <script id="tmpl-station" type="text/template">
   <li>
@@ -41,7 +78,9 @@
       <h3>{{name}}</h3>
       <p>{{available_bike}} bikes | {{available_spaces}} spaces</p>
       <p class='last_update'>Updated {{last_update_label}}</p>
+      {{#distance_label}}
       <span class="ui-li-count">{{distance_label}}</span>
+      {{/distance_label}}
     </a>
   </li>
 </script>

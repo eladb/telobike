@@ -14,7 +14,18 @@ if (typeof(Number.prototype.toDeg) === "undefined") {
   }
 }
 
-$(function() {
+$(document).bind('pageinit', function() {
+  $.mobile.page.prototype.options.domCache = true; // http://jquerymobile.com/test/docs/pages/page-cache.html
+
+  $(document).bind('pagechange', function(e) {
+    console.log('pagechange');
+    var $target = $(e.target);
+    console.log(e);
+    console.log($target);
+    var $footer = $target.find('footer');
+    console.log($footer);
+  })
+
   var current_location = null;
 
   function reload() {
