@@ -3,22 +3,27 @@
   <head> 
   <title>Telobike</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  
+  <!-- apple webapp -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="img/favicon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/favicon.png">
+  <link rel="apple-touch-startup-image" href="img/splash.png">
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <link rel="stylesheet" href="css/list.css" />
-  <script src="js/jquery-1.7.2.min.js"></script>
-  <script src="js/jquery.mobile-1.1.0.min.js"></script>
-  <script src="js/mustache.js"></script>
-  <script src="js/pretty.js"></script>
-  <script src="js/list.js"></script>
+  <link rel="stylesheet" href="app.css" />
+  <script src="app.js" type='text/javascript'></script>
+  <script type='text/javascript'>
+  app.require('index');
+  </script>
+
 </head> 
 <body> 
 
 <div data-role="page" id='list'>
   <div data-role="header" data-position='fixed' data-id='header'>
     <h1>Telobike</h1>
+    <a id='refresh' class="ui-btn-right" data-icon='refresh'>Refresh</a>
   </div>
 
   <div data-role="content"> 
@@ -40,8 +45,8 @@
   <div data-role="header" data-position='fixed' data-id='header'>
     <h1>Telobike</h1>
   </div>
-  <div data-role="content"> 
-    <h2>Hello map</h2>
+  <div data-role="content" id='map_content'>
+    <div id='map_canvas'></div>
   </div>
   <footer data-role='footer' data-position='fixed' data-id='footer'>
     <div data-role="navbar" class='tabbar'>
@@ -76,17 +81,17 @@
 
 <script id="tmpl-station" type="text/template">
   <li>
-    <a href="#">
-      <img src="img/list_{{status}}.png" alt="{{status}}">
-      <h3>{{name}}</h3>
-      <p>{{available_bike}} bikes | {{available_spaces}} spaces</p>
-      <p class='last_update'>Updated {{last_update_label}}</p>
-      {{#distance_label}}
-      <span class="ui-li-count">{{distance_label}}</span>
-      {{/distance_label}}
-    </a>
+    <img src="img/list_{{status}}.png" alt="{{status}}">
+    <h3>{{name}}</h3>
+    <p>{{available_bike}} bikes | {{available_spaces}} spaces</p>
+    <p class='last_update'>Updated {{last_update_label}}</p>
+    {{#distance_label}}
+    <span class="ui-li-count">{{distance_label}}</span>
+    {{/distance_label}}
   </li>
 </script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 
 </body>
 

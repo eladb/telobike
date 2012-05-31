@@ -1,0 +1,20 @@
+{
+    "/" : "./public",
+
+    "/app.css" : [
+        "./public/css/index.styl",
+        "./public/css/jquery.mobile-1.1.0.min.css"
+    ],
+
+    "/app.js" : {
+        "input" : {
+            "module": [ "./public/app/index.js" ],
+            "lib" : [ 
+                "./public/lib/jquery-1.7.2.min.js",
+                "./public/lib/jquery.mobile-1.1.0.min.js",
+                "./public/lib/mustache.js",
+                "./public/lib/pretty.js"
+            ]
+        }
+    }
+}
