@@ -30,3 +30,5 @@ server.get('/tlv/stations/:id', function(req, res) {
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(process.env.port || 5000);
+
+console.log('telobike server started. listening on %s', process.env.port || 5000);
