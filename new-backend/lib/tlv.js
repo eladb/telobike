@@ -55,6 +55,8 @@ module.exports = function() {
       if (use_cache && cached_station) return callback(null, cached_station);
 
       return refresh_list(use_cache, function(err, stations) {
+        if (err) return callback(err);
+        
         var station = stations[id];
         if (!station) return callback(new Error('station ' + id + ' not found'));
 
