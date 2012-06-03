@@ -39,4 +39,6 @@ setInterval(function() {
   stations.refresh();
 }, REFRESH_INTERVAL);
 
+stations.refresh(); // refresh upon start
+
 console.log('telobike server started. listening on %s', process.env.port || 5000);
