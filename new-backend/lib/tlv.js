@@ -83,13 +83,15 @@ module.exports = function() {
 
   function refresh_all(use_cache, callback) {
     var result = {};
-    return refresh_list(true, function(err, stations) {
+    return refresh_list(use_cache, function(err, stations) {
+      if (err) return callback(err);      
       return async.forEach(Object.keys(stations), function(id, cb) {
-        return refresh_station(true, id, function(err, station) {
+        return refresh_station(use_cache, id, function(err, station) {
+          if (err) return cb();
           if (station) result[id] = station;
           return cb();
         });
-      }, function(err) {
+      }, function() {
         return callback(null, result);
       });
     });

@@ -33,7 +33,7 @@ $(document).bind('pageinit', function() {
         s.online = !!s.last_update;
         s.active = !s.online || s.available_bike > 0 || s.available_spaces > 0;
         s.status = determine_status(s);
-        s.last_update_label = prettyDate(s.last_update);
+        s.last_update_label = prettyDate(s.last_update_time);
 
         if (current_location) {
           var d = calculate_distance([ s.latitude, s.longitude ], current_location);
@@ -68,28 +68,28 @@ $(document).bind('pageinit', function() {
   });
 
   $('#refresh').click(function(e) {
-    e.preventDefault();
+    //e.preventDefault();
     reload();
   });
 
   reload();
 
-  function init_map() {
-    var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-    var myOptions = {
-      zoom: 4,
-      center: myLatlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title:"Hello World!"
-    });
-  }
+  // function init_map() {
+  //   var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+  //   var myOptions = {
+  //     zoom: 4,
+  //     center: myLatlng,
+  //     mapTypeId: google.maps.MapTypeId.ROADMAP
+  //   }
+  //   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  //   var marker = new google.maps.Marker({
+  //       position: myLatlng,
+  //       map: map,
+  //       title:"Hello World!"
+  //   });
+  // }
 
-  init_map();
+  // init_map();
 
   // http://www.movable-type.co.uk/scripts/latlong.html
   function calculate_distance(l1, l2) {

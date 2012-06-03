@@ -33,4 +33,10 @@ server.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(process.env.port || 5000);
 
+var REFRESH_INTERVAL = 5 * 60 * 1000; // every 5 minutes
+setInterval(function() {
+  console.log('Refresh stations');
+  stations.refresh();
+}, REFRESH_INTERVAL);
+
 console.log('telobike server started. listening on %s', process.env.port || 5000);
