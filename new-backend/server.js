@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 
 var server = express.createServer();
-
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
 
 var stations = require('./lib/tlv')();
