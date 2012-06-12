@@ -55,6 +55,8 @@ module.exports = function(url, callback) {
       done: function(err, window) {
         if (err) return callback(err);
         else {
+          if (!window.$) return callback(new Error('unable to access jquery'));
+
           // add `close` function to window
           window.$.close = function() {  window.close();  }; 
           return callback(null, window.$);
