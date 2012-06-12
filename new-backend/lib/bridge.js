@@ -17,7 +17,7 @@ function scrape(callback) {
         var now = JSON.stringify(new Date()).replace('T', ' ').replace('Z', '').replace(/\"/g, '');
 
         sandbox.stations = [];
-        sandbox.setMarker = function(lat, lng, sid, name, address, total, slots) {
+        sandbox.setMarker = function(lng, lat, sid, name, address, total, slots) {
           sandbox.stations.push({
             available_bike: parseInt(total - slots).toString(),
             available_spaces: parseInt(slots).toString(),
