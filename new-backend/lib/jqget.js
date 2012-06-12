@@ -2,8 +2,19 @@ var request = require('request');
 var jsdom = require('jsdom');
 var MemoryStream = require('memstream').MemoryStream;
 var zlib = require('zlib');
+var urlparse = require('url').parse;
+var fs = require('fs');
 
 module.exports = function(url, callback) {
+  var purl = urlparse(url);
+  
+  if (purl.protocol === 'file:') {
+    return fs.readFile(purl.path, function(err, body) {
+      if (err) return callback(err);
+      return jsdomize(body, callback);
+    });
+  }
+
   var req = request(url);
 
   req.on('error', function(err) {
@@ -33,15 +44,18 @@ module.exports = function(url, callback) {
     }
 
     output.on('end', function() {
-      return jsdom.env({
-        html: body,
-        scripts: [ 'http://code.jquery.com/jquery-1.5.min.js' ], 
-        done: function(err, window) {
-          if (err) return callback(err);
-          else return callback(null, window.$);
-        }
-      });
-
+      return jsdomize(body, callback);
     });
   });
+
+  function jsdomize(body, callback) {
+    return jsdom.env({
+      html: body,
+      scripts: [ 'http://code.jquery.com/jquery-1.5.min.js' ], 
+      done: function(err, window) {
+        if (err) return callback(err);
+        else return callback(null, window.$);
+      }
+    });
+  }
 }
