@@ -8,15 +8,30 @@ var stations = require('./lib/tlv')();
 
 var bridge = require('./lib/bridge');
 
-function bridge_handler(req, res) {
-  return bridge(function(err, stations) {
+var stations = null;
+
+function read_stations() {
+  console.log('Reading station information from tel-o-fun');
+  return bridge(function(err, updated_stations) {
     if (err) {
-      res.writeHead(500);
-      return res.end(err.toString());
+      console.error(err);
+      return;
     }
 
-    res.send(stations);
+    stations = updated_stations;
   });
+}
+
+setInterval(read_stations, 5000);
+read_stations();
+
+function bridge_handler(req, res) {
+  if (!stations) {
+    res.writeHead(500);
+    return res.end('No stations information from tel-o-fun');
+  }
+
+  return res.send(stations);
 }
 
 server.get('/stations', bridge_handler);
@@ -36,7 +51,7 @@ server.get('/cities/tlv', function(req, res) {
   city.mail_tags = "This problem was reported via telobike";
   city.service_name= "תל-אופן";
   city['service_name.en'] = "Tel-o-Fun";
-  
+
   return res.send(city);
 })
 
