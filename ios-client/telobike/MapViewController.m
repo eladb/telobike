@@ -91,10 +91,17 @@
     _inactiveStationLabel.text = NSLocalizedString(@"Inactive station", nil);
     
     self.navigationItem.title = NSLocalizedString(@"Map", @"title of map view");
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:
-                                               [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease],
-                                               [[[MKUserTrackingBarButtonItem alloc] initWithMapView:self.map] autorelease],
-                                               nil];
+    
+    if ([self.navigationItem respondsToSelector:@selector(setRightBarButtonItems:animated:)]) {
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:
+                                                   [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)] autorelease],
+                                                   [[[MKUserTrackingBarButtonItem alloc] initWithMapView:self.map] autorelease],
+                                                   nil];
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = [[[MKUserTrackingBarButtonItem alloc] initWithMapView:self.map] autorelease];
+    }
+    
     _myLocationButton.hidden = YES;
     
     MKCoordinateRegion region;
@@ -217,6 +224,8 @@
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
+    NSLog(@"deselect: count=%d", mapView.selectedAnnotations.count);
+    
     if (![view.annotation isKindOfClass:[StationAnnotation class]]) {
         return;
     }
@@ -224,11 +233,19 @@
     StationAnnotation* a = (StationAnnotation*) view.annotation;
     a.selected = NO;
     [self updateAnnotationView:view forAnnotation:a];
-    [self hideDetailsPaneAnimated:YES];
+    
+    if (mapView.selectedAnnotations.count == 0) {
+        // on iOS < 5.0, `deselect` will be triggered after `select` was, so we don't want to
+        // hide the details pane (we already showed the new one). In this case, the selectedAnnotations.count
+        // will be 1 at the time of the deselect and thus this will not be called.
+        [self hideDetailsPaneAnimated:YES];
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    NSLog(@"select: count=%d", mapView.selectedAnnotations.count);
+    
     if (![view.annotation isKindOfClass:[StationAnnotation class]]) {
         return;
     }
@@ -254,7 +271,9 @@
 
 - (void)mapViewWillMove:(MKMapView *)mapView
 {
+    
     [self deselectStation];
+    [self hideDetailsPaneAnimated:YES];
 }
 
 @end
