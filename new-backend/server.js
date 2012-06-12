@@ -8,8 +8,8 @@ var stations = require('./lib/tlv')();
 
 var bridge = require('./lib/bridge');
 
-server.get('/tlvbridge', function(req, res) {
-  bridge(function(err, stations) {
+function bridge_handler(req, res) {
+  return bridge(function(err, stations) {
     if (err) {
       res.writeHead(500);
       return res.end(err.toString());
@@ -17,7 +17,10 @@ server.get('/tlvbridge', function(req, res) {
 
     res.send(stations);
   });
-});
+}
+
+server.get('/stations', bridge_handler);
+server.get('/tlv/stations', bridge_handler);
 
 // server.get('/tlv/stations', function(req, res) {
 //   return stations.all(function(err, stations) {
