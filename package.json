@@ -16,7 +16,8 @@
     "memory-cache": "*",
     "memstream": "*",
     "mkdirp": "*",
-    "request": "*"
+    "request": "*",
+    "logule": "0.6.1"
   },
   "devDependencies": {},
   "optionalDependencies": {}

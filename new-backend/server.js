@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var logule = require('logule');
 
 var server = express.createServer();
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
@@ -8,22 +9,60 @@ var stations = require('./lib/tlv')();
 
 var bridge = require('./lib/bridge');
 
-var stations = null;
+var stations = {};
 
-function read_stations() {
-  console.log('Reading station information from tel-o-fun');
-  return bridge(function(err, updated_stations) {
+function read_stations(callback) {
+  callback = callback || function() {};
+  logule.trace('Reading station information from tel-o-fun');
+  return bridge('he', function(err, updated_stations) {
     if (err) {
-      console.error(err);
-      return;
+      logule.error(err);
+      return callback(err);
     }
 
-    stations = updated_stations;
+    for (var sid in updated_stations) {
+      var station = stations[sid];
+      if (!station) stations[sid] = station = {};
+      var updated_station = updated_stations[sid];
+      for (var k in updated_station) {
+        station[k] = updated_station[k];
+      }
+    }
+
+    return callback(null, updated_stations);
+  });
+}
+
+function read_en_stations(callback) {
+  if (typeof callback !== 'function') callback = null;
+  callback = callback || function() {};
+
+  logule.trace('Merging en station names and addresses');
+  
+  return bridge('en', function(err, updated_en_stations) {
+    if (err) { 
+      logule.error(err);
+      return callback(err);
+    }
+
+    for (var sid in updated_en_stations) {
+      var en_station = updated_en_stations[sid];
+      var station = stations[sid];
+      if (!station) station = en_station;
+      station.name_en = en_station.name;
+      station.address_en = en_station.address;
+    }
+
+    return callback(null, updated_en_stations);
   });
 }
 
 setInterval(read_stations, 5000);
-read_stations();
+setInterval(read_en_stations, 30*60*1000); // update en names every 30 minutes
+
+read_stations(function(err) {
+  if (!err) read_en_stations();
+});
 
 function bridge_handler(req, res) {
   if (!stations) {
@@ -31,7 +70,13 @@ function bridge_handler(req, res) {
     return res.end('No stations information from tel-o-fun');
   }
 
-  return res.send(stations);
+  var result = [];
+
+  for (var sid in stations) {
+    result.push(stations[sid]);
+  }
+
+  return res.send(result);
 }
 
 server.get('/', function(req, res) {
@@ -92,4 +137,4 @@ server.listen(process.env.port || 5000);
 
 // stations.refresh(); // refresh upon start
 
-console.log('telobike server started. listening on %s', process.env.port || 5000);
+logule.trace('telobike server started. listening on %s', process.env.port || 5000);
