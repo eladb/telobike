@@ -34,6 +34,9 @@ function bridge_handler(req, res) {
   return res.send(stations);
 }
 
+server.get('/', function(req, res) {
+  return res.redirect('http://itunes.apple.com/us/app/tel-o-bike-tel-aviv-bicycle/id436915919?mt=8');
+});
 server.get('/stations', bridge_handler);
 server.get('/tlv/stations', bridge_handler);
 server.get('/cities/tlv', function(req, res) {
