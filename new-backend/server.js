@@ -22,20 +22,22 @@ function bridge_handler(req, res) {
 server.get('/stations', bridge_handler);
 server.get('/tlv/stations', bridge_handler);
 server.get('/cities/tlv', function(req, res) {
-  return res.send({
-    city: "tlv",
-    city_center: "32.0664,34.7779",
-    city_name: "תל-אביב יפו",
-    city_name.en: "Tel-Aviv",
-    disclaimer: "Yo, the real-time station status is taken directly from the official\nTel-o-Fun website. In cases where the data is not accurate, we recommend sending "feedback about the bike service".\n\nEnjoy and thanks for all your great inputs about the app!\nNir and Elad",
-    // info_url: "http://telobike.citylifeapps.com/static/en/tlv.html",
-    // info_url_he: "http://telobike.citylifeapps.com/static/he/tlv.html",
-    last_update: "2011-06-15 18:47:50.982111",
-    mail: "info@fsm-tlv.com",
-    mail_tags: "This problem was reported via telobike",
-    service_name: "תל-אופן",
-    service_name.en: "Tel-o-Fun"
-  });
+  var city = {};
+
+  city.city = "tlv";
+  city.city_center = "32.0664,34.7779";
+  city.city_name = "תל-אביב יפו";
+  city['city_name.en'] = "Tel-Aviv";
+  city.disclaimer = "Yo, the real-time station status is taken directly from the official\nTel-o-Fun website. In cases where the data is not accurate, we recommend sending \"feedback about the bike service\".\n\nEnjoy and thanks for all your great inputs about the app!\nNir and Elad";
+  city.info_url = "http://telobike.citylifeapps.com/static/en/tlv.html";
+  city.info_url_he = "http://telobike.citylifeapps.com/static/he/tlv.html";
+  city.last_update = "2011-06-15 18:47:50.982111";
+  city.mail = "info@fsm-tlv.com";
+  city.mail_tags = "This problem was reported via telobike";
+  city.service_name= "תל-אופן";
+  city['service_name.en'] = "Tel-o-Fun";
+  
+  return res.send(city);
 })
 
 // server.get('/tlv/stations', function(req, res) {
