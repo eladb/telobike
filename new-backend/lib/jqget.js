@@ -54,7 +54,11 @@ module.exports = function(url, callback) {
       scripts: [ 'http://code.jquery.com/jquery-1.5.min.js' ], 
       done: function(err, window) {
         if (err) return callback(err);
-        else return callback(null, window.$);
+        else {
+          // add `close` function to window
+          window.$.close = function() {  window.close();  }; 
+          return callback(null, window.$);
+        }
       }
     });
   }

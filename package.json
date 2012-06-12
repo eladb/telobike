@@ -16,7 +16,7 @@
     "memory-cache": "*",
     "memstream": "*",
     "mkdirp": "*",
-    "request": "*",
+    "request": "2.9.202",
     "logule": "0.6.1"
   },
   "devDependencies": {},

@@ -60,6 +60,11 @@ function read_en_stations(callback) {
 setInterval(read_stations, 5000);
 setInterval(read_en_stations, 30*60*1000); // update en names every 30 minutes
 
+setInterval(function() {
+  var mb = Math.round(process.memoryUsage().heapTotal / 1024);
+  logule.trace(mb + ' KB');
+}, 2500);
+
 read_stations(function(err) {
   if (!err) read_en_stations();
 });

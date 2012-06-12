@@ -1,6 +1,7 @@
 var jqget = require('./jqget');
 var path = require('path');
 var vm = require('vm');
+var logule = require('logule');
 
 function scrape(lang, callback) {
   // var f = 'file://' + path.join(__dirname, 'out.html');
@@ -36,6 +37,12 @@ function scrape(lang, callback) {
 
         src += 'loadMarkers();';
         vm.runInNewContext(src, sandbox);
+
+        // must close window (memoty leak)
+        // http://stackoverflow.com/questions/5718391/memory-leak-in-node-js-scraper/6891729#6891729
+        $.close();
+
+        logule.trace('Found ' + Object.keys(sandbox.stations).length + ' stations');
 
         return callback(null, sandbox.stations);
       }
