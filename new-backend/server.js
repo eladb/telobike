@@ -1,8 +1,11 @@
 var express = require('express');
 var path = require('path');
 var logule = require('logule');
-
+var cors = require('./lib/cors');
 var server = express.createServer();
+
+server.use(express.methodOverride());
+server.use(cors());
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
 
 var stations = require('./lib/tlv')();
