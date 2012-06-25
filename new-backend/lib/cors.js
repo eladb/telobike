@@ -2,7 +2,7 @@
 module.exports = function() {
   return function(req, res, next) {
 
-    var requestHeaders = req.headers && req.headers['Access-Control-Request-Headers'];
+    var requestHeaders = req.headers && req.headers['access-control-request-headers'];
     var allowHeaders = requestHeaders ? requestHeaders : 'Content-Type, Authorization';
 
     res.header('Access-Control-Allow-Origin', '*');
