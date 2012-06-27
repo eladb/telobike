@@ -1,0 +1,17 @@
+{
+  "author": "",
+  "name": "telobike",
+  "version": "0.0.0",
+  "dependencies": {
+    "uijs": "git+ssh://git@github.com:eladb/uijs",
+    "xui": "*"
+  },
+  "main": "app",
+  "devDependencies": {
+    "uijs-toolchain": "git+ssh://git@github.com:eladb/uijs-devtools"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
