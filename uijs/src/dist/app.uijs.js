@@ -364,6 +364,8 @@ process.binding = function (name) {
 })();
 });
 
+require.define("/package.json",function(require,module,exports,__dirname,__filename,process){module.exports = {}});
+
 require.define("/app.js",function(require,module,exports,__dirname,__filename,process){var uijs = require('uijs');
 var box = uijs.box;
 var defaults = uijs.util.defaults;
@@ -1783,13 +1785,13 @@ function carouselBehavior(spring_left_base, spring_right_base, spring_max_stretc
         moving = true;
         var delta_position = last_touch_position - previous_touch_position;
         var delta_ts = (last_timestamp - previous_touch_timestamp) / 1000; //In seconds
-        if ((last_position > spring_left_base() && delta_position > 0) || (last_position < (spring_right_base) && delta_position < 0)) {
+        if ((last_position > spring_left_base() && delta_position > 0) || (last_position < spring_right_base() && delta_position < 0)) {
           spring = true;
           if (last_position > spring_left_base()) {
             spring_base = spring_left_base();  
           }
           else{
-            spring_base = spring_right_base;
+            spring_base = spring_right_base();
           }
           delta_position = (spring_max_stretch() - ((last_position - spring_base) * calculateDirection(delta_position)) ) / spring_max_stretch() * delta_position; 
         }
@@ -3396,13 +3398,13 @@ function carouselBehavior(spring_left_base, spring_right_base, spring_max_stretc
         moving = true;
         var delta_position = last_touch_position - previous_touch_position;
         var delta_ts = (last_timestamp - previous_touch_timestamp) / 1000; //In seconds
-        if ((last_position > spring_left_base() && delta_position > 0) || (last_position < (spring_right_base) && delta_position < 0)) {
+        if ((last_position > spring_left_base() && delta_position > 0) || (last_position < spring_right_base() && delta_position < 0)) {
           spring = true;
           if (last_position > spring_left_base()) {
             spring_base = spring_left_base();  
           }
           else{
-            spring_base = spring_right_base;
+            spring_base = spring_right_base();
           }
           delta_position = (spring_max_stretch() - ((last_position - spring_base) * calculateDirection(delta_position)) ) / spring_max_stretch() * delta_position; 
         }
@@ -5387,7 +5389,7 @@ xui.extend({
 
 return window.x$; };});
 
-require.define("/.tmp.48590.entry.app.js",function(require,module,exports,__dirname,__filename,process){window.require = require;
+require.define("/.tmp.10403.entry.app.js",function(require,module,exports,__dirname,__filename,process){window.require = require;
 
 // lazy require so that app code will not execute before onload
 Object.defineProperty(window, 'main', {
@@ -5395,5 +5397,5 @@ Object.defineProperty(window, 'main', {
     return require('./app.js');
   }
 });});
-require("/.tmp.48590.entry.app.js");
+require("/.tmp.10403.entry.app.js");
 })();

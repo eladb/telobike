@@ -1,0 +1,14 @@
+{
+  "author": "",
+  "name": "telobike",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/eladb/telobike.git"
+  },
+  "dependencies": {
+      "xui": "*"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
