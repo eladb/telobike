@@ -15,11 +15,12 @@ exports.createModel = function() {
         var stations = JSON.parse(this.responseText);
 
         console.log('Response with ' + stations.length + ' stations');
-        
+
         stations.forEach(function(s) {
           s.location = [ s.latitude, s.longitude ];
           s.status = determine_status(s);
           s.image = 'assets/img/map_' + s.status + '.png';
+          s.list_image = 'assets/img/list_' + s.status + '.png';
           s.center = [ 6.0, -18.0 ];
 
           // These will create a callout:
