@@ -20,7 +20,7 @@
     "logule": "0.6.1"
   },
   "scripts": {
-      "start": "app.js"
+      "start": "server.js"
   },
   "subdomain": "telobike",
   "devDependencies": {},
