@@ -1,5 +1,7 @@
 var x$ = require('xui');
-var EventEmitter = require('uijs').events.EventEmitter;
+var uijs = require('uijs');
+var EventEmitter = uijs.events.EventEmitter;
+var util = uijs.util;
 
 exports.createModel = function() {
 
@@ -20,7 +22,7 @@ exports.createModel = function() {
           s.location = [ s.latitude, s.longitude ];
           s.status = determine_status(s);
           s.image = 'assets/img/map_' + s.status + '.png';
-          s.list_image = 'assets/img/list_' + s.status + '.png';
+          s.list_image = util.loadimage('assets/img/list_' + s.status + '.png');
           s.center = [ 6.0, -18.0 ];
 
           // These will create a callout:

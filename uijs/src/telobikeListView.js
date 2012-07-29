@@ -4,18 +4,22 @@ var scroller = uijs.scroller;
 var box = uijs.box;
 var controls = require('uijs-controls');
 var telobikeListItem = require('./telobikeListItem');
+var telobikeClickedListItem = require('./telobikeClickedListItem');
 var listview = controls.listview;
 
 function stripes() {
   var obj = listview({
     items:[],
-    onCreateItem: telobikeListItem,
+    onBindBoxItem: telobikeListItem,
+    itemHeight:68,
+    width:function(){return this.root().width;},
   });
-   
+
   var model = require('./model').createModel();
 
   model.on('update', function() {
-    obj.items = model.stations;
+
+    obj.items = model.stations;//.slice(0,7);//.sort(function(a,b){ return a.distance - b.distance; });
   });
   
   /*obj.ondraw = function(ctx) {
@@ -40,11 +44,11 @@ function stripes() {
 
 
 
-var s = scroller({
+//var s = scroller({
   //content:stripes(),
-});
+//});
 
-s.content = stripes();
-s.height = 1000;
+//s.content = stripes();
+//s.height = 1000;
 
-module.exports = s;
+module.exports = stripes();
