@@ -6,22 +6,26 @@ var controls = require('uijs-controls');
 var button = controls.button;
 var image = controls.image;
 var label = controls.label;
+var rect = controls.rect;
 
 module.exports = function(data) {
-  var obj = button({
-    //width:function(){return this.root().width;},
-    //height:68,
+  var obj = rect({
+    width : function(){return obj.root().width;},
+    height : 67,
+    color: function(){
+      return (data.clicked) ? 'gray' : 'white';
+     },
+     alpha:function(){
+      return (data.clicked) ? 0.5 : 1;
+     },
   });
-
-  //temp
-  obj.width = function(){return obj.root().width;};
-  obj.height = 67;
 
   var img = image({
     image: util.loadimage(data.list_image),
     x:10,
     y:10,
     adaptSizeAccordingToImage:true,
+    alpha: 1,
   });
 
   var location = label({
@@ -31,6 +35,7 @@ module.exports = function(data) {
     size:14,
     width:100,
     bold:true,
+    alpha: 1,
   });
 
   var bikeStatus = label({
@@ -44,6 +49,7 @@ module.exports = function(data) {
     x:positioning.prev.left(),
     size:14,
     width:50,
+    alpha: 1,
   });
 
   var parkingStatus = label({
@@ -57,13 +63,17 @@ module.exports = function(data) {
     x:positioning.prev.right(20),
     size:14,
     width:50,
+    alpha: 1,
   });
 
   var arrow = image({
-    image: util.loadimage('assets/img/arrow.jpg'),
-    adaptSizeAccordingToImage:true,
+    image: function(){
+      return (data.clicked) ? util.loadimage('assets/img/white_arrow.png'):
+                             util.loadimage('assets/img/arrow.png');
+    },
     y:20,
     x:positioning.parent.right(-40),
+    alpha: 1,
   });
 
   var distance = label({
@@ -73,6 +83,7 @@ module.exports = function(data) {
     size:10,
     color:'gray',
     width:40,
+    alpha: 1,
   });
 
   obj.add(img);
