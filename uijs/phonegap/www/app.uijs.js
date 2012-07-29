@@ -5387,7 +5387,7 @@ xui.extend({
 
 return window.x$; };});
 
-require.define("/.tmp.93412.entry.app.js",function(require,module,exports,__dirname,__filename,process){window.require = require;
+require.define("/.tmp.17960.entry.app.js",function(require,module,exports,__dirname,__filename,process){window.require = require;
 
 // lazy require so that app code will not execute before onload
 Object.defineProperty(window, 'main', {
@@ -5395,5 +5395,5 @@ Object.defineProperty(window, 'main', {
     return require('./app.js');
   }
 });});
-require("/.tmp.93412.entry.app.js");
+require("/.tmp.17960.entry.app.js");
 })();
