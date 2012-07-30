@@ -40,8 +40,8 @@ exports.createModel = function() {
   }
 
   function determine_status(station) {
-    if (station.available_bike === 0) return 'empty';
-    if (station.available_spaces === 0) return 'full';
+    if (station.available_bike === 0 || station.available_bike === '0') return 'empty';
+    if (station.available_spaces === 0 || station.available_spaces === '0') return 'full';
     if (station.available_bike <= 3) return 'hempty';
     if (station.available_spaces <= 3) return 'hfull';
     return 'okay';
