@@ -4,7 +4,7 @@ var scroller = uijs.scroller;
 var box = uijs.box;
 var controls = require('uijs-controls');
 var telobikeListItem = require('./telobikeListItem');
-var telobikeClickedListItem = require('./telobikeClickedListItem');
+//var telobikeClickedListItem = require('./telobikeClickedListItem');
 var listview = controls.listview;
 
 function stripes() {
