@@ -1,94 +1,90 @@
 var uijs = require('uijs');
 var box = uijs.box;
 var util = uijs.util;
-var positioning = uijs.positioning;
 var controls = require('uijs-controls');
 var button = controls.button;
 var image = controls.image;
 var label = controls.label;
 var rect = controls.rect;
+var bind = uijs.bind;
 
 module.exports = function(boxItem) {
-  var backround = rect({
-    width : boxItem.width,
-    height : boxItem.height - 1,
-    color: function(){
-      return (boxItem.data.clicked) ? 'gray' : 'white';
-     },
-     alpha:function(){
-      return (boxItem.data.clicked) ? 0.5 : 1;
-     },
-  });
-
   var img = image({
-    image: function(){ return boxItem.data.list_image;},
+    image: bind(img, 'image', function(){ return boxItem.data.list_image;}),
     x:10,
     y:10,
+    width:47,
+    height:47,
   });
 
+  var textLocationStart = 27;
+    
   var location = label({
-    text:function() { return boxItem.data.name_en; },
-    y:positioning.prev.top(5),
-    x:positioning.prev.right(10),
+    text:bind(location, 'text', function() { return boxItem.data.name_en; }),
+    x:67,
+    y:textLocationStart,
     size:14,
     width:100,
+    height:16.8,
     bold:true,
   });
 
   var bikeStatus = label({
-    text:function(){return "bikes: " +  boxItem.data.available_bike;},
-    color:function(){
+    text:bind(bikeStatus, 'text', function(){return "bikes: " +  boxItem.data.available_bike;}),
+    color:bind(bikeStatus, 'color', function(){
       if(boxItem.data.status === 'empty') return 'red';
       if(boxItem.data.status === 'hempty') return 'orange';
       return 'black';
-    },
-    y:positioning.prev.bottom(5),
-    x:positioning.prev.left(),
+    }),
+    x:67,
+    y:textLocationStart + 20,
     size:14,
     width:50,
+    height:16.8,
   });
 
   var parkingStatus = label({
-    text:function(){return "parking: " +  boxItem.data.available_spaces; },
-    color:function(){
+    text:bind(parkingStatus, 'text', function(){return "parking: " +  boxItem.data.available_spaces; }),
+    color:bind(parkingStatus, 'color', function(){
       if(boxItem.data.status === 'full') return 'red';
       if(boxItem.data.status === 'hfull') return 'orange';
       return 'black';
-    },
-    y:positioning.prev.top(),
-    x:positioning.prev.right(20),
+    }),
+    x:167,
+    y:textLocationStart + 20,
     size:14,
     width:50,
+    height:16.8,
   });
 
   var whiteArrowImage = util.loadimage('assets/img/white_arrow.png');
   var grayArrowImage = util.loadimage('assets/img/arrow.png');
 
   var arrow = image({
-    image: function(){
-      return (boxItem.data.clicked) ? whiteArrowImage : grayArrowImage;
-    },
+    image: grayArrowImage,
+    x: boxItem.width - 45,
     y:20,
-    x:positioning.parent.right(-40),
+    width:20,
+    height:25,
   });
 
   var distance = label({
-    text:function(){return boxItem.data.distance || '100m';},
-    y:positioning.prev.bottom(5),
-    x:positioning.prev.left(-10),
+    text:bind(distance, 'text', function(){return boxItem.data.distance || '100m';}),
+    x:boxItem.width - 50,
+    y:textLocationStart + 30,
     size:10,
-    color:'gray',
     width:40,
+    height:12,
   });
 
   var seperator = rect({
-    height: 1,
     x:0,
     y:boxItem.height - 1,
     width:boxItem.width,
+    height:1,
+    color:'gray',
   });
 
-  boxItem.add(backround);
   boxItem.add(img);
   boxItem.add(location);
   boxItem.add(bikeStatus);
@@ -96,6 +92,5 @@ module.exports = function(boxItem) {
   boxItem.add(arrow);
   boxItem.add(distance);
   boxItem.add(seperator);
-
 };
   

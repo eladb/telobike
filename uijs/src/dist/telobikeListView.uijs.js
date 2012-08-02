@@ -367,57 +367,28 @@ process.binding = function (name) {
 require.define("/package.json",function(require,module,exports,__dirname,__filename,process){module.exports = {}});
 
 require.define("/telobikeListView.js",function(require,module,exports,__dirname,__filename,process){var uijs = require('uijs');
-var positioning = uijs.positioning;
 var scroller = uijs.scroller;
 var box = uijs.box;
 var controls = require('uijs-controls');
 var telobikeListItem = require('./telobikeListItem');
-//var telobikeClickedListItem = require('./telobikeClickedListItem');
 var listview = controls.listview;
+var bind = uijs.bind;
 
 function stripes() {
   var obj = listview({
     items:[],
     onBindBoxItem: telobikeListItem,
     itemHeight:68,
-    width:function(){return this.root().width;},
   });
 
   var model = require('./model').createModel();
 
   model.on('update', function() {
-
-    obj.items = model.stations;//.slice(0,7);//.sort(function(a,b){ return a.distance - b.distance; });
+    obj.items = model.stations;
   });
   
-  /*obj.ondraw = function(ctx) {
-    ctx.fillStyle = 'gray';
-    ctx.fillRect(0, 0, this.width, this.height);
-    var curr_y = 0;
-    var h = 100;
-
-    ctx.strokeStyle = 'black';
-    ctx.fillStyle = 'blue';
-    ctx.font = '20px Helvetica';
-    var i = 0;
-    while (curr_y < this.height) {
-      ctx.strokeRect(0, curr_y, this.width, h);
-      ctx.fillText(i.toString(), 20, curr_y + 50);
-      curr_y += h;
-      i++;
-    }
-  };*/
   return obj;
 }
-
-
-
-//var s = scroller({
-  //content:stripes(),
-//});
-
-//s.content = stripes();
-//s.height = 1000;
 
 module.exports = stripes();});
 
@@ -431,14 +402,14 @@ exports.positioning = require('./positioning');
 exports.interaction = require('./interaction');
 exports.animation = require('./animation');
 exports.events = require('./events');
-exports.buffers = require('./buffers');
+exports.bind = require('./bind');
 
 exports.kinetics = require('./kinetics');
 exports.scroller = require('./scroller');});
 
 require.define("/node_modules/uijs/lib/canvasize.js",function(require,module,exports,__dirname,__filename,process){var box = require('./box');
 var capture = require('./interaction').capture;
-var buffers = require('./buffers');
+var bind = require('./bind');
 
 module.exports = function(options) {
   options = options || {};
@@ -464,9 +435,14 @@ module.exports = function(options) {
     function(cb) { setTimeout(cb, 1000/60); }
   );
 
-  //window.requestAnimationFrame = function(cb) { setTimeout(cb, 1000/1000); }
-
   window.devicePixelRatio || (window.devicePixelRatio = 1);
+
+  //TODO: Added 4 lines below for debugging - remove when done
+  //TODO: please do not submit this hunk uncommented because tests fail
+  //window.requestAnimationFrame = function(cb) { setTimeout(cb, 1); }
+  //alert('Original pixel ratio: ' + window.devicePixelRatio);
+  //window.devicePixelRatio = 2;
+  //alert('Pixel ratio: ' + window.devicePixelRatio);
 
   var canvas = null;
 
@@ -494,6 +470,8 @@ module.exports = function(options) {
     canvas.style.background = 'rgba(0,0,0,0.0)';
     document.body.appendChild(canvas);
 
+    var bufferCanvas = document.createElement("canvas");
+
     function adjust_size() {
       // http://joubert.posterous.com/crisp-html-5-canvas-text-on-mobile-phones-and
       canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -501,8 +479,19 @@ module.exports = function(options) {
       canvas.style.width = window.innerWidth;
       canvas.style.height = window.innerHeight;
 
+      // The buffer will be used only on platforms on which it is benefitial 
+      // (some platforms gain much from using it while others perform slower)
+      bufferCanvas.x = canvas.x;
+      bufferCanvas.y = canvas.y;
+      bufferCanvas.width = canvas.width;
+      bufferCanvas.height = canvas.height;
+      bufferCanvas.style.width = canvas.style.width;
+      bufferCanvas.style.height = canvas.style.height;
+
       var c = canvas.getContext('2d');
       c.scale(window.devicePixelRatio, window.devicePixelRatio);
+      var bc = bufferCanvas.getContext('2d');
+      bc.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
 
     window.onresize = function() {
@@ -528,13 +517,18 @@ module.exports = function(options) {
   options.id = options.id || 'canvas';
   options.x = options.x || 0;
   options.y = options.y || 0;
-  options.width = options.width || function() { return canvas.width / window.devicePixelRatio; };
-  options.height = options.height || function() { return canvas.height / window.devicePixelRatio; };
+  // TODO: deliberately binding with wrong names in order to get an autobind and not get the property bound to options cause then
+  // in the box constructor it will already be a property and not transffer from attributes to obj. 
+  // Need to fix this!!
+  var hoptions;
+  options.width = options.width || bind(hoptions, 'width', function() { return canvas.width / window.devicePixelRatio; });
+  options.height = options.height || bind(hoptions, 'height', function() { return canvas.height / window.devicePixelRatio; });
 
   var main = box(options);
 
   main.domless = domless;
   main.canvas = canvas;
+  main.bufferCanvas = bufferCanvas;
 
   // hook canvas events to `main.interact()`.
   capture(canvas, function(event, coords, e) {
@@ -548,15 +542,32 @@ module.exports = function(options) {
 
   function redraw(force) {
     if (!force && main.paused) return; // stop redraw loop if we are paused.
-
     var ctx = canvas.getContext('2d');
+    var bufferCtx = bufferCanvas.getContext('2d');
 
+    // TODO: determine this var based on the platform on which we are running
+    // (some platforms gain much from using it while others perform slower)
+    var useBuffer = false;
     //TODO: since the canvas fills the screen we don't really need this?
     if (main.alpha && main.alpha() < 1.0) {
+      if (useBuffer) {
+        bufferCtx.clearRect(0, 0, canvas.width, canvas.height);  
+      }
+      else{
+        ctx.clearRect(0, 0, canvas.width, canvas.height);   
+      }
+    }
+    
+    // TODO: passing many vars for calculations if to draw boxes or not, see if this optimization is indeed needed, and if so find better way to do it
+    main.draw(useBuffer ? bufferCtx : ctx, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+
+    if (useBuffer) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(bufferCtx.canvas);
     }
 
-    main.draw(ctx);
+    //TODO: maybe can do this in stead of scale..
+    //ctx.drawImage(bufferCtx.canvas, 0, 0, 500, 500, 0,0,1000, 1000);
 
     var now = Date.now();
     var delta = now - fps_start_time;
@@ -564,7 +575,8 @@ module.exports = function(options) {
 
     // emit fps every ~1sec
     if (delta >= 1000) {
-      console.log("fps: " + (fps / (delta / 1000)));
+      main.emit('fps', (fps / (delta / 1000)));
+      console.log('fps: ', (fps / (delta / 1000)));
       fps = 0;
       fps_start_time = now;
     };
@@ -596,15 +608,13 @@ require.define("/node_modules/uijs/lib/box.js",function(require,module,exports,_
 var valueof = require('./util').valueof;
 var propertize = require('./util').propertize;
 var animate = require('./animation');
-var buffers = require('./buffers')();
+var autobind = require('./bind').autobind;
 
 var EventEmitter = require('./events').EventEmitter;
 
 var idgenerator = 0;
 
-
 var box = module.exports = function(options) {
-
   var attributes = defaults(options, {
     x: 0,
     y: 0,
@@ -613,13 +623,16 @@ var box = module.exports = function(options) {
     children: [],
     rotation: 0.0,
     visible: true,
+    clip: false,
     alpha: null,
     debug: false,
     interaction: true, // send interaction events on this box. must be set to true for events to be emitted
     autopropagate: true, // propagate interaction events to child boxes. if false, the parent needs to call `e.propagate()` on the event
-    id: function() { return this._id; },
+    _id: 'BOX.' + idgenerator++,
   });
 
+  attributes.id = attributes.id || attributes._id;
+  
   // TODO: extend()
   var obj = new EventEmitter();
 
@@ -627,30 +640,26 @@ var box = module.exports = function(options) {
     obj[k] = attributes[k];
   }
 
-  // turn all attributes except `onxxx` and anything that begins with a '_' to properties.
-  propertize(obj, function(attr) {
-    return !(attr.indexOf('on') === 0 || attr.indexOf('_') === 0);
+  // Create properties from binded vars
+  autobind(obj);
+
+  obj.watch('children', function(c, bound) { 
+    if (!bound) {
+      var _push = c.push;
+
+      c.forEach(function(i) {
+        i.parent = obj;
+      });
+
+      c.push = function(child) {
+        child.parent = obj;
+        return _push.apply(c, arguments);
+      };
+    } else {
+      console.warn('warning: box.children is bound to a function - child.parent will not be automatically set');
+    }
   });
 
-  var prev_children = obj.children;
-
-  obj.properties.onchange('children', function(c) {
-    var _push = c.push;
-
-    c.forEach(function(i) {
-      i.parent = obj;
-    });
-
-    c.push = function(child) {
-      child.parent = obj;
-      return _push.apply(c, arguments);
-    };
-  });
-
-
-  obj.children = prev_children;
-
-  obj._id = 'BOX.' + idgenerator++;
   obj._is_box  = true;
 
   /// ## Box Hierarchy
@@ -808,36 +817,8 @@ var box = module.exports = function(options) {
 
   /// ## Drawing
 
-  // captures the current state of the box and all its children
-  obj._has_state_changed = function() {
-    var self = this;
-
-    var last = self._last_state;
-    if (!last) last = self._last_state = {};
-
-    var changed = false;
-
-    self.properties.forEach(function(p) {
-      if (p === 'children') return;
-      if (p === 'content') return;
-
-      var val = self[p];
-      if (last[p] !== val) {
-        last[p] = val;
-        changed = true;
-      }
-    });
-
-    self.children.forEach(function(child) {
-      var child_changed = child._has_state_changed();
-      if (child_changed) changed = true;
-    });
-
-    return changed;
-  };
-
   function freezer(fn) {
-    return function() {
+    function freezerInnerFunction(){
       this.$freeze = {};
       
       var ret;
@@ -854,79 +835,100 @@ var box = module.exports = function(options) {
 
       if (ex) throw ex;
       return ret;
-    };
+    }
+
+    return freezerInnerFunction;
   }
 
-  /// ### box.ondraw(ctx)
-  /// `ondraw` is called __every frame__ with a `CanvasRenderingContext2D` as a single
-  /// parameter. The box should draw itself as efficiently as possible.
-
+  
   /// ### box.draw(ctx)
   /// This function is called every frame. It draws the current box (by means of calling `ondraw`)
   /// and then draws the box's children iteratively. This function also implements a few of the basic
   /// drawing capabilities and optimizations: buffering, scaling, rotation.
-  obj.draw = freezer(function(parent_ctx) {
+  // TODO: passing many vars for calculations if to draw boxes or not, see if this optimization is indeed needed, and if so find better way to do it
+  function draw(ctx, topLayerLeft, topLayerTop, topLayerRight, topLayerBottom, parentLayerLeft, parentLayerTop, parentLayerRight, parentLayerBottom) {
     var self = this;
+    if (!self.visible || self.alpha === 0.0) return;
+    
+    // Return if this box is not in the visible area of the screen
+    //TODO: If we know the axis on which the box moves, we can change the order of these tests and improve performance
 
-    if (!self.visible || self.alpha === 0.0 || self.height <= 0 || self.width <= 0) {
-      return; // skip this box
-    }
+    var selfY = self.y;
+    //var myTop = parentLayerTop + selfY;
+    //if (myTop > topLayerBottom){
+    //  return;
+    //}
 
-    parent_ctx.save();
+    var selfHeight = self.height;
+    //if (selfHeight <= 0) {return;};
+    //var myBottom = myTop + selfHeight;
+    //if (myBottom < topLayerTop){
+    //  return;
+    //}
+
+    var selfX = self.x;
+    //var myLeft = parentLayerLeft + selfX;
+    //if (myLeft > topLayerRight){
+    //  return;
+    //}
+
+    var selfWidth = self.width;
+    //if (selfWidth <= 0) {return;};
+    //var myRight = myLeft + selfWidth;
+    //if (myRight < topLayerLeft) {
+    //  return;
+    //}
+
+    ctx.save();
 
     if (self.rotation) {
-      var centerX = self.x + self.width / 2;
-      var centerY = self.y + self.height / 2;
-      parent_ctx.translate(centerX, centerY);
-      parent_ctx.rotate(self.rotation);
-      parent_ctx.translate(-centerX, -centerY);
+      var centerX = selfX + self.Width / 2;
+      var centerY = selfY + selfHeight / 2;
+      ctx.translate(centerX, centerY);
+      ctx.rotate(self.rotation);
+      ctx.translate(-centerX, -centerY);
     }
 
     // stuff that applies to all children
-    parent_ctx.translate(self.x, self.y);
-    if (self.alpha) parent_ctx.globalAlpha = self.alpha;
+    ctx.translate(selfX, selfY);
+    if (self.alpha) ctx.globalAlpha = self.alpha;
 
-    var changed = true; //self._has_state_changed();
-
-    if (!changed && self._buffer) {
-      parent_ctx.drawImage(self._buffer, 0, 0);
-      parent_ctx.fillStyle = 'red';
-      parent_ctx.fillRect(5, 5, 10, 10);
+    if (self.clip) {
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(selfWidth, 0);
+      ctx.lineTo(selfWidth, selfHeight);
+      ctx.lineTo(0, selfHeight);
+      ctx.closePath();
+      ctx.clip();
     }
-    else {
-      var ctx = parent_ctx;
 
-      // var buffer = self._buffer = buffers.create(self.width, self.height);
-      // var ctx = buffer.getContext('2d');
-      
-      var children = self.children;
+    var children = self.children;
 
-      // stuff that applies only to this child
-      ctx.save();
+    // stuff that applies only to this child
+    ctx.save();
 
-      // emit a `frame` event
-      self.emit('frame');
+    // emit a `frame` event
+    self.emit('frame');
 
-      // call `ondraw` for rendering.
-      if (self.ondraw) {
-        if (self.width > 0 && self.height > 0) {
-          self.ondraw(ctx);
-        }
+    // call `ondraw` for rendering.
+    if (self.ondraw) {
+      if (selfWidth > 0 && selfHeight > 0) {
+        self.ondraw(ctx);
       }
-
-      ctx.restore();
-
-      children.forEach(function(child) {
-        //TODO: do not draw child if out of viewport
-        child.draw.call(child, ctx);
-      });
-
-      // draw on parent canvas canvas
-      // parent_ctx.drawImage(buffer, 0, 0);
     }
 
-    parent_ctx.restore();
-  });
+    ctx.restore();
+
+    children.forEach(function(child) {
+      //TODO: do not draw child if out of viewport
+      child.draw.call(child, ctx);
+    });
+
+    ctx.restore();
+  };
+
+  obj.draw = freezer(draw);
 
   // -- interactivity
 
@@ -1178,83 +1180,6 @@ exports.loadimage = function(src) {
   return img;
 };
 
-// turns all attributes of `obj` into functional properties.
-// `filter` (`function(attr)`) can be used to filter out any attributes.
-exports.propertize = function(obj, filter) {
-  filter = filter || function(attr) { return true; }; 
-
-  if (!obj.properties) {
-    obj.properties = [];
-    obj.properties._ee = new EventEmitter();
-    obj.properties.onchange = function(prop, callback) {
-      return obj.properties._ee.on(prop, callback);
-    };
-  }
-
-  function prop(obj, name) {
-    var prev = obj[name];
-
-    var currIsFunction = false;
-    var curr = null;
-    var prev_value = null;
-
-    Object.defineProperty(obj, name, {
-      get: function() {
-        var self = this;
-
-        function value() {
-          //if (typeof curr === 'function') {
-          if (currIsFunction) {
-            var new_value = curr.call(self);
-            if (new_value !== prev_value){
-              self.properties._ee.emit(name, new_value, prev_value);
-            }
-            prev_value = new_value;
-            return new_value;
-          }
-          else {
-            return curr;
-          }
-        }
-
-        if (self.$freeze) {
-          if (!self.$freeze[name]) {
-            self.$freeze[name] = value();
-          }
-          return self.$freeze[name];
-        }
-        else {
-          return value();
-        }
-      },
-      set: function(value) {
-        if (typeof value !== 'function') {
-          obj.properties._ee.emit(name, value, curr);
-          prev_value = null;
-          currIsFunction = false;
-        }
-        else{
-          currIsFunction = true;
-        }
-
-        curr = value;
-      }
-    });
-
-    obj[name] = prev;
-    obj.properties.push(name); // manage a list of property names
-  }
-
-  for (var attr in obj) {
-    if (!obj.hasOwnProperty(attr)) continue; // skip properties from linked objects
-    if (!filter(attr)) continue;
-    if (attr === 'properties') continue;
-    prop(obj, attr);
-  }
-
-  return obj;
-};
-
 exports.linearGradient = function(ctx, gradientColors, x1, y1, x2, y2){
   if (!gradientColors) return;
   /*
@@ -1407,6 +1332,9 @@ module.exports = function(from, to, options) {
   var callbackCalled = false;
 
   return function () {
+    if (typeof from === 'function') from = from.call(this);
+    if (typeof to === 'function') to = to.call(this);
+
     var elapsedTime = Date.now() - startTime;
     var ratio = elapsedTime / options.duration;
     if (ratio < 1.0) {
@@ -1424,22 +1352,98 @@ module.exports = function(from, to, options) {
   };
 };});
 
-require.define("/node_modules/uijs/lib/buffers.js",function(require,module,exports,__dirname,__filename,process){module.exports = function() {
-  var obj = {};
+require.define("/node_modules/uijs/lib/bind.js",function(require,module,exports,__dirname,__filename,process){var EventEmitter = require('./events').EventEmitter;
 
-  obj.create = function(w, h) {
-    var canvas = module.exports.factory();
-    canvas.width = w;
-    canvas.height = h;
-    return canvas;
+function addWatch(obj){
+  if (obj.$watch) { return; };
+  obj.$watch = new EventEmitter();
+  obj.watch = function(prop, cb) {
+    var curr = obj[prop];
+
+    // Only bind if 'prop' is not yet bounded
+    if(!obj.$boundedVars || !obj.$boundedVars[prop]) {
+      bind(obj, prop, function() { return curr; }, false);
+    }
+    
+    cb.call(obj, curr, false);
+    return this.$watch.on(prop, cb);
   };
 
-  return obj;
-};
+  obj.unwatch = function(prop, cb) {
+    return this.$watch.off(prop, cb);
+  };
+}
 
-module.exports.factory = function() {
-  return document.createElement('canvas');
-};});
+function bind(obj, prop, getter, emit) {
+  if (obj === undefined) {
+    return { $bind: getter };
+  }
+
+  if (typeof emit === 'undefined') {
+    emit = true;
+  }
+
+  // add `watch` capability to object.
+  addWatch(obj);
+
+  // add indication the 'prop' is bounded
+  if(!obj.$boundedVars) {
+    obj.$boundedVars = {};
+  }
+  obj.$boundedVars[prop] = true;
+
+  getter = getter || function() { return undefined; };
+
+  function setter(newval) {
+    // newval has $bind on it immediately after the call to bind because the call to bind returns the bind promise and calls the setter with it
+    if (newval && newval.$bind) {  
+      bind(obj, prop, newval.$bind);
+      return newval;
+    }
+
+    bind(obj, prop, function() { return newval; }, false);
+
+    // emit a change event on the $watch event emitter, if defined.
+    emit_change(newval, false);
+
+    return newval;
+  }
+
+  Object.defineProperty(obj, prop, {
+    configurable: true,
+    enumerable: true,
+    get: getter,
+    set: setter,
+  });
+
+  // emit a change event to indicate that we have made a new bind
+  if (emit) {
+    emit_change(getter, true);
+  }
+
+  function emit_change(newval, bound) {
+    if (!obj.$watch) return;
+    obj.$watch.emit(prop, newval, bound);
+  }
+
+  return { $bind: getter };
+}
+
+function autobind(obj) {
+  Object.keys(obj).forEach(function(k) {
+    var val = obj[k];
+    if (val && val.$bind) {
+      bind(obj, k, val.$bind);
+    }
+  });
+
+  // add `watch` capability to object. Needed if none of the keys above triggers a binding
+  addWatch(obj);
+  return obj;
+}
+
+module.exports = bind;
+module.exports.autobind = autobind;});
 
 require.define("/node_modules/uijs/lib/interaction.js",function(require,module,exports,__dirname,__filename,process){// maps DOM events to uijs event names
 var EVENTS = {
@@ -1494,12 +1498,10 @@ var capture = require('./interaction').capture;
 var defaults = util.defaults;
 
 module.exports = function(options) {
-  options = defaults(options, {
+  var obj = box(defaults(options, {
     html: '<div>',
     interaction: false, // by default we let HTML capture events
-  });
-
-  var obj = box(options);
+  }));
 
   var last_bounds = null;
 
@@ -1890,40 +1892,47 @@ var defaults = require('./util').defaults;
 var min = require('./util').min;
 var max = require('./util').max;
 var scrollbar = require('./scrollbar');
+var bind = require('./bind');
 
 module.exports = function(options) {
   var obj = box(defaults(options, {
-    content: box(),
     clip: true,
   }));
 
   var bar = scrollbar({ 
-    height: function() { return obj.height; },
-    size: function() {
+    height: bind(bar, 'height', function() { return obj.height; }),
+    size: bind(bar, 'size', function() {
       return obj.height / obj.content.height;
-    },
-    position: function() {
+    }),
+    position: bind(bar, 'position', function() {
       return -obj.content.y / obj.content.height;
-    },
-    x: function() {
+    }),
+    x: bind(bar, 'x', function() {
       return obj.width - this.width;
-    }
+    }),
   });
 
-  obj.children = function() { 
+  obj.children = bind(obj, 'children', function() { 
+    obj.content.parent = obj;
+    bar.parent = obj;
     return [ obj.content, bar ]; 
-  };
+  });
 
   var events = [];
 
-  obj.properties.onchange('content', function(value) {
-    value.y = kinetics.carouselBehavior(
+  obj.watch('content', function(value) { 
+    if (!value) { return; }; // This can happen if setting the watch when the content is undefined (upon setting a watch this callback is called with the current value)
+    value.yAnimation = kinetics.carouselBehavior(
       function() { return 0; },
       function() { return obj.height - obj.content.height; },
       function() { return 100; },
       events,
       function() { },
       { regularFriction: function() { return 0.997; } });
+    value.y = bind(value, 'y', function(){
+      var result = Math.round(value.yAnimation());
+      return result;
+    });
   });
 
   obj.ondraw = function(ctx) {
@@ -1960,14 +1969,13 @@ module.exports = function(options) {
     position: 0.3,
     size: 0.5,
     interaction: false,
-    lineWidth: 10,
-    width: function() { return this.lineWidth; },
+    width: 10,
   }));
 
   obj.ondraw = function(ctx) {
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
     ctx.lineCap = 'round';
-    ctx.lineWidth = this.lineWidth;
+    ctx.lineWidth = this.width;
     ctx.beginPath();
 
     var barstart = 8;
@@ -1976,8 +1984,8 @@ module.exports = function(options) {
     var barposition = this.position * barheight;
     var barsize = this.size * barheight;
 
-    ctx.moveTo(this.width - 10, max(barstart + barposition, barstart));
-    ctx.lineTo(this.width - 10, min(barstart + barposition + barsize, barstart + barheight));
+    ctx.moveTo(0, max(barstart + barposition, barstart));
+    ctx.lineTo(0, min(barstart + barposition + barsize, barstart + barheight));
     ctx.stroke();
   }; 
 
@@ -2007,17 +2015,15 @@ module.exports = function(options) {
     horizontalAlign: 'center',
     verticalAlign: 'middle',
     adaptSizeAccordingToImage:false,
-    width: function(){
-      var self = this;
-      return self.image.width;
-    },
-    height: function(){
-      var self = this;
-      return self.image.height;
-    },
+    width: 50,
+    height: 50,
   }));
 
-  obj.ondraw = function(ctx) {
+  function renderImage(ctx, img, x, y, w, h){
+    ctx.drawImage(img, x, y, w, h);
+  }
+
+  function onDrawImage(ctx){
     var self = this;
 
     if (!self.image) return;
@@ -2098,8 +2104,10 @@ module.exports = function(options) {
         break;
     } 
     
-    ctx.drawImage(img, x, y, w, h);
+    renderImage(ctx, img, x, y, w, h);
   }
+
+  obj.ondraw = onDrawImage;
 
   return obj;
 };});
@@ -2111,10 +2119,11 @@ var defaults = util.defaults;
 var image = require('./image');
 var label = require('./label');
 var positioning = uijs.positioning;
+var bind = uijs.bind;
 
 module.exports = function(options) {
   var obj = box({
-    alpha:function() {return this._touching ? 0.8 : 1.0;},
+    alpha: bind(obj, 'alpha', function() {return this._touching ? 0.8 : 1.0;}),
   });
 
   obj.on('touchstart', function() {
@@ -2156,28 +2165,30 @@ module.exports = function(options) {
     border: null,
     shadow: null,
     center: false,
-    /*border: function(ctx) {
+    height: options.size ? options.size + 20/100 * options.size : 20,
+    renderBorder: function(ctx) {
       ctx.strokeStyle = 'yellow';
       ctx.strokeRect(0, 0, this.width, this.height);
     },
-    shadow: function(ctx){
+    renderShadow: function(ctx){
       ctx.shadowBlur = 2;
       ctx.shadowColor = 'black';
       ctx.shadowOffsetX = 2;
       ctx.shadowOffsetY = 2;
-    },*/
-
-    height: function() { return this.size + 20/100 * this.size },
+    },
   }));
 
-  obj.ondraw = function(ctx) {
+  function renderLabel(ctx, text, x, y){
+    ctx.fillText(text, x, y);
+  }
+
+  function onDrawLabel(ctx){
     var self = this;
     var text = self.text;
 
     if (!text) return;
 
-    var border = self.border;
-    if(border) { border(ctx);}
+    if(self.border) { self.renderBorder(ctx);}
     
     ctx.fillStyle = self.color;
     
@@ -2196,7 +2207,7 @@ module.exports = function(options) {
     };
     ctx.font = self.fontCache;
 
-    if (self.textCache !== text) {
+    if (self.textCache !== text || calculatePlacement) {
       self.textCache = text;
       self.mesurementCache = ctx.measureText(self.textCache);
       calculatePlacement = true;
@@ -2217,14 +2228,15 @@ module.exports = function(options) {
     };
     
     if (calculatePlacement) {
-       self.xPosCache = self.center ? w / 2 - self.mesurementCache.width / 2 - 1 : 0;
-       self.yPosCache = h / 2 - size / 2 + size - 20/100 * size;
+      self.xPosCache = self.center ? w / 2 - self.mesurementCache.width / 2 - 1 : 0;
+      self.yPosCache = 0;//h / 2 - size / 2 + size - 20/100 * size;
     }
 
-    var shadow = self.shadow;
-    if(shadow) {shadow(ctx);}
-    ctx.fillText(text, self.xPosCache, self.yPosCache);
-  };
+    if(self.shadow) {self.renderShadow(ctx);}
+    renderLabel(ctx, text, self.xPosCache, self.yPosCache);
+  }
+
+  obj.ondraw = onDrawLabel;
 
   return obj;
 }});
@@ -2238,12 +2250,18 @@ module.exports = function(options) {
     	color: 'gray',
   	}));
 
-   	obj.ondraw = function(ctx) {
+    function renderRect(ctx, x, y, w, h){
+      ctx.fillRect(x, y, w, h);
+    }
+
+    function onDrawRect(ctx){
       var self = this;
-   		
+      
       ctx.fillStyle = self.color;
-      ctx.fillRect(0, 0, self.width, self.height);  
-    } 
+      renderRect(ctx, 0, 0, self.width, self.height);
+    }
+
+   	obj.ondraw = onDrawRect;
 
 	return obj;
 }; });
@@ -2254,8 +2272,8 @@ var label = require('./label');
 var box = uijs.box;
 var util = uijs.util;
 var defaults = util.defaults;
-var positioning = uijs.positioning;
 var scroller = uijs.scroller;
+var bind = uijs.bind;
 
 module.exports = function(options) {
   var obj = scroller(defaults(options, {
@@ -2268,85 +2286,48 @@ module.exports = function(options) {
     }, 
   }));
 
-  var content = box();
-  content.height = function(){ return obj.itemHeight * obj.items.length }
-  content.width = function(){ return obj.width; }
-
   var cashPool = [];
 
-  content.children = function() {
-    var self = this;
+  var content = box({
+    children: bind(content, 'children', function() { 
+      var self = this;
 
-    var startItemIndex = util.max(Math.floor(-self.y/obj.itemHeight),0);
-    var endItemIndex = util.min(Math.ceil(obj.height/obj.itemHeight) + startItemIndex,obj.items.length);
+      var startItemIndex = util.max(Math.floor(-self.y/obj.itemHeight),0);
+      var endItemIndex = util.min(Math.ceil(obj.height/obj.itemHeight) + startItemIndex,obj.items.length);
 
-    if(cashPool.length == 0 && obj.items.length > 0){
-      
-      for (var poolIndex = startItemIndex; poolIndex < endItemIndex; poolIndex++) {
-        var boxItem = box({
-          height:obj.itemHeight,
-          width:obj.width,
-          data:obj.items[0],
-        });
+      if(cashPool.length == 0 && obj.items.length > 0){
+        //TODO: improve the API. I dont like it that we bind to some irrelevant data object here and change the data property later to rebind without using the data bind function
+        for (var poolIndex = startItemIndex; poolIndex < endItemIndex; poolIndex++) {
+          var boxItem = box({
+            height:obj.itemHeight,
+            width:obj.width,
+            data:obj.items[0],
+            parent:obj,
+          });
 
-        boxItem.parent = obj;
+          obj.onBindBoxItem(boxItem);
 
-        obj.onBindBoxItem(boxItem);
-
-        //add box item as to the cash pool
-        cashPool.push(boxItem);
+          //add box item as to the cash pool
+          cashPool.push(boxItem);
+        }
       }
-    }
-
-    var i = 0;
-    for (var key = startItemIndex; key < endItemIndex; key++) {
-      var boxItem = cashPool[i];
-      boxItem.data = obj.items[key],
-      
-      //update item positioning
-      boxItem.x = 0;
-      boxItem.y =  key * obj.itemHeight ;
-      i++;
-    }
-    
-    return cashPool;
-  }
-
-  content.interaction = false;
-/*
-  //item clicking support
-  obj.on('touchmove', function(startPt,endPt) {
-    console.log('touch move');
-    if(this.touchedItem){
-      this.touchedItem.data.clicked = null;
-      //this.emit('move',this.touchedItem.data,startPt,endPt);
-      this.touchedItem = null;
-    }
+      var i = 0;
+      for (var key = startItemIndex; key < endItemIndex; key++) {
+        var boxItem = cashPool[i];
+        boxItem.data = obj.items[key],
+        
+        //update item positioning
+        boxItem.x = 0;
+        boxItem.y =  key * obj.itemHeight ;
+        i++;
+      }
+      return cashPool;
+    }), 
+    height: bind(content, 'height', function(){ return obj.itemHeight * obj.items.length }),
+    width: bind(content, 'width', function(){ return obj.width; }),
+    interaction: false,
   });
 
-  obj.on('touchstart', function(pos) {
-    console.log('touch start');
-    this._touching = true;
-    this.startCapture();
-    var item = this.content.hittest(pos,null).child;
-   
-    item.data.clicked = true;
-    this.touchedItem = item;
-      
-  });
-
-  obj.on('touchend', function(pos) {
-    console.log('touch end');
-    this._touching = false;
-    this.stopCapture();
-    
-    if(this.touchedItem){
-      this.touchedItem.data.clicked = null;
-      this.emit('click',this.touchedItem.data);
-      this.touchedItem = null;
-    }
-  });
-*/
   obj.content = content;
   return obj;
 };
@@ -2356,12 +2337,12 @@ require.define("/node_modules/uijs-controls/lib/activity.js",function(require,mo
 var box = uijs.box;
 var util = uijs.util;
 var defaults = util.defaults;
+var bind = uijs.bind;
 
 module.exports = function(options) {
   var obj = box(defaults(options, {
-    index: function() {return 0;},
     animating: true,
-    visible: function() { return this.animating; },
+    visible: bind(obj, 'visible', function() { return this.animating; }),
     lineType: 'dot', // 'dot' or 'line' (default 'dot')
     height: 50,
     width: 50,
@@ -2386,16 +2367,15 @@ module.exports = function(options) {
       ctx.strokeStyle = line.color(idx);
       ctx.lineCap = 'round';
       ctx.stroke();
-//    console.log('x1=' + line.x1() + '; y1=' + line.y1() + '; x2=' + line.x2() + ';y2=' + line.y2() + ';width=' + line.width() + ';color=' + line.color(idx));
     });
   };
 
   var start = Date.now();
-  obj.index = function() {
+  obj.index = bind(obj, 'index', function() {
     var delta = Date.now() - start;
     var rps = 1 * 1000; // rounds per seconds
     return ((delta % rps) / rps) * lines.length;
-  };
+  });
 
   function line(index) {
     var angle = index * Math.PI * 2 / numberOfLines;
@@ -2444,94 +2424,90 @@ module.exports = function(options) {
 require.define("/telobikeListItem.js",function(require,module,exports,__dirname,__filename,process){var uijs = require('uijs');
 var box = uijs.box;
 var util = uijs.util;
-var positioning = uijs.positioning;
 var controls = require('uijs-controls');
 var button = controls.button;
 var image = controls.image;
 var label = controls.label;
 var rect = controls.rect;
+var bind = uijs.bind;
 
 module.exports = function(boxItem) {
-  var backround = rect({
-    width : boxItem.width,
-    height : boxItem.height - 1,
-    color: function(){
-      return (boxItem.data.clicked) ? 'gray' : 'white';
-     },
-     alpha:function(){
-      return (boxItem.data.clicked) ? 0.5 : 1;
-     },
-  });
-
   var img = image({
-    image: function(){ return boxItem.data.list_image;},
+    image: bind(img, 'image', function(){ return boxItem.data.list_image;}),
     x:10,
     y:10,
+    width:47,
+    height:47,
   });
 
+  var textLocationStart = 27;
+    
   var location = label({
-    text:function() { return boxItem.data.name_en; },
-    y:positioning.prev.top(5),
-    x:positioning.prev.right(10),
+    text:bind(location, 'text', function() { return boxItem.data.name_en; }),
+    x:67,
+    y:textLocationStart,
     size:14,
     width:100,
+    height:16.8,
     bold:true,
   });
 
   var bikeStatus = label({
-    text:function(){return "bikes: " +  boxItem.data.available_bike;},
-    color:function(){
+    text:bind(bikeStatus, 'text', function(){return "bikes: " +  boxItem.data.available_bike;}),
+    color:bind(bikeStatus, 'color', function(){
       if(boxItem.data.status === 'empty') return 'red';
       if(boxItem.data.status === 'hempty') return 'orange';
       return 'black';
-    },
-    y:positioning.prev.bottom(5),
-    x:positioning.prev.left(),
+    }),
+    x:67,
+    y:textLocationStart + 20,
     size:14,
     width:50,
+    height:16.8,
   });
 
   var parkingStatus = label({
-    text:function(){return "parking: " +  boxItem.data.available_spaces; },
-    color:function(){
+    text:bind(parkingStatus, 'text', function(){return "parking: " +  boxItem.data.available_spaces; }),
+    color:bind(parkingStatus, 'color', function(){
       if(boxItem.data.status === 'full') return 'red';
       if(boxItem.data.status === 'hfull') return 'orange';
       return 'black';
-    },
-    y:positioning.prev.top(),
-    x:positioning.prev.right(20),
+    }),
+    x:167,
+    y:textLocationStart + 20,
     size:14,
     width:50,
+    height:16.8,
   });
 
   var whiteArrowImage = util.loadimage('assets/img/white_arrow.png');
   var grayArrowImage = util.loadimage('assets/img/arrow.png');
 
   var arrow = image({
-    image: function(){
-      return (boxItem.data.clicked) ? whiteArrowImage : grayArrowImage;
-    },
+    image: grayArrowImage,
+    x: boxItem.width - 45,
     y:20,
-    x:positioning.parent.right(-40),
+    width:20,
+    height:25,
   });
 
   var distance = label({
-    text:function(){return boxItem.data.distance || '100m';},
-    y:positioning.prev.bottom(5),
-    x:positioning.prev.left(-10),
+    text:bind(distance, 'text', function(){return boxItem.data.distance || '100m';}),
+    x:boxItem.width - 50,
+    y:textLocationStart + 30,
     size:10,
-    color:'gray',
     width:40,
+    height:12,
   });
 
   var seperator = rect({
-    height: 1,
     x:0,
     y:boxItem.height - 1,
     width:boxItem.width,
+    height:1,
+    color:'gray',
   });
 
-  boxItem.add(backround);
   boxItem.add(img);
   boxItem.add(location);
   boxItem.add(bikeStatus);
@@ -2539,7 +2515,6 @@ module.exports = function(boxItem) {
   boxItem.add(arrow);
   boxItem.add(distance);
   boxItem.add(seperator);
-
 };
   
 });
@@ -4099,7 +4074,7 @@ xui.extend({
 
 return window.x$; };});
 
-require.define("/.tmp.95930.entry.telobikeListView.js",function(require,module,exports,__dirname,__filename,process){window.require = require;
+require.define("/.tmp.93867.entry.telobikeListView.js",function(require,module,exports,__dirname,__filename,process){window.require = require;
 
 // lazy require so that app code will not execute before onload
 Object.defineProperty(window, 'main', {
@@ -4107,5 +4082,5 @@ Object.defineProperty(window, 'main', {
     return require('./telobikeListView.js');
   }
 });});
-require("/.tmp.95930.entry.telobikeListView.js");
+require("/.tmp.93867.entry.telobikeListView.js");
 })();
