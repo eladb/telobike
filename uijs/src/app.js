@@ -7,6 +7,7 @@ var positioning = uijs.positioning;
 var image = require('uijs-controls').image;
 var loadimage = uijs.util.loadimage;
 var panel = require('./station-panel');
+var bind = uijs.bind;
 
 function map(options) {
   var obj = box(defaults(options, {
@@ -89,8 +90,8 @@ var TLV = {
 };
 
 var map1 = app.add(map({
-  height: positioning.parent.height(),
-  width: positioning.parent.width(),
+  height: bind(map1, 'height', positioning.parent.height()),
+  width: bind(map1, 'width', positioning.parent.width()),
   title: 'Map1',
   region: TLV,
 }))
@@ -105,9 +106,9 @@ model.on('update', function() {
 
 var p = app.add(panel({
   id: '#panel',
-  x: positioning.parent.centerx(), 
+  x: bind(p, 'x', positioning.parent.centerx()), 
   y: -167,
-  station: function() { return map1.current_marker; },
+  station: bind(p, 'station', function() { return map1.current_marker; }),
 }));
 
 map1.on('marker-selected', function(m) {
