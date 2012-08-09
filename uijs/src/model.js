@@ -23,15 +23,15 @@ exports.createModel = function() {
         var stations = JSON.parse(this.responseText);
         console.log('Response with ' + stations.length + ' stations');
 
-        navigator.geolocation.getCurrentPosition(function(position) {
-          console.log("got position " + position.coords.latitude + ", " + position.coords.longitude);
+        // navigator.geolocation.getCurrentPosition(function(position) {
+        //   console.log("got position " + position.coords.latitude + ", " + position.coords.longitude);
           stations.forEach(function(s) {
             s.location = [ s.latitude, s.longitude ];
             s.status = determine_status(s);
             s.image = 'assets/img/map_' + s.status + '.png';
-            s.list_image = util.loadimage('assets/img/list_' + s.status + '.png');
+            s.list_image = 'assets/img/list_' + s.status + '.png';
             s.center = [ 6.0, -18.0 ];
-            s.distance = getDistance(s.latitude, s.longitude, position.coords.latitude, position.coords.longitude);
+            // s.distance = getDistance(s.latitude, s.longitude, position.coords.latitude, position.coords.longitude);
 
             // These will create a callout:
             // s.title = s.name;
@@ -42,7 +42,7 @@ exports.createModel = function() {
           var prev = obj.stations;
           obj.stations = stations;
           obj.emit('update', stations, prev);
-        }); 
+        // });
       },
     });
 

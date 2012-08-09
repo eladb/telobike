@@ -19,7 +19,15 @@ module.exports = function(type, id, options) {
     console.warn('No phonegap environment. Unable to create native object of type ' + type);
     obj.call = function(method, args, callback) {
       callback = callback || function() {};
-      return callback();
+
+      try {
+        var s = JSON.stringify(args);
+        return callback();
+      }
+      catch (e) {
+        console.error('Cannot serialize arguments: ' + e);
+        return callback(e);
+      }
     };
     
     return obj;
@@ -50,7 +58,15 @@ module.exports = function(type, id, options) {
       return callback.call(obj, err);
     }
 
-    return cordova.exec(success, failure, 'org.uijs.native', 'invoke', [ method, type, id, JSON.stringify(args) ]);
+    try {
+      var sargs = JSON.stringify(args);
+      console.log('native invoke ' + method + ' ' + type + ' ' + id);
+      return cordova.exec(success, failure, 'org.uijs.native', 'invoke', [ method, type, id, sargs ]);
+    }
+    catch(e) {
+      console.error('Unable to serialize args: ' + e);
+      return callback(e);
+    }
   };
 
   obj.call('init', options, function(err) {
