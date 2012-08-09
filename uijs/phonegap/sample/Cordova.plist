@@ -9,7 +9,7 @@
 	<key>EnableLocation</key>
 	<false/>
 	<key>EnableViewportScale</key>
-	<false/>
+	<true/>
 	<key>AutoHideSplashScreen</key>
 	<true/>
 	<key>ShowSplashScreenSpinner</key>
@@ -22,6 +22,7 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>localhost</string>
 		<string>gsp1.apple.com</string>
 		<string>www.google.com</string>
 		<string>telobike.citylifeapps.com</string>

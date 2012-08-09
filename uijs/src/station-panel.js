@@ -58,7 +58,8 @@ module.exports = function(options) {
   }
 
   var obj = box(defaults(options, {
-    width: 276, height: 167,
+    width: 276, 
+    height: 167,
     station: {
       name: '108 Rotchild Ave.',
       available_bike: 4,

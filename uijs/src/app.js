@@ -32,7 +32,7 @@ model.on('update', function() {
 
 var p = app.add(panel({
   id: '#panel',
-  x: bind(p, 'x', positioning.parent.centerx()), 
+  x: 320/2-276/2,//bind(p, 'x', positioning.parent.centerx()), 
   y: -167,
   station: bind(p, 'station', function() { return map1.current_marker; }),
 }));
@@ -56,5 +56,10 @@ map1.on('marker-deselected', function() {
 map1.on('move', function() {
   p.animate({ y: -167 });
 });
+
+// app.ondraw = function(ctx) {
+//   ctx.fillStyle = 'blue';
+//   ctx.fillRect(5, 5, 320-10, 460-10);
+// };
 
 module.exports = app;

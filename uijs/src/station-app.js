@@ -16,7 +16,7 @@ var p = app.add(station({
 }));
 
 var toggle_button = app.add(button({
-  x: 500,
+  x: 10,
   y: 10,
   width: 200,
   height: 50,
@@ -35,6 +35,8 @@ toggle_button.on('click', function() {
     opened = true;
   }
 });
+
+alert(window.devicePixelRatio);
 
 module.exports = app;
 
