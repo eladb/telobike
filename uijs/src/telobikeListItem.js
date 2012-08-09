@@ -9,6 +9,14 @@ var rect = controls.rect;
 var bind = uijs.bind;
 
 module.exports = function(boxItem) {
+  
+  var backround = rect({
+    width : boxItem.width,
+    height : boxItem.height - 1,
+    color: bind(backround, 'color', function(){ return (boxItem.data.select || boxItem.highlight) ? 'gray' : 'white'; }),
+    alpha: bind(backround, 'alpha', function(){ return (boxItem.data.select || boxItem.highlight) ? 0.5 : 1; }),
+  });
+
   var img = image({
     image: bind(img, 'image', function(){ return boxItem.data.list_image;}),
     x:10,
@@ -17,15 +25,15 @@ module.exports = function(boxItem) {
     height:47,
   });
 
-  var textLocationStart = 27;
+  var textLocationStart = 13;
     
   var location = label({
     text:bind(location, 'text', function() { return boxItem.data.name_en; }),
     x:67,
     y:textLocationStart,
     size:14,
-    width:100,
-    height:16.8,
+    width:boxItem.width - 45 - 67 - 5,
+    height:14,
     bold:true,
   });
 
@@ -39,8 +47,8 @@ module.exports = function(boxItem) {
     x:67,
     y:textLocationStart + 20,
     size:14,
-    width:50,
-    height:16.8,
+    width:100,
+    height:14,
   });
 
   var parkingStatus = label({
@@ -53,15 +61,15 @@ module.exports = function(boxItem) {
     x:167,
     y:textLocationStart + 20,
     size:14,
-    width:50,
-    height:16.8,
+    width:boxItem.width - 45 - 67,
+    height:14,
   });
 
   var whiteArrowImage = util.loadimage('assets/img/white_arrow.png');
   var grayArrowImage = util.loadimage('assets/img/arrow.png');
 
   var arrow = image({
-    image: grayArrowImage,
+    image: bind(arrow, 'image', function(){ return (boxItem.data.select || boxItem.highlight) ? whiteArrowImage : grayArrowImage;}),
     x: boxItem.width - 45,
     y:20,
     width:20,
@@ -69,12 +77,15 @@ module.exports = function(boxItem) {
   });
 
   var distance = label({
-    text:bind(distance, 'text', function(){return boxItem.data.distance || '100m';}),
+    text:bind(distance, 'text', function(){return (boxItem.data.distance) ? 
+      ((boxItem.data.distance >= 1000) ? (boxItem.data.distance/1000).toFixed(1) +' km' :  boxItem.data.distance +' m') : 
+      'undefined'; }),
     x:boxItem.width - 50,
     y:textLocationStart + 30,
     size:10,
-    width:40,
-    height:12,
+    width:50,
+    height:10,
+    color:'gray',
   });
 
   var seperator = rect({
@@ -85,6 +96,7 @@ module.exports = function(boxItem) {
     color:'gray',
   });
 
+  boxItem.add(backround);
   boxItem.add(img);
   boxItem.add(location);
   boxItem.add(bikeStatus);

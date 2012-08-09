@@ -16,9 +16,19 @@ function stripes() {
   var model = require('./model').createModel();
 
   model.on('update', function() {
-    obj.items = model.stations;
+    obj.items = model.stations.sort(function(a,b){
+      if(!a.distance || !b.distance)
+      {
+        return 0;
+      }
+      return (parseInt(a.distance) - parseInt(b.distance));
+    });
   });
   
+  obj.on('click',function(data){
+    data.select = true;
+  })
+
   return obj;
 }
 
