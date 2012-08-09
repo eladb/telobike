@@ -11,3 +11,4 @@ obj
 bin
 *.csproj.user
 *.suo
+v8.log
