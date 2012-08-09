@@ -66,6 +66,8 @@ module.exports = function(options) {
     },
   }));
 
+  console.log(obj.interaction);
+
   var bg = obj.add(image({
     x: 0, y: -6, width: 276, height: 167,
     image: loadimage('assets/img/panel.png'),
@@ -106,14 +108,20 @@ module.exports = function(options) {
   }));
 
   var report_button = bg.add(button({
+    background: null,
     id: '#report',
     x: bind(report_button, 'x', function() { return bike_status.x; }),
     y: bind(report_button, 'y', positioning.relative('#parking').bottom(4)),
     text: 'Report',
+    image: loadimage('assets/img/button.png'),
+    color: 'white',
+    height: 40,
+    width: 102,
   }));
 
   var fav_button = bg.add(button({
     id: '#fav',
+    background: null,
     x: bind(fav_button, 'x', positioning.relative('#report').right(-1)),
     y: bind(fav_button, 'y', positioning.relative('#report').top()),
     image: loadimage('assets/img/button_fav.png'),
@@ -123,9 +131,13 @@ module.exports = function(options) {
 
   var nav_button = bg.add(button({
     id: '#nav',
+    background: null,
     x: bind(nav_button, 'x', positioning.prev.right(-1)),
     y: bind(nav_button, 'y', positioning.prev.top()),
+    image: loadimage('assets/img/button.png'),
+    height: 40,
     text: 'Navigate',
+    color: 'white',
   }));
 
   report_button.on('click', function() {
