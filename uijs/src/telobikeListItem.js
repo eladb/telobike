@@ -43,7 +43,7 @@ module.exports = function(boxItem) {
     width:boxItem.width - 45 - 67 - 5,
     height:14,
     bold:true,
-    center: false,
+    align: 'left',
   });
 
   var bikeStatus = label({
@@ -58,7 +58,7 @@ module.exports = function(boxItem) {
     size:14,
     width:100,
     height:14,
-    center: false,
+    align: 'left',
   });
 
   var parkingStatus = label({
@@ -73,7 +73,7 @@ module.exports = function(boxItem) {
     size:14,
     width:boxItem.width - 45 - 67,
     height:14,
-    center: false,
+    align: 'left',
   });
 
   var whiteArrowImage = util.loadimage('assets/img/white_arrow.png');
@@ -97,7 +97,7 @@ module.exports = function(boxItem) {
     width:50,
     height:10,
     color:'gray',
-    center: false,
+    align: 'left',
   });
 
   var seperator = rect({
