@@ -41,7 +41,7 @@ module.exports = function(boxItem) {
     y:textLocationStart,
     size:14,
     width:boxItem.width - 45 - 67 - 5,
-    height:14,
+    height:20,
     bold:true,
     align: 'left',
   });
@@ -57,7 +57,7 @@ module.exports = function(boxItem) {
     y:textLocationStart + 20,
     size:14,
     width:100,
-    height:14,
+    height:20,
     align: 'left',
   });
 
@@ -72,7 +72,7 @@ module.exports = function(boxItem) {
     y:textLocationStart + 20,
     size:14,
     width:boxItem.width - 45 - 67,
-    height:14,
+    height:20,
     align: 'left',
   });
 
@@ -95,7 +95,7 @@ module.exports = function(boxItem) {
     y:textLocationStart + 30,
     size:10,
     width:50,
-    height:10,
+    height:15,
     color:'gray',
     align: 'left',
   });
