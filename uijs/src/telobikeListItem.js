@@ -13,18 +13,21 @@ module.exports = function(boxItem) {
   var backround = rect({
     width : boxItem.width,
     height : boxItem.height - 1,
-    color: bind(backround, 'color', function(){ return (boxItem.data.select || boxItem.highlight) ? 'gray' : 'white'; }),
-    alpha: bind(backround, 'alpha', function(){ return (boxItem.data.select || boxItem.highlight) ? 0.5 : 1; }),
+    visible: bind(function () { return (boxItem.data.select || boxItem.highlight) ? true : false; }),
+    color: 'gray',
+    alpha: 0.5,
   });
 
 
   var images = {};
+  images['assets/img/list_empty.png'] = util.loadimage('assets/img/list_empty.png');
+  images['assets/img/list_hempty.png'] = util.loadimage('assets/img/list_hempty.png');
+  images['assets/img/list_full.png'] = util.loadimage('assets/img/list_full.png');
+  images['assets/img/list_hfull.png'] = util.loadimage('assets/img/list_hfull.png');
+  images['assets/img/list_okay.png'] = util.loadimage('assets/img/list_okay.png');
 
   var img = image({
     image: bind(img, 'image', function(){ 
-      if (!images[boxItem.data.list_image]) {
-        images[boxItem.data.list_image] = util.loadimage(boxItem.data.list_image);
-      }
       return images[boxItem.data.list_image];
     }),
     x:10,
@@ -33,7 +36,7 @@ module.exports = function(boxItem) {
     height:47,
   });
 
-  var textLocationStart = 13;
+  var textLocationStart = 17;
     
   var location = label({
     text:bind(location, 'text', function() { return boxItem.data.name_en; }),
