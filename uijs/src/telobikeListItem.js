@@ -36,7 +36,7 @@ module.exports = function(boxItem) {
     height:47,
   });
 
-  var textLocationStart = 17;
+  var textLocationStart = 11;
     
   var location = label({
     text:bind(location, 'text', function() { return boxItem.data.name_en; }),
