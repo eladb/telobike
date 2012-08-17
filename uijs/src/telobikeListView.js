@@ -10,7 +10,7 @@ function stripes() {
   var obj = listview({
     items:[],
     onBindBoxItem: telobikeListItem,
-    itemHeight:68,
+    itemHeight:68
   });
 
   var model = require('./model').createModel();

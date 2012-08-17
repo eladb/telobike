@@ -43,7 +43,7 @@ exports.createModel = function() {
           obj.stations = stations;
           obj.emit('update', stations, prev);
         // });
-      },
+      }
     });
 
   }

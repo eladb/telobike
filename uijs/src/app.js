@@ -21,7 +21,7 @@ var map1 = app.add(map({
   height: bind(map1, 'height', positioning.parent.height()),
   width: bind(map1, 'width', positioning.parent.width()),
   title: 'Map',
-  region: TLV,
+  region: TLV
 }));
 
 var model = require('./model').createModel();
@@ -34,13 +34,13 @@ var p = app.add(panel({
   id: '#panel',
   x: 320/2-276/2,//bind(p, 'x', positioning.parent.centerx()), 
   y: -167,
-  station: bind(p, 'station', function() { return map1.current_marker; }),
+  station: bind(p, 'station', function() { return map1.current_marker; })
 }));
 
 map1.on('marker-selected', function(m) {
   map1.region = {
     center: m.location,
-    distance: [1000, 1000], // 1km
+    distance: [1000, 1000] // 1km
   };
 
   map1.current_marker = m;

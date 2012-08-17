@@ -8,13 +8,13 @@ module.exports = function(options) {
     markers: [], // a marker contains at least { location: [ lat, long ] }
     region: {
       center: [ 0, 0 ],
-      distance: [ 10, 10 ],
+      distance: [ 10, 10 ]
     },
     userLocation: {
       visible: false,
       track: true,
-      heading: false,
-    },
+      heading: false
+    }
   }));
 
   var native_map = nativeobj('UIJSMap', obj._id, {});
