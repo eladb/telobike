@@ -16,7 +16,7 @@ module.exports = function(boxItem) {
     width : boxItem.width,
     height : boxItem.height - 1,
     color: bind(function () { return (boxItem.data.select || boxItem.highlight) ? 'gray' : 'white'; }),
-    alpha: bind(function () { return (boxItem.data.select || boxItem.highlight) ? 0.5 : 0.1; }),
+    alpha: bind(function () { return (boxItem.data.select || boxItem.highlight) ? 0.5 : null; }),
   });
 
 
