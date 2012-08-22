@@ -22,31 +22,18 @@ module.exports = function(options) {
   // forward all events from `native_map` to `obj` (like!)
   native_map.forward(obj);
 
-  var last_bounds;
+  native_map.mock = true;
 
-  obj.monitor = function(attr_or_fn, callback) {
-    var self = this;
+  var subscribed = false;
+  var last_position = null;
 
-    if (typeof attr_or_fn !== 'function') {
-      var attr = attr_or_fn;
-      attr_or_fn = function() {
-        return self[attr];
-      }
-    }
+  function position_changed() {
+    var new_position = this.x + ',' + this.y + '-' + this.width + 'x' + this.height;
 
-    var last_value = null;
-    self.on('frame', function() {
-      var curr_value = JSON.stringify(attr_or_fn.call(self)); // serialize
-      if (last_value !== curr_value) {
-        callback.call(self, curr_value, last_value);
-        last_value = curr_value;
-      }
-    });
-  };
+    // console.log('new_position: ' + new_position);
 
-  obj.monitor(
-    function() { return this.x + ',' + this.y + '-' + this.width + 'x' + this.height; }, 
-    function() {
+    if (last_position !== new_position) {
+      
       native_map.call('move', {
         x: this.x,
         y: this.y,
@@ -54,25 +41,54 @@ module.exports = function(options) {
         height: this.height
       });
 
+      last_position = new_position;
+    }
+
+    // only subscribe *after* we did some positioning
+    if (!subscribed) {
       obj.watch('markers', function() {
+        console.log('markers changed');
         native_map.call('set_markers', this.markers);
       });
 
       obj.watch('region', function() {
+        console.log('region changed');
         native_map.call('set_region', this.region);
       });
 
       obj.watch('userLocation', function() {
+        console.log('userLocation changed');
         native_map.call('set_user_location', this.userLocation);
-      });
+      });      
 
-    });
+      subscribed = true;
+    }
+  }
+
+  obj.watch('x', position_changed);
+  obj.watch('y', position_changed);
+  obj.watch('width', position_changed);
+  obj.watch('height', position_changed);
 
   obj.ondraw = function(ctx) {
-    ctx.clearRect(0, 0, this.width, this.height);
+    if (!native_map.mock) {
+      ctx.clearRect(0, 0, this.width, this.height);
+    }
+    else {
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, this.width, this.height);
+      ctx.strokeStyle = 'red';
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(this.width, this.height);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(this.width, 0);
+      ctx.lineTo(0, this.height);
+      ctx.stroke();
+      ctx.strokeRect(0, 0, this.width, this.height);
+    }
   };
-
-  var last_bounds;
 
   return obj;
 }

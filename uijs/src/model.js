@@ -2,12 +2,13 @@ var x$ = require('xui');
 var uijs = require('uijs');
 var EventEmitter = uijs.events.EventEmitter;
 var util = uijs.util;
+var preloaded = require('./preloaded-stations');
 
 exports.createModel = function() {
 
   var obj = new EventEmitter();
 
-  obj.stations = [];
+  obj.stations = preloaded;
 
   if (typeof Number.prototype.toRad == 'undefined') {
     Number.prototype.toRad = function() {
@@ -15,38 +16,42 @@ exports.createModel = function() {
     }
   }
 
-  function reload() {
+  var current_position = null;
 
+  function reload() {
     x$().xhr('http://telobike.citylifeapps.com/stations', {
       async: true,
       callback: function(items) {
         var stations = JSON.parse(this.responseText);
         console.log('Response with ' + stations.length + ' stations');
 
-        // navigator.geolocation.getCurrentPosition(function(position) {
-        //   console.log("got position " + position.coords.latitude + ", " + position.coords.longitude);
-          stations.forEach(function(s) {
-            s.location = [ s.latitude, s.longitude ];
-            s.status = determine_status(s);
-            s.image = 'assets/img/map_' + s.status + '.png';
-            s.list_image = 'assets/img/list_' + s.status + '.png';
-            s.center = [ 6.0, -18.0 ];
-            // s.distance = getDistance(s.latitude, s.longitude, position.coords.latitude, position.coords.longitude);
+        stations.forEach(function(s) {
+          s.location = [ s.latitude, s.longitude ];
+          s.status = determine_status(s);
+          s.image = 'assets/img/map_' + s.status + '.png';
+          s.list_image = 'assets/img/list_' + s.status + '.png';
+          s.center = [ 6.0, -18.0 ];
 
-            // These will create a callout:
-            // s.title = s.name;
-            // s.subtitle = s.available_bike + ' bicycles ' + s.available_spaces + ' slots';
-            // s.icon = 'assets/img/list_' + s.status + '.png';
-          });
+          if (current_position) {
+            s.distance = getDistance(s.latitude, s.longitude, current_position.coords.latitude, current_position.coords.longitude);
+          }
 
-          var prev = obj.stations;
-          obj.stations = stations;
-          obj.emit('update', stations, prev);
-        // });
-      }
+          // These will create a callout:
+          // s.title = s.name;
+          // s.subtitle = s.available_bike + ' bicycles ' + s.available_spaces + ' slots';
+          // s.icon = 'assets/img/list_' + s.status + '.png';
+        });
+
+        var prev = obj.stations;
+        obj.stations = stations;
+        obj.emit('update', stations, prev);
+      },
     });
-
   }
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    current_position = position;
+  });
 
   function determine_status(station) {
     if (station.available_bike === 0 || station.available_bike === '0') return 'empty';
@@ -70,6 +75,10 @@ exports.createModel = function() {
 
   reload();
   setInterval(reload, 30000); // refresh every 30sec
+
+  setTimeout(function() {
+    obj.emit('update', obj.stations, null);
+  }, 100);
 
   return obj;
 }

@@ -30,7 +30,7 @@ module.exports = function(boxItem) {
   var grayArrowImage = util.loadimage('assets/img/arrow.png', function() { images['gray_arrow'] = grayArrowImage; });
 
   var img = image({
-    image: bind(img, 'image', function(){ 
+    image: bind(function() { 
       return images[boxItem.data.list_image];
     }),
     x:10,
@@ -40,7 +40,7 @@ module.exports = function(boxItem) {
   });
 
   var arrow = image({
-    image: bind(arrow, 'image', function(){ 
+    image: bind(function(){ 
       return (boxItem.data.select || boxItem.highlight) ? images['white_arrow'] : images['gray_arrow'];}),
     x: boxItem.width - 45,
     y:20,
@@ -51,7 +51,7 @@ module.exports = function(boxItem) {
   var textLocationStart = 11;
     
   var location = label({
-    text:bind(location, 'text', function() { return boxItem.data.name_en; }),
+    text:bind(function() { return boxItem.data.name_en; }),
     x:67,
     y:textLocationStart,
     size:14,
@@ -62,8 +62,8 @@ module.exports = function(boxItem) {
   });
 
   var bikeStatus = label({
-    text:bind(bikeStatus, 'text', function(){return "bikes: " +  boxItem.data.available_bike;}),
-    color:bind(bikeStatus, 'color', function(){
+    text:bind(function() { return "bikes: " +  boxItem.data.available_bike; } ),
+    color:bind(function() {
       if(boxItem.data.status === 'empty') return 'red';
       if(boxItem.data.status === 'hempty') return 'orange';
       return 'black';
@@ -77,8 +77,8 @@ module.exports = function(boxItem) {
   });
 
   var parkingStatus = label({
-    text:bind(parkingStatus, 'text', function(){return "parking: " +  boxItem.data.available_spaces; }),
-    color:bind(parkingStatus, 'color', function(){
+    text:bind(function() { return "parking: " +  boxItem.data.available_spaces; }),
+    color:bind(function() {
       if(boxItem.data.status === 'full') return 'red';
       if(boxItem.data.status === 'hfull') return 'orange';
       return 'black';
@@ -92,9 +92,12 @@ module.exports = function(boxItem) {
   });
 
   var distance = label({
-    text:bind(distance, 'text', function(){return (boxItem.data.distance) ? 
-      ((boxItem.data.distance >= 1000) ? (boxItem.data.distance/1000).toFixed(1) +' km' :  boxItem.data.distance +' m') : 
-      'undefined'; }),
+    text: bind(function() {
+      return 
+        (boxItem.data.distance) ? 
+        ((boxItem.data.distance >= 1000) ? (boxItem.data.distance/1000).toFixed(1) +' km' :  boxItem.data.distance +' m') : 
+        null; 
+    }),
     x:boxItem.width - 50,
     y:textLocationStart + 30,
     size:10,

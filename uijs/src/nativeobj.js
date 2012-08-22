@@ -17,6 +17,7 @@ module.exports = function(type, id, options) {
   var cordova = window.cordova || window.Cordova;
   if (!cordova) {
     console.warn('No phonegap environment. Unable to create native object of type ' + type);
+    obj.mock = true;
     obj.call = function(method, args, callback) {
       callback = callback || function() {};
 
