@@ -8,33 +8,33 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sample/Plugins/UIJSMap.m"
-         timestampString = "364678344.496534"
+         timestampString = "367348823.380699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "213"
-         endingLineNumber = "213">
+         startingLineNumber = "218"
+         endingLineNumber = "218">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sample/Plugins/UIJSMap.m"
-         timestampString = "364678344.496534"
+         timestampString = "367348823.380699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "214"
-         endingLineNumber = "214">
+         startingLineNumber = "219"
+         endingLineNumber = "219">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sample/Plugins/UIJSMap.m"
-         timestampString = "364421394.02508"
+         timestampString = "367348823.380699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
          landmarkName = "-rightCalloutImage"
          landmarkType = "5">
       </FileBreakpoint>
@@ -43,11 +43,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sample/Plugins/UIJSMap.m"
-         timestampString = "364678344.496534"
+         timestampString = "367348823.380699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "155"
+         endingLineNumber = "155"
          landmarkName = "-mapView:viewForAnnotation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -56,11 +56,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sample/Plugins/UIJSMap.m"
-         timestampString = "364678344.496534"
+         timestampString = "367348823.380699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
          landmarkName = "-mapView:didSelectAnnotationView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -69,11 +69,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sample/Plugins/UIJSMap.m"
-         timestampString = "364678344.496534"
+         timestampString = "367348823.380699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "204"
-         endingLineNumber = "204"
+         startingLineNumber = "209"
+         endingLineNumber = "209"
          landmarkName = "-mapView:didDeselectAnnotationView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -108,12 +108,181 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "sample/Plugins/UIJSMap.m"
-         timestampString = "366217111.173684"
+         timestampString = "367348823.380699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "141"
-         endingLineNumber = "141"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
          landmarkName = "-uijs_set_user_location:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
+         landmarkName = "-uijs_set_markers:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
+         landmarkName = "-uijs_set_markers:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "135"
+         endingLineNumber = "135"
+         landmarkName = "-uijs_set_markers:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-coordinate"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
+         landmarkName = "-title"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
+         landmarkName = "-subtitle"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-image"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
+         landmarkName = "-image"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
+         landmarkName = "-leftCalloutImage"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
+         landmarkName = "-hasCenter"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
+         landmarkName = "-center"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348823.380699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
+         landmarkName = "-title"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "sample/Plugins/UIJSMap.m"
+         timestampString = "367348754.343363"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "23"
+         endingLineNumber = "23"
+         landmarkName = "-locationForKey:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

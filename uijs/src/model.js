@@ -18,33 +18,42 @@ exports.createModel = function() {
 
   var current_position = null;
 
+  function notify_update() {
+    var stations = obj.stations;
+
+    stations.forEach(function(s) {
+      s.location = [ s.latitude, s.longitude ];
+      s.status = determine_status(s);
+      s.image = 'assets/img/map_' + s.status + '.png';
+      s.list_image = 'assets/img/list_' + s.status + '.png';
+      s.center = [ 6.0, -18.0 ];
+
+      if (current_position) {
+        s.distance = getDistance(s.latitude, s.longitude, current_position.coords.latitude, current_position.coords.longitude);
+      }
+
+      // These will create a callout:
+      // s.title = s.name;
+      // s.subtitle = s.available_bike + ' bicycles ' + s.available_spaces + ' slots';
+      // s.icon = 'assets/img/list_' + s.status + '.png';
+    });
+
+    obj.emit('update', stations);
+  }
+
   function reload() {
     x$().xhr('http://telobike.citylifeapps.com/stations', {
       async: true,
       callback: function(items) {
-        var stations = JSON.parse(this.responseText);
-        console.log('Response with ' + stations.length + ' stations');
-
-        stations.forEach(function(s) {
-          s.location = [ s.latitude, s.longitude ];
-          s.status = determine_status(s);
-          s.image = 'assets/img/map_' + s.status + '.png';
-          s.list_image = 'assets/img/list_' + s.status + '.png';
-          s.center = [ 6.0, -18.0 ];
-
-          if (current_position) {
-            s.distance = getDistance(s.latitude, s.longitude, current_position.coords.latitude, current_position.coords.longitude);
-          }
-
-          // These will create a callout:
-          // s.title = s.name;
-          // s.subtitle = s.available_bike + ' bicycles ' + s.available_spaces + ' slots';
-          // s.icon = 'assets/img/list_' + s.status + '.png';
-        });
-
-        var prev = obj.stations;
-        obj.stations = stations;
-        obj.emit('update', stations, prev);
+        try {
+          var stations = JSON.parse(this.responseText);
+          console.log('Response with ' + stations.length + ' stations');
+          obj.stations = stations;
+          notify_update();
+        }
+        catch (e) {
+          console.error('parse error:', e);
+        }
       },
     });
   }
@@ -77,7 +86,8 @@ exports.createModel = function() {
   setInterval(reload, 30000); // refresh every 30sec
 
   setTimeout(function() {
-    obj.emit('update', obj.stations, null);
+    console.log('updating stations...');
+    notify_update();
   }, 100);
 
   return obj;
