@@ -59,14 +59,19 @@
 
 - (void)invoke:(NSArray*)args withDict:(NSDictionary*)adict
 {
+    NSLog(@"HERE!");
+
     if (!objects) {
         objects = [[NSMutableDictionary alloc] init];
     }
+    
     
     NSString* objmethod = [args objectAtIndex:1];
     NSString* objtype = [args objectAtIndex:2];
     NSString* objid = [args objectAtIndex:3];
     id methodargs = [[args objectAtIndex:4] JSONValue];
+
+    NSLog(@"THERE");
 
     NSLog(@"uijs native invoke %@, %@, %@", objmethod, objtype, objid);
 
@@ -86,7 +91,7 @@
         [[self.webView superview] addSubview:obj];
         [[self.webView superview] bringSubviewToFront:self.webView];
         
-        self.webView.userInteractionEnabled = NO;
+//        self.webView.userInteractionEnabled = NO;
         self.webView.opaque = NO;
         self.webView.backgroundColor = [UIColor clearColor];
         [objects setObject:obj forKey:objid];

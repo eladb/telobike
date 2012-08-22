@@ -2,7 +2,7 @@
 <html>
   <head>
     <title></title>
-    <meta name="viewport" content="width=320, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <style>
       body {
@@ -17,12 +17,13 @@
     <script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
 
     <script>
-      function onDeviceReady() {  
+      function onDeviceReady() {
         var uijs = require('uijs');
         var positioning = uijs.positioning;
-        var bind = uijs.bind;
         
-        if (!main || !uijs.box.isbox(main)) {
+          console.log('MAIN:', main.is_box);
+          
+        if (!main || !main.is_box) {
           throw new Error('Main module must export a box')
         }
         
@@ -34,8 +35,10 @@
         
         main.x = 0;
         main.y = 0;
-        main.width = bind(main, 'width', positioning.parent.width());
-        main.height = bind(main, 'height', positioning.parent.height());
+          main.width = 100;
+          main.height = 100;
+//        main.bind('width', positioning.parent.width());
+//        main.bind('height', positioning.parent.height());
           
         canvas.add(main);
       };

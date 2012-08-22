@@ -14,38 +14,34 @@ module.exports = function(options) {
       visible: false,
       track: true,
       heading: false
-    }
+    },
+    invalidators: [ 'bounds' ],
   }));
+
+  obj.bind('bounds', function() { 
+    return this.x + ',' + this.y + '-' + this.width + 'x' + this.height; 
+  });
 
   var native_map = nativeobj('UIJSMap', obj._id, {});
 
   // forward all events from `native_map` to `obj` (like!)
   native_map.forward(obj);
 
-  native_map.mock = true;
+  // native_map.mock = true;
 
   var subscribed = false;
-  var last_position = null;
 
-  function position_changed() {
-    var new_position = this.x + ',' + this.y + '-' + this.width + 'x' + this.height;
-
-    // console.log('new_position: ' + new_position);
-
-    if (last_position !== new_position) {
-      
-      native_map.call('move', {
-        x: this.x,
-        y: this.y,
-        width: this.width,
-        height: this.height
-      });
-
-      last_position = new_position;
-    }
+  obj.watch('bounds', function() {
+    native_map.call('move', {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height
+    });
 
     // only subscribe *after* we did some positioning
     if (!subscribed) {
+      
       obj.watch('markers', function() {
         console.log('markers changed');
         native_map.call('set_markers', this.markers);
@@ -63,12 +59,7 @@ module.exports = function(options) {
 
       subscribed = true;
     }
-  }
-
-  obj.watch('x', position_changed);
-  obj.watch('y', position_changed);
-  obj.watch('width', position_changed);
-  obj.watch('height', position_changed);
+  });
 
   obj.ondraw = function(ctx) {
     if (!native_map.mock) {

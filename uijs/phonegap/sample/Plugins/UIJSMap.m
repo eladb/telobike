@@ -19,6 +19,11 @@
 - (CLLocationCoordinate2D)locationForKey:(NSString *)key
 {
     NSArray* location = [self objectForKey:key];
+    if (![location isKindOfClass:[NSArray class]]) {
+        NSLog(@"%@ must be an array for object %@", key, self);
+        return CLLocationCoordinate2DMake(0, 0);
+    }
+    
     CLLocationDegrees lat = [[location objectAtIndex:0] floatValue];
     CLLocationDegrees lng = [[location objectAtIndex:1] floatValue];
     return CLLocationCoordinate2DMake(lat, lng);

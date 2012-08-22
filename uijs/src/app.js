@@ -10,9 +10,7 @@ var bind = uijs.bind;
 var telobike_map = require('./telobike-map');
 var telobike_lv = require('./telobikeListView');
 
-var app = box({
-  id: 'app',
-});
+var app = box({ id: 'app' });
 
 var model = require('./model').createModel();
 

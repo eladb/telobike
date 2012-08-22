@@ -20,7 +20,7 @@ module.exports = function(type, id, options) {
     obj.mock = true;
     obj.call = function(method, args, callback) {
       callback = callback || function() {};
-
+      console.log('uijs_native:', method, args);
       try {
         var s = JSON.stringify(args);
         return callback();
