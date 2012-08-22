@@ -16,13 +16,13 @@ var app = box({
 
 var model = require('./model').createModel();
 
-// var map = app.add(telobike_map({
-//   id: 'telobike_map',
-//   x: bind(positioning.parent.width()),
-//   width: bind(positioning.parent.width()),
-//   height: bind(positioning.parent.height()),
-//   model: model,
-// }));
+var map = app.add(telobike_map({
+  id: 'telobike_map',
+  x: bind(positioning.parent.width()),
+  width: bind(positioning.parent.width()),
+  height: bind(positioning.parent.height()),
+  model: model,
+}));
 
 var lv = app.add(telobike_lv({
   id: 'telobike_listview',
@@ -32,18 +32,18 @@ var lv = app.add(telobike_lv({
   model: model,
 }));
 
-// lv.on('click', function(item) {
-//   lv.animate({ x: function() { return -this.parent.width; } });
-//   map.animate({ x: 0 }, { ondone: function() {
-//     map.select(item);
-//   }});
-// });
+lv.on('click', function(item) {
+  lv.animate({ x: function() { return -this.parent.width; } });
+  map.animate({ x: 0 }, { ondone: function() {
+    map.select(item);
+  }});
+});
 
-// map.on('back', function() {
-//   lv.animate({ x: 0 });
-//   map.animate({ x: function() { 
-//     return this.parent.width; 
-//   }});
-// });
+map.on('back', function() {
+  lv.animate({ x: 0 });
+  map.animate({ x: function() { 
+    return this.parent.width; 
+  }});
+});
 
 module.exports = app;
