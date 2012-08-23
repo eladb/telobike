@@ -19,7 +19,6 @@ function stripes() {
     },
     searchBar:searchBar({
       height:40,
-      backgroundImage:util.loadimage('assets/img/searchBar.png'),
     }),
   });
 
