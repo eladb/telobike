@@ -19,7 +19,6 @@ module.exports = function(boxItem) {
     alpha: bind(function () { return (boxItem.data.select || boxItem.highlight) ? 0.5 : null; }),
   });
 
-
   var images = {};
   var empty_image = util.loadimage('assets/img/list_empty.png', function() { images['assets/img/list_empty.png'] = empty_image; });
   var hempty_image = util.loadimage('assets/img/list_hempty.png', function() { images['assets/img/list_hempty.png'] = hempty_image; });
