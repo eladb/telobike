@@ -92,10 +92,16 @@ module.exports = function(boxItem) {
 
   var distance = label({
     text: bind(function() {
-      return 
-        (boxItem.data.distance) ? 
-        ((boxItem.data.distance >= 1000) ? (boxItem.data.distance/1000).toFixed(1) +' km' :  boxItem.data.distance +' m') : 
-        null; 
+      return_value = 'unknown';
+      if(boxItem.data.distance) {
+        if(boxItem.data.distance >= 1000) {
+          return_value = (boxItem.data.distance/1000).toFixed(1) +' km';
+        } 
+        else {
+          return_value = boxItem.data.distance +' m';
+        }
+      }
+      return return_value;
     }),
     x:boxItem.width - 50,
     y:textLocationStart + 30,

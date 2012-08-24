@@ -9,12 +9,6 @@ var util = uijs.util;
 var defaults = util.defaults;
 
 module.exports = function(options) {
-  // var x = box(options);
-  // x.ondraw = function(ctx) {
-  //   ctx.fillStyle = 'red';
-  //   ctx.fillRect(0, 0, this.width, this.height);
-  // };
-  // return x;
 
   var obj = listview(defaults(options, {
     model: null,
