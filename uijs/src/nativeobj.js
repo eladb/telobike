@@ -11,6 +11,41 @@ window.uijs_emit_event = function(objid, event, args) {
   return obj.emit(event, args);
 };
 
+window.uijs_hittest = function(options) {
+  
+  if (!options) {
+    console.log('uijs_hittest: no options');
+    return false;
+  }
+
+  var canvas = window.uijs_canvas;
+  if (!canvas) {
+    console.log('uijs_hittest: no canvas');
+    return false;
+  }
+
+  var pt = options.pt;
+  if (!pt) {
+    console.log('uijs_hittest: no options.pt');
+    return false;
+  }
+
+  // console.log('uijs_hittest pt=(' + pt.x + ',' + pt.y + ')');
+  var ht = canvas.hittest(pt);
+
+  // check if that last hitted box is a native object.
+  var obj_ids = Object.keys(ht);
+  var last_objid = obj_ids[obj_ids.length - 1];
+  var last_box = ht[last_objid].child;
+
+  if (last_box._id in window.uijs_native_objects) {
+    console.log(last_box._id + ' is a native object');
+    return false;
+  }
+
+  return true;
+};
+
 module.exports = function(type, id, options) {
   var obj = new EventEmitter();
 
