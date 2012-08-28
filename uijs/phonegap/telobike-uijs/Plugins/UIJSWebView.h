@@ -6,7 +6,7 @@
 //
 //
 
-#import <Cordova/Cordova.h>
+#import <Cordova/CDV.h>
 
 @interface UIJSWebView : CDVCordovaView
 

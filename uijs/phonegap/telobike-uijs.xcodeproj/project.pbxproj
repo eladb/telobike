@@ -57,6 +57,11 @@
 		F4B3F88415B43D2E00418ED5 /* verify.sh in Resources */ = {isa = PBXBuildFile; fileRef = F4B3F88315B43D2E00418ED5 /* verify.sh */; };
 		F4B3F88B15B43D9300418ED5 /* www in Resources */ = {isa = PBXBuildFile; fileRef = F4B3F88A15B43D9300418ED5 /* www */; };
 		F4E2963E15BC8C200013C7EF /* MKMapViewWithTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E2963D15BC8C200013C7EF /* MKMapViewWithTouch.m */; };
+		F4FB725015ECC61100671ACE /* UIJSWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FB724F15ECC61100671ACE /* UIJSWebView.m */; };
+		F4FB725215ECF3FE00671ACE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB725115ECF3FE00671ACE /* Icon.png */; };
+		F4FB725415ECF40400671ACE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB725315ECF40400671ACE /* Icon@2x.png */; };
+		F4FB725615ECF40A00671ACE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB725515ECF40A00671ACE /* Default.png */; };
+		F4FB725815ECF40D00671ACE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB725715ECF40D00671ACE /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,7 +97,7 @@
 		F48C84F015B5407C00710E33 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		F48C84FD15B54D9500710E33 /* UIJSMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIJSMap.h; path = Plugins/UIJSMap.h; sourceTree = "<group>"; };
 		F48C84FE15B54D9500710E33 /* UIJSMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIJSMap.m; path = Plugins/UIJSMap.m; sourceTree = "<group>"; };
-		F4B3F82E15B43D2E00418ED5 /* sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4B3F82E15B43D2E00418ED5 /* telobike-uis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "telobike-uis.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B3F83215B43D2E00418ED5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4B3F83415B43D2E00418ED5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F4B3F83615B43D2E00418ED5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -132,6 +137,12 @@
 		F4B3F88A15B43D9300418ED5 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		F4E2963C15BC8C200013C7EF /* MKMapViewWithTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapViewWithTouch.h; sourceTree = "<group>"; };
 		F4E2963D15BC8C200013C7EF /* MKMapViewWithTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapViewWithTouch.m; sourceTree = "<group>"; };
+		F4FB724E15ECC61100671ACE /* UIJSWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIJSWebView.h; path = Plugins/UIJSWebView.h; sourceTree = "<group>"; };
+		F4FB724F15ECC61100671ACE /* UIJSWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIJSWebView.m; path = Plugins/UIJSWebView.m; sourceTree = "<group>"; };
+		F4FB725115ECF3FE00671ACE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		F4FB725315ECF40400671ACE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		F4FB725515ECF40A00671ACE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		F4FB725715ECF40D00671ACE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +215,10 @@
 		F4B3F82015B43D2E00418ED5 = {
 			isa = PBXGroup;
 			children = (
+				F4FB725715ECF40D00671ACE /* Default@2x.png */,
+				F4FB725515ECF40A00671ACE /* Default.png */,
+				F4FB725315ECF40400671ACE /* Icon@2x.png */,
+				F4FB725115ECF3FE00671ACE /* Icon.png */,
 				F4B3F88A15B43D9300418ED5 /* www */,
 				F4B3F84C15B43D2E00418ED5 /* sample */,
 				F4B3F83115B43D2E00418ED5 /* Frameworks */,
@@ -214,7 +229,7 @@
 		F4B3F82F15B43D2E00418ED5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4B3F82E15B43D2E00418ED5 /* sample.app */,
+				F4B3F82E15B43D2E00418ED5 /* telobike-uis.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,7 +264,8 @@
 				F4B3F88115B43D2E00418ED5 /* Plugins */,
 				F4B3F84D15B43D2E00418ED5 /* Supporting Files */,
 			);
-			path = sample;
+			name = sample;
+			path = "telobike-uijs";
 			sourceTree = "<group>";
 		};
 		F4B3F84D15B43D2E00418ED5 /* Supporting Files */ = {
@@ -355,6 +371,8 @@
 				F48C84FE15B54D9500710E33 /* UIJSMap.m */,
 				F4E2963C15BC8C200013C7EF /* MKMapViewWithTouch.h */,
 				F4E2963D15BC8C200013C7EF /* MKMapViewWithTouch.m */,
+				F4FB724E15ECC61100671ACE /* UIJSWebView.h */,
+				F4FB724F15ECC61100671ACE /* UIJSWebView.m */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -362,9 +380,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4B3F82D15B43D2E00418ED5 /* sample */ = {
+		F4B3F82D15B43D2E00418ED5 /* telobike-uis */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4B3F88715B43D2E00418ED5 /* Build configuration list for PBXNativeTarget "sample" */;
+			buildConfigurationList = F4B3F88715B43D2E00418ED5 /* Build configuration list for PBXNativeTarget "telobike-uis" */;
 			buildPhases = (
 				F4B3F82715B43D2E00418ED5 /* Sources */,
 				F4B3F82815B43D2E00418ED5 /* Frameworks */,
@@ -377,9 +395,9 @@
 			);
 			dependencies = (
 			);
-			name = sample;
+			name = "telobike-uis";
 			productName = sample;
-			productReference = F4B3F82E15B43D2E00418ED5 /* sample.app */;
+			productReference = F4B3F82E15B43D2E00418ED5 /* telobike-uis.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -390,7 +408,7 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = F4B3F82515B43D2E00418ED5 /* Build configuration list for PBXProject "sample" */;
+			buildConfigurationList = F4B3F82515B43D2E00418ED5 /* Build configuration list for PBXProject "telobike-uijs" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -405,7 +423,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4B3F82D15B43D2E00418ED5 /* sample */,
+				F4B3F82D15B43D2E00418ED5 /* telobike-uis */,
 			);
 		};
 /* End PBXProject section */
@@ -430,6 +448,10 @@
 				F4B3F88015B43D2E00418ED5 /* MainViewController.xib in Resources */,
 				F4B3F88415B43D2E00418ED5 /* verify.sh in Resources */,
 				F4B3F88B15B43D9300418ED5 /* www in Resources */,
+				F4FB725215ECF3FE00671ACE /* Icon.png in Resources */,
+				F4FB725415ECF40400671ACE /* Icon@2x.png in Resources */,
+				F4FB725615ECF40A00671ACE /* Default.png in Resources */,
+				F4FB725815ECF40D00671ACE /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +497,7 @@
 				F48C84FC15B5407C00710E33 /* SBJsonWriter.m in Sources */,
 				F48C84FF15B54D9500710E33 /* UIJSMap.m in Sources */,
 				F4E2963E15BC8C200013C7EF /* MKMapViewWithTouch.m in Sources */,
+				F4FB725015ECC61100671ACE /* UIJSWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,13 +618,13 @@
 				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "sample/sample-Prefix.pch";
+				GCC_PREFIX_HEADER = "telobike-uijs/sample-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1,",
 					"CORDOVA_FRAMEWORK=1",
 				);
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "sample/sample-Info.plist";
+				INFOPLIST_FILE = "telobike-uijs/sample-Info.plist";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					UIKit,
@@ -613,7 +636,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -626,13 +649,13 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "sample/sample-Prefix.pch";
+				GCC_PREFIX_HEADER = "telobike-uijs/sample-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NDEBUG=1,",
 					"CORDOVA_FRAMEWORK=1",
 				);
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "sample/sample-Info.plist";
+				INFOPLIST_FILE = "telobike-uijs/sample-Info.plist";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					UIKit,
@@ -644,7 +667,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -653,7 +676,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F4B3F82515B43D2E00418ED5 /* Build configuration list for PBXProject "sample" */ = {
+		F4B3F82515B43D2E00418ED5 /* Build configuration list for PBXProject "telobike-uijs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4B3F88515B43D2E00418ED5 /* Debug */,
@@ -662,7 +685,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4B3F88715B43D2E00418ED5 /* Build configuration list for PBXNativeTarget "sample" */ = {
+		F4B3F88715B43D2E00418ED5 /* Build configuration list for PBXNativeTarget "telobike-uis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4B3F88815B43D2E00418ED5 /* Debug */,

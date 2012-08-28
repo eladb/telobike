@@ -7,6 +7,7 @@
 //
 
 #import "UIJSWebView.h"
+#import "SBJson.h"
 
 @implementation UIJSWebView
 
@@ -19,13 +20,16 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    // Drawing code
+    NSDictionary* pt = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithFloat:point.x], @"x", [NSNumber numberWithFloat:point.y], @"y", nil];
+    NSDictionary* options = [[NSDictionary alloc] initWithObjectsAndKeys:pt, @"pt", nil];
+    NSString* script = [NSString stringWithFormat:@"window && window.uijs_hittest && window.uijs_hittest(%@)", [options JSONString]];
+//    NSLog(@"script:%@", script);
+    NSString* result = [self stringByEvaluatingJavaScriptFromString:script];
+    BOOL uijsHit = [result boolValue];
+    if (uijsHit) return [super hitTest:point withEvent:event];
+    else return nil;
 }
-*/
 
 @end
