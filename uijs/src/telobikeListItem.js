@@ -25,9 +25,9 @@ module.exports = function(boxItem) {
   var full_image = util.loadimage('assets/img/list_full.png', function() { images['assets/img/list_full.png'] = full_image; });
   var hfull_image = util.loadimage('assets/img/list_hfull.png', function() { images['assets/img/list_hfull.png'] = hfull_image; });
   var ok_image = util.loadimage('assets/img/list_okay.png', function() { images['assets/img/list_okay.png'] = ok_image; });
-  var whiteArrowImage = util.loadimage('assets/img/white_arrow.png', function() { images['white_arrow'] = whiteArrowImage; });
+  var whiteArrowImage = util.loadimage('assets/img/white_arrow.png', function() { images['assets/img/white_arrow.png'] = whiteArrowImage; });
   var MyLocation = util.loadimage('assets/img/MyLocation.png', function() { images['assets/img/MyLocation.png'] = MyLocation; });
-  var grayArrowImage = util.loadimage('assets/img/arrow.png', function() { images['gray_arrow'] = grayArrowImage; });
+  var grayArrowImage = util.loadimage('assets/img/arrow.png', function() { images['assets/img/arrow.png'] = grayArrowImage; });
 
   var img = image({
     image: bind(function() { 
