@@ -26,6 +26,7 @@
 //
 
 #import "MainViewController.h"
+#import "UIJSWebView.h"
 
 @implementation MainViewController
 
@@ -67,12 +68,13 @@
 }
 
 /* Comment out the block below to over-ride */
-/*
 - (CDVCordovaView*) newCordovaViewWithFrame:(CGRect)bounds
 {
-    return[super newCordovaViewWithFrame:bounds];
+    UIJSWebView* webView = [[UIJSWebView alloc] initWithFrame:bounds];
+    return webView;
+    
+//    return[super newCordovaViewWithFrame:bounds];
 }
-*/
 
 /* Comment out the block below to over-ride */
 /*
