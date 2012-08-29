@@ -49,9 +49,9 @@ module.exports = function(boxItem) {
     size: 14,
     width: boxItem.width - 45 - 67 - 5,
     height: bind(function(){
-      return boxItem.data.name_en != 'Current Position' ?  20 : 40;
+      return boxItem.data.name_en !== 'Current Position' ?  20 : 26;
     }),
-    bold: bind(function(){ return (boxItem.data.name_en != 'Current Position'); }),
+    bold: true,
     align: 'left',
   });
 
@@ -68,7 +68,7 @@ module.exports = function(boxItem) {
     width: 100,
     height: 20,
     align: 'left',
-    visible: bind(function(){ return boxItem.data.name_en != 'Current Position'; }),
+    visible: bind(function(){ return boxItem.data.name_en !== 'Current Position'; }),
   });
 
   var parkingStatus = label({
@@ -84,7 +84,7 @@ module.exports = function(boxItem) {
     width: boxItem.width - 45 - 67,
     height: 20,
     align: 'left',
-    visible: bind(function(){ return boxItem.data.name_en != 'Current Position'; }),
+    visible: bind(function(){ return boxItem.data.name_en !== 'Current Position'; }),
   });
 
   var arrow = image({
