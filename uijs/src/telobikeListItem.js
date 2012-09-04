@@ -85,7 +85,11 @@ module.exports = function(boxItem) {
   });
 
   var arrow = image({
-    image: bind(function(){ return (boxItem.data.select || boxItem.highlight) ? images['assets/img/white_arrow.png'] : images['assets/img/arrow.png'];}),
+    image: bind(function(){ 
+      return (boxItem.data.select || boxItem.highlight) ? 
+        util.loadimage('assets/img/white_arrow.png') : 
+        util.loadimage('assets/img/arrow.png');
+      }),
     x: boxItem.width - 45,
     y: 20,
     width: 20,
