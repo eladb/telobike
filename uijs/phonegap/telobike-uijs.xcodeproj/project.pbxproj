@@ -62,6 +62,8 @@
 		F4FB725415ECF40400671ACE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB725315ECF40400671ACE /* Icon@2x.png */; };
 		F4FB725615ECF40A00671ACE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB725515ECF40A00671ACE /* Default.png */; };
 		F4FB725815ECF40D00671ACE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4FB725715ECF40D00671ACE /* Default@2x.png */; };
+		F4FB725B15ED124400671ACE /* UIJSTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FB725A15ED124400671ACE /* UIJSTabBar.m */; };
+		F4FB726615ED203F00671ACE /* UIJSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F4FB726515ED203F00671ACE /* UIJSNavigationBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +145,10 @@
 		F4FB725315ECF40400671ACE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		F4FB725515ECF40A00671ACE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F4FB725715ECF40D00671ACE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F4FB725915ED124400671ACE /* UIJSTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIJSTabBar.h; path = Plugins/UIJSTabBar.h; sourceTree = "<group>"; };
+		F4FB725A15ED124400671ACE /* UIJSTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIJSTabBar.m; path = Plugins/UIJSTabBar.m; sourceTree = "<group>"; };
+		F4FB726415ED203F00671ACE /* UIJSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIJSNavigationBar.h; path = Plugins/UIJSNavigationBar.h; sourceTree = "<group>"; };
+		F4FB726515ED203F00671ACE /* UIJSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIJSNavigationBar.m; path = Plugins/UIJSNavigationBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +379,10 @@
 				F4E2963D15BC8C200013C7EF /* MKMapViewWithTouch.m */,
 				F4FB724E15ECC61100671ACE /* UIJSWebView.h */,
 				F4FB724F15ECC61100671ACE /* UIJSWebView.m */,
+				F4FB725915ED124400671ACE /* UIJSTabBar.h */,
+				F4FB725A15ED124400671ACE /* UIJSTabBar.m */,
+				F4FB726415ED203F00671ACE /* UIJSNavigationBar.h */,
+				F4FB726515ED203F00671ACE /* UIJSNavigationBar.m */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -498,6 +508,8 @@
 				F48C84FF15B54D9500710E33 /* UIJSMap.m in Sources */,
 				F4E2963E15BC8C200013C7EF /* MKMapViewWithTouch.m in Sources */,
 				F4FB725015ECC61100671ACE /* UIJSWebView.m in Sources */,
+				F4FB725B15ED124400671ACE /* UIJSTabBar.m in Sources */,
+				F4FB726615ED203F00671ACE /* UIJSNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

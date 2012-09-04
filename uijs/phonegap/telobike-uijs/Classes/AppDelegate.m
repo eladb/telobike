@@ -79,6 +79,7 @@
     self.viewController.useSplashScreen = YES;
     self.viewController.wwwFolderName = @"www";
     self.viewController.startPage = @"index.html";
+//    self.viewController.startPage = @"http://localhost:5000";
     self.viewController.invokeString = invokeString;
     self.viewController.view.frame = viewBounds;
     

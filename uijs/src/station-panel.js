@@ -23,7 +23,7 @@ module.exports = function(options) {
       count: 4,
       icon: loadimage('assets/img/icon_parking.png'),
       status: bind(function() {
-        if (this.count === 0) return 'red';
+        if (this.count == 0) return 'red';
         if (this.count <= 3) return 'yellow';
         else return 'green';
       }),

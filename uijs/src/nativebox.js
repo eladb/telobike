@@ -13,7 +13,8 @@ module.exports = function(options) {
   obj.invalidators.push('bounds');
 
   obj.bind('bounds', function() { 
-    return this.x + ',' + this.y + '-' + this.width + 'x' + this.height; 
+    var s = this.screen();
+    return s.x + ',' + s.y + '-' + this.width + 'x' + this.height; 
   });
 
   var native_view = nativeobj(obj.type, obj._id, {});
@@ -23,10 +24,14 @@ module.exports = function(options) {
 
   var subscribed = false;
 
+  obj.native = native_view;
+
   obj.watch('bounds', function() {
+    var s = this.screen();
+
     native_view.call('move', {
-      x: this.x,
-      y: this.y,
+      x: s.x,
+      y: s.y,
       width: this.width,
       height: this.height
     });

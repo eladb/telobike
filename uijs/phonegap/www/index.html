@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <style>
       body {
@@ -19,28 +18,14 @@
     <script>
       function onDeviceReady() {
         var uijs = require('uijs');
-        var positioning = uijs.positioning;
           
         if (!main || !main.is_box) {
           throw new Error('Main module must export a box')
         }
         
         // -- create canvas
-        
-        var canvas = uijs.canvasize();
-        
-        // -- add main box to canvas
-        
-        main.x = 0;
-        main.y = 0;
-          main.width = 100;
-          main.height = 100;
-//        main.bind('width', positioning.parent.width());
-//        main.bind('height', positioning.parent.height());
-          
-        canvas.add(main);
-          
-        window.uijs_canvas = canvas;
+        window.uijs_canvas = uijs.canvasize();
+        window.uijs_canvas.add(main);
       };
 
       window.onload = function() {

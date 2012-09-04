@@ -39,7 +39,7 @@ window.uijs_hittest = function(options) {
   var last_box = ht[last_objid].child;
 
   if (last_box._id in window.uijs_native_objects) {
-    console.log(last_box._id + ' is a native object');
+    // console.log(last_box._id + ' is a native object');
     return false;
   }
 
@@ -96,7 +96,7 @@ module.exports = function(type, id, options) {
 
     try {
       var sargs = JSON.stringify(args);
-      console.log('native invoke ' + method + ' ' + type + ' ' + id);
+      // console.log('native invoke ' + type + '[' + id + '].' + method);
       return cordova.exec(success, failure, 'org.uijs.native', 'invoke', [ method, type, id, sargs ]);
     }
     catch(e) {

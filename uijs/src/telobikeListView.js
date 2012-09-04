@@ -22,6 +22,7 @@ module.exports = function(options) {
     itemHeight: 68,
     items: [],
     invalidators: [ 'model' ],
+    clip: true,
   }));
 
   obj.watch('model', function(val) {

@@ -59,21 +59,20 @@
 
 - (void)invoke:(NSArray*)args withDict:(NSDictionary*)adict
 {
-    NSLog(@"HERE!");
-
     if (!objects) {
         objects = [[NSMutableDictionary alloc] init];
     }
     
-    
     NSString* objmethod = [args objectAtIndex:1];
     NSString* objtype = [args objectAtIndex:2];
     NSString* objid = [args objectAtIndex:3];
-    id methodargs = [[args objectAtIndex:4] JSONValue];
+    id _args = [args objectAtIndex:4];
+    id methodargs = nil;
+    if (_args && ![_args isKindOfClass:[NSNull class]]) {
+        methodargs = [_args JSONValue];
+    }
 
-    NSLog(@"THERE");
-
-    NSLog(@"uijs native invoke %@, %@, %@", objmethod, objtype, objid);
+//    NSLog(@"uijs native invoke %@, %@, %@", objmethod, objtype, objid);
 
     if (!objid || !objtype || !objmethod) {
         assert(false);
@@ -82,6 +81,7 @@
     UIJSView* obj = [objects objectForKey:objid];
     if (!obj) {
         Class cls = NSClassFromString(objtype);
+        assert(cls);
         id initializedObj = [[cls alloc] init];
         obj = (UIJSView*)initializedObj;
         obj.objid = objid;
@@ -91,7 +91,6 @@
         [[self.webView superview] addSubview:obj];
         [[self.webView superview] bringSubviewToFront:self.webView];
         
-//        self.webView.userInteractionEnabled = NO;
         self.webView.opaque = NO;
         self.webView.backgroundColor = [UIColor clearColor];
         [objects setObject:obj forKey:objid];

@@ -52,9 +52,11 @@ module.exports = function (options) {
   });
 
   function collapse_panel() {
-    p.animate({ y: -167 }, { ondone: function() {
-      obj.current_marker = null;
-    }});
+    p.animate({ y: -167 }, { 
+      ondone: function() {
+        obj.current_marker = null;
+      }
+    });
   }
 
   obj.on('marker-deselected', collapse_panel);

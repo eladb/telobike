@@ -1,5 +1,4 @@
 var uijs = require('uijs');
-var box = uijs.box;
 var defaults = uijs.util.defaults;
 var nativebox = require('./nativebox');
 
