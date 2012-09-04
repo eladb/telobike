@@ -30,7 +30,7 @@
 
 - (void)emitEvent:(NSString*)name withObject:(id)object
 {
-    NSLog(@"emitting event: %@ with object %@", name, object);
+//    NSLog(@"emitting event: %@ with object %@", name, object);
     NSString* js = [NSString stringWithFormat:@"window.uijs_emit_event(\'%@\', '%@', %@)", self.objid, name, [object JSONRepresentation]];
     [self.uijs writeJavascript:js];
 }

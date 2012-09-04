@@ -21,6 +21,7 @@ module.exports = function(options) {
     searchBar:searchBar({ height:40, }),
     model: null,
     invalidators: [ 'model' ],
+    clip: true,
   }));
 
   var stations;
