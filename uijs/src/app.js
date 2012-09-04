@@ -6,60 +6,105 @@ var animate = uijs.animation;
 var positioning = uijs.positioning;
 var image = require('uijs-controls').image;
 var loadimage = uijs.util.loadimage;
-var panel = require('./station-panel');
 var bind = uijs.bind;
-var map = require('./map');
+var telobike_map = require('./telobike-map');
+var telobike_lv = require('./telobikeListView');
+var telobike_tabbar = require('./telobike-tabbar');
+var navbar = require('./navbar');
+// var telobike_navbar = require('./telobike-navbar');
 
-var app = box();
-
-var TLV = {
-  center: [32.0696, 34.7781],
-  distance: [1000,1000],
-};
-
-var map1 = app.add(map({
-  height: bind(map1, 'height', positioning.parent.height()),
-  width: bind(map1, 'width', positioning.parent.width()),
-  title: 'Map',
-  region: TLV,
-}));
+var app = box({ id: 'app' });
 
 var model = require('./model').createModel();
 
-model.on('update', function() {
-  map1.markers = model.stations;
-});
+var nav = app.add(navbar());
 
-var p = app.add(panel({
-  id: '#panel',
-  x: 320/2-276/2,//bind(p, 'x', positioning.parent.centerx()), 
-  y: -167,
-  station: bind(p, 'station', function() { return map1.current_marker; }),
+nav.push_item({ title: 'List' });
+
+var tabbar = app.add(telobike_tabbar());
+
+
+
+var content = app.add(box({
+  x: 0,
+  y: 44,
+  width: bind(positioning.parent.width()),
+  height: bind(positioning.parent.height(-50-44)),
+  clip: true,
 }));
 
-map1.on('marker-selected', function(m) {
-  map1.region = {
-    center: m.location,
-    distance: [1000, 1000], // 1km
-  };
-
-  map1.current_marker = m;
-  p.animate({ y: 0 });
+var map = telobike_map({
+  id: 'telobike_map',
+  y: 0,
+  x: bind(positioning.parent.width()),
+  width: bind(positioning.parent.width()),
+  height: bind(positioning.parent.height()),
+  model: model,
+  title: 'Map',
 });
 
-map1.on('marker-deselected', function() {
-  p.animate({ y: -167 }, { ondone: function() {
-    map1.current_marker = null;
+var lv = telobike_lv({
+  id: 'telobike_listview',
+  x: 0, y: 0,
+  width: bind(positioning.parent.width()),
+  height: bind(positioning.parent.height()),
+  model: model,
+  title: 'List',
+});
+
+// navbar.on('init', function() {
+//   this.push_box(lv);
+// });
+
+// lv.on('click', function() {
+//   navbar.push_box(map);
+// });
+
+content.add(lv);
+content.add(map);
+
+tabbar.watch('selected', function(tabid) {
+  switch (tabid) {
+    case 'list': 
+      lv.x = 0;
+      map.bind('x', positioning.parent.width());
+      // navbar.clear_items();
+      // navbar.push_item({ title: 'List' });
+      // navbar.push_item({ title: 'Map' });
+      // navbar.pop_item({ title: 'Map' });
+      break;
+
+    case 'map':
+      map.x = 0;
+      lv.bind('x', function() { return -this.parent.width; });
+      // navbar.push_item({ title: 'Map' });
+      break;
+  }
+});
+
+// navbar.on('pop', function() {
+//   tabbar.selected = 'list';
+// });
+
+lv.on('click', function(item) {
+  // navbar.selected = 'map';
+  // navbar.push_item({ title: 'Map' });
+  // navbar.on('pop', function() {
+  //   map.emit('back');
+  // });
+  lv.animate({ x: function() { return -this.parent.width; } });
+  map.animate({ x: 0 }, { ondone: function() {
+    tabbar.selected = 'map';
+    map.select(item);
   }});
 });
 
-map1.on('move', function() {
-  p.animate({ y: -167 });
+map.on('back', function() {
+  // navbar.selected = 'list';
+  lv.animate({ x: 0 });
+  map.animate({ x: positioning.parent.width() }, { ondone: function() {
+    tabbar.selected = 'list';
+  }});
 });
-
-// app.ondraw = function(ctx) {
-//   ctx.fillStyle = 'blue';
-//   ctx.fillRect(5, 5, 320-10, 460-10);
-// };
 
 module.exports = app;

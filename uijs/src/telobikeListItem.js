@@ -10,105 +10,112 @@ var bind = uijs.bind;
 
 module.exports = function(boxItem) {
   
+  boxItem.is_simple_container = true;
+
   var backround = rect({
     width : boxItem.width,
     height : boxItem.height - 1,
-    visible: bind(function () { return (boxItem.data.select || boxItem.highlight) ? true : false; }),
-    color: 'gray',
-    alpha: 0.5,
+    color: bind(function () { return (boxItem.data.select || boxItem.highlight) ? 'gray' : 'white'; }),
+    alpha: bind(function () { return (boxItem.data.select || boxItem.highlight) ? 0.5 : null; }),
   });
-
-
-  var images = {};
-  images['assets/img/list_empty.png'] = util.loadimage('assets/img/list_empty.png');
-  images['assets/img/list_hempty.png'] = util.loadimage('assets/img/list_hempty.png');
-  images['assets/img/list_full.png'] = util.loadimage('assets/img/list_full.png');
-  images['assets/img/list_hfull.png'] = util.loadimage('assets/img/list_hfull.png');
-  images['assets/img/list_okay.png'] = util.loadimage('assets/img/list_okay.png');
 
   var img = image({
-    image: bind(img, 'image', function(){ 
-      return images[boxItem.data.list_image];
-    }),
+    image: bind(function() { return util.loadimage(boxItem.data.list_image); }),
     x:10,
     y:10,
-    width:47,
-    height:47,
+    width:50,
+    height:50,
   });
 
-  var textLocationStart = 11;
-    
+  var arrow = image({
+    image: bind(function() {
+      return (boxItem.data.select || boxItem.highlight) ? util.loadimage('assets/img/white_arrow.png') : util.loadimage('assets/img/arrow.png'); 
+    }),
+    x: boxItem.width - 45,
+    y:20,
+    width:20,
+    height:25
+  });
+
+  var textLocationStart = 17;
+
   var location = label({
-    text:bind(location, 'text', function() { return boxItem.data.name_en; }),
-    x:67,
-    y:textLocationStart,
-    size:14,
-    width:boxItem.width - 45 - 67 - 5,
-    height:20,
-    bold:true,
+    text: bind(function() { return boxItem.data.name_en; }),
+    x: 67,
+    y: textLocationStart,
+    size: 14,
+    width: boxItem.width - 45 - 67 - 5,
+    height: bind(function(){
+      return boxItem.data.name_en !== 'Current Position' ?  20 : 26;
+    }),
+    bold: true,
     align: 'left',
   });
 
   var bikeStatus = label({
-    text:bind(bikeStatus, 'text', function(){return "bikes: " +  boxItem.data.available_bike;}),
-    color:bind(bikeStatus, 'color', function(){
+    text: bind(function(){ return "bikes: " +  boxItem.data.available_bike;}),
+    color: bind(function(){
       if(boxItem.data.status === 'empty') return 'red';
       if(boxItem.data.status === 'hempty') return 'orange';
       return 'black';
     }),
-    x:67,
-    y:textLocationStart + 20,
-    size:14,
-    width:100,
-    height:20,
+    x: 67,
+    y: textLocationStart + 20,
+    size: 14,
+    width: 100,
+    height: 20,
     align: 'left',
+    visible: bind(function(){ return boxItem.data.name_en !== 'Current Position'; }),
   });
 
   var parkingStatus = label({
-    text:bind(parkingStatus, 'text', function(){return "parking: " +  boxItem.data.available_spaces; }),
-    color:bind(parkingStatus, 'color', function(){
+    text: bind(function(){return "parking: " +  boxItem.data.available_spaces; }),
+    color: bind(function(){
       if(boxItem.data.status === 'full') return 'red';
       if(boxItem.data.status === 'hfull') return 'orange';
       return 'black';
     }),
-    x:167,
-    y:textLocationStart + 20,
-    size:14,
-    width:boxItem.width - 45 - 67,
-    height:20,
+    x: 167,
+    y: textLocationStart + 20,
+    size: 14,
+    width: boxItem.width - 45 - 67,
+    height: 20,
     align: 'left',
+    visible: bind(function(){ return boxItem.data.name_en !== 'Current Position'; }),
   });
 
-  var whiteArrowImage = util.loadimage('assets/img/white_arrow.png');
-  var grayArrowImage = util.loadimage('assets/img/arrow.png');
-
   var arrow = image({
-    image: bind(arrow, 'image', function(){ return (boxItem.data.select || boxItem.highlight) ? whiteArrowImage : grayArrowImage;}),
+    image: bind(function(){ 
+      return (boxItem.data.select || boxItem.highlight) ? 
+        util.loadimage('assets/img/white_arrow.png') : 
+        util.loadimage('assets/img/arrow.png');
+      }),
     x: boxItem.width - 45,
-    y:20,
-    width:20,
-    height:25,
+    y: 20,
+    width: 20,
+    height: 25,
   });
 
   var distance = label({
-    text:bind(distance, 'text', function(){return (boxItem.data.distance) ? 
+    text: bind(function(){
+      return (typeof boxItem.data.distance !== undefined) ? 
       ((boxItem.data.distance >= 1000) ? (boxItem.data.distance/1000).toFixed(1) +' km' :  boxItem.data.distance +' m') : 
       'undefined'; }),
-    x:boxItem.width - 50,
-    y:textLocationStart + 30,
-    size:10,
-    width:50,
-    height:15,
-    color:'gray',
+    x: boxItem.width - 50,
+    y: textLocationStart + 30,
+    size: 10,
+    width: 50,
+    height: 15,
+    color: 'gray',
     align: 'left',
   });
 
   var seperator = rect({
-    x:0,
-    y:boxItem.height - 1,
-    width:boxItem.width,
-    height:1,
-    color:'gray',
+    x: 0,
+    y: boxItem.height - 1,
+    width: boxItem.width,
+    height: 1,
+    color: 'gray',
   });
 
   boxItem.add(backround);
@@ -119,5 +126,6 @@ module.exports = function(boxItem) {
   boxItem.add(arrow);
   boxItem.add(distance);
   boxItem.add(seperator);
+
 };
   

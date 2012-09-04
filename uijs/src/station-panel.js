@@ -4,10 +4,12 @@ var defaults = uijs.util.defaults;
 var nativeobj = require('./nativeobj');
 var animate = uijs.animation;
 var positioning = uijs.positioning;
-var image = require('uijs-controls').image;
+var controls = require('uijs-controls');
+var image = controls.image;
 var loadimage = uijs.util.loadimage;
-var label = require('uijs-controls').label;
-var button = require('uijs-controls').button;
+var label = controls.label;
+var button = controls.button;
+var rect = controls.rect;
 var bind = uijs.bind;
 
 module.exports = function(options) {
@@ -20,8 +22,8 @@ module.exports = function(options) {
       width: 121, height: 58,
       count: 4,
       icon: loadimage('assets/img/icon_parking.png'),
-      status: bind(obj, 'status', function() {
-        if (this.count === 0) return 'red';
+      status: bind(function() {
+        if (this.count == 0) return 'red';
         if (this.count <= 3) return 'yellow';
         else return 'green';
       }),
@@ -34,24 +36,25 @@ module.exports = function(options) {
     };
 
     var background_image = obj.add(image({
-      image: bind(background_image, 'image', function() { return backgrounds[obj.status]; }),
+      image: bind(function() { return backgrounds[obj.status]; }),
       width: 121, height: 58,
     }));
 
     var icon_image = obj.add(image({
-      image: bind(icon_image, 'image', function() { return obj.icon; }),
+      image: bind(function() { return obj.icon; }),
       width: 121/2, height: 58,
       x: 1, y: 1,
     }));
 
     var count_label = obj.add(label({
-      text: bind(count_label, 'text', function() { return obj.count; }),
+      text: bind(function() { return obj.count; }),
       color: 'white',
       size: 40,
       font: 'Helvetica',
-      x: bind(count_label, 'x', positioning.prev.right()), 
-      y: bind(count_label, 'y',positioning.prev.top(5)),
+      x: bind(positioning.prev.right()), 
+      y: bind(positioning.prev.top(5)),
       width: 121/2-5,
+      height: 48,
     }));
 
     return obj;
@@ -77,13 +80,15 @@ module.exports = function(options) {
   var name_label = bg.add(label({
     id: '#name',
     x: 10, 
-    width: bind(name_label, 'width', positioning.parent.width(-20)),
-    y: 10, 
+    y: 10,
+    width: bind(positioning.parent.width(-20)),
     height: 35,
+    // adjustsFontSizeToFitWidth: 20,
     size: 20,
     color: 'white',
-    shadow: true,
-    text: bind(name_label, 'text', function() {
+    shadowColor: 'white',
+    shadowBlur: 10,
+    text: bind(function() {
       return obj.station && obj.station.name;
     }),
   }));
@@ -92,8 +97,8 @@ module.exports = function(options) {
     id: '#bicycle',
     icon: loadimage('assets/img/icon_bike.png'),
     x: 15, 
-    y: bind(bike_status, 'y', positioning.relative('#name').bottom(-4)),
-    count: bind(bike_status, 'count', function() {
+    y: bind(positioning.relative('#name').bottom(-4)),
+    count: bind(function() {
       return obj.station && obj.station.available_bike;
     }),
   }));
@@ -101,9 +106,9 @@ module.exports = function(options) {
   var park_status = bg.add(statusbox({ 
     id: '#parking',
     icon: loadimage('assets/img/icon_parking.png'),
-    x: bind(park_status, 'x', positioning.prev.right()), 
-    y: bind(park_status, 'y', positioning.prev.top()),
-    count: bind(park_status, 'count', function() {
+    x: bind(positioning.prev.right()), 
+    y: bind(positioning.prev.top()),
+    count: bind(function() {
       return obj.station && obj.station.available_spaces;
     }),
   }));
@@ -111,20 +116,21 @@ module.exports = function(options) {
   var report_button = bg.add(button({
     background: null,
     id: '#report',
-    x: bind(report_button, 'x', function() { return bike_status.x; }),
-    y: bind(report_button, 'y', positioning.relative('#parking').bottom(4)),
+    x: bind(function() { return bike_status.x; }),
+    y: bind(positioning.relative('#parking').bottom(4)),
     text: 'Report',
     image: loadimage('assets/img/button.png'),
     color: 'white',
     height: 40,
     width: 102,
+    size: 14,
   }));
 
   var fav_button = bg.add(button({
     id: '#fav',
     background: null,
-    x: bind(fav_button, 'x', positioning.relative('#report').right(-1)),
-    y: bind(fav_button, 'y', positioning.relative('#report').top()),
+    x: bind(positioning.relative('#report').right(-1)),
+    y: bind(positioning.relative('#report').top()),
     image: loadimage('assets/img/button_fav.png'),
     width: 43,
     height: 40,
@@ -133,12 +139,13 @@ module.exports = function(options) {
   var nav_button = bg.add(button({
     id: '#nav',
     background: null,
-    x: bind(nav_button, 'x', positioning.prev.right(-1)),
-    y: bind(nav_button, 'y', positioning.prev.top()),
+    x: bind(positioning.prev.right(-1)),
+    y: bind(positioning.prev.top()),
     image: loadimage('assets/img/button.png'),
     height: 40,
     text: 'Navigate',
     color: 'white',
+    size: 14,
   }));
 
   report_button.on('click', function() {
