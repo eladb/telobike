@@ -6,7 +6,7 @@ var server = express.createServer();
 var csvdb = require('csvdb');
 
 var overrides_url = 'https://docs.google.com/spreadsheet/pub?key=0AuP9sJn-WbrXdFdOV1lPV09EZDBrQ2RlZzM5ZmhPb2c&output=csv';
-var overrides_db = csvdb(overrides_url, { autofetch: 10000 });
+var overrides_db = csvdb(overrides_url, { autofetch: 30 * 1000 }); // refresh overrides every 30s
 
 setTimeout(function() {
   console.log(overrides_db.entries);
@@ -68,7 +68,7 @@ function read_en_stations(callback) {
   });
 }
 
-setInterval(read_stations, 5000);
+setInterval(read_stations, 30*1000); // update station info every 30 seconds
 setInterval(read_en_stations, 30*60*1000); // update en names every 30 minutes
 
 setInterval(function() {
