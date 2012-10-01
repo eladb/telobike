@@ -130,7 +130,17 @@ server.get('/cities/tlv', function(req, res) {
   city['service_name.en'] = "Tel-o-Fun";
 
   return res.send(city);
-})
+});
+
+server.post('/_deploy_dskfjh484jk09k', function(req, res) {
+  var backoff_sec = Math.round(5 + Math.random() * 35); // between 5s and 30s
+  console.log('Deployment request. Exit in', backoff_sec + 's');
+  setTimeout(function() {
+    console.log('Bye');
+    process.exit(0);
+  }, backoff_sec * 1000);
+  res.end('OK');
+});
 
 // server.get('/tlv/stations', function(req, res) {
 //   return stations.all(function(err, stations) {
