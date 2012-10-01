@@ -3,6 +3,14 @@ var path = require('path');
 var logule = require('logule');
 var cors = require('./lib/cors');
 var server = express.createServer();
+var csvdb = require('csvdb');
+
+var overrides_url = 'https://docs.google.com/spreadsheet/pub?key=0AuP9sJn-WbrXdFdOV1lPV09EZDBrQ2RlZzM5ZmhPb2c&output=csv';
+var overrides_db = csvdb(overrides_url, { autofetch: 10000 });
+
+setTimeout(function() {
+  console.log(overrides_db.entries);
+}, 5000);
 
 server.use(express.methodOverride());
 server.use(cors());
@@ -81,7 +89,20 @@ function bridge_handler(req, res) {
   var result = [];
 
   for (var sid in stations) {
-    result.push(stations[sid]);
+    var s = stations[sid];
+
+    var overrides = overrides_db.entries[sid];
+    if (overrides) {
+      console.log('found overrides for', sid);
+      for (var k in overrides) {
+        var val = overrides[k];
+        if (val) {
+          s[k] = val;
+        }
+      }
+    }
+
+    result.push(s);
   }
 
   return res.send(result);

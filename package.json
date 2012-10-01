@@ -17,7 +17,8 @@
     "memstream": "*",
     "mkdirp": "*",
     "request": "2.9.202",
-    "logule": "0.6.1"
+    "logule": "0.6.1",
+    "csvdb": "0.0.3"
   },
   "scripts": {
       "start": "app.js"
