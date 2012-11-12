@@ -1,0 +1,82 @@
+2a3,5
+> 104 -- אזורי חן  גרינברג 26 -- Azorei Chen – 26 Greenberg St.
+> 105 -- מרכז שוסטר אחימאיר 18 -- 18 Aba Ahimeir St.- Shuster Center 
+> 106 -- רודנסקי מרכז מסחרי -- Rudensky-Ramat Aviv 3
+3a7,12
+> 108 -- פרלוק 4 -- 4 Perluk St.
+> 109 -- טאגור מרכז מסחרי -- Tagore St. – commercial center
+> 110 -- שיכון למד האוזנר 5 -- Shikun Lamed – 5 Hausner St.
+> 111 -- איינשטיין 41 -- 41 Einstein St.
+> 112 -- אוניברסיטה איינשטיין 78 -- 78 Einstein St.
+> 113 -- ברודצקי פינת שד אבנר -- Brodetzky St./ Mayer Ebner
+6a16
+> 118 -- שלמה בן יוסף 24 -- 24  Shlomo Ben-Yosef St.
+10a21,22
+> 201 -- המשתלה ברוד מקס 12 -- The Plant Nursery – 12 Max Brod St.
+> 202 -- אהרון בקר 15 -- 15 Beker Aharon St.
+11a24,26
+> 204 -- צהל פינת עיר שמש בכיכר -- Tsahal St./ Ir Shemesh St.
+> 205 -- צה"ל מול בית 76 -- Opp. 76 Tsahal St.
+> 206 -- נווה שרת הצנחנים 2 -- Neve Sharett – 2 HaTzanchanim St.
+13a29,30
+> 209 -- עתידים -דבורה הנביאה -- Raoul Valenberg St./ Dvorah HaNeva St.- Atidim
+> 210 -- הדר יוסף - מרכז מסחרי -- Hadar Yosef – commercial center
+15a33,35
+> 213 -- שלום אש מרכז מסחרי -- 
+> 214 -- תל ברוך ביהס אלחריזי -- Tel Baruch – Alharizi School
+> 215 -- רוקח מרכז הירידים -- Trade Fairs Center
+16a37
+> 217 -- גבעת הפרחים -- 7 Marcel Yanko St.
+18a40
+> 220 -- קדש ברנע מול בית 9 -- Opp. 9 Kadesh Barnea St.
+27a50
+> 310 -- ברנדיס 20 -- 20 Brandeis St.
+51a75
+> 336 -- בן גוריון 55 -בשדרה -- 55 Ben Gurion Av.
+61a86
+> 355 -- הרברט סמואל 32 -- 32 Herbert Samuel St.
+68a94
+> 364 -- גינת שינקין-י נפחא מול 1 -- Sheinkin  garden
+84a111
+> 404 -- שארית ישראל מול 37 -- Opp. 37 Sheerit Yisrael St. Bloomfield Stadium
+86a114,115
+> 407 -- מכללת תא עזה מול 34 -- Opp. 34 Azza St. – Tlv College
+> 408 -- גרינבוים 37 - נווה עופר -- 37  Greenbaum St.
+87a117,121
+> 410 -- יפת 66 -  גן השניים -- 66 Yefet St.
+> 411 -- שוק פשפשים- רבי אחא -- Flea market – Rabbi Aha St.
+> 412 -- ישראל גורי 34 -- 34 Guri Yisrael St.
+> 414 -- שד הבעל שם טוב נוה אילן -- HaBesht Ave. – Neve Golan
+> 415 -- שדרות בן צבי 91 -- 91 Ben-Zvi Av.
+89a124
+> 418 -- ישראל מסלנט מול 13 -- opp.13 Israel Misalant St.
+90a126,129
+> 422 -- מנדס פרנס - גינת טולוז -- Mendes Parnas St. – Toulouse Gardens
+> 423 -- קדם 49 -- 49 Kedem St.
+> 424 -- אייזיק חריף מול 36 -- Opp. 36 Isaac Harif St.
+> 425 -- המחרוזת 9 -- 9 Machrozet St.
+91a131
+> 501 -- שדרות ההשכלה 11 -- Hahaskalla Av. / Krminitzki St.
+92a133,141
+> 504 -- משה דיין פינת לה גרדיה -- Moshe Dayan St./ La Guardia St.
+> 507 -- היכל נוקיה השלושה 9 -- 9 ha-shlosha St.- Nokia Arena
+> 508 -- משה דיין פינת יצחק שדה -- Moshe Dayan St./ Yitzhak Sadeh St.
+> 509 -- הטייסים 40 -- 40 HaTayassim Rd.
+> 510 -- קרייתי מול 28 -- Opp. 28 Kiryati St.
+> 511 -- ההגנה 31 - תחנת רכבת ההגנה -- 2 Derech HaHaganah St. – HaHaganah Railway station
+> 512 -- יגאל אלון 33 פינת שדרות החי"ל  -- 33 Yigal Allon St./ Hahayil
+> 513 -- משה דיין 45 -- 45 Moshe Dayan St.
+> 514 -- מעפילי אגוז 59 -- 59 Maapilei Egoz St.
+94c143,151
+< 526 -- לה גווארדיה 24 -- 24 La Guardia
+---
+> 516 -- מחל 79 -- 79 Mahal St.
+> 517 -- דרך בר לב 186 -- 186 Bar-Lev Rd.
+> 518 -- דרך בר לב 111 -- 111 Bar-Lev Rd.
+> 519 -- ילקוט  הרועים 2 - נחלת יצחק -- 2 Yalkut HaRoim St. / Nachlat Yitzhak
+> 520 -- פארק דרום בכניסה -- Park Darom – Entrance (Biranit St.)
+> 522 -- תחנת רכבת ההגנה -- Hahgana Railway Station
+> 523 -- אצל 93 -- 93 Etsel St.
+> 525 -- עזריאלי-בירידה לאיילון דרום -- Opp. Azrieli Center - Ayalon South
+> 526 -- לה גווארדיה 24 -- 24 La Guardia
+\ No newline at end of file

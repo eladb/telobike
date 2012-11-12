@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var logule = require('logule');
 var cors = require('./lib/cors');
-var server = express.createServer();
+var server = express();
 var csvdb = require('csvdb');
 
 var overrides_url = 'https://docs.google.com/spreadsheet/pub?key=0AuP9sJn-WbrXdFdOV1lPV09EZDBrQ2RlZzM5ZmhPb2c&output=csv';

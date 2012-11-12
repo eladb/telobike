@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+var bridge = require('../lib/bridge');
+return bridge('he', function(err, stations) {
+  if (err) console.error(err);
+  else console.log(stations);
+});

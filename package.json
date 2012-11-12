@@ -18,7 +18,8 @@
     "mkdirp": "*",
     "request": "2.9.202",
     "logule": "0.6.1",
-    "csvdb": "0.0.3"
+    "csvdb": "0.0.3",
+    "soap": "git://github.com/eladb/node-soap.git#master"
   },
   "scripts": {
       "start": "app.js"

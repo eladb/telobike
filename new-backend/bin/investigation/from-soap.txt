@@ -1,0 +1,94 @@
+370 -- רוטשילד 65 -- 65 Rothschild Av./ Nachmami St.
+362 -- רוטשילד 108 -- 108 Rothshild Av. 
+371 -- בגין 48 פינת הרכבת -- 48 Menachem Begin Rd./ HaRakevet St.
+363 -- בית רובינשטיין-צ. מעריב -- Begin/ Lincoln -Biet Rubinshtein
+368 -- אלנבי 90 פינת מאזה -- 90 Allenby St./ Maze St.
+357 -- רוטשילד 140 -- 140 Rothshild Av. - Habima
+375 -- יהודה הלוי 43 פינת אלנבי -- 43 Yehuda HaLevi St./ Allenby St.
+358 -- שפרינצק 1 - סינימטק -- 1 Shprintsak St. - Cinematek
+369 -- רוטשילד 11 פינת הרצל -- 11 Rothshild Av./ Herzl St.
+361 -- אלנבי 53 שוק הכרמל -- 53 Allenby St. - Carmel Market
+380 -- גן מאיר - רחוב קינג גורג -- King George St.- Meir Garden
+365 -- יצחק שדה 17 - ביטוח לאומי -- 17 Yitskhak Sadeh St. 
+372 -- יד חרוצים 17 - המסגר -- 17 Yad Kharutsim St./Ha-Masger
+402 -- לוינסקי 83א -- 83 Elhanan Eib Levinski St.
+348 -- שדרות בן ציון  1 -- 1 Shderot Ben Tsiyon St.
+346 -- אבן גבירול 28 -- 28 Ibn Gabirol St.
+366 -- כרמלית פינת הכרמל -- Carmelit/ Ha-Carmel Market
+359 -- קפלן פינת ארניה -- Kaplan St./ Aaranha St.
+401 -- יסוד המעלה 64 - ת. מרכזית -- 64 Yesud ha-Maala  St. - Central Bus Station
+354 -- בן יהודה 1 -- 1 Ben Yehuda St.
+430 -- העליה 49 -- HaAliya 49
+347 -- בוגרשוב 45 פינת פינסקר -- Bograshov 45/ Pinsker st.
+360 -- שד יהודית 11 פינת הנציב -- 11 Sderot Yehudit /Ha-Nanatsiv St.
+342 -- שאול המלך 21 קאמרי -- 21 Sauol Hamelekh- Hakameri
+344 -- נצח ישראל 4 פינת מסריק -- 4 Netsakh Yisrael St./ Masaryk
+379 -- שבזי 19 -נווה צדק -- Shabazi 19 Neve Tsedek
+416 -- פלורנטין שד וושינגטון  -- Washington Av./ Florentin St.
+343 -- ככר דיזינגוף  -- 2 Reiness St. - Dizengoff Square
+526 -- לה גווארדיה 24 -- 24 La Guardia
+381 -- פרישמן 77 -- 77 Frishman St.
+367 -- קויפמן 2 -  תחנת הדלק -- Opp. 2 Koifman St. - Gas Station
+503 -- יגאל אלון 96 -- 96 Yigal Allon St.
+345 -- ויצמן 1 -  בית המשפט -- 1 Weizman St. - Court Justice Hall
+341 -- הרברט סמואל 90 -- 90 Herbert Samuel St.
+331 -- כיכר רבין -- Rabin Square
+377 -- מתחם התחנה -- Hatachana
+332 -- דוד המלך 30 -- 30 David Hamellech St.
+335 -- דיזנגוף 126 -- 126 Meir Dizengoff St.
+334 -- בן יהודה 86 -- 86 Ben Yehuda St.
+330 -- שדרות בן גוריון 68 -- 68 Ben Gurion Av.
+333 -- ויצמן 15-איכילוב -- 15 weizman st. Ichilov Hospital
+324 -- אבן גבירול 106 -בית הדואר -- 106 Ibn Gvirol St. - Post Office
+515 -- סמטת כביר 18 -- 18 Kabir Lane
+406 -- הרצל 155 - גני הטבע -- 155 Herzl St. - Botanical Garden
+323 -- תשח 2 -- 2 Tashah St.
+337 -- ארלוזורוב 62 -- 62 Arlozorov St.
+403 -- רציף העליה השניה - כיכר השעון --  The Clock Tower
+325 -- הלסינקי 3 -- 3 Helsinki St.
+319 -- אבן גבירול 124 -- 124 Ibn Gvirol St.
+329 -- מלון קרלטון בטיילת -- Carlton Hotel - Tayelet
+420 -- שד ירושלים פינת בן צבי 1 -- Jerusalem Av./ 1 Ben Zvi Av.
+321 -- ה באייר 2- כיכר המדינה -- 2 Heh be-iyar St. - Ha-Medina Square
+318 -- בן יהודה 192 -- 192 Ben Yehuda St.
+326 -- תחנת רכבת סבידור -- Savidor Train Station Center
+320 -- השלה 1  -מתחם בזל -- 1 HaShlah St. - Basel Area
+322 -- שדרות הציונות 1  --  1 Tsiyonut Av
+405 -- כיכר קדומים -יפו העתיקה -- Kedumim Square – Old jaffa
+314 -- נורדאו 101בשדרה -- 101 Nordau St.
+315 -- דה האז 30 -- 30 De Haas St.
+313 -- דיזנגוף 280 -- 280 Meir Dizengoff St.
+316 -- ויצמן 60 - בית החייל -- 60 Weizman St. - Beit Ha-Khyal
+409 -- נמל יפו מבנה המגדלור -- Nemal Yaffo - Ha-migdalor (jaffa Port)
+306 -- אלוני ניסים 8 -- 8 Nisim Aloni St.
+311 -- אבן גבירול 182 -- 182 Ibn Gvirol St.
+317 -- פנקס  69 -- 69 Pinkas St.
+312 -- הנמל 12-מציצים -- 12 Namel Tel Aviv - Metzitzim Beach
+417 -- שד ירושלים פ. נחל הבשור -- Yerushalayim Av. Nahal Habsor
+303 -- אוסישקין 48 -- 48 Ussishkin St.
+302 -- דיזנגוף 342 -- 342 Meir Dizengoff St.
+309 -- יהודה מכבי 81 -- 81 Yehuda Hamakabi St.
+307 -- בני דן 56- גני יהושוע -- 56 Bnei Dan St.
+304 -- שדרות רוקח-חניון רידינג -- Rokach Yisrael - Reeding Parking Lot
+328 -- בבלי פעמוני 2 -- 2 Paamony St. - Bavli
+305 -- שדרות רוקח - ספורטק -- Rokach Yisrael - Sportek
+301 -- נמל תל אביב כיכר שלוותה -- Namel Tel Aviv - Shalvata
+308 -- קוסובסקי 34 -גני יהושוע -- 34 Kosowski St.
+116 -- שי עגנון 59 -- 59 Agnon St./ Israel Galili St.
+117 -- דרך נמיר - סמינר הקיבוצים -- Derekh Namir - Seminar Ha-Kibutsim
+114 -- לוי אשכול 26 -- 26 Levi Eshkol St. - Sde Dov Airport
+216 -- תחנת רכבת אונברסיטה -- University Railway Station
+122 -- אוניברסיטה שער 4 -- University - Gate 4
+120 -- הגוש הגדול אמיר גלבע 17 -- 17 Amir Gilboa st.
+123 -- האוניברסיטה - ספריה -- University - Library
+107 -- חוף תל ברוך -- Tel Baruch beach
+121 -- רב אשי 11 מרכז מסחרי -- 11 Rav Ashi st.
+207 -- קהילת קיוב 3 - המכללה להנדסאים -- 3 Kehillat Kiov St. – College of Practical Engineering
+218 -- ראול ולנברג פינת הברזל -- Raoul Wallenberg St./ HaBarzel St.
+208 -- מול פנחס רוזן 62 -- Opp. 62 Pinchas Rosen St.
+212 -- הרוגי המלכות 6 -- 6 Harugey Malkhot St.
+203 -- לאה 16 פינת אלתרמן -- 16 Lea St./ Alterman St.
+219 -- שיכון דן משמר הירדן 79 -- Shikun Dan – 79 Mishmar HaYarden St.
+211 -- אסותא הברזל 23 -- Assuta – 23 HaBarzel St.
+102 -- חוף הצוק הדרומי סאמט שמעון -- South Cliff Beach
+101 -- חוף הצוק הצפוני מלון מנדרין -- North Cliff Beach
