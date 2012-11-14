@@ -43,7 +43,7 @@ module.exports = function(station) {
     available_bike: station.IsActive && station.NumOfAvailableBikes,
     available_spaces: station.IsActive && station.NumOfAvailableDocks,
     city: 'tlv',
-    last_update: station.Timestamp,
+    last_update: station.Timestamp.replace(/[\"Z]/g, '').replace(/T/g, ' '),
     latitude: station.Latitude,
     location: station.Latitude + ',' + station.Longitude,
     longitude: station.Longitude,
