@@ -4,6 +4,8 @@ var logule = require('logule');
 var cors = require('./lib/cors');
 var server = express();
 var csvdb = require('csvdb');
+var telofun_api = require('./telofun-api');
+var telofun_mapper = require('./telofun-mapper');
 
 var overrides_url = 'https://docs.google.com/spreadsheet/pub?key=0AuP9sJn-WbrXdFdOV1lPV09EZDBrQ2RlZzM5ZmhPb2c&output=csv';
 var overrides_db = csvdb(overrides_url, { autofetch: 30 * 1000 }); // refresh overrides every 30s
@@ -16,74 +18,45 @@ server.use(express.methodOverride());
 server.use(cors());
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
 
-var stations = require('./lib/tlv')();
-
-var bridge = require('./lib/bridge');
-
 var stations = {};
 
 function read_stations(callback) {
   callback = callback || function() {};
-  logule.trace('Reading station information from tel-o-fun');
-  return bridge('he', function(err, updated_stations) {
+  logule.trace('reading station information from tel-o-fun');
+
+  return telofun_api(function(err, updated_stations) {
     if (err) {
-      logule.error(err);
+      console.error('error: unable to read telofun stations:', err);
       return callback(err);
     }
 
-    for (var sid in updated_stations) {
-      var station = stations[sid];
-      if (!station) stations[sid] = station = {};
-      var updated_station = updated_stations[sid];
-      for (var k in updated_station) {
-        station[k] = updated_station[k];
-      }
-    }
+    console.log(updated_stations.length + ' stations retrieved');
 
-    return callback(null, updated_stations);
-  });
-}
+    // map stations from tel-o-fun protocol to tel-o-bike protocol
+    mapped_stations = updated_stations.map(telofun_mapper);
 
-function read_en_stations(callback) {
-  if (typeof callback !== 'function') callback = null;
-  callback = callback || function() {};
+    // update cached stations
+    stations = {};    
+    mapped_stations.forEach(function(s) {
+      stations[s.sid] = s;
+    });
 
-  logule.trace('Merging en station names and addresses');
-  
-  return bridge('en', function(err, updated_en_stations) {
-    if (err) { 
-      logule.error(err);
-      return callback(err);
-    }
-
-    for (var sid in updated_en_stations) {
-      var en_station = updated_en_stations[sid];
-      var station = stations[sid];
-      if (!station) station = en_station;
-      station.name_en = en_station.name;
-      station.address_en = en_station.address;
-    }
-
-    return callback(null, updated_en_stations);
+    return callback(null, mapped_stations);
   });
 }
 
 setInterval(read_stations, 30*1000); // update station info every 30 seconds
-setInterval(read_en_stations, 30*60*1000); // update en names every 30 minutes
+read_stations();
 
 setInterval(function() {
   var mb = Math.round(process.memoryUsage().heapTotal / 1024);
-  logule.trace(mb + ' KB');
+  logule.trace(mb + ' kb');
 }, 2500);
 
-read_stations(function(err) {
-  if (!err) read_en_stations();
-});
-
-function bridge_handler(req, res) {
+function get_stations(req, res) {
   if (!stations) {
-    res.writeHead(500);
-    return res.end('No stations information from tel-o-fun');
+    res.writeHead(404);
+    return res.end('no stations information from tel-o-fun');
   }
 
   var result = [];
@@ -111,11 +84,11 @@ function bridge_handler(req, res) {
 server.get('/', function(req, res) {
   return res.redirect('http://itunes.apple.com/us/app/tel-o-bike-tel-aviv-bicycle/id436915919?mt=8');
 });
-server.get('/stations', bridge_handler);
-server.get('/tlv/stations', bridge_handler);
+
+server.get('/stations', get_stations);
+server.get('/tlv/stations', get_stations);
 server.get('/cities/tlv', function(req, res) {
   var city = {};
-
   city.city = "tlv";
   city.city_center = "32.0664,34.7779";
   city.city_name = "תל-אביב יפו";
@@ -128,13 +101,12 @@ server.get('/cities/tlv', function(req, res) {
   city.mail_tags = "This problem was reported via telobike";
   city.service_name= "תל-אופן";
   city['service_name.en'] = "Tel-o-Fun";
-
   return res.send(city);
 });
 
 server.post('/_deploy_dskfjh484jk09k', function(req, res) {
   var backoff_sec = Math.round(5 + Math.random() * 35); // between 5s and 30s
-  console.log('Deployment request. Exit in', backoff_sec + 's');
+  console.log('deployment request. Exit in', backoff_sec + 's');
   setTimeout(function() {
     console.log('Bye');
     process.exit(0);
@@ -142,38 +114,6 @@ server.post('/_deploy_dskfjh484jk09k', function(req, res) {
   res.end('OK');
 });
 
-// server.get('/tlv/stations', function(req, res) {
-//   return stations.all(function(err, stations) {
-//     if (err) return res.send(err);
-
-//     var arr = [];
-//     for (var id in stations) {
-//       var s = stations[id];
-//       s.url = '/tlv/stations/' + id;
-//       arr.push(s);
-//     }
-
-//     return res.send(arr);
-//   });
-// });
-
-// server.get('/tlv/stations/:id', function(req, res) {
-//   stations.one(req.params.id, function(err, station) {
-//     if (err) return res.send(err);
-//     return res.send(station);
-//   });
-// });
-
-// server.use(express.static(path.join(__dirname, 'public')));
-
 server.listen(process.env.port || 5000);
-
-// var REFRESH_INTERVAL = 5 * 60 * 1000; // every 5 minutes
-// setInterval(function() {
-//   console.log('Refresh stations');
-//   stations.refresh();
-// }, REFRESH_INTERVAL);
-
-// stations.refresh(); // refresh upon start
 
 logule.trace('telobike server started. listening on %s', process.env.port || 5000);
