@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1181</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>IBMKMapView</string>
+			<string>IBProxyObject</string>
 			<string>IBUIButton</string>
 			<string>IBUIImageView</string>
-			<string>IBUIView</string>
 			<string>IBUILabel</string>
-			<string>IBProxyObject</string>
+			<string>IBUIView</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -47,8 +47,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -64,7 +62,6 @@
 								<int key="NSvFlags">295</int>
 								<string key="NSFrameSize">{321, 168}</string>
 								<reference key="NSSuperview" ref="460380492"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="542996284"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -83,7 +80,6 @@
 								<int key="NSvFlags">293</int>
 								<string key="NSFrame">{{37, 15}, {245, 25}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="73105567"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -116,7 +112,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{35, 107}, {101, 40}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="142766722"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -155,7 +150,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{184, 107}, {101, 40}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="971101448"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -178,7 +172,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{139, 107}, {41, 40}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="630559526"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -215,7 +208,6 @@
 								<int key="NSvFlags">-2147483355</int>
 								<string key="NSFrame">{{30, 60}, {261, 25}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1073492703"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -244,7 +236,6 @@
 										<int key="NSvFlags">293</int>
 										<string key="NSFrame">{{5, 0}, {126, 60}}</string>
 										<reference key="NSSuperview" ref="73105567"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="123217355"/>
 										<int key="IBUIContentMode">9</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -259,7 +250,6 @@
 										<int key="NSvFlags">293</int>
 										<string key="NSFrame">{{133, 0}, {122, 60}}</string>
 										<reference key="NSSuperview" ref="73105567"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="137134145"/>
 										<int key="IBUIContentMode">9</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -274,7 +264,6 @@
 										<int key="NSvFlags">293</int>
 										<string key="NSFrame">{{196, 5}, {54, 46}}</string>
 										<reference key="NSSuperview" ref="73105567"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="409331726"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -304,7 +293,6 @@
 										<int key="NSvFlags">293</int>
 										<string key="NSFrame">{{66, 5}, {54, 46}}</string>
 										<reference key="NSSuperview" ref="73105567"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="578359261"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -325,7 +313,6 @@
 										<int key="NSvFlags">293</int>
 										<string key="NSFrame">{{12, 7}, {53, 45}}</string>
 										<reference key="NSSuperview" ref="73105567"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="453309884"/>
 										<int key="IBUIContentMode">4</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -340,7 +327,6 @@
 										<int key="NSvFlags">293</int>
 										<string key="NSFrame">{{140, 7}, {53, 44}}</string>
 										<reference key="NSSuperview" ref="73105567"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="145861120"/>
 										<int key="IBUIContentMode">4</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -353,7 +339,6 @@
 								</object>
 								<string key="NSFrame">{{30, 45}, {261, 60}}</string>
 								<reference key="NSSuperview" ref="460380492"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="573979456"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -367,7 +352,6 @@
 						</object>
 						<string key="NSFrame">{{0, -5}, {321, 163}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="509595615"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -378,7 +362,6 @@
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="460380492"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -739,201 +722,12 @@
 			<nil key="sourceID"/>
 			<int key="maxID">59</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">MKMapViewWithTouch</string>
-					<string key="superclassName">MKMapView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MKMapViewWithTouch.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MapViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>navigateToStation:</string>
-							<string>refresh:</string>
-							<string>reportProblemInStation:</string>
-							<string>toggleFavorite:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>navigateToStation:</string>
-							<string>refresh:</string>
-							<string>reportProblemInStation:</string>
-							<string>toggleFavorite:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">navigateToStation:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">refresh:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">reportProblemInStation:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">toggleFavorite:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>availBikeLabel</string>
-							<string>availParkLabel</string>
-							<string>bikeBox</string>
-							<string>detailsPane</string>
-							<string>favoriteButton</string>
-							<string>inactiveStationLabel</string>
-							<string>map</string>
-							<string>myLocationButton</string>
-							<string>navigateToStationButton</string>
-							<string>parkBox</string>
-							<string>reportProblemButton</string>
-							<string>searchBar</string>
-							<string>stationBoxesPanel</string>
-							<string>stationDistanceLabel</string>
-							<string>stationName</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIImageView</string>
-							<string>UIView</string>
-							<string>UIButton</string>
-							<string>UILabel</string>
-							<string>MKMapViewWithTouch</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIImageView</string>
-							<string>UIButton</string>
-							<string>UISearchBar</string>
-							<string>UIView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>availBikeLabel</string>
-							<string>availParkLabel</string>
-							<string>bikeBox</string>
-							<string>detailsPane</string>
-							<string>favoriteButton</string>
-							<string>inactiveStationLabel</string>
-							<string>map</string>
-							<string>myLocationButton</string>
-							<string>navigateToStationButton</string>
-							<string>parkBox</string>
-							<string>reportProblemButton</string>
-							<string>searchBar</string>
-							<string>stationBoxesPanel</string>
-							<string>stationDistanceLabel</string>
-							<string>stationName</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">availBikeLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">availParkLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">bikeBox</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">detailsPane</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">favoriteButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">inactiveStationLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">map</string>
-								<string key="candidateClassName">MKMapViewWithTouch</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">myLocationButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">navigateToStationButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">parkBox</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">reportProblemButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">searchBar</string>
-								<string key="candidateClassName">UISearchBar</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">stationBoxesPanel</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">stationDistanceLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">stationName</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MapViewController.h</string>
-					</object>
-				</object>
-			</object>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1296" key="NS.object.0"/>
+			<real value="1536" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
@@ -966,6 +760,6 @@
 				<string>{123, 58}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1181</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>
