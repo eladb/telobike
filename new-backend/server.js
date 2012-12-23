@@ -38,7 +38,9 @@ function read_stations(callback) {
     // update cached stations
     stations = {};    
     mapped_stations.forEach(function(s) {
-      stations[s.sid] = s;
+      if(s.IsActive){
+        stations[s.sid] = s;
+      }
     });
 
     return callback(null, mapped_stations);

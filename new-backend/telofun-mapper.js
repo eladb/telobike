@@ -40,6 +40,7 @@
 
 module.exports = function(station) {
   return {
+    IsActive: station.IsActive,
     available_bike: station.IsActive && station.NumOfAvailableBikes,
     available_spaces: station.IsActive && station.NumOfAvailableDocks,
     city: 'tlv',
