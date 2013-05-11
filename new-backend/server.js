@@ -18,6 +18,7 @@ server.use(express.methodOverride());
 server.use(cors());
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
 
+
 var stations = {};
 
 function read_stations(callback) {
@@ -84,6 +85,11 @@ function get_stations(req, res) {
 }
 
 server.get('/', function(req, res) {
+  var host_parts = req.headers.host.split(':')[0].split('.');
+  if (host_parts[0] === 'worldtour') {
+    return res.redirect('http://www.tripcolor.com/user/53139/trip/C027FFEF-C4CF-4A4F-AA13-B8B11D1E4D75')
+  }
+
   return res.redirect('http://itunes.apple.com/us/app/tel-o-bike-tel-aviv-bicycle/id436915919?mt=8');
 });
 
