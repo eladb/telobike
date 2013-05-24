@@ -136,10 +136,12 @@
     else {
         [[Analytics shared] eventStopTimer];
         
-        NSTimeInterval interval = [timePicker countDownDuration] + 1.0;
 #if TARGET_IPHONE_SIMULATOR
-        interval = 5.0;
+        NSTimeInterval interval = 5.0;
+#else
+        NSTimeInterval interval = [timePicker countDownDuration] + 1.0;
 #endif
+        
         notification = [[UILocalNotification alloc] init];
         notification.fireDate = [[NSDate date] dateByAddingTimeInterval:interval];
         notification.alertBody = NSLocalizedString(@"ALERT_BODY", nil);

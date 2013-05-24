@@ -34,7 +34,12 @@
             [items addObject:newItem];
         }
         [_visibleTabBar setItems:items];
-        [_visibleTabBar setFrame:CGRectMake(0, 480 - 49, 320, 49)];
+
+        // >>should fix 5" iphones
+        CGRect barRect = [[UIScreen mainScreen] bounds];
+        barRect.origin.y = barRect.size.height - 49;
+        barRect.size.height = 49;
+        [_visibleTabBar setFrame:barRect];
         [[self view] addSubview:_visibleTabBar];
     }
     return self;

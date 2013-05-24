@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "StationList.h"
 #import "City.h"
-#import "LoadingViewController.h"
+#import "LoadingVC.h"
 #import "IASKAppSettingsViewController.h"
 #import "Appirater.h"
 
@@ -68,7 +68,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     _feedbackOptions = [[FeedbackOptions alloc] init];
     _feedbackOptions.delegate = self;
     
-    LoadingViewController* vc = [[LoadingViewController new] autorelease];
+    LoadingVC* vc = [[LoadingVC new] autorelease];
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     

@@ -121,8 +121,6 @@
 		04C905E51399A64B007489A0 /* info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E21399A64B007489A0 /* info@2x.png */; };
 		04C905E91399A6C5007489A0 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E71399A6C4007489A0 /* home.png */; };
 		04C905EA1399A6C5007489A0 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E81399A6C5007489A0 /* home@2x.png */; };
-		04C905F21399AD5E007489A0 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C905F01399AD5B007489A0 /* LoadingViewController.m */; };
-		04C905F31399AD5E007489A0 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C905F11399AD5D007489A0 /* LoadingViewController.xib */; };
 		F4012D4814766FB200EFA21A /* YellowStar.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4614766FB200EFA21A /* YellowStar.png */; };
 		F4012D4914766FB200EFA21A /* YellowStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4714766FB200EFA21A /* YellowStar@2x.png */; };
 		F4012D4C1476764900EFA21A /* TimerBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4A1476764900EFA21A /* TimerBackground.png */; };
@@ -174,6 +172,8 @@
 		F4BA7F211473E7CA00730050 /* StationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */; };
 		F4C6A55F1451DD2500732558 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55D1451DD2500732558 /* map.png */; };
 		F4C6A5601451DD2500732558 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C6A55E1451DD2500732558 /* map@2x.png */; };
+		F4F06F01174C80A400F279C5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F06F00174C80A400F279C5 /* Default-568h@2x.png */; };
+		F4F06F04174C881700F279C5 /* LoadingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F06F03174C881600F279C5 /* LoadingVC.m */; };
 		F4F9B743145C220D007D75F4 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B71D145C220D007D75F4 /* IASKAppSettingsViewController.m */; };
 		F4F9B744145C220D007D75F4 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B71F145C220D007D75F4 /* IASKAppSettingsWebViewController.m */; };
 		F4F9B745145C220D007D75F4 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F9B721145C220D007D75F4 /* IASKSpecifierValuesViewController.m */; };
@@ -361,9 +361,6 @@
 		04C905E21399A64B007489A0 /* info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info@2x.png"; path = "telobike/assets/info@2x.png"; sourceTree = SOURCE_ROOT; };
 		04C905E71399A6C4007489A0 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = telobike/assets/home.png; sourceTree = SOURCE_ROOT; };
 		04C905E81399A6C5007489A0 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home@2x.png"; path = "telobike/assets/home@2x.png"; sourceTree = SOURCE_ROOT; };
-		04C905EF1399AD5B007489A0 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
-		04C905F01399AD5B007489A0 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
-		04C905F11399AD5D007489A0 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
 		F4012D4614766FB200EFA21A /* YellowStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowStar.png; path = telobike/assets/YellowStar.png; sourceTree = SOURCE_ROOT; };
 		F4012D4714766FB200EFA21A /* YellowStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowStar@2x.png"; path = "telobike/assets/YellowStar@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D4A1476764900EFA21A /* TimerBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TimerBackground.png; path = telobike/assets/TimerBackground.png; sourceTree = SOURCE_ROOT; };
@@ -422,6 +419,9 @@
 		F4BA7F201473E7CA00730050 /* StationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationTableViewCell.xib; sourceTree = "<group>"; };
 		F4C6A55D1451DD2500732558 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = telobike/assets/map.png; sourceTree = SOURCE_ROOT; };
 		F4C6A55E1451DD2500732558 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "telobike/assets/map@2x.png"; sourceTree = SOURCE_ROOT; };
+		F4F06F00174C80A400F279C5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F4F06F02174C881600F279C5 /* LoadingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingVC.h; sourceTree = "<group>"; };
+		F4F06F03174C881600F279C5 /* LoadingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingVC.m; sourceTree = "<group>"; };
 		F4F9B71C145C220D007D75F4 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		F4F9B71D145C220D007D75F4 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
 		F4F9B71E145C220D007D75F4 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
@@ -496,6 +496,7 @@
 				F4719BBC147663EC0055443B /* map */,
 				04A7335F1378B31A000D3A0C /* Default.png */,
 				04A9A7E21378BCFE004A5842 /* Default@2x.png */,
+				F4F06F00174C80A400F279C5 /* Default-568h@2x.png */,
 				04A733591378B208000D3A0C /* Icon.png */,
 				04A7335A1378B208000D3A0C /* Icon@2x.png */,
 			);
@@ -603,9 +604,8 @@
 				04C905DC1399A4D7007489A0 /* InfoViewController.h */,
 				04C905DD1399A4D8007489A0 /* InfoViewController.m */,
 				04C905DE1399A4D8007489A0 /* InfoViewController.xib */,
-				04C905EF1399AD5B007489A0 /* LoadingViewController.h */,
-				04C905F01399AD5B007489A0 /* LoadingViewController.m */,
-				04C905F11399AD5D007489A0 /* LoadingViewController.xib */,
+				F4F06F02174C881600F279C5 /* LoadingVC.h */,
+				F4F06F03174C881600F279C5 /* LoadingVC.m */,
 				04C905CB13999751007489A0 /* ReportProblem.h */,
 				04C905CC13999752007489A0 /* ReportProblem.m */,
 				04863E02139B880D00274D50 /* SendFeedback.h */,
@@ -1045,7 +1045,6 @@
 				04C905E51399A64B007489A0 /* info@2x.png in Resources */,
 				04C905E91399A6C5007489A0 /* home.png in Resources */,
 				04C905EA1399A6C5007489A0 /* home@2x.png in Resources */,
-				04C905F31399AD5E007489A0 /* LoadingViewController.xib in Resources */,
 				04863D9B139B71D900274D50 /* blackArrow.png in Resources */,
 				04863D9C139B71D900274D50 /* blackArrow@2x.png in Resources */,
 				04863D9D139B71D900274D50 /* blueArrow.png in Resources */,
@@ -1135,6 +1134,7 @@
 				F45361041486069D00ED0293 /* YellowFullMenu@2x.png in Resources */,
 				F4536107148606A800ED0293 /* YellowFull.png in Resources */,
 				F4536108148606A800ED0293 /* YellowFull@2x.png in Resources */,
+				F4F06F01174C80A400F279C5 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,7 +1167,6 @@
 				0481E45B139635AB0046C4D1 /* Globals.m in Sources */,
 				04C905CD13999752007489A0 /* ReportProblem.m in Sources */,
 				04C905DF1399A4D9007489A0 /* InfoViewController.m in Sources */,
-				04C905F21399AD5E007489A0 /* LoadingViewController.m in Sources */,
 				04863D9A139B71D900274D50 /* EGORefreshTableHeaderView.m in Sources */,
 				04863E04139B880E00274D50 /* SendFeedback.m in Sources */,
 				04863FB6139BAFDA00274D50 /* Appirater.m in Sources */,
@@ -1206,6 +1205,7 @@
 				F4012D691476A6FA00EFA21A /* MyLocationTableViewCell.m in Sources */,
 				F4012D6D1476B92800EFA21A /* TabBarController.m in Sources */,
 				F47D5F0E156C03EC005BC5B3 /* MKMapViewWithTouch.m in Sources */,
+				F4F06F04174C881700F279C5 /* LoadingVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
