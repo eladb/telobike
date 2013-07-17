@@ -26,6 +26,9 @@ function read_stations(callback) {
   logule.trace('reading station information from tel-o-fun');
 
   return telofun_api(function(err, updated_stations) {
+
+    console.log(updated_stations);
+
     if (err) {
       console.error('error: unable to read telofun stations:', err);
       return callback(err);

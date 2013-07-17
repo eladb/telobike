@@ -102,7 +102,7 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     [_noFavorites2 setText:NSLocalizedString(@"FAVORITES_EMPTY_LIST_2", nil)];
     
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(hideSearchBarFirstTime:) userInfo:nil repeats:NO];
-
+    
     [super viewDidLoad];
 }
 

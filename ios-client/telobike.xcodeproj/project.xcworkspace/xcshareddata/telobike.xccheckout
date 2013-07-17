@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8FF58322-9ED1-4FD6-8047-5A09B6D72D2F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>telobike</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C1D42097-F3FA-4580-9B5D-87BFDE67F4CE</key>
+		<string>ssh://github.com/eladb/telobike.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios-client/telobike.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C1D42097-F3FA-4580-9B5D-87BFDE67F4CE</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/eladb/telobike.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C1D42097-F3FA-4580-9B5D-87BFDE67F4CE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C1D42097-F3FA-4580-9B5D-87BFDE67F4CE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>telobike</string>
+		</dict>
+	</array>
+</dict>
+</plist>
