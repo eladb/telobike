@@ -101,7 +101,7 @@ server.get('/cities/tlv', function(req, res) {
   city.city_center = "32.0664,34.7779";
   city.city_name = "תל-אביב יפו";
   city['city_name.en'] = "Tel-Aviv";
-  city.disclaimer = "In the last couple of days\nthe Tel-o-Fun database seems to be providing wrong data.\nWe are trying to figure it out.\nSorry, Nir and Elad"
+  city.disclaimer = "Horray! The recent issues with the Tel-o-Fun database have been resolved. Enjoy cycling! Nir and Elad";
   city.info_url = "http://telobike.citylifeapps.com/static/en/tlv.html";
   city.info_url_he = "http://telobike.citylifeapps.com/static/he/tlv.html";
   city.last_update = "2011-06-15 18:47:50.982111";
