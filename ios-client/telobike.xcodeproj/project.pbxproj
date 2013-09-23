@@ -130,7 +130,6 @@
 		F4536108148606A800ED0293 /* YellowFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4536106148606A800ED0293 /* YellowFull@2x.png */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
-		F4719BB414763D5A0055443B /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4719BB314763D5A0055443B /* libGoogleAnalytics.a */; };
 		F4719BBA147642780055443B /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = F4719BB9147642780055443B /* Analytics.m */; };
 		F4719BBF1476642C0055443B /* yellowbox.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BBD1476642C0055443B /* yellowbox.png */; };
 		F4719BC01476642C0055443B /* yellowbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BBE1476642C0055443B /* yellowbox@2x.png */; };
@@ -305,8 +304,6 @@
 		F4536106148606A800ED0293 /* YellowFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowFull@2x.png"; sourceTree = "<group>"; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		F4719BB214763D5A0055443B /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GANTracker.h; path = GoogleAnalyticsSDK/Library/GANTracker.h; sourceTree = "<group>"; };
-		F4719BB314763D5A0055443B /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = GoogleAnalyticsSDK/Library/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		F4719BB8147642780055443B /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 		F4719BB9147642780055443B /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analytics.m; sourceTree = "<group>"; };
 		F4719BBD1476642C0055443B /* yellowbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowbox.png; path = telobike/assets/yellowbox.png; sourceTree = SOURCE_ROOT; };
@@ -357,7 +354,6 @@
 				04954128137495DD00F98DC0 /* UIKit.framework in Frameworks */,
 				0495412A137495DD00F98DC0 /* Foundation.framework in Frameworks */,
 				0495412C137495DD00F98DC0 /* CoreGraphics.framework in Frameworks */,
-				F4719BB414763D5A0055443B /* libGoogleAnalytics.a in Frameworks */,
 				1A8FECF72D944A4FB1654216 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				F43C3E8117F0D16000F7199B /* AMBlurView */,
-				F4719BB114763D1B0055443B /* GoogleAnalytics */,
 				04863D8C139B71D800274D50 /* EGOTableViewPullRefresh */,
 			);
 			path = ext;
@@ -613,15 +608,6 @@
 				F43C3E8317F0D17500F7199B /* AMBlurView.m */,
 			);
 			name = AMBlurView;
-			sourceTree = "<group>";
-		};
-		F4719BB114763D1B0055443B /* GoogleAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				F4719BB214763D5A0055443B /* GANTracker.h */,
-				F4719BB314763D5A0055443B /* libGoogleAnalytics.a */,
-			);
-			name = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 		F4719BBC147663EC0055443B /* map */ = {

@@ -7,6 +7,8 @@
 //
 
 #import "Analytics.h"
+#import <GoogleAnalytics-iOS-SDK/GAI.h>
+#import <GoogleAnalytics-iOS-SDK/GAIDictionaryBuilder.h>
 
 static const NSInteger kGANDispatchPeriodSec = 10;
 
@@ -23,23 +25,31 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 - (void)startTracker
 {
-    // google analytics
-    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-27122332-1" dispatchPeriod:kGANDispatchPeriodSec delegate:self];
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = 20;
+    [[GAI sharedInstance] logger].logLevel = kGAILogLevelVerbose;
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-27122332-1"];
 }
 
 - (void)stopTracker
 {
-    [[GANTracker sharedTracker] stopTracker];
+//    [[GANTracker sharedTracker] stopTracker];
 }
 
 #pragma mark - Pageviews
 
-- (void)pageView:(NSString*)page 
+- (id<GAITracker>)tracker
 {
-    NSError* err;
-    if (![[GANTracker sharedTracker] trackPageview:page withError:&err]) {
-        NSLog(@"GA pageview error: %@", err);
-    }
+    return [[GAI sharedInstance] defaultTracker];
+}
+
+- (void)pageView:(NSString*)page
+{
+    NSDictionary* d = [[GAIDictionaryBuilder createEventWithCategory:@"pageview"
+                                                             action:@"pageview"
+                                                               label:page
+                                                               value:nil] build];
+    [[self tracker] send:d];
 }
 
 - (void)pageViewList       { [self pageView:@"list"]; }
@@ -52,10 +62,11 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 - (void)event:(NSString*)event action:(NSString*)action label:(NSString*)label
 {
-    NSError* err;
-    if (![[GANTracker sharedTracker] trackEvent:event action:action label:label value:-1 withError:&err]) {
-        NSLog(@"GA event error: %@", err);
-    }
+    NSDictionary* d = [[GAIDictionaryBuilder createEventWithCategory:event
+                                                              action:action
+                                                               label:label
+                                                               value:nil] build];
+    [[self tracker] send:d];
 }
 
 - (void)eventAppStart                              { [self event:@"app" action:@"start" label:nil]; }
@@ -66,21 +77,5 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 - (void)eventRemoveFavorite:(NSString*)stationID   { [self event:@"favorite" action:@"remove" label:stationID]; }
 - (void)eventReportProblem:(NSString*)problemType  { [self event:@"problem" action:problemType label:nil]; }
 - (void)eventListCurrentLocation;                  { [self event:@"list" action:@"currentLocation" label:nil]; }
-
-#pragma mark - GA Delegate
-
-#pragma mark - Google Analytics
-
-- (void)hitDispatched:(NSString *)hitString
-{
-    NSLog(@"GA:hitDispatched -- [string=%@]", hitString);
-}
-
-- (void)trackerDispatchDidComplete:(GANTracker *)tracker
-                  eventsDispatched:(NSUInteger)hitsDispatched
-              eventsFailedDispatch:(NSUInteger)hitsFailedDispatch
-{
-    NSLog(@"GA:trackerDispatchDidComplete -- [success=%d,failures=%d]", hitsDispatched, hitsFailedDispatch);
-}
 
 @end

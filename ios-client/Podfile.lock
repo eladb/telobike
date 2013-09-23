@@ -11,6 +11,7 @@ PODS:
     - Reachability
   - ASIHTTPRequest/S3 (1.8.1):
     - Reachability
+  - GoogleAnalytics-iOS-SDK (3.0.1)
   - InAppSettingsKit (1.1)
   - NUI (0.3.5)
   - Reachability (3.1.1)
@@ -19,6 +20,7 @@ PODS:
 DEPENDENCIES:
   - Appirater
   - ASIHTTPRequest
+  - GoogleAnalytics-iOS-SDK
   - InAppSettingsKit
   - NUI
   - SBJson
@@ -26,6 +28,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Appirater: 10cdcb23edc2d3b225afbb4a7d110539adac9b55
   ASIHTTPRequest: a411b8d0f006ed8fc24248be6a0c4ad2abc9b101
+  GoogleAnalytics-iOS-SDK: ea0118af32b97a92ac98b25ecc2aa2a286c835c7
   InAppSettingsKit: cf2c4193c3269d6acf996f7975f310d18a5e1e3c
   NUI: ad4c41528632f07dafe87764ab29fcac0000895f
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
