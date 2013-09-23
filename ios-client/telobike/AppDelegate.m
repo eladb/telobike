@@ -79,7 +79,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
 
     self.mainController.tabBarControllerDelegate = self;
-    
+
     return YES;
 }
 

@@ -112,6 +112,13 @@
     _map.showsUserLocation = YES;
     
     [self reloadStations];
+    
+    [_detailsPane setBlurTintColor:[UIColor colorWithRed:0.0f
+                                                   green:0.0f
+                                                    blue:0.0f
+                                                   alpha:.2f]];
+    [_detailsPane.layer setCornerRadius:3.0f];
+    
     [self hideDetailsPaneAnimated:NO];
 }
 

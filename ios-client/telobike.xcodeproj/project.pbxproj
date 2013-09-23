@@ -121,6 +121,7 @@
 		04C905E51399A64B007489A0 /* info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E21399A64B007489A0 /* info@2x.png */; };
 		04C905E91399A6C5007489A0 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E71399A6C4007489A0 /* home.png */; };
 		04C905EA1399A6C5007489A0 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C905E81399A6C5007489A0 /* home@2x.png */; };
+		1A8FECF72D944A4FB1654216 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4660FAE3C94EC0ACB6E5F1 /* libPods.a */; };
 		F4012D4814766FB200EFA21A /* YellowStar.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4614766FB200EFA21A /* YellowStar.png */; };
 		F4012D4914766FB200EFA21A /* YellowStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4714766FB200EFA21A /* YellowStar@2x.png */; };
 		F4012D4C1476764900EFA21A /* TimerBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D4A1476764900EFA21A /* TimerBackground.png */; };
@@ -143,6 +144,7 @@
 		F4012D841476D0FF00EFA21A /* alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D831476D0FF00EFA21A /* alarm@2x.png */; };
 		F4012D861476D11000EFA21A /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = F4012D851476D10F00EFA21A /* alarm.png */; };
 		F4012D8A1476D19400EFA21A /* MyLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4012D8B1476D19400EFA21A /* MyLocationTableViewCell.xib */; };
+		F43C3E8417F0D17500F7199B /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = F43C3E8317F0D17500F7199B /* AMBlurView.m */; };
 		F452AFDB1451CF85009F3E0F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F452AFDA1451CF85009F3E0F /* libz.dylib */; };
 		F45361031486069D00ED0293 /* YellowFullMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = F45361011486069D00ED0293 /* YellowFullMenu.png */; };
 		F45361041486069D00ED0293 /* YellowFullMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F45361021486069D00ED0293 /* YellowFullMenu@2x.png */; };
@@ -361,6 +363,8 @@
 		04C905E21399A64B007489A0 /* info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info@2x.png"; path = "telobike/assets/info@2x.png"; sourceTree = SOURCE_ROOT; };
 		04C905E71399A6C4007489A0 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = telobike/assets/home.png; sourceTree = SOURCE_ROOT; };
 		04C905E81399A6C5007489A0 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home@2x.png"; path = "telobike/assets/home@2x.png"; sourceTree = SOURCE_ROOT; };
+		4214F19B994E4900B15A9335 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AA4660FAE3C94EC0ACB6E5F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4012D4614766FB200EFA21A /* YellowStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowStar.png; path = telobike/assets/YellowStar.png; sourceTree = SOURCE_ROOT; };
 		F4012D4714766FB200EFA21A /* YellowStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowStar@2x.png"; path = "telobike/assets/YellowStar@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D4A1476764900EFA21A /* TimerBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TimerBackground.png; path = telobike/assets/TimerBackground.png; sourceTree = SOURCE_ROOT; };
@@ -385,6 +389,8 @@
 		F4012D831476D0FF00EFA21A /* alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alarm@2x.png"; sourceTree = SOURCE_ROOT; };
 		F4012D851476D10F00EFA21A /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = SOURCE_ROOT; };
 		F4012D8B1476D19400EFA21A /* MyLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLocationTableViewCell.xib; sourceTree = "<group>"; };
+		F43C3E8217F0D17500F7199B /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBlurView.h; path = "iOS-blur/blur/blur/AMBlurView.h"; sourceTree = "<group>"; };
+		F43C3E8317F0D17500F7199B /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBlurView.m; path = "iOS-blur/blur/blur/AMBlurView.m"; sourceTree = "<group>"; };
 		F452AFDA1451CF85009F3E0F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F45361011486069D00ED0293 /* YellowFullMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowFullMenu.png; sourceTree = "<group>"; };
 		F45361021486069D00ED0293 /* YellowFullMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowFullMenu@2x.png"; sourceTree = "<group>"; };
@@ -481,6 +487,7 @@
 				0495412A137495DD00F98DC0 /* Foundation.framework in Frameworks */,
 				0495412C137495DD00F98DC0 /* CoreGraphics.framework in Frameworks */,
 				F4719BB414763D5A0055443B /* libGoogleAnalytics.a in Frameworks */,
+				1A8FECF72D944A4FB1654216 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +513,7 @@
 		040AAAF913749689001FF38F /* ext */ = {
 			isa = PBXGroup;
 			children = (
+				F43C3E8117F0D16000F7199B /* AMBlurView */,
 				F4719BB114763D1B0055443B /* GoogleAnalytics */,
 				04863D8C139B71D800274D50 /* EGOTableViewPullRefresh */,
 				040AB1C11374972D001FF38F /* json-framework */,
@@ -729,6 +737,8 @@
 				040AAAF913749689001FF38F /* ext */,
 				04954126137495DD00F98DC0 /* frameworks */,
 				04954124137495DD00F98DC0 /* products */,
+				4214F19B994E4900B15A9335 /* Pods.xcconfig */,
+				062306E7AE7447659D3929F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -785,6 +795,14 @@
 			name = resources;
 			sourceTree = "<group>";
 		};
+		062306E7AE7447659D3929F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA4660FAE3C94EC0ACB6E5F1 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F4012D791476C09B00EFA21A /* list */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,6 +828,15 @@
 				0493506313A3D830005A5385 /* RedFullMenu@2x.png */,
 			);
 			name = list;
+			sourceTree = "<group>";
+		};
+		F43C3E8117F0D16000F7199B /* AMBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				F43C3E8217F0D17500F7199B /* AMBlurView.h */,
+				F43C3E8317F0D17500F7199B /* AMBlurView.m */,
+			);
+			name = AMBlurView;
 			sourceTree = "<group>";
 		};
 		F4719BB114763D1B0055443B /* GoogleAnalytics */ = {
@@ -976,9 +1003,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04954144137495DE00F98DC0 /* Build configuration list for PBXNativeTarget "telobike" */;
 			buildPhases = (
+				34B8E0D0708648C497D59BF0 /* Check Pods Manifest.lock */,
 				0495411F137495DD00F98DC0 /* Sources */,
 				04954120137495DD00F98DC0 /* Frameworks */,
 				04954121137495DD00F98DC0 /* Resources */,
+				ED35D718233940AB92949290 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1145,6 +1174,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		34B8E0D0708648C497D59BF0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ED35D718233940AB92949290 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0495411F137495DD00F98DC0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1163,6 +1225,7 @@
 				040AAED11374968B001FF38F /* ASINetworkQueue.m in Sources */,
 				040AAED21374968B001FF38F /* Reachability.m in Sources */,
 				040AB1E113749785001FF38F /* MapViewController.m in Sources */,
+				F43C3E8417F0D17500F7199B /* AMBlurView.m in Sources */,
 				040AB1E5137497AE001FF38F /* StationList.m in Sources */,
 				040AB1EB137497BB001FF38F /* StationTableViewCell.m in Sources */,
 				040AB1EF137497D1001FF38F /* Station.m in Sources */,
@@ -1294,8 +1357,10 @@
 		};
 		04954145137495DE00F98DC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4214F19B994E4900B15A9335 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1303,9 +1368,12 @@
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "ext/route-me/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"ext/route-me/**",
+				);
 				INFOPLIST_FILE = "telobike/telobike-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1318,17 +1386,22 @@
 		};
 		04954146137495DE00F98DC0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4214F19B994E4900B15A9335 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "ext/route-me/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"ext/route-me/**",
+				);
 				INFOPLIST_FILE = "telobike/telobike-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

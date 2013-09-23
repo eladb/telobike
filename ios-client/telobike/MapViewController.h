@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "Station.h"
 #import "MKMapViewWithTouch.h"
+#import "AMBlurView.h"
 
 @protocol MapViewControllerDelegate;
 
@@ -23,7 +24,7 @@
 @property (nonatomic, retain) IBOutlet UIButton* myLocationButton;
 
 // details pane
-@property (nonatomic, retain) IBOutlet UIView* detailsPane;
+@property (nonatomic, retain) IBOutlet AMBlurView* detailsPane;
 @property (nonatomic, retain) IBOutlet UILabel* availBikeLabel;
 @property (nonatomic, retain) IBOutlet UILabel* availParkLabel;
 @property (nonatomic, retain) IBOutlet UIImageView* bikeBox;
