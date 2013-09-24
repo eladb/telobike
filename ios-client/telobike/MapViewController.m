@@ -80,6 +80,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    return;
 
     _map.touchDelegate = self;
     

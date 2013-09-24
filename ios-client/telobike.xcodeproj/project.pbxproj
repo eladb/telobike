@@ -30,15 +30,6 @@
 		0481E44F1396311B0046C4D1 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E44E1396311B0046C4D1 /* City.m */; };
 		0481E4581396351A0046C4D1 /* ASIHTTPRequest+Telobike.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E4571396351A0046C4D1 /* ASIHTTPRequest+Telobike.m */; };
 		0481E45B139635AB0046C4D1 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E45A139635AB0046C4D1 /* Globals.m */; };
-		04863D9A139B71D900274D50 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04863D90139B71D800274D50 /* EGORefreshTableHeaderView.m */; };
-		04863D9B139B71D900274D50 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D92139B71D800274D50 /* blackArrow.png */; };
-		04863D9C139B71D900274D50 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D93139B71D800274D50 /* blackArrow@2x.png */; };
-		04863D9D139B71D900274D50 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D94139B71D800274D50 /* blueArrow.png */; };
-		04863D9E139B71D900274D50 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D95139B71D800274D50 /* blueArrow@2x.png */; };
-		04863D9F139B71D900274D50 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D96139B71D800274D50 /* grayArrow.png */; };
-		04863DA0139B71D900274D50 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D97139B71D800274D50 /* grayArrow@2x.png */; };
-		04863DA1139B71D900274D50 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D98139B71D800274D50 /* whiteArrow.png */; };
-		04863DA2139B71D900274D50 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863D99139B71D800274D50 /* whiteArrow@2x.png */; };
 		04863DF5139B78D100274D50 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863DF3139B78D100274D50 /* gear.png */; };
 		04863DF6139B78D100274D50 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04863DF4139B78D100274D50 /* gear@2x.png */; };
 		04863DFA139B7AAA00274D50 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04863DF9139B7AAA00274D50 /* Settings.bundle */; };
@@ -130,6 +121,7 @@
 		F4536108148606A800ED0293 /* YellowFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4536106148606A800ED0293 /* YellowFull@2x.png */; };
 		F46E1B95145C1C3E00038039 /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F46E1B94145C1C3E00038039 /* bikebell.wav */; };
 		F46E1B97145C1D2400038039 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46E1B96145C1D2400038039 /* AudioToolbox.framework */; };
+		F470EB4517F11372006FD464 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F470EB4417F11372006FD464 /* Storyboard.storyboard */; };
 		F4719BBA147642780055443B /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = F4719BB9147642780055443B /* Analytics.m */; };
 		F4719BBF1476642C0055443B /* yellowbox.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BBD1476642C0055443B /* yellowbox.png */; };
 		F4719BC01476642C0055443B /* yellowbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4719BBE1476642C0055443B /* yellowbox@2x.png */; };
@@ -188,16 +180,6 @@
 		0481E4571396351A0046C4D1 /* ASIHTTPRequest+Telobike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+Telobike.m"; sourceTree = "<group>"; };
 		0481E459139635AB0046C4D1 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		0481E45A139635AB0046C4D1 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
-		04863D8F139B71D800274D50 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
-		04863D90139B71D800274D50 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		04863D92139B71D800274D50 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
-		04863D93139B71D800274D50 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
-		04863D94139B71D800274D50 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
-		04863D95139B71D800274D50 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
-		04863D96139B71D800274D50 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
-		04863D97139B71D800274D50 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
-		04863D98139B71D800274D50 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
-		04863D99139B71D800274D50 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		04863DF3139B78D100274D50 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = telobike/assets/gear.png; sourceTree = SOURCE_ROOT; };
 		04863DF4139B78D100274D50 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gear@2x.png"; path = "telobike/assets/gear@2x.png"; sourceTree = SOURCE_ROOT; };
 		04863DF9139B7AAA00274D50 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -304,6 +286,7 @@
 		F4536106148606A800ED0293 /* YellowFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowFull@2x.png"; sourceTree = "<group>"; };
 		F46E1B94145C1C3E00038039 /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/assets/bikebell.wav; sourceTree = SOURCE_ROOT; };
 		F46E1B96145C1D2400038039 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F470EB4417F11372006FD464 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		F4719BB8147642780055443B /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 		F4719BB9147642780055443B /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analytics.m; sourceTree = "<group>"; };
 		F4719BBD1476642C0055443B /* yellowbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowbox.png; path = telobike/assets/yellowbox.png; sourceTree = SOURCE_ROOT; };
@@ -381,7 +364,6 @@
 			isa = PBXGroup;
 			children = (
 				F43C3E8117F0D16000F7199B /* AMBlurView */,
-				04863D8C139B71D800274D50 /* EGOTableViewPullRefresh */,
 			);
 			path = ext;
 			sourceTree = "<group>";
@@ -459,48 +441,6 @@
 			name = app;
 			sourceTree = "<group>";
 		};
-		04863D8C139B71D800274D50 /* EGOTableViewPullRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				04863D8D139B71D800274D50 /* Classes */,
-				04863D91139B71D800274D50 /* Resources */,
-			);
-			name = EGOTableViewPullRefresh;
-			path = EGOTableViewPullRefresh/EGOTableViewPullRefresh;
-			sourceTree = "<group>";
-		};
-		04863D8D139B71D800274D50 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				04863D8E139B71D800274D50 /* View */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		04863D8E139B71D800274D50 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				04863D8F139B71D800274D50 /* EGORefreshTableHeaderView.h */,
-				04863D90139B71D800274D50 /* EGORefreshTableHeaderView.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		04863D91139B71D800274D50 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				04863D92139B71D800274D50 /* blackArrow.png */,
-				04863D93139B71D800274D50 /* blackArrow@2x.png */,
-				04863D94139B71D800274D50 /* blueArrow.png */,
-				04863D95139B71D800274D50 /* blueArrow@2x.png */,
-				04863D96139B71D800274D50 /* grayArrow.png */,
-				04863D97139B71D800274D50 /* grayArrow@2x.png */,
-				04863D98139B71D800274D50 /* whiteArrow.png */,
-				04863D99139B71D800274D50 /* whiteArrow@2x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		04954118137495DD00F98DC0 = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +484,7 @@
 		0495412D137495DD00F98DC0 /* telobike */ = {
 			isa = PBXGroup;
 			children = (
+				F470EB4417F11372006FD464 /* Storyboard.storyboard */,
 				04746C6313755A2E00D9CBDA /* app */,
 				040AAAD513749677001FF38F /* assets */,
 				04A732B713787354000D3A0C /* resources */,
@@ -777,14 +718,6 @@
 				04C905E51399A64B007489A0 /* info@2x.png in Resources */,
 				04C905E91399A6C5007489A0 /* home.png in Resources */,
 				04C905EA1399A6C5007489A0 /* home@2x.png in Resources */,
-				04863D9B139B71D900274D50 /* blackArrow.png in Resources */,
-				04863D9C139B71D900274D50 /* blackArrow@2x.png in Resources */,
-				04863D9D139B71D900274D50 /* blueArrow.png in Resources */,
-				04863D9E139B71D900274D50 /* blueArrow@2x.png in Resources */,
-				04863D9F139B71D900274D50 /* grayArrow.png in Resources */,
-				04863DA0139B71D900274D50 /* grayArrow@2x.png in Resources */,
-				04863DA1139B71D900274D50 /* whiteArrow.png in Resources */,
-				04863DA2139B71D900274D50 /* whiteArrow@2x.png in Resources */,
 				04863DF5139B78D100274D50 /* gear.png in Resources */,
 				04863DF6139B78D100274D50 /* gear@2x.png in Resources */,
 				04863DFA139B7AAA00274D50 /* Settings.bundle in Resources */,
@@ -792,6 +725,7 @@
 				04863EB0139BAF3B00274D50 /* LocateMeButton.png in Resources */,
 				04863EB1139BAF3B00274D50 /* LocateMeButton@2x.png in Resources */,
 				04863EB4139BAF3B00274D50 /* Location.png in Resources */,
+				F470EB4517F11372006FD464 /* Storyboard.storyboard in Resources */,
 				04863EB5139BAF3B00274D50 /* Location@2x.png in Resources */,
 				04B09FD713A3B5BA00B54D05 /* panel.png in Resources */,
 				04B09FD813A3B5BA00B54D05 /* panel@2x.png in Resources */,
@@ -918,7 +852,6 @@
 				0481E45B139635AB0046C4D1 /* Globals.m in Sources */,
 				04C905CD13999752007489A0 /* ReportProblem.m in Sources */,
 				04C905DF1399A4D9007489A0 /* InfoViewController.m in Sources */,
-				04863D9A139B71D900274D50 /* EGORefreshTableHeaderView.m in Sources */,
 				04863E04139B880E00274D50 /* SendFeedback.m in Sources */,
 				040ADD1813A3BAFB002784A1 /* NavigateToStation.m in Sources */,
 				F47DF9D014531812005DCA1B /* TimerViewController.m in Sources */,

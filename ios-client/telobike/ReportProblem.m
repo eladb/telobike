@@ -63,7 +63,7 @@
     [mailCompose setMessageBody:bodyWithTags isHTML:NO];
     
     mailCompose.mailComposeDelegate = self;
-    [_parentViewController presentModalViewController:mailCompose animated:YES];
+    [_parentViewController presentViewController:mailCompose animated:YES completion:nil];
     [self retain];
 }
 
@@ -92,7 +92,7 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [_parentViewController dismissModalViewControllerAnimated:YES];
+    [_parentViewController dismissViewControllerAnimated:YES completion:nil];
     [self release];
 }
 

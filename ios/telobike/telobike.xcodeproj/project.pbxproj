@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
+		F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE817F11589006FD464 /* CoreGraphics.framework */; };
+		F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
+		F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F470EBEF17F11589006FD464 /* InfoPlist.strings */; };
+		F470EBF317F11589006FD464 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBF217F11589006FD464 /* main.m */; };
+		F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBF617F11589006FD464 /* TBAppDelegate.m */; };
+		F470EBFA17F11589006FD464 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F470EBF817F11589006FD464 /* Main.storyboard */; };
+		F470EBFD17F11589006FD464 /* TBFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBFC17F11589006FD464 /* TBFirstViewController.m */; };
+		F470EC0017F11589006FD464 /* TBSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBFF17F11589006FD464 /* TBSecondViewController.m */; };
+		F470EC0217F11589006FD464 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F470EC0117F11589006FD464 /* Images.xcassets */; };
+		F470EC0917F11589006FD464 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EC0817F11589006FD464 /* XCTest.framework */; };
+		F470EC0A17F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
+		F470EC0B17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
+		F470EC1317F11589006FD464 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F470EC1117F11589006FD464 /* InfoPlist.strings */; };
+		F470EC1517F11589006FD464 /* telobikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EC1417F11589006FD464 /* telobikeTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F470EC0C17F11589006FD464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F470EBDB17F11589006FD464 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F470EBE217F11589006FD464;
+			remoteInfo = telobike;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F470EBE317F11589006FD464 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F470EBE617F11589006FD464 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F470EBE817F11589006FD464 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F470EBEA17F11589006FD464 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F470EBEE17F11589006FD464 /* telobike-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "telobike-Info.plist"; sourceTree = "<group>"; };
+		F470EBF017F11589006FD464 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F470EBF217F11589006FD464 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F470EBF417F11589006FD464 /* telobike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telobike-Prefix.pch"; sourceTree = "<group>"; };
+		F470EBF517F11589006FD464 /* TBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBAppDelegate.h; sourceTree = "<group>"; };
+		F470EBF617F11589006FD464 /* TBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBAppDelegate.m; sourceTree = "<group>"; };
+		F470EBF917F11589006FD464 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F470EBFB17F11589006FD464 /* TBFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBFirstViewController.h; sourceTree = "<group>"; };
+		F470EBFC17F11589006FD464 /* TBFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBFirstViewController.m; sourceTree = "<group>"; };
+		F470EBFE17F11589006FD464 /* TBSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBSecondViewController.h; sourceTree = "<group>"; };
+		F470EBFF17F11589006FD464 /* TBSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBSecondViewController.m; sourceTree = "<group>"; };
+		F470EC0117F11589006FD464 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F470EC0717F11589006FD464 /* telobikeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telobikeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F470EC0817F11589006FD464 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F470EC1017F11589006FD464 /* telobikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "telobikeTests-Info.plist"; sourceTree = "<group>"; };
+		F470EC1217F11589006FD464 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F470EC1417F11589006FD464 /* telobikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = telobikeTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F470EBE017F11589006FD464 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */,
+				F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */,
+				F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F470EC0417F11589006FD464 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F470EC0917F11589006FD464 /* XCTest.framework in Frameworks */,
+				F470EC0B17F11589006FD464 /* UIKit.framework in Frameworks */,
+				F470EC0A17F11589006FD464 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F470EBDA17F11589006FD464 = {
+			isa = PBXGroup;
+			children = (
+				F470EBEC17F11589006FD464 /* telobike */,
+				F470EC0E17F11589006FD464 /* telobikeTests */,
+				F470EBE517F11589006FD464 /* Frameworks */,
+				F470EBE417F11589006FD464 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F470EBE417F11589006FD464 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F470EBE317F11589006FD464 /* telobike.app */,
+				F470EC0717F11589006FD464 /* telobikeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F470EBE517F11589006FD464 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F470EBE617F11589006FD464 /* Foundation.framework */,
+				F470EBE817F11589006FD464 /* CoreGraphics.framework */,
+				F470EBEA17F11589006FD464 /* UIKit.framework */,
+				F470EC0817F11589006FD464 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F470EBEC17F11589006FD464 /* telobike */ = {
+			isa = PBXGroup;
+			children = (
+				F470EBF517F11589006FD464 /* TBAppDelegate.h */,
+				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
+				F470EBF817F11589006FD464 /* Main.storyboard */,
+				F470EBFB17F11589006FD464 /* TBFirstViewController.h */,
+				F470EBFC17F11589006FD464 /* TBFirstViewController.m */,
+				F470EBFE17F11589006FD464 /* TBSecondViewController.h */,
+				F470EBFF17F11589006FD464 /* TBSecondViewController.m */,
+				F470EC0117F11589006FD464 /* Images.xcassets */,
+				F470EBED17F11589006FD464 /* Supporting Files */,
+			);
+			path = telobike;
+			sourceTree = "<group>";
+		};
+		F470EBED17F11589006FD464 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F470EBEE17F11589006FD464 /* telobike-Info.plist */,
+				F470EBEF17F11589006FD464 /* InfoPlist.strings */,
+				F470EBF217F11589006FD464 /* main.m */,
+				F470EBF417F11589006FD464 /* telobike-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F470EC0E17F11589006FD464 /* telobikeTests */ = {
+			isa = PBXGroup;
+			children = (
+				F470EC1417F11589006FD464 /* telobikeTests.m */,
+				F470EC0F17F11589006FD464 /* Supporting Files */,
+			);
+			path = telobikeTests;
+			sourceTree = "<group>";
+		};
+		F470EC0F17F11589006FD464 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F470EC1017F11589006FD464 /* telobikeTests-Info.plist */,
+				F470EC1117F11589006FD464 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F470EBE217F11589006FD464 /* telobike */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F470EC1817F11589006FD464 /* Build configuration list for PBXNativeTarget "telobike" */;
+			buildPhases = (
+				F470EBDF17F11589006FD464 /* Sources */,
+				F470EBE017F11589006FD464 /* Frameworks */,
+				F470EBE117F11589006FD464 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = telobike;
+			productName = telobike;
+			productReference = F470EBE317F11589006FD464 /* telobike.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F470EC0617F11589006FD464 /* telobikeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F470EC1B17F11589006FD464 /* Build configuration list for PBXNativeTarget "telobikeTests" */;
+			buildPhases = (
+				F470EC0317F11589006FD464 /* Sources */,
+				F470EC0417F11589006FD464 /* Frameworks */,
+				F470EC0517F11589006FD464 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F470EC0D17F11589006FD464 /* PBXTargetDependency */,
+			);
+			name = telobikeTests;
+			productName = telobikeTests;
+			productReference = F470EC0717F11589006FD464 /* telobikeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F470EBDB17F11589006FD464 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TB;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Elad Ben-Israel";
+				TargetAttributes = {
+					F470EC0617F11589006FD464 = {
+						TestTargetID = F470EBE217F11589006FD464;
+					};
+				};
+			};
+			buildConfigurationList = F470EBDE17F11589006FD464 /* Build configuration list for PBXProject "telobike" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F470EBDA17F11589006FD464;
+			productRefGroup = F470EBE417F11589006FD464 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F470EBE217F11589006FD464 /* telobike */,
+				F470EC0617F11589006FD464 /* telobikeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F470EBE117F11589006FD464 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F470EC0217F11589006FD464 /* Images.xcassets in Resources */,
+				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
+				F470EBFA17F11589006FD464 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F470EC0517F11589006FD464 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F470EC1317F11589006FD464 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F470EBDF17F11589006FD464 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F470EC0017F11589006FD464 /* TBSecondViewController.m in Sources */,
+				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
+				F470EBFD17F11589006FD464 /* TBFirstViewController.m in Sources */,
+				F470EBF317F11589006FD464 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F470EC0317F11589006FD464 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F470EC1517F11589006FD464 /* telobikeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F470EC0D17F11589006FD464 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F470EBE217F11589006FD464 /* telobike */;
+			targetProxy = F470EC0C17F11589006FD464 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F470EBEF17F11589006FD464 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F470EBF017F11589006FD464 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F470EBF817F11589006FD464 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F470EBF917F11589006FD464 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F470EC1117F11589006FD464 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F470EC1217F11589006FD464 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F470EC1617F11589006FD464 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F470EC1717F11589006FD464 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F470EC1917F11589006FD464 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
+				INFOPLIST_FILE = "telobike/telobike-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F470EC1A17F11589006FD464 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
+				INFOPLIST_FILE = "telobike/telobike-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F470EC1C17F11589006FD464 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/telobike.app/telobike";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "telobikeTests/telobikeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F470EC1D17F11589006FD464 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/telobike.app/telobike";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
+				INFOPLIST_FILE = "telobikeTests/telobikeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F470EBDE17F11589006FD464 /* Build configuration list for PBXProject "telobike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F470EC1617F11589006FD464 /* Debug */,
+				F470EC1717F11589006FD464 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F470EC1817F11589006FD464 /* Build configuration list for PBXNativeTarget "telobike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F470EC1917F11589006FD464 /* Debug */,
+				F470EC1A17F11589006FD464 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F470EC1B17F11589006FD464 /* Build configuration list for PBXNativeTarget "telobikeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F470EC1C17F11589006FD464 /* Debug */,
+				F470EC1D17F11589006FD464 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F470EBDB17F11589006FD464 /* Project object */;
+}
