@@ -1,0 +1,32 @@
+PODS:
+  - AFNetworking (2.0.0-RC3):
+    - AFNetworking/Core
+  - AFNetworking/Core (2.0.0-RC3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLConnection (2.0.0-RC3)
+  - AFNetworking/Reachability (2.0.0-RC3)
+  - AFNetworking/Security (2.0.0-RC3)
+  - AFNetworking/Serialization (2.0.0-RC3)
+  - Appirater (2.0.1)
+  - GoogleAnalytics-iOS-SDK (3.0.1)
+  - InAppSettingsKit (1.1)
+  - SBJson (3.2)
+
+DEPENDENCIES:
+  - AFNetworking
+  - Appirater
+  - GoogleAnalytics-iOS-SDK
+  - InAppSettingsKit
+  - SBJson
+
+SPEC CHECKSUMS:
+  AFNetworking: ebc18e280dab2e71f9368cfc8e5c60ed125eec1a
+  Appirater: 10cdcb23edc2d3b225afbb4a7d110539adac9b55
+  GoogleAnalytics-iOS-SDK: ea0118af32b97a92ac98b25ecc2aa2a286c835c7
+  InAppSettingsKit: cf2c4193c3269d6acf996f7975f310d18a5e1e3c
+  SBJson: e60b4dc22448c2ae1e754b523a4ab53408e85c8d
+
+COCOAPODS: 0.23.0

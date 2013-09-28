@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TBMapViewController.h"
+#import "TBListViewController.h"
 
 @interface TBAppDelegate : UIResponder <UIApplicationDelegate>
 

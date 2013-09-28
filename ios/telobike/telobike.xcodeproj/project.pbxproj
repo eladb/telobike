@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87874FC9433042AAADAE0F63 /* libPods.a */; };
+		F42E60AE17F11A2C0099A1D0 /* TBListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60AD17F11A2C0099A1D0 /* TBListViewController.m */; };
+		F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F42E60AF17F11AF60099A1D0 /* Assets.xcassets */; };
+		F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E60B117F11C5A0099A1D0 /* MapKit.framework */; };
+		F42E60B817F123060099A1D0 /* TBStation.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60B717F123060099A1D0 /* TBStation.m */; };
+		F42E60BB17F123590099A1D0 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60BA17F123590099A1D0 /* Utils.m */; };
 		F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
 		F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE817F11589006FD464 /* CoreGraphics.framework */; };
 		F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
@@ -14,14 +20,26 @@
 		F470EBF317F11589006FD464 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBF217F11589006FD464 /* main.m */; };
 		F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBF617F11589006FD464 /* TBAppDelegate.m */; };
 		F470EBFA17F11589006FD464 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F470EBF817F11589006FD464 /* Main.storyboard */; };
-		F470EBFD17F11589006FD464 /* TBFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBFC17F11589006FD464 /* TBFirstViewController.m */; };
-		F470EC0017F11589006FD464 /* TBSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBFF17F11589006FD464 /* TBSecondViewController.m */; };
-		F470EC0217F11589006FD464 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F470EC0117F11589006FD464 /* Images.xcassets */; };
+		F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBFF17F11589006FD464 /* TBMapViewController.m */; };
 		F470EC0917F11589006FD464 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EC0817F11589006FD464 /* XCTest.framework */; };
 		F470EC0A17F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
 		F470EC0B17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
 		F470EC1317F11589006FD464 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F470EC1117F11589006FD464 /* InfoPlist.strings */; };
 		F470EC1517F11589006FD464 /* telobikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EC1417F11589006FD464 /* telobikeTests.m */; };
+		F47B5CC017F1293600D88614 /* TBFavorites.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CBF17F1293600D88614 /* TBFavorites.m */; };
+		F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */; };
+		F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CCA17F65DAC00D88614 /* TBServer.m */; };
+		F47B5CCE17F6675B00D88614 /* TBCity.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CCD17F6675B00D88614 /* TBCity.m */; };
+		F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CD417F66D1100D88614 /* NSObject+Binding.m */; };
+		F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CD717F6B37F00D88614 /* TBNavigationController.m */; };
+		F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CDE17F6C7E100D88614 /* TBFeedbackActionSheet.m */; };
+		F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CE017F6C97100D88614 /* MessageUI.framework */; };
+		F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CE317F6CAF200D88614 /* MFMailComposeViewController+Feedback.m */; };
+		F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CE617F6CC3000D88614 /* TBFeedbackMailComposeViewController.m */; };
+		F47B5CEA17F6D21100D88614 /* TBCalloutAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CE917F6D21100D88614 /* TBCalloutAccessoryView.m */; };
+		F47B5CEC17F6D22200D88614 /* TBCalloutAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47B5CEB17F6D22200D88614 /* TBCalloutAccessoryView.xib */; };
+		F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */; };
+		F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +53,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		87874FC9433042AAADAE0F63 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBListViewController.h; sourceTree = "<group>"; };
+		F42E60AD17F11A2C0099A1D0 /* TBListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBListViewController.m; sourceTree = "<group>"; };
+		F42E60AF17F11AF60099A1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		F42E60B117F11C5A0099A1D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F42E60B617F123060099A1D0 /* TBStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStation.h; sourceTree = "<group>"; };
+		F42E60B717F123060099A1D0 /* TBStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStation.m; sourceTree = "<group>"; };
+		F42E60B917F123590099A1D0 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		F42E60BA17F123590099A1D0 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		F470EBE317F11589006FD464 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F470EBE617F11589006FD464 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F470EBE817F11589006FD464 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -46,16 +74,38 @@
 		F470EBF517F11589006FD464 /* TBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBAppDelegate.h; sourceTree = "<group>"; };
 		F470EBF617F11589006FD464 /* TBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBAppDelegate.m; sourceTree = "<group>"; };
 		F470EBF917F11589006FD464 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F470EBFB17F11589006FD464 /* TBFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBFirstViewController.h; sourceTree = "<group>"; };
-		F470EBFC17F11589006FD464 /* TBFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBFirstViewController.m; sourceTree = "<group>"; };
-		F470EBFE17F11589006FD464 /* TBSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBSecondViewController.h; sourceTree = "<group>"; };
-		F470EBFF17F11589006FD464 /* TBSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBSecondViewController.m; sourceTree = "<group>"; };
-		F470EC0117F11589006FD464 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F470EBFE17F11589006FD464 /* TBMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBMapViewController.h; sourceTree = "<group>"; };
+		F470EBFF17F11589006FD464 /* TBMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMapViewController.m; sourceTree = "<group>"; };
 		F470EC0717F11589006FD464 /* telobikeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telobikeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F470EC0817F11589006FD464 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F470EC1017F11589006FD464 /* telobikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "telobikeTests-Info.plist"; sourceTree = "<group>"; };
 		F470EC1217F11589006FD464 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F470EC1417F11589006FD464 /* telobikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = telobikeTests.m; sourceTree = "<group>"; };
+		F47B5CBE17F1293600D88614 /* TBFavorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFavorites.h; sourceTree = "<group>"; };
+		F47B5CBF17F1293600D88614 /* TBFavorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFavorites.m; sourceTree = "<group>"; };
+		F47B5CC617F655EC00D88614 /* TBStationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationTableViewCell.h; sourceTree = "<group>"; };
+		F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationTableViewCell.m; sourceTree = "<group>"; };
+		F47B5CC917F65DAC00D88614 /* TBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBServer.h; sourceTree = "<group>"; };
+		F47B5CCA17F65DAC00D88614 /* TBServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBServer.m; sourceTree = "<group>"; };
+		F47B5CCC17F6675B00D88614 /* TBCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCity.h; sourceTree = "<group>"; };
+		F47B5CCD17F6675B00D88614 /* TBCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCity.m; sourceTree = "<group>"; };
+		F47B5CD317F66D1100D88614 /* NSObject+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Binding.h"; sourceTree = "<group>"; };
+		F47B5CD417F66D1100D88614 /* NSObject+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Binding.m"; sourceTree = "<group>"; };
+		F47B5CD617F6B37F00D88614 /* TBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBNavigationController.h; sourceTree = "<group>"; };
+		F47B5CD717F6B37F00D88614 /* TBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBNavigationController.m; sourceTree = "<group>"; };
+		F47B5CDD17F6C7E100D88614 /* TBFeedbackActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFeedbackActionSheet.h; sourceTree = "<group>"; };
+		F47B5CDE17F6C7E100D88614 /* TBFeedbackActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFeedbackActionSheet.m; sourceTree = "<group>"; };
+		F47B5CE017F6C97100D88614 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		F47B5CE217F6CAF200D88614 /* MFMailComposeViewController+Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFMailComposeViewController+Feedback.h"; sourceTree = "<group>"; };
+		F47B5CE317F6CAF200D88614 /* MFMailComposeViewController+Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFMailComposeViewController+Feedback.m"; sourceTree = "<group>"; };
+		F47B5CE517F6CC3000D88614 /* TBFeedbackMailComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFeedbackMailComposeViewController.h; sourceTree = "<group>"; };
+		F47B5CE617F6CC3000D88614 /* TBFeedbackMailComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFeedbackMailComposeViewController.m; sourceTree = "<group>"; };
+		F47B5CE817F6D21100D88614 /* TBCalloutAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCalloutAccessoryView.h; sourceTree = "<group>"; };
+		F47B5CE917F6D21100D88614 /* TBCalloutAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCalloutAccessoryView.m; sourceTree = "<group>"; };
+		F47B5CEB17F6D22200D88614 /* TBCalloutAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBCalloutAccessoryView.xib; sourceTree = "<group>"; };
+		F47B5CED17F6D43C00D88614 /* NSBundle+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+View.h"; sourceTree = "<group>"; };
+		F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+View.m"; sourceTree = "<group>"; };
+		F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +113,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */,
+				F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */,
+				F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */,
 				F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */,
 				F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */,
 				F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */,
+				51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +143,7 @@
 				F470EC0E17F11589006FD464 /* telobikeTests */,
 				F470EBE517F11589006FD464 /* Frameworks */,
 				F470EBE417F11589006FD464 /* Products */,
+				0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,10 +159,14 @@
 		F470EBE517F11589006FD464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */,
+				F47B5CE017F6C97100D88614 /* MessageUI.framework */,
+				F42E60B117F11C5A0099A1D0 /* MapKit.framework */,
 				F470EBE617F11589006FD464 /* Foundation.framework */,
 				F470EBE817F11589006FD464 /* CoreGraphics.framework */,
 				F470EBEA17F11589006FD464 /* UIKit.framework */,
 				F470EC0817F11589006FD464 /* XCTest.framework */,
+				87874FC9433042AAADAE0F63 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -115,14 +174,17 @@
 		F470EBEC17F11589006FD464 /* telobike */ = {
 			isa = PBXGroup;
 			children = (
+				F470EBF817F11589006FD464 /* Main.storyboard */,
+				F42E60AF17F11AF60099A1D0 /* Assets.xcassets */,
 				F470EBF517F11589006FD464 /* TBAppDelegate.h */,
 				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
-				F470EBF817F11589006FD464 /* Main.storyboard */,
-				F470EBFB17F11589006FD464 /* TBFirstViewController.h */,
-				F470EBFC17F11589006FD464 /* TBFirstViewController.m */,
-				F470EBFE17F11589006FD464 /* TBSecondViewController.h */,
-				F470EBFF17F11589006FD464 /* TBSecondViewController.m */,
-				F470EC0117F11589006FD464 /* Images.xcassets */,
+				F47B5CD617F6B37F00D88614 /* TBNavigationController.h */,
+				F47B5CD717F6B37F00D88614 /* TBNavigationController.m */,
+				F47B5CD117F668B000D88614 /* List */,
+				F47B5CD217F668BE00D88614 /* Map */,
+				F47B5CD017F6689400D88614 /* Utils */,
+				F47B5CDC17F6C7C800D88614 /* Feedback */,
+				F47B5CCF17F6687B00D88614 /* Data model */,
 				F470EBED17F11589006FD464 /* Supporting Files */,
 			);
 			path = telobike;
@@ -157,6 +219,70 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F47B5CCF17F6687B00D88614 /* Data model */ = {
+			isa = PBXGroup;
+			children = (
+				F47B5CC917F65DAC00D88614 /* TBServer.h */,
+				F47B5CCA17F65DAC00D88614 /* TBServer.m */,
+				F47B5CCC17F6675B00D88614 /* TBCity.h */,
+				F47B5CCD17F6675B00D88614 /* TBCity.m */,
+				F42E60B617F123060099A1D0 /* TBStation.h */,
+				F42E60B717F123060099A1D0 /* TBStation.m */,
+				F47B5CBE17F1293600D88614 /* TBFavorites.h */,
+				F47B5CBF17F1293600D88614 /* TBFavorites.m */,
+			);
+			name = "Data model";
+			sourceTree = "<group>";
+		};
+		F47B5CD017F6689400D88614 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F42E60B917F123590099A1D0 /* Utils.h */,
+				F42E60BA17F123590099A1D0 /* Utils.m */,
+				F47B5CD317F66D1100D88614 /* NSObject+Binding.h */,
+				F47B5CD417F66D1100D88614 /* NSObject+Binding.m */,
+				F47B5CED17F6D43C00D88614 /* NSBundle+View.h */,
+				F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		F47B5CD117F668B000D88614 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */,
+				F42E60AD17F11A2C0099A1D0 /* TBListViewController.m */,
+				F47B5CC617F655EC00D88614 /* TBStationTableViewCell.h */,
+				F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		F47B5CD217F668BE00D88614 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				F470EBFE17F11589006FD464 /* TBMapViewController.h */,
+				F470EBFF17F11589006FD464 /* TBMapViewController.m */,
+				F47B5CE817F6D21100D88614 /* TBCalloutAccessoryView.h */,
+				F47B5CE917F6D21100D88614 /* TBCalloutAccessoryView.m */,
+				F47B5CEB17F6D22200D88614 /* TBCalloutAccessoryView.xib */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		F47B5CDC17F6C7C800D88614 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				F47B5CDD17F6C7E100D88614 /* TBFeedbackActionSheet.h */,
+				F47B5CDE17F6C7E100D88614 /* TBFeedbackActionSheet.m */,
+				F47B5CE217F6CAF200D88614 /* MFMailComposeViewController+Feedback.h */,
+				F47B5CE317F6CAF200D88614 /* MFMailComposeViewController+Feedback.m */,
+				F47B5CE517F6CC3000D88614 /* TBFeedbackMailComposeViewController.h */,
+				F47B5CE617F6CC3000D88614 /* TBFeedbackMailComposeViewController.m */,
+			);
+			name = Feedback;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,9 +290,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F470EC1817F11589006FD464 /* Build configuration list for PBXNativeTarget "telobike" */;
 			buildPhases = (
+				7FC991199E0B4C2AA7675132 /* Check Pods Manifest.lock */,
 				F470EBDF17F11589006FD464 /* Sources */,
 				F470EBE017F11589006FD464 /* Frameworks */,
 				F470EBE117F11589006FD464 /* Resources */,
+				B2B8448F929D4572B5A2E7D3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +333,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Elad Ben-Israel";
 				TargetAttributes = {
+					F470EBE217F11589006FD464 = {
+						DevelopmentTeam = CV6VG34TMM;
+					};
 					F470EC0617F11589006FD464 = {
 						TestTargetID = F470EBE217F11589006FD464;
 					};
@@ -234,8 +365,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F470EC0217F11589006FD464 /* Images.xcassets in Resources */,
+				F47B5CEC17F6D22200D88614 /* TBCalloutAccessoryView.xib in Resources */,
 				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
+				F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */,
 				F470EBFA17F11589006FD464 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,14 +382,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7FC991199E0B4C2AA7675132 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B2B8448F929D4572B5A2E7D3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F470EBDF17F11589006FD464 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F470EC0017F11589006FD464 /* TBSecondViewController.m in Sources */,
+				F47B5CCE17F6675B00D88614 /* TBCity.m in Sources */,
+				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
+				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
+				F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */,
+				F47B5CEA17F6D21100D88614 /* TBCalloutAccessoryView.m in Sources */,
+				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
+				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,
+				F42E60B817F123060099A1D0 /* TBStation.m in Sources */,
+				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,
 				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
-				F470EBFD17F11589006FD464 /* TBFirstViewController.m in Sources */,
+				F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */,
+				F42E60BB17F123590099A1D0 /* Utils.m in Sources */,
+				F42E60AE17F11A2C0099A1D0 /* TBListViewController.m in Sources */,
+				F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */,
+				F47B5CC017F1293600D88614 /* TBFavorites.m in Sources */,
+				F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */,
 				F470EBF317F11589006FD464 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,12 +560,15 @@
 		};
 		F470EC1917F11589006FD464 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
 				INFOPLIST_FILE = "telobike/telobike-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -395,12 +576,15 @@
 		};
 		F470EC1A17F11589006FD464 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
 				INFOPLIST_FILE = "telobike/telobike-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -467,6 +651,7 @@
 				F470EC1A17F11589006FD464 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F470EC1B17F11589006FD464 /* Build configuration list for PBXNativeTarget "telobikeTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +660,7 @@
 				F470EC1D17F11589006FD464 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
