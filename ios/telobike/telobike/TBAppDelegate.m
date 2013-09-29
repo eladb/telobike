@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
 //
 
+#import <GoogleMaps/GoogleMaps.h>
 #import "TBAppDelegate.h"
 
 @interface TBAppDelegate ()
@@ -16,6 +17,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [GMSServices provideAPIKey:@"AIzaSyCqwGJK_a2virlkr_NzP5o-GcTK-Dl8eXY"];
+
 //    UIColor* barTint = [UIColor blackColor];
 //    UIColor* tint = [UIColor colorWithWhite:0.7 alpha:1.0];
 //
