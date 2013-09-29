@@ -120,16 +120,22 @@
         view.centerOffset = CGPointMake(6.0, -18.0);
         TBCalloutAccessoryView* a = [[NSBundle mainBundle] loadViewFromNibForClass:[TBCalloutAccessoryView class]];
         a.autoresizingMask = 0;
-        view.leftCalloutAccessoryView = a;
+        view.rightCalloutAccessoryView = a;
     }
     
     TBStation* station = (TBStation*)annotation;
     view.image = station.markerImage;
     view.canShowCallout = YES;
-    TBCalloutAccessoryView* a = (TBCalloutAccessoryView*)view.leftCalloutAccessoryView;
+    TBCalloutAccessoryView* a = (TBCalloutAccessoryView*)view.rightCalloutAccessoryView;
     a.station = station;
+
 
     return view;
 }
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    NSLog(@"disclosure");
+}
+
 
 @end

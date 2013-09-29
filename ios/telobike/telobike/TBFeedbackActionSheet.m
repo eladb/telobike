@@ -20,6 +20,7 @@
               otherButtonTitles:NSLocalizedString(@"Bicycle system", @"feedback action sheet option for bike service"),
                                 NSLocalizedString(@"App", @"feedback action sheet option for app"),
                                 nil];
+
     return self;
 }
 

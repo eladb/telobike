@@ -40,6 +40,11 @@
 		F47B5CEC17F6D22200D88614 /* TBCalloutAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47B5CEB17F6D22200D88614 /* TBCalloutAccessoryView.xib */; };
 		F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */; };
 		F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */; };
+		F47B5CF517F78B1A00D88614 /* TBTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CF417F78B1A00D88614 /* TBTimerViewController.m */; };
+		F47B5CF917F78C9000D88614 /* TBStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CF817F78C9000D88614 /* TBStationViewController.m */; };
+		F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F47B5CFB17F7937400D88614 /* Settings.bundle */; };
+		F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */; };
+		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +111,15 @@
 		F47B5CED17F6D43C00D88614 /* NSBundle+View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+View.h"; sourceTree = "<group>"; };
 		F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+View.m"; sourceTree = "<group>"; };
 		F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F47B5CF317F78B1A00D88614 /* TBTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTimerViewController.h; sourceTree = "<group>"; };
+		F47B5CF417F78B1A00D88614 /* TBTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTimerViewController.m; sourceTree = "<group>"; };
+		F47B5CF717F78C9000D88614 /* TBStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationViewController.h; sourceTree = "<group>"; };
+		F47B5CF817F78C9000D88614 /* TBStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationViewController.m; sourceTree = "<group>"; };
+		F47B5CFB17F7937400D88614 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		F47B5CFD17F7939200D88614 /* TBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSettingsViewController.h; sourceTree = "<group>"; };
+		F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSettingsViewController.m; sourceTree = "<group>"; };
+		F47B5D0017F797DA00D88614 /* UIColor+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
+		F47B5D0117F797DA00D88614 /* UIColor+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,17 +194,20 @@
 				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
 				F47B5CD617F6B37F00D88614 /* TBNavigationController.h */,
 				F47B5CD717F6B37F00D88614 /* TBNavigationController.m */,
-				F47B5CD117F668B000D88614 /* List */,
-				F47B5CD217F668BE00D88614 /* Map */,
-				F47B5CD017F6689400D88614 /* Utils */,
-				F47B5CDC17F6C7C800D88614 /* Feedback */,
-				F47B5CCF17F6687B00D88614 /* Data model */,
-				F470EBED17F11589006FD464 /* Supporting Files */,
+				F47B5CD117F668B000D88614 /* list */,
+				F47B5CD217F668BE00D88614 /* map */,
+				F47B5CF617F78C7E00D88614 /* station */,
+				F47B5CF217F78B0700D88614 /* timer */,
+				F47B5CFA17F7935900D88614 /* settings */,
+				F47B5CD017F6689400D88614 /* utils */,
+				F47B5CDC17F6C7C800D88614 /* feedback */,
+				F47B5CCF17F6687B00D88614 /* data model */,
+				F470EBED17F11589006FD464 /* support */,
 			);
 			path = telobike;
 			sourceTree = "<group>";
 		};
-		F470EBED17F11589006FD464 /* Supporting Files */ = {
+		F470EBED17F11589006FD464 /* support */ = {
 			isa = PBXGroup;
 			children = (
 				F470EBEE17F11589006FD464 /* telobike-Info.plist */,
@@ -198,7 +215,7 @@
 				F470EBF217F11589006FD464 /* main.m */,
 				F470EBF417F11589006FD464 /* telobike-Prefix.pch */,
 			);
-			name = "Supporting Files";
+			name = support;
 			sourceTree = "<group>";
 		};
 		F470EC0E17F11589006FD464 /* telobikeTests */ = {
@@ -219,7 +236,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F47B5CCF17F6687B00D88614 /* Data model */ = {
+		F47B5CCF17F6687B00D88614 /* data model */ = {
 			isa = PBXGroup;
 			children = (
 				F47B5CC917F65DAC00D88614 /* TBServer.h */,
@@ -231,12 +248,14 @@
 				F47B5CBE17F1293600D88614 /* TBFavorites.h */,
 				F47B5CBF17F1293600D88614 /* TBFavorites.m */,
 			);
-			name = "Data model";
+			name = "data model";
 			sourceTree = "<group>";
 		};
-		F47B5CD017F6689400D88614 /* Utils */ = {
+		F47B5CD017F6689400D88614 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				F47B5D0017F797DA00D88614 /* UIColor+Style.h */,
+				F47B5D0117F797DA00D88614 /* UIColor+Style.m */,
 				F42E60B917F123590099A1D0 /* Utils.h */,
 				F42E60BA17F123590099A1D0 /* Utils.m */,
 				F47B5CD317F66D1100D88614 /* NSObject+Binding.h */,
@@ -244,10 +263,10 @@
 				F47B5CED17F6D43C00D88614 /* NSBundle+View.h */,
 				F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */,
 			);
-			name = Utils;
+			name = utils;
 			sourceTree = "<group>";
 		};
-		F47B5CD117F668B000D88614 /* List */ = {
+		F47B5CD117F668B000D88614 /* list */ = {
 			isa = PBXGroup;
 			children = (
 				F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */,
@@ -255,10 +274,10 @@
 				F47B5CC617F655EC00D88614 /* TBStationTableViewCell.h */,
 				F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */,
 			);
-			name = List;
+			name = list;
 			sourceTree = "<group>";
 		};
-		F47B5CD217F668BE00D88614 /* Map */ = {
+		F47B5CD217F668BE00D88614 /* map */ = {
 			isa = PBXGroup;
 			children = (
 				F470EBFE17F11589006FD464 /* TBMapViewController.h */,
@@ -267,10 +286,10 @@
 				F47B5CE917F6D21100D88614 /* TBCalloutAccessoryView.m */,
 				F47B5CEB17F6D22200D88614 /* TBCalloutAccessoryView.xib */,
 			);
-			name = Map;
+			name = map;
 			sourceTree = "<group>";
 		};
-		F47B5CDC17F6C7C800D88614 /* Feedback */ = {
+		F47B5CDC17F6C7C800D88614 /* feedback */ = {
 			isa = PBXGroup;
 			children = (
 				F47B5CDD17F6C7E100D88614 /* TBFeedbackActionSheet.h */,
@@ -280,7 +299,35 @@
 				F47B5CE517F6CC3000D88614 /* TBFeedbackMailComposeViewController.h */,
 				F47B5CE617F6CC3000D88614 /* TBFeedbackMailComposeViewController.m */,
 			);
-			name = Feedback;
+			name = feedback;
+			sourceTree = "<group>";
+		};
+		F47B5CF217F78B0700D88614 /* timer */ = {
+			isa = PBXGroup;
+			children = (
+				F47B5CF317F78B1A00D88614 /* TBTimerViewController.h */,
+				F47B5CF417F78B1A00D88614 /* TBTimerViewController.m */,
+			);
+			name = timer;
+			sourceTree = "<group>";
+		};
+		F47B5CF617F78C7E00D88614 /* station */ = {
+			isa = PBXGroup;
+			children = (
+				F47B5CF717F78C9000D88614 /* TBStationViewController.h */,
+				F47B5CF817F78C9000D88614 /* TBStationViewController.m */,
+			);
+			name = station;
+			sourceTree = "<group>";
+		};
+		F47B5CFA17F7935900D88614 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				F47B5CFB17F7937400D88614 /* Settings.bundle */,
+				F47B5CFD17F7939200D88614 /* TBSettingsViewController.h */,
+				F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */,
+			);
+			name = settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,6 +414,7 @@
 			files = (
 				F47B5CEC17F6D22200D88614 /* TBCalloutAccessoryView.xib in Resources */,
 				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
+				F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */,
 				F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */,
 				F470EBFA17F11589006FD464 /* Main.storyboard in Resources */,
 			);
@@ -425,10 +473,13 @@
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
 				F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */,
 				F47B5CEA17F6D21100D88614 /* TBCalloutAccessoryView.m in Sources */,
+				F47B5CF917F78C9000D88614 /* TBStationViewController.m in Sources */,
 				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,
 				F42E60B817F123060099A1D0 /* TBStation.m in Sources */,
+				F47B5CF517F78B1A00D88614 /* TBTimerViewController.m in Sources */,
 				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,
+				F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */,
 				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
 				F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */,
 				F42E60BB17F123590099A1D0 /* Utils.m in Sources */,
@@ -437,6 +488,7 @@
 				F47B5CC017F1293600D88614 /* TBFavorites.m in Sources */,
 				F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */,
 				F470EBF317F11589006FD464 /* main.m in Sources */,
+				F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

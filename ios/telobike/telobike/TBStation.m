@@ -213,7 +213,7 @@ static const NSInteger kMarginalBikeAmount = 3;
 
 - (NSString *)subtitle
 {
-    return self.address;
+    return nil;
 }
 
 - (UIImage*)imageWithNameFormat:(NSString*)fmt

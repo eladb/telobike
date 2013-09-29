@@ -50,7 +50,7 @@
         result = [self objectForKey:key];
     }
     
-    return result; //[NSString stringWithFormat:@"%@.%@", lang, result];
+    return [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (CLLocation*)locationForKey:(NSString *)key

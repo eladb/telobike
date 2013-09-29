@@ -16,25 +16,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIColor* barTint = [UIColor blackColor];
-    UIColor* tint = [UIColor whiteColor];
-
-    // if this is iOS 7, set theme
-    if ([[[UIDevice currentDevice] systemVersion] hasPrefix:@"7."]) {
-        [UITabBar appearance].barTintColor = barTint;
-        [UINavigationBar appearance].barTintColor = barTint;
-
-        // this will make the status bar text white
-        [UIView appearance].tintColor = tint;
-
-        [UINavigationBar appearance].titleTextAttributes = @{ NSForegroundColorAttributeName:tint };
-
-        self.window.backgroundColor = [UIColor whiteColor];
-    }
-    else {
-        [UINavigationBar appearance].tintColor = barTint;
-    }
-    
+//    UIColor* barTint = [UIColor blackColor];
+//    UIColor* tint = [UIColor colorWithWhite:0.7 alpha:1.0];
+//
+//    // if this is iOS 7, set theme
+//    if ([[[UIDevice currentDevice] systemVersion] hasPrefix:@"7."]) {
+//        [UITabBar appearance].barTintColor = tint;
+//        [UITabBar appearance].tintColor = barTint;
+//        [UINavigationBar appearance].barTintColor = barTint;
+//
+//        // this will make the status bar text white
+//        [UIView appearance].tintColor = tint;
+//
+//
+//        self.window.backgroundColor = [UIColor whiteColor];
+//    }
+//    else {
+//        [UINavigationBar appearance].tintColor = barTint;
+//    }
+//    
     return YES;
 }
 							

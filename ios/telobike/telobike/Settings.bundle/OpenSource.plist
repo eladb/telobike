@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>SETTINGS_OSS_DEVELOPERS_LABEL</string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) 2008-2011 Route-Me contr.</string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) 2009-2010 Stig Brautaset</string>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>File</key>
+			<string>https://github.com/stig/json-framework/</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) 2007-2011 All-Seeing Interactive</string>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>File</key>
+			<string>http://allseeing-i.com/ASIHTTPRequest/</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) Google Map Icons Collection</string>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>File</key>
+			<string>http://mapicons.nicolasmollet.com/</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) Map Data OpenStreetMap contr.</string>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>File</key>
+			<string>http://www.openstreetmap.org/</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) 2009 EGOTableViewPullRefresh</string>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>File</key>
+			<string>https://github.com/enormego/EGOTableViewPullRefresh</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) Luc Vandal and Ortwin Gentz</string>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>File</key>
+			<string>http://www.inappsettingskit.com/</string>
+		</dict>
+		<dict>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) 2010 Arash Payan.</string>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>File</key>
+			<string>https://github.com/arashpayan/appirater/</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(CC) soundbyter bicycle-bell</string>
+			<key>File</key>
+			<string>http://soundcloud.com/soundbyterfreesounds</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>Key</key>
+			<string></string>
+			<key>Title</key>
+			<string>(C) Tab bar alarm icon by app-bits</string>
+			<key>File</key>
+			<string>http://app-bits.com</string>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>Title</key>
+	<string>Open Source</string>
+</dict>
+</plist>
