@@ -15,5 +15,6 @@
 + (UIColor*)navigationBarTintColor;
 + (UIColor*)tabbarBackgroundColor;
 + (UIColor*)tabbarTintColor;
++ (UIColor*)detailsBackgroundColor;
 
 @end

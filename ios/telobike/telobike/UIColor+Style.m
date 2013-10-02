@@ -11,11 +11,13 @@
 @implementation UIColor (Style)
 
 + (UIColor*)themeColor                   { return [UIColor blackColor]; }
++ (UIColor*)tintColor                    { return [UIColor whiteColor]; }
 
 + (UIColor*)navigationBarBackgroundColor { return [UIColor themeColor]; }
-+ (UIColor*)navigationBarTitleColor      { return [UIColor whiteColor]; }
-+ (UIColor*)navigationBarTintColor       { return [UIColor whiteColor]; }
-+ (UIColor*)tabbarBackgroundColor        { return [UIColor whiteColor]; }
++ (UIColor*)navigationBarTitleColor      { return [UIColor tintColor]; }
++ (UIColor*)navigationBarTintColor       { return [UIColor tintColor]; }
++ (UIColor*)tabbarBackgroundColor        { return [UIColor tintColor]; }
 + (UIColor*)tabbarTintColor              { return [UIColor themeColor]; }
++ (UIColor*)detailsBackgroundColor       { return [UIColor tabbarBackgroundColor]; }
 
 @end

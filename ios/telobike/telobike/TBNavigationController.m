@@ -31,7 +31,7 @@ static const NSUInteger kTabBarHeight = 49.0f;
     self.listViewController = [self.viewControllers objectAtIndex:0];
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
     self.timerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"timer"];
-
+    
     self.settingsViewController = [[TBSettingsViewController alloc] init];
     
     // add tabbar to navigation controller so it will be visible everywhere

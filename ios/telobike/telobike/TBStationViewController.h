@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TBStation.h"
+
 
 @interface TBStationViewController : UIViewController
+
+@property (strong, nonatomic) TBStation* station;
 
 @end

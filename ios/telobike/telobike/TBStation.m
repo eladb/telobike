@@ -95,6 +95,11 @@ static const NSInteger kMarginalBikeAmount = 3;
     _availBike   = [[dict objectForKey:@"available_bike"] intValue];
     _availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
     
+    // if address and name are the same, remove the address
+    if ([_stationName localizedCaseInsensitiveCompare:_address] == NSOrderedSame) {
+        _address = nil;
+    }
+    
     _coordinate = CLLocationCoordinate2DMake([self latitude], [self longitude]);
     _freshness = [_lastUpdate timeIntervalSinceNow];
     _isOnline = _lastUpdate != nil && _freshness < kFreshnessTimeInterval;
@@ -107,10 +112,10 @@ static const NSInteger kMarginalBikeAmount = 3;
     else if (!_isActive) _statusText = NSLocalizedString(@"Inactive station", nil);
     
     if (_statusText) _availBikeDesc = _statusText;
-    else _availBikeDesc = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Bicycle", @"Number of bicycle"), _availBike];
+    else _availBikeDesc = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Bicycle", @"Number of bicycle"), (long)_availBike];
     
     if (!_isOnline || !_isActive) _availSpaceDesc = @"";
-    else _availSpaceDesc = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Slots", @"number of slots available"), _availSpace];
+    else _availSpaceDesc = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Slots", @"number of slots available"), (long)_availSpace];
     
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
     UIColor* yellow = [UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0];

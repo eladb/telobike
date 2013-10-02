@@ -6,19 +6,28 @@
 //  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
 //
 
+#import <GoogleMaps/GoogleMaps.h>
 #import <MapKit/MapKit.h>
 #import "TBStation.h"
 #import "TBMapViewController.h"
 #import "TBServer.h"
 #import "NSObject+Binding.h"
-#import "TBCalloutAccessoryView.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
+#import "TBStationViewController.h"
+#import "TBStationDetailsView.h"
 
-@interface TBMapViewController () <MKMapViewDelegate>
+@interface TBMapViewController () <GMSMapViewDelegate>
 
-@property (strong, nonatomic) IBOutlet MKMapView* mapView;
+
+@property (strong, nonatomic) IBOutlet GMSMapView* gmapView;
+@property (strong, nonatomic) IBOutlet UIView*     stationDetailsContainerView;
+
 @property (strong, nonatomic) TBServer* server;
+
+@property (strong, nonatomic) NSMutableDictionary*  markers;
+@property (strong, nonatomic) TBStationDetailsView* stationDetails;
+@property (assign) BOOL doNotHide;
 
 @end
 
@@ -27,115 +36,149 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.markers = [[NSMutableDictionary alloc] init];
     self.server = [TBServer instance];
     
     [self observeValueOfKeyPath:@"stations" object:self.server with:^(id new, id old) {
         [self refresh:nil];
-        self.selectedStation = self.selectedStation;
     }];
     
     [self observeValueOfKeyPath:@"city" object:self.server with:^(id new, id old) {
+        // if we have a selected station, don't update the region
         if (self.selectedStation) {
-            // if we have a selected station, don't update the region
             return;
         }
-        
-        MKCoordinateRegion region;
-        region.center = self.server.city.cityCenter.coordinate;
-        region.span = MKCoordinateSpanMake(0.05, 0.05);
-        [self.mapView setRegion:region animated:NO];
+
+        self.gmapView.camera = [GMSCameraPosition cameraWithTarget:self.server.city.cityCenter.coordinate zoom:13];
     }];
     
-    MKUserTrackingBarButtonItem* trackingBarButtonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
-    self.navigationItem.rightBarButtonItem = trackingBarButtonItem;
+    // google maps
+    self.gmapView.camera                    = [GMSCameraPosition cameraWithTarget:self.server.city.cityCenter.coordinate zoom:13];
+    self.gmapView.myLocationEnabled         = YES;
+    self.gmapView.settings.myLocationButton = YES;
+    self.gmapView.settings.compassButton    = YES;
+    self.gmapView.padding = UIEdgeInsetsMake(64.0f, 0.0f, 49.0f, 0.0f);
+    self.gmapView.delegate = self;
+    
+    // station details
+    self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
+    CGRect stationDetailsContainerFrame = self.stationDetailsContainerView.frame;
+    stationDetailsContainerFrame.size.height = self.stationDetails.frame.size.height + 49.0f;
+    self.stationDetailsContainerView.frame = stationDetailsContainerFrame;
+    [self.stationDetailsContainerView addSubview:self.stationDetails];
+}
+
+- (void)viewDidLayoutSubviews {
+    NSLog(@"viewDidLayoutSubviews, selectedStation:%@", self.selectedStation ? self.selectedStation.sid : @"nil");
+    [super viewDidLayoutSubviews];
+    if (!self.doNotHide) {
+        [self hideStationDetailsAnimated:NO];
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
     navigationController.tabBar.selectedItem = navigationController.mapViewController.tabBarItem;
+    
+    [self refresh:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"viewDidDisappear");
+    [super viewDidDisappear:animated];
+    self.doNotHide = NO;
 }
 
 - (void)refresh:(id)sender {
-    // create a dictionary of existing annotations to update
-    NSMutableDictionary* existingAnnotations = [[NSMutableDictionary alloc] init];
-    for (TBStation* existingStation in _mapView.annotations) {
-        if (![existingStation isKindOfClass:[TBStation class]]) {
-            continue; // skip MKUserLocation annotation
-        }
-        [existingAnnotations setObject:existingStation forKey:existingStation.sid];
-    }
-    
     for (TBStation* station in [TBServer instance].stations) {
-        TBStation* existingStation = [existingAnnotations objectForKey:station.sid];
-        if (existingStation) {
-            // station already exists, just update
-            existingStation.dict = station.dict;
+        
+        // if a marker exists for this station id, reuse it
+        GMSMarker* marker = [self.markers objectForKey:station.sid];
+        if (!marker) {
+            GMSMarker *marker = [[GMSMarker alloc] init];
+            [self.markers setObject:marker forKey:station.sid];
         }
-        else {
-            // station does not exist, add
-            [self.mapView addAnnotation:station];
-        }
+        
+        marker.position = station.coordinate;
+        marker.map = self.gmapView;
+        marker.title = station.title;
+        marker.snippet = station.subtitle;
+        marker.icon = station.markerImage;
+        marker.userData = station;
     }
 }
 
 #pragma mark - Selection
 
 - (void)setSelectedStation:(TBStation *)selectedStation {
-    TBStation* prev = _selectedStation;
+    NSLog(@"setSelectedStation:%@", selectedStation ? selectedStation.sid : @"nil");
+
+    if (_selectedStation == selectedStation) {
+        return; // nothing to do
+    }
+    
+    // hide details of previous station
+    if (_selectedStation) {
+        [self hideStationDetailsAnimated:YES];
+    }
+    
     _selectedStation = selectedStation;
 
-    for (TBStation* station in self.mapView.annotations) {
-        if (![station isKindOfClass:[TBStation class]]) {
-            continue;
-        }
-        
-        if ([station.sid isEqualToString:selectedStation.sid]) {
-            [self.mapView deselectAnnotation:prev animated:NO];
+    // no station is selected so we are done now
+    if (!selectedStation) {
+        return;
+    }
 
-            MKCoordinateRegion region;
-            region.span = MKCoordinateSpanMake(0.02, 0.02);
-            region.center = station.coordinate;
-            [self.mapView setRegion:region animated:YES];
-            [self.mapView selectAnnotation:station animated:YES];
+    // move camera to make selected station visible (details will open after camera is idle)
+    GMSCameraPosition* pos = [GMSCameraPosition cameraWithTarget:selectedStation.coordinate zoom:15];
+    [self.gmapView animateToCameraPosition:pos];
+}
 
-            break; // break loop
-        }
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
+    self.selectedStation = marker.userData;
+    return YES;
+}
+
+- (void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture {
+    if (gesture) {
+        self.selectedStation = nil;
     }
 }
 
-#pragma mark - Map view delegate
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    static NSString* identifier = @"station";
-    
-    // only if this is a station annotation
-    if (![annotation isKindOfClass:[TBStation class]]) {
-        return nil;
+- (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position {
+    NSLog(@"idleAtCameraPosition, selectedStation:%@", self.selectedStation  ? self.selectedStation.sid : @"nil");
+    if (self.selectedStation) {
+        self.doNotHide = YES;
+        self.stationDetails.station = self.selectedStation;
+        [self showStationDetailsAnimated:YES];
     }
-    
-    MKAnnotationView* view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if (!view) {
-        view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        view.centerOffset = CGPointMake(6.0, -18.0);
-        TBCalloutAccessoryView* a = [[NSBundle mainBundle] loadViewFromNibForClass:[TBCalloutAccessoryView class]];
-        a.autoresizingMask = 0;
-        view.rightCalloutAccessoryView = a;
-    }
-    
-    TBStation* station = (TBStation*)annotation;
-    view.image = station.markerImage;
-    view.canShowCallout = YES;
-    TBCalloutAccessoryView* a = (TBCalloutAccessoryView*)view.rightCalloutAccessoryView;
-    a.station = station;
-
-
-    return view;
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    NSLog(@"disclosure");
+#pragma mark - Station details
+
+- (void)hideStationDetailsAnimated:(BOOL)animated {
+    CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
+    stationDetailsFrame.origin.y = self.view.bounds.size.height;
+    [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
 }
 
+- (void)showStationDetailsAnimated:(BOOL)animated {
+    CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
+    stationDetailsFrame.origin.y = self.view.bounds.size.height - stationDetailsFrame.size.height;
+    [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
+}
+
+- (void)changeStationDetailsFrame:(CGRect)newFrame animated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration:0.25f animations:^{
+            self.stationDetailsContainerView.frame = newFrame;
+        }];
+    }
+    else {
+        self.stationDetailsContainerView.frame = newFrame;
+    }
+}
 
 @end

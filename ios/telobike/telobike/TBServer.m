@@ -41,14 +41,17 @@ static NSUInteger kCacheDiskCapacityBytes   = 4 * 1024 * 1024;
     if (self) {
         NSURL* url  = [NSURL URLWithString:kServerBaseURL];
         self.server = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
-        self.cache  = [[NSURLCache alloc] initWithMemoryCapacity:kCacheMemoryCapacityBytes
-                                                    diskCapacity:kCacheDiskCapacityBytes
-                                                        diskPath:@"stations"];
-
-        [NSURLCache setSharedURLCache:self.cache];
         
         [self parseCityResponse:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"city"]];
-        [self parseStationsResponse:[[NSUserDefaults standardUserDefaults] arrayForKey:@"stations"]];
+
+        id cachedStationsResponse = [[NSUserDefaults standardUserDefaults] arrayForKey:@"stations"];
+        if (!cachedStationsResponse) {
+            NSURL* sampleDataURL = [[NSBundle mainBundle] URLForResource:@"sample-data" withExtension:@"json"];
+            NSData* sampleData = [NSData dataWithContentsOfURL:sampleDataURL];
+            cachedStationsResponse = [NSJSONSerialization JSONObjectWithData:sampleData options:0 error:nil];
+        }
+        
+        [self parseStationsResponse:cachedStationsResponse];
         [self reloadStations:nil];
         [self reloadCity:nil];
     }
