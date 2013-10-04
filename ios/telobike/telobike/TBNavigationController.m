@@ -39,12 +39,15 @@ static const NSUInteger kTabBarHeight = 49.0f;
     tabBarFrame.origin = CGPointMake(0.0f, self.view.frame.size.height - kTabBarHeight);
     tabBarFrame.size   = CGSizeMake(self.view.frame.size.width, kTabBarHeight);
     self.tabBar = [[UITabBar alloc] initWithFrame:tabBarFrame];
-    
+    self.tabBar.itemPositioning = UITabBarItemPositioningCentered;
+    self.tabBar.itemSpacing = 0.5f;
+
+
     NSMutableArray* items = [[NSMutableArray alloc] init];
     [items addObject:self.listViewController.tabBarItem];
     [items addObject:self.mapViewController.tabBarItem];
     [items addObject:self.timerViewController.tabBarItem];
-    [items addObject:self.settingsViewController.tabBarItem];
+//    [items addObject:self.settingsViewController.tabBarItem];
     
     self.tabBar.items = items;
     self.tabBar.selectedItem = [self.tabBar.items objectAtIndex:0];

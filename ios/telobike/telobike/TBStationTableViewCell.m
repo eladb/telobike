@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel* subtitleLabel;
 @property (strong, nonatomic) IBOutlet TBAvailabilityView* availabilityView;
 @property (strong, nonatomic) IBOutlet TBTintedView* availabilityIndicatorView;
+@property (strong, nonatomic) IBOutlet UIProgressView* progressView;
 
 @end
 
@@ -39,6 +40,8 @@
     NSString* distance = @"122m";
     [desc appendAttributedString:[[NSAttributedString alloc] initWithString:distance attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
     self.subtitleLabel.attributedText = desc;
+    self.progressView.progress = station.availBike / station.totalSlots;
+    self.progressView.progressTintColor = station.availBikeColor;
     self.availabilityIndicatorView.fillColor = station.indicatorColor;
 
     _station = station;

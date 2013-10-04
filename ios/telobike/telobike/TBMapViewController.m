@@ -24,14 +24,17 @@
 @property (strong, nonatomic) IBOutlet UIView*     stationDetailsContainerView;
 
 @property (strong, nonatomic) TBServer* server;
-
 @property (strong, nonatomic) NSMutableDictionary*  markers;
 @property (strong, nonatomic) TBStationDetailsView* stationDetails;
-@property (assign) BOOL doNotHide;
+@property (assign) BOOL doNotHide; // hack!
+
+- (IBAction)showMyLocation:(id)sender;
 
 @end
 
 @implementation TBMapViewController
+
+#pragma mark - View controller events
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,8 +58,12 @@
     // google maps
     self.gmapView.camera                    = [GMSCameraPosition cameraWithTarget:self.server.city.cityCenter.coordinate zoom:13];
     self.gmapView.myLocationEnabled         = YES;
-    self.gmapView.settings.myLocationButton = YES;
     self.gmapView.settings.compassButton    = YES;
+    self.gmapView.settings.scrollGestures   = YES;
+    self.gmapView.settings.zoomGestures     = YES;
+    self.gmapView.settings.tiltGestures     = YES;
+    self.gmapView.settings.rotateGestures   = YES;
+
     self.gmapView.padding = UIEdgeInsetsMake(64.0f, 0.0f, 49.0f, 0.0f);
     self.gmapView.delegate = self;
     
@@ -64,17 +71,20 @@
     self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
     CGRect stationDetailsContainerFrame = self.stationDetailsContainerView.frame;
     stationDetailsContainerFrame.size.height = self.stationDetails.frame.size.height + 49.0f;
+
+    CGRect stationDetailsFrame = self.stationDetails.frame;
+    stationDetailsFrame.size.height = stationDetailsContainerFrame.size.height;
+    self.stationDetails.frame =stationDetailsFrame;
+    
     self.stationDetailsContainerView.frame = stationDetailsContainerFrame;
     [self.stationDetailsContainerView addSubview:self.stationDetails];
 }
 
 - (void)viewDidLayoutSubviews {
-    NSLog(@"viewDidLayoutSubviews, selectedStation:%@", self.selectedStation ? self.selectedStation.sid : @"nil");
     [super viewDidLayoutSubviews];
     if (!self.doNotHide) {
         [self hideStationDetailsAnimated:NO];
     }
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,10 +96,12 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    NSLog(@"viewDidDisappear");
     [super viewDidDisappear:animated];
     self.doNotHide = NO;
+    self.selectedStation = nil;
 }
+
+#pragma mark - Markers
 
 - (void)refresh:(id)sender {
     for (TBStation* station in [TBServer instance].stations) {
@@ -148,7 +160,6 @@
 }
 
 - (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position {
-    NSLog(@"idleAtCameraPosition, selectedStation:%@", self.selectedStation  ? self.selectedStation.sid : @"nil");
     if (self.selectedStation) {
         self.doNotHide = YES;
         self.stationDetails.station = self.selectedStation;
@@ -159,6 +170,9 @@
 #pragma mark - Station details
 
 - (void)hideStationDetailsAnimated:(BOOL)animated {
+    if (!self.parentViewController) {
+        animated = NO;
+    }
     CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
     stationDetailsFrame.origin.y = self.view.bounds.size.height;
     [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
@@ -179,6 +193,14 @@
     else {
         self.stationDetailsContainerView.frame = newFrame;
     }
+}
+
+#pragma mark - My location
+
+- (void)showMyLocation:(id)sender {
+    self.selectedStation = nil;
+    GMSCameraPosition* pos = [GMSCameraPosition cameraWithTarget:self.gmapView.myLocation.coordinate zoom:15];
+    [self.gmapView animateToCameraPosition:pos];
 }
 
 @end

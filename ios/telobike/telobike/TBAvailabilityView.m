@@ -24,7 +24,8 @@
 
     CGFloat spacing = 4.0f;
     int totalSlots = self.station.availSpace + self.station.availBike;
-    CGFloat slotWidth = 8.0f;//;rect.size.width / totalSlots - spacing;
+//    CGFloat slotWidth = 8.0f;//;rect.size.width / totalSlots - spacing;
+    CGFloat slotWidth = 5.0f;//;rect.size.width / totalSlots - spacing;
     CGFloat startX = 1.0f;
     CGFloat startY = rect.size.height / 2.0f - slotWidth / 2.0f + 1.0f;
     CGFloat x = startX;
@@ -32,12 +33,14 @@
     for (int i = 0; i < totalSlots; ++i) {
         if (i < self.station.availBike) {
             UIColor* slotColor = self.station.availBikeColor;
+//            UIColor* slotColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
             CGContextSetLineWidth(ctx, 1.0f);
             CGContextSetStrokeColorWithColor(ctx, [slotColor CGColor]);
             CGContextSetFillColorWithColor(ctx, [slotColor CGColor]);
         }
         else {
             UIColor* slotColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
+//            UIColor* slotColor = self.station.availSpaceColor;
             CGContextSetLineWidth(ctx, 1.0f);
             CGContextSetStrokeColorWithColor(ctx, [slotColor CGColor]);
             CGContextSetFillColorWithColor(ctx, [[UIColor clearColor] CGColor]);

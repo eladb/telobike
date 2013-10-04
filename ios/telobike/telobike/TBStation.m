@@ -94,6 +94,7 @@ static const NSInteger kMarginalBikeAmount = 3;
     _address     = [dict localizedStringForKey:@"address"];
     _availBike   = [[dict objectForKey:@"available_bike"] intValue];
     _availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
+    _totalSlots  = _availBike + _availSpace;
     
     // if address and name are the same, remove the address
     if ([_stationName localizedCaseInsensitiveCompare:_address] == NSOrderedSame) {
