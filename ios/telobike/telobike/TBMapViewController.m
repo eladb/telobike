@@ -52,11 +52,10 @@
             return;
         }
 
-        self.gmapView.camera = [GMSCameraPosition cameraWithTarget:self.server.city.cityCenter.coordinate zoom:13];
+        self.gmapView.camera = [GMSCameraPosition cameraWithTarget:self.server.city.cityCenter.coordinate zoom:12];
     }];
     
     // google maps
-    self.gmapView.camera                    = [GMSCameraPosition cameraWithTarget:self.server.city.cityCenter.coordinate zoom:13];
     self.gmapView.myLocationEnabled         = YES;
     self.gmapView.settings.compassButton    = YES;
     self.gmapView.settings.scrollGestures   = YES;
@@ -78,6 +77,8 @@
     
     self.stationDetailsContainerView.frame = stationDetailsContainerFrame;
     [self.stationDetailsContainerView addSubview:self.stationDetails];
+
+    [self moveCameraToSelectedStation];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -137,14 +138,17 @@
     }
     
     _selectedStation = selectedStation;
+    [self moveCameraToSelectedStation];
+}
 
+- (void)moveCameraToSelectedStation {
     // no station is selected so we are done now
-    if (!selectedStation) {
+    if (!self.selectedStation) {
         return;
     }
-
+    
     // move camera to make selected station visible (details will open after camera is idle)
-    GMSCameraPosition* pos = [GMSCameraPosition cameraWithTarget:selectedStation.coordinate zoom:15];
+    GMSCameraPosition* pos = [GMSCameraPosition cameraWithTarget:self.selectedStation.coordinate zoom:15];
     [self.gmapView animateToCameraPosition:pos];
 }
 

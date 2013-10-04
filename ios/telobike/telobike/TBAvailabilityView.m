@@ -25,7 +25,7 @@
     CGFloat spacing = 4.0f;
     int totalSlots = self.station.availSpace + self.station.availBike;
 //    CGFloat slotWidth = 8.0f;//;rect.size.width / totalSlots - spacing;
-    CGFloat slotWidth = 5.0f;//;rect.size.width / totalSlots - spacing;
+    CGFloat slotWidth = 8.0f;//;rect.size.width / totalSlots - spacing;
     CGFloat startX = 1.0f;
     CGFloat startY = rect.size.height / 2.0f - slotWidth / 2.0f + 1.0f;
     CGFloat x = startX;
@@ -47,7 +47,8 @@
         }
 
         CGRect slotRect = CGRectMake(x, y, slotWidth, slotWidth);
-        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:slotRect.size.width / 2.0f];
+//        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:slotRect.size.width / 2.0f];
+        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:1.0f];
         [path fill];
         [path stroke];
 

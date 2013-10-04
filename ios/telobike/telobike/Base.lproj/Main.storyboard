@@ -315,7 +315,6 @@
         <image name="accessory-bike" width="42" height="28"/>
         <image name="accessory-parking" width="39" height="38"/>
         <image name="title2" width="54" height="35"/>
-        <image name="title2" width="54" height="35"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
