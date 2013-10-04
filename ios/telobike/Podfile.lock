@@ -13,7 +13,6 @@ PODS:
   - Appirater (2.0.1)
   - GoogleAnalytics-iOS-SDK (3.0.1)
   - InAppSettingsKit (1.1)
-  - iOS-KML-Framework (0.0.1)
   - SBJson (3.2)
 
 DEPENDENCIES:
@@ -21,7 +20,6 @@ DEPENDENCIES:
   - Appirater
   - GoogleAnalytics-iOS-SDK
   - InAppSettingsKit
-  - iOS-KML-Framework
   - SBJson
 
 SPEC CHECKSUMS:
@@ -29,7 +27,6 @@ SPEC CHECKSUMS:
   Appirater: 10cdcb23edc2d3b225afbb4a7d110539adac9b55
   GoogleAnalytics-iOS-SDK: ea0118af32b97a92ac98b25ecc2aa2a286c835c7
   InAppSettingsKit: cf2c4193c3269d6acf996f7975f310d18a5e1e3c
-  iOS-KML-Framework: c981153e8b919304b3123543e1d597cdbf99fea3
   SBJson: e60b4dc22448c2ae1e754b523a4ab53408e85c8d
 
 COCOAPODS: 0.25.0

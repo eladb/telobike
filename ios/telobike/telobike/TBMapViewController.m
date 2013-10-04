@@ -15,6 +15,7 @@
 #import "TBNavigationController.h"
 #import "TBStationViewController.h"
 #import "TBStationDetailsView.h"
+#import "KMLParser.h"
 
 @interface TBMapViewController () <MKMapViewDelegate>
 
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
 @property (strong, nonatomic) TBStationDetailsView* stationDetails;
+@property (strong, nonatomic) KMLParser* kmlParser;
 
 @property (assign, nonatomic) BOOL regionChangingForSelection;
 
@@ -71,6 +73,8 @@
     
     self.stationDetailsContainerView.frame = stationDetailsContainerFrame;
     [self.stationDetailsContainerView addSubview:self.stationDetails];
+    
+    [self loadRoutesFromKML];
 }
 
 
@@ -158,7 +162,7 @@
     view.image = _selectedStation.selectedMarkerImage;
     
     MKCoordinateRegion region;
-    region.span = MKCoordinateSpanMake(0.02, 0.02);
+    region.span = MKCoordinateSpanMake(0.004, 0.004);
     region.center = self.selectedStation.coordinate;
     
     self.regionChangingForSelection = YES;
@@ -212,10 +216,6 @@
 }
 
 - (void)changeStationDetailsFrame:(CGRect)newFrame animated:(BOOL)animated {
-//    if (!self.parentViewController) {
-//        animated = NO;
-//    }
-    
     if (animated) {
         [UIView animateWithDuration:0.25f animations:^{
             self.stationDetailsContainerView.frame = newFrame;
@@ -233,6 +233,19 @@
                                 message:NSLocalizedString(@"Unable to determine location", @"Location error message")
                                delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"Cancel button for location erro alert")
                       otherButtonTitles:nil] show];
+}
+
+#pragma mark - Routes
+
+- (void)loadRoutesFromKML {
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"routes" withExtension:@"kml"];
+    self.kmlParser = [[KMLParser alloc] initWithURL:url];
+    [self.kmlParser parseKML];
+    [self.mapView addOverlays:self.kmlParser.overlays];
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    return [self.kmlParser rendererForOverlay:overlay];
 }
 
 @end

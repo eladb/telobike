@@ -45,11 +45,11 @@
 		F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F47B5CFB17F7937400D88614 /* Settings.bundle */; };
 		F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */; };
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
-		F47B5D0C17F7CFA800D88614 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5D0B17F7CFA800D88614 /* CoreText.framework */; };
-		F47B5D0E17F7CFB100D88614 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5D0D17F7CFB100D88614 /* GLKit.framework */; };
 		F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */; };
 		F4D6FA8917FC4D5A000D0F2A /* TBStationDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
+		F4EE1E4817FEEE86002F8A62 /* routes.kml in Resources */ = {isa = PBXBuildFile; fileRef = F4EE1E4717FEEE86002F8A62 /* routes.kml */; };
+		F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EE1E7517FEF58C002F8A62 /* KMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,21 +126,14 @@
 		F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSettingsViewController.m; sourceTree = "<group>"; };
 		F47B5D0017F797DA00D88614 /* UIColor+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
 		F47B5D0117F797DA00D88614 /* UIColor+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
-		F47B5D0517F7CF8D00D88614 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		F47B5D0717F7CF9600D88614 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		F47B5D0917F7CFA100D88614 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		F47B5D0B17F7CFA800D88614 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		F47B5D0D17F7CFB100D88614 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		F47B5D0F17F7CFB700D88614 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		F47B5D1117F7CFBE00D88614 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		F47B5D1317F7CFC500D88614 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		F47B5D1517F7CFCA00D88614 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		F47B5D1717F7CFCF00D88614 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		F47B5D1917F7CFD500D88614 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F4D6FA8517FC4D4B000D0F2A /* TBStationDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsView.h; sourceTree = "<group>"; };
 		F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsView.m; sourceTree = "<group>"; };
 		F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationDetailsView.xib; sourceTree = "<group>"; };
 		F4D6FA8A17FC8442000D0F2A /* sample-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sample-data.json"; sourceTree = "<group>"; };
+		F4EE1E4717FEEE86002F8A62 /* routes.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = routes.kml; sourceTree = "<group>"; };
+		F4EE1E7417FEF58C002F8A62 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
+		F4EE1E7517FEF58C002F8A62 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +141,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F47B5D0E17F7CFB100D88614 /* GLKit.framework in Frameworks */,
-				F47B5D0C17F7CFA800D88614 /* CoreText.framework in Frameworks */,
 				F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */,
 				F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */,
 				F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */,
@@ -196,17 +187,7 @@
 		F470EBE517F11589006FD464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F47B5D1917F7CFD500D88614 /* SystemConfiguration.framework */,
-				F47B5D1717F7CFCF00D88614 /* OpenGLES.framework */,
-				F47B5D1517F7CFCA00D88614 /* libz.dylib */,
-				F47B5D1317F7CFC500D88614 /* libicucore.dylib */,
-				F47B5D1117F7CFBE00D88614 /* libc++.dylib */,
 				F47B5D0F17F7CFB700D88614 /* ImageIO.framework */,
-				F47B5D0D17F7CFB100D88614 /* GLKit.framework */,
-				F47B5D0B17F7CFA800D88614 /* CoreText.framework */,
-				F47B5D0917F7CFA100D88614 /* CoreLocation.framework */,
-				F47B5D0717F7CF9600D88614 /* CoreData.framework */,
-				F47B5D0517F7CF8D00D88614 /* AVFoundation.framework */,
 				F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */,
 				F47B5CE017F6C97100D88614 /* MessageUI.framework */,
 				F42E60B117F11C5A0099A1D0 /* MapKit.framework */,
@@ -223,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				F4D6FA8A17FC8442000D0F2A /* sample-data.json */,
+				F4EE1E4717FEEE86002F8A62 /* routes.kml */,
 				F470EBF817F11589006FD464 /* Main.storyboard */,
 				F42E60AF17F11AF60099A1D0 /* Assets.xcassets */,
 				F470EBF517F11589006FD464 /* TBAppDelegate.h */,
@@ -319,6 +301,7 @@
 		F47B5CD217F668BE00D88614 /* map */ = {
 			isa = PBXGroup;
 			children = (
+				F4EE1E7317FEF582002F8A62 /* KMLParser */,
 				F470EBFE17F11589006FD464 /* TBMapViewController.h */,
 				F470EBFF17F11589006FD464 /* TBMapViewController.m */,
 				F4D6FA8517FC4D4B000D0F2A /* TBStationDetailsView.h */,
@@ -367,6 +350,15 @@
 				F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */,
 			);
 			name = settings;
+			sourceTree = "<group>";
+		};
+		F4EE1E7317FEF582002F8A62 /* KMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				F4EE1E7417FEF58C002F8A62 /* KMLParser.h */,
+				F4EE1E7517FEF58C002F8A62 /* KMLParser.m */,
+			);
+			name = KMLParser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,6 +449,7 @@
 				F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */,
 				F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */,
 				F470EBFA17F11589006FD464 /* Main.storyboard in Resources */,
+				F4EE1E4817FEEE86002F8A62 /* routes.kml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +508,7 @@
 				F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */,
 				F47B5CF917F78C9000D88614 /* TBStationViewController.m in Sources */,
 				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
+				F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */,
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,
 				F42E60B817F123060099A1D0 /* TBStation.m in Sources */,
 				F47B5CF517F78B1A00D88614 /* TBTimerViewController.m in Sources */,
