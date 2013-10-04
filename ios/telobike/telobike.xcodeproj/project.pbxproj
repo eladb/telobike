@@ -13,6 +13,8 @@
 		F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E60B117F11C5A0099A1D0 /* MapKit.framework */; };
 		F42E60B817F123060099A1D0 /* TBStation.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60B717F123060099A1D0 /* TBStation.m */; };
 		F42E60BB17F123590099A1D0 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60BA17F123590099A1D0 /* Utils.m */; };
+		F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */; };
+		F42FCA1117FE52F700E24D50 /* TBTintedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42FCA1017FE52F700E24D50 /* TBTintedView.m */; };
 		F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
 		F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE817F11589006FD464 /* CoreGraphics.framework */; };
 		F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
@@ -82,6 +84,10 @@
 		F42E60B717F123060099A1D0 /* TBStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStation.m; sourceTree = "<group>"; };
 		F42E60B917F123590099A1D0 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		F42E60BA17F123590099A1D0 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		F42FCA0917FD6A3F00E24D50 /* TBAvailabilityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAvailabilityView.h; sourceTree = "<group>"; };
+		F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAvailabilityView.m; sourceTree = "<group>"; };
+		F42FCA0F17FE52F700E24D50 /* TBTintedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTintedView.h; sourceTree = "<group>"; };
+		F42FCA1017FE52F700E24D50 /* TBTintedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTintedView.m; sourceTree = "<group>"; };
 		F470EBE317F11589006FD464 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F470EBE617F11589006FD464 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F470EBE817F11589006FD464 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -327,6 +333,10 @@
 				F42E60AD17F11A2C0099A1D0 /* TBListViewController.m */,
 				F47B5CC617F655EC00D88614 /* TBStationTableViewCell.h */,
 				F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */,
+				F42FCA0917FD6A3F00E24D50 /* TBAvailabilityView.h */,
+				F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */,
+				F42FCA0F17FE52F700E24D50 /* TBTintedView.h */,
+				F42FCA1017FE52F700E24D50 /* TBTintedView.m */,
 			);
 			name = list;
 			sourceTree = "<group>";
@@ -525,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F47B5CCE17F6675B00D88614 /* TBCity.m in Sources */,
+				F42FCA1117FE52F700E24D50 /* TBTintedView.m in Sources */,
 				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
 				F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */,
@@ -545,6 +556,7 @@
 				F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */,
 				F470EBF317F11589006FD464 /* main.m in Sources */,
 				F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */,
+				F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

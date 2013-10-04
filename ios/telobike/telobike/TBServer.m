@@ -11,8 +11,6 @@
 #import "TBStation.h"
 
 static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com";
-static NSUInteger kCacheMemoryCapacityBytes = 4 * 1024 * 1024;
-static NSUInteger kCacheDiskCapacityBytes   = 4 * 1024 * 1024;
 
 @interface TBServer ()
 

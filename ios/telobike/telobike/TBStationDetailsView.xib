@@ -66,12 +66,18 @@
                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJ8-S6-6wh" userLabel="indicatorView" customClass="TBTintedView">
+                    <rect key="frame" x="0.0" y="0.0" width="3" height="113"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="availBikeLabel" destination="Gqb-c9-UYX" id="T9M-Kf-cR2"/>
                 <outlet property="availSpaceLabel" destination="y81-MO-sEx" id="Sem-HI-sae"/>
                 <outlet property="bikeContainerView" destination="MYw-O2-18k" id="T8A-gf-qrN"/>
+                <outlet property="indicatorView" destination="iJ8-S6-6wh" id="xft-o0-FsJ"/>
                 <outlet property="parkingContainerView" destination="EMX-8c-Utr" id="1u2-R8-k0O"/>
                 <outlet property="stationAddressLabel" destination="WTC-dn-eed" id="Zi1-zF-wmA"/>
                 <outlet property="stationNameLabel" destination="SVw-VI-rnu" id="Cm7-Kd-Kue"/>

@@ -8,6 +8,7 @@
 
 #import "TBStationDetailsView.h"
 #import "UIColor+Style.h"
+#import "TBTintedView.h"
 
 @interface TBStationDetailsView()
 
@@ -20,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UILabel* stationNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel* stationAddressLabel;
 
+@property (strong, nonatomic) IBOutlet TBTintedView* indicatorView;
+
 @end
 
 @implementation TBStationDetailsView
@@ -31,7 +34,9 @@
 
 - (void)setStation:(TBStation *)station {
     _station = station;
-    
+
+    self.indicatorView.fillColor = station.indicatorColor;
+
     self.availSpaceLabel.text = [NSString stringWithFormat:@"%ld", (long)station.availSpace];
     self.availBikeLabel.text = [NSString stringWithFormat:@"%ld", (long)station.availBike];
     

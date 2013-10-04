@@ -48,6 +48,8 @@ typedef enum {
 @property (nonatomic, readonly) UIColor* availBikeColor;
 @property (nonatomic, assign) BOOL favorite;
 
+@property (nonatomic, readonly) UIColor* indicatorColor;
+
 @property (nonatomic, readonly) StationState state;
 @property (nonatomic, readonly) AmountState parkState;
 @property (nonatomic, readonly) AmountState bikeState;

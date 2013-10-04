@@ -112,14 +112,16 @@ static const NSInteger kMarginalBikeAmount = 3;
     else if (!_isActive) _statusText = NSLocalizedString(@"Inactive station", nil);
     
     if (_statusText) _availBikeDesc = _statusText;
-    else _availBikeDesc = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Bicycle", @"Number of bicycle"), (long)_availBike];
+    else _availBikeDesc = [NSString stringWithFormat:@"%ld", (long)_availBike, NSLocalizedString(@"Bicycles", @"Number of bicycle")];
     
     if (!_isOnline || !_isActive) _availSpaceDesc = @"";
-    else _availSpaceDesc = [NSString stringWithFormat:@"%@: %ld", NSLocalizedString(@"Slots", @"number of slots available"), (long)_availSpace];
+    else _availSpaceDesc = [NSString stringWithFormat:@"%ld", (long)_availSpace, NSLocalizedString(@"Slots", @"number of slots available")];
     
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
     UIColor* yellow = [UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0];
-    UIColor* green  = [UIColor colorWithRed:0.0f green:102.0f/255.0f blue:0.0f alpha:1.0f];
+    UIColor* green  = [UIColor colorWithRed:0.0f green:122.0f/255.0f blue:0.0f alpha:1.0f];
+    
+    _indicatorColor = nil;
     
     // set red color for bike and space if either of them is 0.
     if (_isActive) {
@@ -130,6 +132,16 @@ static const NSInteger kMarginalBikeAmount = 3;
         if (_availSpace == 0) _availSpaceColor = red;
         else if (_availSpace <= kMarginalBikeAmount) _availSpaceColor = yellow;
         else _availSpaceColor = green;
+        
+        _indicatorColor = green;
+        if (_availBikeColor != green || _availSpaceColor != green) {
+            if (_availBikeColor == red || _availSpaceColor == red) {
+                _indicatorColor = red;
+            }
+            else {
+                _indicatorColor = yellow;
+            }
+        }
     }
     
     // load images for list and markers

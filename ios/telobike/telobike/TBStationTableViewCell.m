@@ -6,31 +6,41 @@
 //  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "TBStationTableViewCell.h"
+#import "TBAvailabilityView.h"
+#import "TBTintedView.h"
 
 @interface TBStationTableViewCell ()
 
-//@property (strong, nonatomic) IBOutlet UIImageView* iconImageView;
-//@property (strong, nonatomic) IBOutlet UILabel*     stationNameLabel;
-//@property (strong, nonatomic) IBOutlet UILabel*     availableBikesLabel;
-//@property (strong, nonatomic) IBOutlet UILabel*     availableSlotsLabel;
-//@property (strong, nonatomic) IBOutlet UILabel*     distanceLabel;
-//
-//
+@property (strong, nonatomic) IBOutlet UILabel* stationNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel* subtitleLabel;
+@property (strong, nonatomic) IBOutlet TBAvailabilityView* availabilityView;
+@property (strong, nonatomic) IBOutlet TBTintedView* availabilityIndicatorView;
+
 @end
 
 @implementation TBStationTableViewCell
 
 - (void)setStation:(TBStation *)station
 {
-    self.imageView.image      = station.listImage;
-    self.textLabel.text       = station.stationName;
+    self.availabilityView.station = station;
+    self.stationNameLabel.text    = station.stationName;
     
     NSMutableAttributedString* desc = [[NSMutableAttributedString alloc] init];
-    [desc appendAttributedString:[[NSAttributedString alloc] initWithString:station.availBikeDesc  attributes:@{ NSForegroundColorAttributeName: station.availBikeColor }]];
-    [desc appendAttributedString:[[NSAttributedString alloc] initWithString:@" ・ "]];
-    [desc appendAttributedString:[[NSAttributedString alloc] initWithString:station.availSpaceDesc attributes:@{ NSForegroundColorAttributeName: station.availSpaceColor }]];
-    self.detailTextLabel.attributedText = desc;
+//    if (station.address) {
+//        [desc appendAttributedString:[[NSAttributedString alloc] initWithString:station.address attributes:@{ NSForegroundColorAttributeName: [UIColor grayColor] }]];
+//    }
+//    
+//    if (desc.length > 0) {
+//        [desc appendAttributedString:[[NSAttributedString alloc] initWithString:@"・" attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
+//    }
+
+    NSString* distance = @"122m";
+    [desc appendAttributedString:[[NSAttributedString alloc] initWithString:distance attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
+    self.subtitleLabel.attributedText = desc;
+    self.availabilityIndicatorView.fillColor = station.indicatorColor;
+
     _station = station;
 }
 
