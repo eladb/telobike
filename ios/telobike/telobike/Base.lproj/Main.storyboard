@@ -29,9 +29,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search stations" translucent="NO" id="piD-Q1-dvC">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="ttd-dx-cuw" id="Aab-5j-3uC"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Station" id="GyB-Ju-9sl" customClass="TBStationTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="90"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GyB-Ju-9sl" id="8Bb-uP-VE4">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="89"/>
@@ -69,14 +77,6 @@
                                     <outlet property="subtitleLabel" destination="jhl-HG-8aK" id="4oo-WH-SYe"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="p5f-6x-RdI">
-                                <rect key="frame" x="0.0" y="176" width="320" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p5f-6x-RdI" id="zAI-ci-Igf">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="ttd-dx-cuw" id="mlV-DL-Bcw"/>
@@ -86,7 +86,11 @@
                     <tabBarItem key="tabBarItem" title="List" image="Top_Charts" id="NpL-YH-X2J"/>
                     <navigationItem key="navigationItem" id="Y0l-8p-age">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="iwo-cX-nPB"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="iwo-cX-nPB">
+                            <connections>
+                                <action selector="search:" destination="ttd-dx-cuw" id="cc1-P2-rez"/>
+                            </connections>
+                        </barButtonItem>
                         <view key="titleView" opaque="NO" contentMode="scaleToFill" id="bqe-nO-aMe">
                             <rect key="frame" x="135" y="12" width="50" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -108,6 +112,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
+                        <outlet property="searchBar" destination="piD-Q1-dvC" id="Sam-Fe-W09"/>
                         <outlet property="searchDisplayController" destination="2UI-Tv-KI7" id="EE4-4r-eWE"/>
                     </connections>
                 </tableViewController>

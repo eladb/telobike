@@ -16,8 +16,13 @@
 #import "TBFeedbackActionSheet.h"
 #import "TBFeedbackMailComposeViewController.h"
 
-@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchBarDelegate>
 
+@property (strong, nonatomic) IBOutlet UISearchBar* searchBar;
+@property (assign, nonatomic) BOOL isShowingSearchBar;
+@property (strong, nonatomic) UIBarButtonItem* searchBarButtonItem;
+
+- (IBAction)search:(id)sender;
 - (IBAction)feedback:(id)sender;
 
 @end
@@ -36,6 +41,13 @@
     }];
     
     [self refresh:nil];
+    [self hideSearchBarAnimated:NO];
+    
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom = ((TBNavigationController*)self.navigationController).tabBar.frame.size.height;
+    self.tableView.contentInset = insets;
+    
+    self.searchBarButtonItem = self.navigationItem.leftBarButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -44,10 +56,37 @@
     navigationController.tabBar.selectedItem = navigationController.listViewController.tabBarItem;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.searchBar resignFirstResponder];
+}
+
 #pragma mark - Refresh
 
 - (NSArray*)stations {
-    return [TBServer instance].stations;
+    NSPredicate* predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        
+        NSString* filter = self.searchBar.text;
+        
+        if (filter.length == 0) {
+            return YES;
+        }
+        
+        TBStation* station = evaluatedObject;
+        
+        // split filter to words and see if this station match all the words.
+        NSArray* keywords = [filter componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        for (NSString* keyword in keywords) {
+            if (![station queryKeyword:keyword]) {
+                return NO;
+            }
+        }
+        
+        // station contains all keywords, it should be included in the list.
+        return YES;
+    }];
+    
+    return [[TBServer instance].stations filteredArrayUsingPredicate:predicate];
 }
 
 - (void)refresh:(id)sender {
@@ -97,5 +136,60 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Search
+
+- (void)search:(id)sender {
+    if (self.tableView.contentOffset.y == -self.tableView.contentInset.top) {
+        [self.searchBar becomeFirstResponder];
+    }
+    
+    //-64.0
+    [self.tableView setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:YES];
+    self.isShowingSearchBar = YES;
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (self.isShowingSearchBar) {
+        [self.searchBar becomeFirstResponder];
+        self.isShowingSearchBar = NO;
+    }
+}
+
+- (void)hideSearchBarAnimated:(BOOL)animated {
+    self.isShowingSearchBar = NO;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:animated];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [self.searchBar setShowsCancelButton:YES animated:YES];
+    self.navigationItem.leftBarButtonItem = nil;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (self.searchBar.text.length == 0) {
+        [self.searchBar setShowsCancelButton:NO animated:YES];
+    }
+    
+    self.navigationItem.leftBarButtonItem = self.searchBarButtonItem;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self.tableView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.text = nil;
+    [self.tableView reloadData];
+    [self.searchBar resignFirstResponder];
+    [self hideSearchBarAnimated:YES];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.searchBar resignFirstResponder];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
+}
 
 @end

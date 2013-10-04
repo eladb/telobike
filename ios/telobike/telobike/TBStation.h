@@ -72,4 +72,6 @@ typedef enum {
 
 - (CLLocationDistance)distanceFromLocation:(CLLocation*)location;
 
+- (BOOL)queryKeyword:(NSString*)keyword;
+
 @end

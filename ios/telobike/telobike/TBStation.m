@@ -239,4 +239,30 @@ static const NSInteger kMarginalBikeAmount = 3;
     return [TBStation imageWithNameFormat:fmt state:[self state]];
 }
 
+#pragma mark - Query
+
+- (BOOL)queryKeyword:(NSString *)keyword {
+    if (keyword.length == 0) {
+        return YES;
+    }
+
+    // trim any whitespace from the keyword
+    keyword = [keyword stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    // check if the filter text is in the station name
+    if (self.stationName.length > 0 && [self.stationName rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
+    
+    // check if the filter text is in the address
+    if (self.address.length > 0 && [self.address rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
+    
+    if (self.tags) {
+        // check if any of the tags match
+        for (NSString* tag in self.tags) {
+            if ([tag rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
+        }
+    }
+    
+    return NO;
+}
+
 @end
