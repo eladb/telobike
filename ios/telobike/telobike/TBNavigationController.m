@@ -47,7 +47,6 @@ static const NSUInteger kTabBarHeight = 49.0f;
     [items addObject:self.listViewController.tabBarItem];
     [items addObject:self.mapViewController.tabBarItem];
     [items addObject:self.timerViewController.tabBarItem];
-//    [items addObject:self.settingsViewController.tabBarItem];
     
     self.tabBar.items = items;
     self.tabBar.selectedItem = [self.tabBar.items objectAtIndex:0];
@@ -61,6 +60,14 @@ static const NSUInteger kTabBarHeight = 49.0f;
     self.navigationBar.barTintColor        = [UIColor navigationBarBackgroundColor];
     self.navigationBar.tintColor           = [UIColor navigationBarTintColor];
     self.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor navigationBarTitleColor] };
+    
+    UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20+44)];
+    topBar.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+    [self.view insertSubview:topBar belowSubview:self.navigationBar];
+    
+    UIView* bottomBar = [[UIView alloc] initWithFrame:self.tabBar.frame];
+    bottomBar.backgroundColor = topBar.backgroundColor;
+    [self.view insertSubview:bottomBar belowSubview:self.tabBar];
 }
 
 #pragma mark - Tab bar delegate

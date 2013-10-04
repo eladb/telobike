@@ -19,5 +19,6 @@
 + (UIColor*)tabbarBackgroundColor        { return [UIColor themeColor]; }
 + (UIColor*)tabbarTintColor              { return [UIColor tintColor]; }
 + (UIColor*)detailsBackgroundColor       { return [UIColor tabbarBackgroundColor]; }
++ (UIColor*)detailsTintColor             { return [UIColor tintColor]; }
 
 @end

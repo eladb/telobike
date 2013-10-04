@@ -48,7 +48,7 @@
 
         CGRect slotRect = CGRectMake(x, y, slotWidth, slotWidth);
 //        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:slotRect.size.width / 2.0f];
-        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:1.0f];
+        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:2.0f];
         [path fill];
         [path stroke];
 

@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
 //
 
-#import <GoogleMaps/GoogleMaps.h>
 #import <MapKit/MapKit.h>
 #import "TBStation.h"
 #import "TBMapViewController.h"
@@ -17,18 +16,16 @@
 #import "TBStationViewController.h"
 #import "TBStationDetailsView.h"
 
-@interface TBMapViewController () <GMSMapViewDelegate>
+@interface TBMapViewController () <MKMapViewDelegate>
 
-
-@property (strong, nonatomic) IBOutlet GMSMapView* gmapView;
-@property (strong, nonatomic) IBOutlet UIView*     stationDetailsContainerView;
+@property (strong, nonatomic) IBOutlet MKMapView* mapView;
+@property (strong, nonatomic) IBOutlet UIView*    stationDetailsContainerView;
 
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
 @property (strong, nonatomic) TBStationDetailsView* stationDetails;
-@property (assign) BOOL doNotHide; // hack!
 
-- (IBAction)showMyLocation:(id)sender;
+@property (assign, nonatomic) BOOL regionChangingForSelection;
 
 @end
 
@@ -44,6 +41,7 @@
     
     [self observeValueOfKeyPath:@"stations" object:self.server with:^(id new, id old) {
         [self refresh:nil];
+        self.selectedStation = self.selectedStation;
     }];
     
     [self observeValueOfKeyPath:@"city" object:self.server with:^(id new, id old) {
@@ -51,20 +49,16 @@
         if (self.selectedStation) {
             return;
         }
-
-        self.gmapView.camera = [GMSCameraPosition cameraWithTarget:self.server.city.cityCenter.coordinate zoom:12];
+        
+        MKCoordinateRegion region;
+        region.center = self.server.city.cityCenter.coordinate;
+        region.span = MKCoordinateSpanMake(0.05, 0.05);
+        [self.mapView setRegion:region animated:NO];
     }];
     
-    // google maps
-    self.gmapView.myLocationEnabled         = YES;
-    self.gmapView.settings.compassButton    = YES;
-    self.gmapView.settings.scrollGestures   = YES;
-    self.gmapView.settings.zoomGestures     = YES;
-    self.gmapView.settings.tiltGestures     = YES;
-    self.gmapView.settings.rotateGestures   = YES;
-
-    self.gmapView.padding = UIEdgeInsetsMake(64.0f, 0.0f, 49.0f, 0.0f);
-    self.gmapView.delegate = self;
+    MKUserTrackingBarButtonItem* trackingBarButtonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
+    self.navigationItem.rightBarButtonItem = trackingBarButtonItem;
+    
     
     // station details
     self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
@@ -77,14 +71,16 @@
     
     self.stationDetailsContainerView.frame = stationDetailsContainerFrame;
     [self.stationDetailsContainerView addSubview:self.stationDetails];
-
-    [self moveCameraToSelectedStation];
 }
+
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    if (!self.doNotHide) {
+    
+    static BOOL oneOff = YES;
+    if (oneOff || !self.selectedStation) {
         [self hideStationDetailsAnimated:NO];
+        oneOff = NO;
     }
 }
 
@@ -98,7 +94,6 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    self.doNotHide = NO;
     self.selectedStation = nil;
 }
 
@@ -108,75 +103,103 @@
     for (TBStation* station in [TBServer instance].stations) {
         
         // if a marker exists for this station id, reuse it
-        GMSMarker* marker = [self.markers objectForKey:station.sid];
-        if (!marker) {
-            GMSMarker *marker = [[GMSMarker alloc] init];
-            [self.markers setObject:marker forKey:station.sid];
+        TBStation* existingMarker = [self.markers objectForKey:station.sid];
+        if (existingMarker) {
+            existingMarker.dict = station.dict;
+            continue;
         }
         
-        marker.position = station.coordinate;
-        marker.map = self.gmapView;
-        marker.title = station.title;
-        marker.snippet = station.subtitle;
-        marker.icon = station.markerImage;
-        marker.userData = station;
+        // add annotation to map (and dictionary)
+        [self.mapView addAnnotation:station];
+        [self.markers setObject:station forKey:station.sid];
     }
 }
 
 #pragma mark - Selection
 
 - (void)setSelectedStation:(TBStation *)selectedStation {
-    NSLog(@"setSelectedStation:%@", selectedStation ? selectedStation.sid : @"nil");
-
-    if (_selectedStation == selectedStation) {
-        return; // nothing to do
+    // look for annotation based on sid
+    for (TBStation* annotation in self.mapView.annotations) {
+        if (![annotation isKindOfClass:[TBStation class]]) {
+            continue; // skip other annotations
+        }
+        
+        if ([annotation.sid isEqualToString:selectedStation.sid]) {
+            selectedStation = annotation;
+        }
     }
     
+    // deselect any annotations
+    self.mapView.selectedAnnotations = nil;
+
     // hide details of previous station
     if (_selectedStation) {
         [self hideStationDetailsAnimated:YES];
     }
     
     _selectedStation = selectedStation;
-    [self moveCameraToSelectedStation];
+    
+    self.mapView.selectedAnnotations = nil;
+    [self.mapView selectAnnotation:selectedStation animated:YES];
 }
 
-- (void)moveCameraToSelectedStation {
-    // no station is selected so we are done now
-    if (!self.selectedStation) {
-        return;
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    [self hideStationDetailsAnimated:YES];
+
+    view.image = ((TBStation*)view.annotation).markerImage;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    _selectedStation = (TBStation*)view.annotation;
+
+    self.stationDetails.station = (TBStation*)view.annotation;
+    [self showStationDetailsAnimated:YES];
+
+    view.image = _selectedStation.selectedMarkerImage;
+    
+    MKCoordinateRegion region;
+    region.span = MKCoordinateSpanMake(0.02, 0.02);
+    region.center = self.selectedStation.coordinate;
+    
+    self.regionChangingForSelection = YES;
+    [self.mapView setRegion:region animated:YES];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    static NSString* identifier = @"station";
+    
+    // only if this is a station annotation
+    if (![annotation isKindOfClass:[TBStation class]]) {
+        return nil;
     }
     
-    // move camera to make selected station visible (details will open after camera is idle)
-    GMSCameraPosition* pos = [GMSCameraPosition cameraWithTarget:self.selectedStation.coordinate zoom:15];
-    [self.gmapView animateToCameraPosition:pos];
-}
-
-- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
-    self.selectedStation = marker.userData;
-    return YES;
-}
-
-- (void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture {
-    if (gesture) {
-        self.selectedStation = nil;
+    MKAnnotationView* view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if (!view) {
+        view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        view.centerOffset = CGPointMake(6.0, -18.0);
     }
+    
+    TBStation* station = (TBStation*)annotation;
+    view.image = station.markerImage;
+
+    return view;
 }
 
-- (void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position {
-    if (self.selectedStation) {
-        self.doNotHide = YES;
-        self.stationDetails.station = self.selectedStation;
-        [self showStationDetailsAnimated:YES];
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    if (self.regionChangingForSelection) {
+        return; // if region is changing for selection, do nothing
     }
+
+    self.selectedStation = nil; // deselect station if user moves map
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    self.regionChangingForSelection = NO;
 }
 
 #pragma mark - Station details
 
 - (void)hideStationDetailsAnimated:(BOOL)animated {
-    if (!self.parentViewController) {
-        animated = NO;
-    }
     CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
     stationDetailsFrame.origin.y = self.view.bounds.size.height;
     [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
@@ -189,6 +212,10 @@
 }
 
 - (void)changeStationDetailsFrame:(CGRect)newFrame animated:(BOOL)animated {
+//    if (!self.parentViewController) {
+//        animated = NO;
+//    }
+    
     if (animated) {
         [UIView animateWithDuration:0.25f animations:^{
             self.stationDetailsContainerView.frame = newFrame;
@@ -201,10 +228,11 @@
 
 #pragma mark - My location
 
-- (void)showMyLocation:(id)sender {
-    self.selectedStation = nil;
-    GMSCameraPosition* pos = [GMSCameraPosition cameraWithTarget:self.gmapView.myLocation.coordinate zoom:15];
-    [self.gmapView animateToCameraPosition:pos];
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", @"Title of alert view")
+                                message:NSLocalizedString(@"Unable to determine location", @"Location error message")
+                               delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"Cancel button for location erro alert")
+                      otherButtonTitles:nil] show];
 }
 
 @end

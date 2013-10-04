@@ -35,6 +35,8 @@
 - (void)setStation:(TBStation *)station {
     _station = station;
 
+    self.stationNameLabel.textColor = [UIColor detailsTintColor];
+    
     self.indicatorView.fillColor = station.indicatorColor;
 
     self.availSpaceLabel.text = [NSString stringWithFormat:@"%ld", (long)station.availSpace];
