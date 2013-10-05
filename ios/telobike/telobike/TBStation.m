@@ -143,6 +143,13 @@ static const NSInteger kMarginalBikeAmount = 3;
                 _indicatorColor = yellow;
             }
         }
+        
+        _fullSlotColor = _availBikeColor;
+        _emptySlotColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
+        
+        if (_availSpaceColor == yellow) {
+            _emptySlotColor = yellow;
+        }
     }
     
     // load images for list and markers

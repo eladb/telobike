@@ -46,6 +46,9 @@ typedef enum {
 @property (nonatomic, readonly) NSString* availSpaceDesc;
 @property (nonatomic, readonly) UIColor* availSpaceColor;
 @property (nonatomic, readonly) UIColor* availBikeColor;
+@property (nonatomic, readonly) UIColor* fullSlotColor;
+@property (nonatomic, readonly) UIColor* emptySlotColor;
+
 @property (nonatomic, readonly) CGFloat totalSlots;
 
 @property (nonatomic, assign) BOOL favorite;

@@ -61,18 +61,18 @@
         totalSlots = maxSlots;
     }
     
+    UIColor* fullSlotColor = self.station.fullSlotColor;
+    UIColor* emptySlotColor = self.station.emptySlotColor;
 
     for (int i = 0; i < totalSlots; ++i) {
         if (i < availBike) {
-            UIColor* slotColor = self.station.availBikeColor;
             CGContextSetLineWidth(ctx, 1.0f);
-            CGContextSetStrokeColorWithColor(ctx, [slotColor CGColor]);
-            CGContextSetFillColorWithColor(ctx, [slotColor CGColor]);
+            CGContextSetStrokeColorWithColor(ctx, [fullSlotColor CGColor]);
+            CGContextSetFillColorWithColor(ctx, [fullSlotColor CGColor]);
         }
         else {
-            UIColor* slotColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
             CGContextSetLineWidth(ctx, 1.0f);
-            CGContextSetStrokeColorWithColor(ctx, [slotColor CGColor]);
+            CGContextSetStrokeColorWithColor(ctx, [emptySlotColor CGColor]);
             CGContextSetFillColorWithColor(ctx, [[UIColor clearColor] CGColor]);
         }
 
