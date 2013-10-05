@@ -53,9 +53,38 @@ static const NSInteger kMarginalBikeAmount = 3;
     return [UIImage imageNamed:[NSString stringWithFormat:fmt, name]];    
 }
 
-+ (UIImage*)markerImageForState:(StationState)state
-{
-    return [TBStation imageWithNameFormat:@"map-%@.png" state:state];
+//+ (UIImage*)markerImageForState:(StationState)state
+//{
+//    return [TBStation imageWithNameFormat:@"map-%@.png" state:state];
+//}
+
++ (UIImage*)circleWithRadius:(CGFloat)sz fillColor:(UIColor*)fillColor borderColor:(UIColor*)borderColor {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(sz, sz), NO, 0.0f);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    CGRect slotRect = CGRectMake(1.0, 1.0, sz - 2.0, sz - 2.0);
+    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:sz / 2.0f];
+    if (fillColor) {
+        CGContextSetFillColorWithColor(ctx, [fillColor CGColor]);
+        [path fill];
+    }
+    if (borderColor) {
+        CGContextSetLineWidth(ctx, 10.0f);
+        CGContextSetStrokeColorWithColor(ctx, [borderColor CGColor]);
+        [path stroke];
+    }
+    UIImage* marker = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return marker;
+}
+
++ (UIImage*)markerImageForColor:(UIColor*)color {
+    return [TBStation circleWithRadius:15.0f fillColor:color borderColor:color];
+}
+
++ (UIImage*)selectedMarkerImageForColor:(UIColor*)color {
+
+    return [TBStation circleWithRadius:15.0f fillColor:color borderColor:[UIColor blackColor]];
 }
 
 + (UIImage*)selectedMarkerImageForState:(StationState)state
@@ -154,8 +183,10 @@ static const NSInteger kMarginalBikeAmount = 3;
     
     // load images for list and markers
     _listImage = [TBStation imageWithNameFormat:@"list-%@.png" state:[self state]];
-    _markerImage = [TBStation markerImageForState:[self state]];
-    _selectedMarkerImage = [TBStation selectedMarkerImageForState:[self state]];
+//    _markerImage = [TBStation markerImageForState:[self state]];
+    _markerImage = [TBStation markerImageForColor:self.indicatorColor];
+//    _selectedMarkerImage = [TBStation selectedMarkerImageForState:[self state]];
+    _selectedMarkerImage = [TBStation selectedMarkerImageForColor:self.indicatorColor];
     
     _isMyLocation = [_sid isEqualToString:@"0"];
     if (_isMyLocation)
