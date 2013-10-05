@@ -48,6 +48,7 @@
     self.tableView.contentInset = insets;
     
     self.searchBarButtonItem = self.navigationItem.leftBarButtonItem;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -143,7 +144,6 @@
         [self.searchBar becomeFirstResponder];
     }
     
-    //-64.0
     [self.tableView setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:YES];
     self.isShowingSearchBar = YES;
 }
@@ -162,7 +162,7 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [self.searchBar setShowsCancelButton:YES animated:YES];
-    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItem.enabled = NO;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
@@ -170,7 +170,7 @@
         [self.searchBar setShowsCancelButton:NO animated:YES];
     }
     
-    self.navigationItem.leftBarButtonItem = self.searchBarButtonItem;
+    self.navigationItem.leftBarButtonItem.enabled = YES;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -182,10 +182,6 @@
     [self.tableView reloadData];
     [self.searchBar resignFirstResponder];
     [self hideSearchBarAnimated:YES];
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.searchBar resignFirstResponder];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {

@@ -216,6 +216,11 @@
 }
 
 - (void)changeStationDetailsFrame:(CGRect)newFrame animated:(BOOL)animated {
+    
+    if (!self.parentViewController) {
+        animated = NO;
+    }
+    
     if (animated) {
         [UIView animateWithDuration:0.25f animations:^{
             self.stationDetailsContainerView.frame = newFrame;

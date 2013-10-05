@@ -46,7 +46,7 @@ static const NSUInteger kTabBarHeight = 49.0f;
     NSMutableArray* items = [[NSMutableArray alloc] init];
     [items addObject:self.listViewController.tabBarItem];
     [items addObject:self.mapViewController.tabBarItem];
-    [items addObject:self.timerViewController.tabBarItem];
+//    [items addObject:self.timerViewController.tabBarItem];
     
     self.tabBar.items = items;
     self.tabBar.selectedItem = [self.tabBar.items objectAtIndex:0];
