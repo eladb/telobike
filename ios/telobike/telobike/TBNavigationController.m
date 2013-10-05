@@ -62,7 +62,7 @@ static const NSUInteger kTabBarHeight = 49.0f;
     self.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor navigationBarTitleColor] };
     
     UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20+44)];
-    topBar.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+    topBar.backgroundColor = [UIColor barDimColor];
     [self.view insertSubview:topBar belowSubview:self.navigationBar];
     
     UIView* bottomBar = [[UIView alloc] initWithFrame:self.tabBar.frame];

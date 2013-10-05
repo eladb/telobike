@@ -11,6 +11,7 @@
 #import "TBMapViewController.h"
 #import "TBServer.h"
 #import "NSObject+Binding.h"
+#import "UIColor+Style.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
 #import "TBStationViewController.h"
@@ -66,12 +67,13 @@
     self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
     CGRect stationDetailsContainerFrame = self.stationDetailsContainerView.frame;
     stationDetailsContainerFrame.size.height = self.stationDetails.frame.size.height + 49.0f;
-
-    CGRect stationDetailsFrame = self.stationDetails.frame;
-    stationDetailsFrame.size.height = stationDetailsContainerFrame.size.height;
-    self.stationDetails.frame =stationDetailsFrame;
+    
+//    CGRect stationDetailsFrame = self.stationDetails.frame;
+//    stationDetailsFrame.size.height = stationDetailsContainerFrame.size.height;
+//    self.stationDetails.frame =stationDetailsFrame;
     
     self.stationDetailsContainerView.frame = stationDetailsContainerFrame;
+    self.stationDetailsContainerView.backgroundColor = [UIColor barDimColor];
     [self.stationDetailsContainerView addSubview:self.stationDetails];
     
     [self loadRoutesFromKML];

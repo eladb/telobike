@@ -87,7 +87,11 @@
         return YES;
     }];
     
-    return [[TBServer instance].stations filteredArrayUsingPredicate:predicate];
+    return [[[TBServer instance].stations filteredArrayUsingPredicate:predicate] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        TBStation* s1 = obj1;
+        TBStation* s2 = obj2;
+        return s2.totalSlots - s1.totalSlots;
+    }];
 }
 
 - (void)refresh:(id)sender {

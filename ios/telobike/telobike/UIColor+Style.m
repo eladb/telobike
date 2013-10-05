@@ -20,5 +20,6 @@
 + (UIColor*)tabbarTintColor              { return [UIColor tintColor]; }
 + (UIColor*)detailsBackgroundColor       { return [UIColor tabbarBackgroundColor]; }
 + (UIColor*)detailsTintColor             { return [UIColor tintColor]; }
++ (UIColor*)barDimColor                  { return [UIColor colorWithWhite:0.0f alpha:0.5f]; }
 
 @end

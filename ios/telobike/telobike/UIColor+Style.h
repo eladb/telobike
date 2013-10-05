@@ -17,5 +17,5 @@
 + (UIColor*)tabbarTintColor;
 + (UIColor*)detailsBackgroundColor;
 + (UIColor*)detailsTintColor;
-
++ (UIColor*)barDimColor;
 @end
