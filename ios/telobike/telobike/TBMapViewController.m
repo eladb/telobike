@@ -18,6 +18,7 @@
 #import "TBStationViewController.h"
 #import "TBStationDetailsView.h"
 #import "KMLParser.h"
+#import "TBStationAnnotationView.h"
 
 @interface TBMapViewController () <MKMapViewDelegate>
 
@@ -104,7 +105,7 @@
     self.selectedStation = nil;
 }
 
-#pragma mark - Markers
+#pragma mark - Annotations
 
 - (void)refresh:(id)sender {
     for (TBStation* station in [TBServer instance].stations) {
@@ -122,6 +123,24 @@
     }
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    static NSString* identifier = @"station";
+    
+    // only if this is a station annotation
+    if (![annotation isKindOfClass:[TBStation class]]) {
+        return nil;
+    }
+    
+    MKAnnotationView* view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if (!view) {
+        view = [[TBStationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        view.centerOffset = CGPointMake(6.0, -18.0);
+    }
+    
+    return view;
+}
+
+
 #pragma mark - Selection
 
 - (void)setSelectedStation:(TBStation *)selectedStation {
@@ -137,7 +156,9 @@
     }
     
     // deselect any annotations
-    self.mapView.selectedAnnotations = nil;
+    for (id annoation in self.mapView.selectedAnnotations) {
+        [self.mapView deselectAnnotation:annoation animated:YES];
+    }
 
     // hide details of previous station
     if (_selectedStation) {
@@ -145,15 +166,11 @@
     }
     
     _selectedStation = selectedStation;
-    
-    self.mapView.selectedAnnotations = nil;
     [self.mapView selectAnnotation:selectedStation animated:YES];
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [self hideStationDetailsAnimated:YES];
-
-    view.image = ((TBStation*)view.annotation).markerImage;
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -161,8 +178,6 @@
 
     self.stationDetails.station = (TBStation*)view.annotation;
     [self showStationDetailsAnimated:YES];
-
-    view.image = _selectedStation.selectedMarkerImage;
     
     MKCoordinateRegion region;
     region.span = MKCoordinateSpanMake(0.004, 0.004);
@@ -170,26 +185,6 @@
     
     self.regionChangingForSelection = YES;
     [self.mapView setRegion:region animated:YES];
-}
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    static NSString* identifier = @"station";
-    
-    // only if this is a station annotation
-    if (![annotation isKindOfClass:[TBStation class]]) {
-        return nil;
-    }
-    
-    MKAnnotationView* view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if (!view) {
-        view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        view.centerOffset = CGPointMake(6.0, -18.0);
-    }
-    
-    TBStation* station = (TBStation*)annotation;
-    view.image = station.markerImage;
-
-    return view;
 }
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
