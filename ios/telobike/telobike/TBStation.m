@@ -58,19 +58,21 @@ static const NSInteger kMarginalBikeAmount = 3;
 //    return [TBStation imageWithNameFormat:@"map-%@.png" state:state];
 //}
 
-+ (UIImage*)circleWithRadius:(CGFloat)sz fillColor:(UIColor*)fillColor borderColor:(UIColor*)borderColor {
++ (UIImage*)circleWithRadius:(CGFloat)sz fillColor:(UIColor*)fillColor borderWidth:(CGFloat)borderWidth borderColor:(UIColor*)borderColor {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(sz, sz), NO, 0.0f);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    CGRect slotRect = CGRectMake(1.0, 1.0, sz - 2.0, sz - 2.0);
-    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:sz / 2.0f];
+    CGFloat corderRadius = sz / 2.0;
+    CGFloat air = 1.0 + borderWidth;
+    CGRect slotRect = CGRectMake(air, air, sz - air * 2, sz - air * 2);
+    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:corderRadius];
     if (fillColor) {
         CGContextSetFillColorWithColor(ctx, [fillColor CGColor]);
         [path fill];
     }
     if (borderColor) {
-        CGContextSetLineWidth(ctx, 10.0f);
         CGContextSetStrokeColorWithColor(ctx, [borderColor CGColor]);
+        [path setLineWidth:borderWidth];
         [path stroke];
     }
     UIImage* marker = UIGraphicsGetImageFromCurrentImageContext();
@@ -79,12 +81,15 @@ static const NSInteger kMarginalBikeAmount = 3;
 }
 
 + (UIImage*)markerImageForColor:(UIColor*)color {
-    return [TBStation circleWithRadius:15.0f fillColor:color borderColor:color];
+    return [TBStation circleWithRadius:15.0f fillColor:color borderWidth:0.0f borderColor:nil];
 }
 
 + (UIImage*)selectedMarkerImageForColor:(UIColor*)color {
 
-    return [TBStation circleWithRadius:15.0f fillColor:color borderColor:[UIColor blackColor]];
+    return [TBStation circleWithRadius:50.0f
+                             fillColor:color
+                           borderWidth:10.0f
+                           borderColor:[color colorWithAlphaComponent:0.4]];
 }
 
 + (UIImage*)selectedMarkerImageForState:(StationState)state
@@ -108,13 +113,49 @@ static const NSInteger kMarginalBikeAmount = 3;
     return cachedImage;
 }
 
+
+- (NSString*)filterStupidPartsInStationName:(NSString*)name {
+    NSString* n = name;
+    NSDictionary* replacements = @{
+      @"st.": @"",
+      @"street": @"",
+      @"av.": @"",
+      @"—": @"-",
+      @"‑": @"-",
+      @"–": @"-",
+      @"-": @"-",
+      @"‒": @"-",
+      @"  / ": @" / ",
+      @"  -": @" -",
+      @"  ": @" ",
+      @" St/": @"/",
+      @"Opp. ": @"",
+      @"-": @"[*]",
+      @"[^\\ ]-": @" -",
+      @"-[^\\ ]": @"- ",
+      @"[^\\ ]\\/": @" /",
+      @"\\/[^\\ ]": @"/ ",
+    };
+
+    for (NSString* search in [replacements allKeys]) {
+        NSString* replace = [replacements objectForKey:search];
+        n = [n stringByReplacingOccurrencesOfString:search
+                                         withString:replace
+                                            options:NSCaseInsensitiveSearch | NSRegularExpressionSearch
+                                              range:NSMakeRange(0, n.length)];
+    }
+    
+    n = [n capitalizedString];
+    return [n stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 - (void)setDict:(NSDictionary *)dict
 {
     _dict = dict;
 
     _sid = [dict objectForKey:@"sid"];
     
-    _stationName = [dict localizedStringForKey:@"name"];
+    _stationName = [self filterStupidPartsInStationName:[dict localizedStringForKey:@"name"]];
     _latitude    = [[dict objectForKey:@"latitude"] doubleValue];
     _longitude   = [[dict objectForKey:@"longitude"] doubleValue];
     _location    = [dict locationForKey:@"location"];

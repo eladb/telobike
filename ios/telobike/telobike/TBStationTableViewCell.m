@@ -26,11 +26,13 @@
 - (void)setStation:(TBStation *)station
 {
     self.availabilityView.station = station;
-    self.stationNameLabel.text = [NSString stringWithFormat:@"%.0f (%d|%d): %@",
-                                  station.totalSlots,
-                                  station.availBike,
-                                  station.availSpace,
-                                  station.stationName];
+//    self.stationNameLabel.text = [NSString stringWithFormat:@"%.0f (%d|%d): %@",
+//                                  station.totalSlots,
+//                                  station.availBike,
+//                                  station.availSpace,
+//                                  station.stationName];
+
+    self.stationNameLabel.text = station.stationName;
     
     NSMutableAttributedString* desc = [[NSMutableAttributedString alloc] init];
 //    if (station.address) {
