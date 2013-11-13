@@ -7,6 +7,8 @@ var csvdb = require('csvdb');
 var telofun_api = require('./telofun-api');
 var telofun_mapper = require('./telofun-mapper');
 
+console.log('telobike server is running...');
+
 var overrides_url = 'https://docs.google.com/spreadsheet/pub?key=0AuP9sJn-WbrXdFdOV1lPV09EZDBrQ2RlZzM5ZmhPb2c&output=csv';
 var overrides_db = csvdb(overrides_url, { autofetch: 30 * 1000 }); // refresh overrides every 30s
 
