@@ -25,8 +25,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 49f64af62e643a68a3f906202f4ed51e18f3bd5c
   Appirater: 10cdcb23edc2d3b225afbb4a7d110539adac9b55
-  GoogleAnalytics-iOS-SDK: ea0118af32b97a92ac98b25ecc2aa2a286c835c7
+  GoogleAnalytics-iOS-SDK: 4a788a66154b395717a31bfec1050f8c47b6d122
   InAppSettingsKit: cf2c4193c3269d6acf996f7975f310d18a5e1e3c
-  SBJson: e60b4dc22448c2ae1e754b523a4ab53408e85c8d
+  SBJson: abc2bf2baef456d5dae213f9826fe2b6fdf19861
 
 COCOAPODS: 0.25.0
