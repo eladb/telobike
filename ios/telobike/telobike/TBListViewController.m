@@ -16,11 +16,12 @@
 #import "TBFeedbackActionSheet.h"
 #import "TBFeedbackMailComposeViewController.h"
 
-@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchBarDelegate>
+@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) IBOutlet UISearchBar* searchBar;
 @property (assign, nonatomic) BOOL isShowingSearchBar;
 @property (strong, nonatomic) UIBarButtonItem* searchBarButtonItem;
+@property (strong, nonatomic) CLLocationManager* locationManager;
 
 - (IBAction)search:(id)sender;
 - (IBAction)feedback:(id)sender;
@@ -33,6 +34,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager startUpdatingLocation];
+    self.locationManager.delegate = self;
+    
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
     [self observeValueOfKeyPath:@"stations" object:[TBServer instance] with:^(id new, id old) {
@@ -61,7 +67,7 @@
     [self.searchBar resignFirstResponder];
 }
 
-#pragma mark - Refresh
+#pragma mark - Stations
 
 - (NSArray*)stations {
     NSPredicate* predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -87,10 +93,31 @@
         return YES;
     }];
     
-    return [[[TBServer instance].stations filteredArrayUsingPredicate:predicate] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    NSArray* filtered = [[[TBServer instance].stations filteredArrayUsingPredicate:predicate] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         TBStation* s1 = obj1;
         TBStation* s2 = obj2;
         return s2.totalSlots - s1.totalSlots;
+    }];
+    
+    return [self sortByDistance:filtered];
+}
+
+// returns an array sorted by distance from current location (if user approved location)
+- (NSArray*)sortByDistance:(NSArray*)stations {
+    CLLocation* location = self.locationManager.location;
+    
+    // no location, sort array from north to south by fixing current location
+    // to the north of city center.
+    if (!location) {
+        location = [[CLLocation alloc] initWithLatitude:0.0f longitude:[TBServer instance].city.cityCenter.coordinate.longitude];
+    }
+
+    return [stations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        TBStation* station1 = obj1;
+        TBStation* station2 = obj2;
+        CLLocationDistance distance1 = [station1 distanceFromLocation:location];
+        CLLocationDistance distance2 = [station2 distanceFromLocation:location];
+        return distance1 - distance2;
     }];
 }
 

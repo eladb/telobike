@@ -11,46 +11,71 @@
 #import "TBAvailabilityView.h"
 #import "TBTintedView.h"
 
-@interface TBStationTableViewCell ()
+@interface TBStationTableViewCell () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel* stationNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel* subtitleLabel;
 @property (strong, nonatomic) IBOutlet TBAvailabilityView* availabilityView;
 @property (strong, nonatomic) IBOutlet TBTintedView* availabilityIndicatorView;
 @property (strong, nonatomic) IBOutlet UIProgressView* progressView;
+@property (strong, nonatomic) CLLocationManager* locationManager;
+@property (strong, nonatomic) MKDistanceFormatter* distanceFormatter;
 
 @end
 
 @implementation TBStationTableViewCell
 
-- (void)setStation:(TBStation *)station
-{
-    self.availabilityView.station = station;
-//    self.stationNameLabel.text = [NSString stringWithFormat:@"%.0f (%d|%d): %@",
-//                                  station.totalSlots,
-//                                  station.availBike,
-//                                  station.availSpace,
-//                                  station.stationName];
-
-    self.stationNameLabel.text = station.stationName;
-    
-    NSMutableAttributedString* desc = [[NSMutableAttributedString alloc] init];
-//    if (station.address) {
-//        [desc appendAttributedString:[[NSAttributedString alloc] initWithString:station.address attributes:@{ NSForegroundColorAttributeName: [UIColor grayColor] }]];
-//    }
-//    
-//    if (desc.length > 0) {
-//        [desc appendAttributedString:[[NSAttributedString alloc] initWithString:@"・" attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
-//    }
-
-    NSString* distance = @"122m";
-    [desc appendAttributedString:[[NSAttributedString alloc] initWithString:distance attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
-    self.subtitleLabel.attributedText = desc;
-    self.progressView.progress = station.availBike / station.totalSlots;
-    self.progressView.progressTintColor = station.availBikeColor;
-    self.availabilityIndicatorView.fillColor = station.indicatorColor;
-
+- (void)setStation:(TBStation *)station {
     _station = station;
+
+    if (!self.locationManager) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        [self.locationManager startUpdatingLocation];
+        self.locationManager.delegate = self;
+    }
+    
+    if (!self.distanceFormatter) {
+        self.distanceFormatter = [[MKDistanceFormatter alloc] init];
+        self.distanceFormatter.units = MKDistanceFormatterUnitsMetric;
+        self.distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleAbbreviated;
+    }
+    
+    self.availabilityView.station = self.station;
+    self.stationNameLabel.text = self.station.stationName;
+    
+    self.progressView.progress = self.station.availBike / self.station.totalSlots;
+    self.progressView.progressTintColor = self.station.availBikeColor;
+    self.availabilityIndicatorView.fillColor = self.station.indicatorColor;
+    
+    [self locationManager:self.locationManager didUpdateLocations:nil];
 }
+
+- (void)prepareForReuse {
+    self.subtitleLabel.hidden = YES;
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+	 didUpdateLocations:(NSArray *)locations {
+    
+    if (self.locationManager.location) {
+        NSLog(@"%@", self.locationManager.location);
+        CLLocationDistance distance = [self.station distanceFromLocation:self.locationManager.location];
+        NSMutableAttributedString* desc = [[NSMutableAttributedString alloc] init];
+
+        if (distance < 10000) {
+            [desc appendAttributedString:[[NSAttributedString alloc] initWithString:[self.distanceFormatter stringFromDistance:distance] attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
+        }
+        else {
+            [desc appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"far", nil) attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
+        }
+        
+        self.subtitleLabel.attributedText = desc;
+        self.subtitleLabel.hidden = NO;
+    }
+    else {
+        self.subtitleLabel.hidden = YES;
+    }
+}
+
 
 @end
