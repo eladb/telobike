@@ -23,7 +23,7 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
 
     CGFloat spacing = 3.5f;
-    int totalSlots = self.station.availSpace + self.station.availBike;
+    long totalSlots = self.station.availSpace + self.station.availBike;
 //    CGFloat slotWidth = 8.0f;//;rect.size.width / totalSlots - spacing;
     CGFloat slotWidth = 9.0f;//;rect.size.width / totalSlots - spacing;
     CGFloat startX = 1.0f;
