@@ -46,6 +46,7 @@
 		F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F47B5CFB17F7937400D88614 /* Settings.bundle */; };
 		F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */; };
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
+		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
 		F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */; };
 		F4D6FA8917FC4D5A000D0F2A /* TBStationDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
@@ -130,6 +131,7 @@
 		F47B5D0017F797DA00D88614 /* UIColor+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
 		F47B5D0117F797DA00D88614 /* UIColor+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
 		F47B5D0F17F7CFB700D88614 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationTableViewCell.xib; sourceTree = "<group>"; };
 		F4D6FA8517FC4D4B000D0F2A /* TBStationDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsView.h; sourceTree = "<group>"; };
 		F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsView.m; sourceTree = "<group>"; };
 		F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationDetailsView.xib; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				F42E60AD17F11A2C0099A1D0 /* TBListViewController.m */,
 				F47B5CC617F655EC00D88614 /* TBStationTableViewCell.h */,
 				F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */,
+				F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */,
 				F42FCA0917FD6A3F00E24D50 /* TBAvailabilityView.h */,
 				F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */,
 				F42FCA0F17FE52F700E24D50 /* TBTintedView.h */,
@@ -454,6 +457,7 @@
 				F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */,
 				F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */,
 				F470EBFA17F11589006FD464 /* Main.storyboard in Resources */,
+				F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */,
 				F4EE1E4817FEEE86002F8A62 /* routes.kml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -584,7 +588,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -624,7 +627,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -697,7 +699,6 @@
 		F470EC1C17F11589006FD464 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/telobike.app/telobike";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -720,7 +721,6 @@
 		F470EC1D17F11589006FD464 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/telobike.app/telobike";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
