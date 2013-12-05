@@ -9,7 +9,7 @@
 #import "TBStationAnnotationView.h"
 #import "TBStation.h"
 
-static CGFloat kDeselectedSize = 18.0f;
+static CGFloat kDeselectedSize = 24.0f;
 static CGFloat kSelectedSize = 48.0f;
 
 @implementation TBStationAnnotationView
