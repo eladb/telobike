@@ -25,10 +25,20 @@
         <scene sceneID="BFF-jS-Zsb">
             <objects>
                 <tableViewController storyboardIdentifier="list" id="ttd-dx-cuw" customClass="TBListViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="5ge-jH-8uA">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="5ge-jH-8uA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="O9L-X6-VvB">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="ttd-dx-cuw" id="v5A-ad-g9h"/>
+                            </connections>
+                        </searchBar>
                         <connections>
                             <outlet property="dataSource" destination="ttd-dx-cuw" id="mlV-DL-Bcw"/>
                             <outlet property="delegate" destination="ttd-dx-cuw" id="Ujr-LE-jb0"/>
@@ -37,26 +47,16 @@
                     <tabBarItem key="tabBarItem" title="List" image="Top_Charts" id="NpL-YH-X2J"/>
                     <navigationItem key="navigationItem" id="Y0l-8p-age">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="iwo-cX-nPB">
-                            <connections>
-                                <action selector="search:" destination="ttd-dx-cuw" id="cc1-P2-rez"/>
-                            </connections>
-                        </barButtonItem>
-                        <view key="titleView" opaque="NO" contentMode="scaleToFill" id="bqe-nO-aMe">
+                        <view key="titleView" opaque="NO" contentMode="scaleToFill" id="hOB-Zr-td8">
                             <rect key="frame" x="135" y="12" width="50" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="JKN-2j-YBb">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="M3z-yx-oqR">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
                             </subviews>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" image="Headset" id="Pyd-ru-1cU">
-                            <connections>
-                                <action selector="feedback:" destination="ttd-dx-cuw" id="jsl-tB-RpB"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="9Yc-bi-CDj">
@@ -67,15 +67,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OhR-Pl-HAp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchBar contentMode="redraw" id="O9L-X6-VvB">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="ttd-dx-cuw" id="v5A-ad-g9h"/>
-                    </connections>
-                </searchBar>
-                <searchDisplayController id="fFy-Dt-9MN">
+                <searchDisplayController searchResultsTitle="" id="fFy-Dt-9MN">
                     <connections>
                         <outlet property="delegate" destination="ttd-dx-cuw" id="Lot-Hz-2Dy"/>
                         <outlet property="searchBar" destination="O9L-X6-VvB" id="Hkj-cl-WYb"/>
@@ -268,7 +260,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Headset" width="26" height="28"/>
         <image name="Timer" width="27" height="27"/>
         <image name="Top_Charts" width="27" height="24"/>
         <image name="World_Times" width="25" height="25"/>

@@ -13,12 +13,12 @@
 @implementation TBFeedbackActionSheet
 
 - (instancetype)initWithDelegate:(id<UIActionSheetDelegate>)delegate {
-    self = [super initWithTitle:NSLocalizedString(@"Send feedback for", @"feedback action sheet title")
+    self = [super initWithTitle:nil
                        delegate:delegate
               cancelButtonTitle:NSLocalizedString(@"Cancel", @"feeback action sheet cancel button")
          destructiveButtonTitle:nil
-              otherButtonTitles:NSLocalizedString(@"Bicycle system", @"feedback action sheet option for bike service"),
-                                NSLocalizedString(@"App", @"feedback action sheet option for app"),
+              otherButtonTitles:NSLocalizedString(@"Contact Tel-o-Fun", @"feedback action sheet option for bike service"),
+                                NSLocalizedString(@"Feedback for this app", @"feedback action sheet option for app"),
                                 nil];
     return self;
 }

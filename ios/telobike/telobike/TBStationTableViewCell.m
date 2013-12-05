@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
 //
 
+@import QuartzCore;
+
 #import <QuartzCore/QuartzCore.h>
 #import "TBStationTableViewCell.h"
 #import "TBAvailabilityView.h"
@@ -32,6 +34,15 @@
     self.distanceFormatter = [[MKDistanceFormatter alloc] init];
     self.distanceFormatter.units = MKDistanceFormatterUnitsMetric;
     self.distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleAbbreviated;
+    
+    
+    // add a hairline layer as a separator
+    CALayer* separator = [[CALayer alloc] init];
+    separator.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, 0.5f);
+    separator.backgroundColor = [[UIColor colorWithWhite:0.8f alpha:1.0f] CGColor];
+    [self.layer addSublayer:separator];
+//    self.layer.borderWidth = .5f;
+//    self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
 }
 
 - (void)setStation:(TBStation *)station {

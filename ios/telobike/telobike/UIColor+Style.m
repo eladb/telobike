@@ -10,16 +10,23 @@
 
 @implementation UIColor (Style)
 
-+ (UIColor*)themeColor                   { return [UIColor blackColor]; }
++ (UIColor*)lustColor                    { return [UIColor colorWithRed:166/255.0 green:72/255.0  blue:25/255.0  alpha:1.0f]; }
++ (UIColor*)terranovaColor               { return [UIColor colorWithRed:43/255.0  green:43/255.0  blue:40/255.0  alpha:1.0f]; }
++ (UIColor*)fiveThousandSkiesColor       { return [UIColor colorWithRed:57/255.0  green:162/255.0 blue:208/255.0 alpha:1.0f]; }
++ (UIColor*)jijiColor                    { return [UIColor colorWithRed:38/255.0  green:115/255.0 blue:148/255.0 alpha:0.8f]; }
++ (UIColor*)cocoColor                    { return [UIColor colorWithRed:32/255.0  green:73/255.0  blue:92/255.0  alpha:0.8f]; }
+
++ (UIColor*)themeColor                   { return [UIColor colorWithWhite:0.0f alpha:0.9f]; }
+
 + (UIColor*)tintColor                    { return [UIColor whiteColor]; }
 
 + (UIColor*)navigationBarBackgroundColor { return [UIColor themeColor]; }
-+ (UIColor*)navigationBarTitleColor      { return [UIColor tintColor]; }
-+ (UIColor*)navigationBarTintColor       { return [UIColor tintColor]; }
++ (UIColor*)navigationBarTitleColor      { return [UIColor tintColor];  }
++ (UIColor*)navigationBarTintColor       { return [UIColor tintColor];  }
 + (UIColor*)tabbarBackgroundColor        { return [UIColor themeColor]; }
-+ (UIColor*)tabbarTintColor              { return [UIColor tintColor]; }
++ (UIColor*)tabbarTintColor              { return [UIColor tintColor];  }
 + (UIColor*)detailsBackgroundColor       { return [UIColor tabbarBackgroundColor]; }
-+ (UIColor*)detailsTintColor             { return [UIColor tintColor]; }
-+ (UIColor*)barDimColor                  { return [UIColor colorWithWhite:0.0f alpha:0.3f]; }
++ (UIColor*)detailsTintColor             { return [UIColor tintColor];  }
++ (UIColor*)barDimColor                  { return [UIColor colorWithWhite:0.0f alpha:0.0f]; }
 
 @end

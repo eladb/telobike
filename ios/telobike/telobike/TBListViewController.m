@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
 //
 
+@import QuartzCore;
+
 #import "TBServer.h"
 #import "TBListViewController.h"
 #import "TBMapViewController.h"
@@ -18,7 +20,7 @@
 
 static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
 
-@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) NSArray* sortedStations;
@@ -56,14 +58,25 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
     [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:CELL_REUSE_IDENTIFIER];
     self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;
     self.searchDisplayController.searchResultsTableView.separatorStyle = self.tableView.separatorStyle;
-    
-    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
     navigationController.tabBar.selectedItem = navigationController.listViewController.tabBarItem;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    if (self.searchDisplayController.active) {
+        return UIStatusBarStyleDefault;
+    }
+    else {
+        return UIStatusBarStyleLightContent;
+    }
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationFade;
 }
 
 #pragma mark - Stations
@@ -114,16 +127,27 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
     }
     else {
         cell.station = self.searchResults[indexPath.row];
-        cell.searchQuery = self.searchDisplayController.searchBar.text;
     }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TBStation* station;
+    
+    if (tableView == self.tableView) {
+        station = self.sortedStations[indexPath.row];
+    }
+    else if (tableView == self.searchDisplayController.searchResultsTableView) {
+        station = self.searchResults[indexPath.row];
+    }
+    else {
+        return;
+    }
+    
     TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
     TBMapViewController* mapViewController = navigationController.mapViewController;
-    mapViewController.selectedStation = self.sortedStations[indexPath.row];
+    mapViewController.selectedStation = station;
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
 
@@ -175,6 +199,16 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
     }];
     
     return [self.sortedStations filteredArrayUsingPredicate:predicate];
+}
+
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    [UIView animateWithDuration:0.2f animations:^{
+        self.navigationItem.titleView.alpha = 0.0f;
+    }];
+
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom = ((TBNavigationController*)self.navigationController).tabBar.frame.size.height;
+    self.searchDisplayController.searchResultsTableView.contentInset = insets;
 }
 
 @end

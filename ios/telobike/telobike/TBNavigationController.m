@@ -30,7 +30,7 @@ static const NSUInteger kTabBarHeight = 49.0f;
     
     self.listViewController = [self.viewControllers objectAtIndex:0];
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
-    self.timerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"timer"];
+//    self.timerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"timer"];
     
     self.settingsViewController = [[TBSettingsViewController alloc] init];
     
@@ -61,14 +61,23 @@ static const NSUInteger kTabBarHeight = 49.0f;
     self.navigationBar.tintColor           = [UIColor navigationBarTintColor];
     self.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor navigationBarTitleColor] };
     
-    UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20+44)];
-    topBar.backgroundColor = [UIColor barDimColor];
-    [self.view insertSubview:topBar belowSubview:self.navigationBar];
+//    UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20+44)];
+//    topBar.backgroundColor = [UIColor barDimColor];
+//    [self.view insertSubview:topBar belowSubview:self.navigationBar];
+//    
+//    UIView* bottomBar = [[UIView alloc] initWithFrame:self.tabBar.frame];
+//    bottomBar.backgroundColor = topBar.backgroundColor;
+//    [self.view insertSubview:bottomBar belowSubview:self.tabBar];
     
-    UIView* bottomBar = [[UIView alloc] initWithFrame:self.tabBar.frame];
-    bottomBar.backgroundColor = topBar.backgroundColor;
-    [self.view insertSubview:bottomBar belowSubview:self.tabBar];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
+
+#pragma mark - Status bar
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 
 #pragma mark - Tab bar delegate
 
