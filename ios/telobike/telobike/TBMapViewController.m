@@ -134,7 +134,6 @@
     MKAnnotationView* view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if (!view) {
         view = [[TBStationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        view.centerOffset = CGPointMake(6.0, -18.0);
     }
     
     return view;
@@ -232,10 +231,7 @@
 #pragma mark - My location
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", @"Title of alert view")
-                                message:NSLocalizedString(@"Unable to determine location", @"Location error message")
-                               delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"Cancel button for location erro alert")
-                      otherButtonTitles:nil] show];
+    NSLog(@"ERROR: unable to determine location: %@", error);
 }
 
 #pragma mark - Routes
