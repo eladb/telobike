@@ -41,8 +41,6 @@
     separator.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, 0.5f);
     separator.backgroundColor = [[UIColor colorWithWhite:0.8f alpha:1.0f] CGColor];
     [self.layer addSublayer:separator];
-//    self.layer.borderWidth = .5f;
-//    self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
 }
 
 - (void)setStation:(TBStation *)station {
@@ -56,6 +54,7 @@
 }
 
 - (void)prepareForReuse {
+    [super prepareForReuse];
     self.subtitleLabel.hidden = YES;
 }
 

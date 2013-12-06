@@ -96,10 +96,14 @@
 #pragma mark - Swipe to remove
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.favoriteStations[indexPath.row] setFavorite:NO];
-    [self updateFavoritesWithReload:NO];
-    
-    [tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationLeft];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.favoriteStations[indexPath.row] setFavorite:NO];
+        [self updateFavoritesWithReload:NO];
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationLeft];
+        [tableView endUpdates];
+        return;
+    }
 }
 
 
