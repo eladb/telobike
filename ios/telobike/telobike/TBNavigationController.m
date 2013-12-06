@@ -64,14 +64,6 @@ static const NSUInteger kTabBarHeight = 49.0f;
     self.navigationBar.tintColor           = [UIColor navigationBarTintColor];
     self.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor navigationBarTitleColor] };
     
-//    UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20+44)];
-//    topBar.backgroundColor = [UIColor barDimColor];
-//    [self.view insertSubview:topBar belowSubview:self.navigationBar];
-//    
-//    UIView* bottomBar = [[UIView alloc] initWithFrame:self.tabBar.frame];
-//    bottomBar.backgroundColor = topBar.backgroundColor;
-//    [self.view insertSubview:bottomBar belowSubview:self.tabBar];
-    
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -97,11 +89,17 @@ static const NSUInteger kTabBarHeight = 49.0f;
     
     if (item == self.nearByViewController.tabBarItem) {
         self.viewControllers = @[ self.nearByViewController ];
+        CGPoint offset = CGPointZero;
+        offset.y = -self.nearByViewController.tableView.contentInset.top;
+        [self.nearByViewController.tableView setContentOffset:offset animated:YES];
         return;
     }
     
     if (item == self.favoritesViewController.tabBarItem) {
         self.viewControllers = @[ self.favoritesViewController ];
+        CGPoint offset = CGPointZero;
+        offset.y = -self.favoritesViewController.tableView.contentInset.top;
+        [self.favoritesViewController.tableView setContentOffset:offset animated:YES];
         return;
     }
     

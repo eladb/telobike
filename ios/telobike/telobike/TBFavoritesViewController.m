@@ -45,6 +45,11 @@
                                                                      attributes:@{ NSParagraphStyleAttributeName: style }];
     self.emptyLabel.textColor = [UIColor colorWithWhite:204/255.0f alpha:1.0f];
     self.tableView.backgroundView = self.emptyLabel;
+
+
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom = ((TBNavigationController*)self.navigationController).tabBar.frame.size.height;
+    self.tableView.contentInset = insets;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

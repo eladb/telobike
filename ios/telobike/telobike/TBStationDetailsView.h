@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "TBStation.h"
 
-@interface TBStationDetailsView : UIToolbar
+@protocol TBStationDetailsViewDelegate;
 
+@interface TBStationDetailsView : UIView
+
+@property (assign, nonatomic) id<TBStationDetailsViewDelegate> stationDetailsDelegate;
 @property (strong, nonatomic) TBStation* station;
+
+@end
+
+@protocol TBStationDetailsViewDelegate <NSObject>
+
+- (void)stationDetailsActionClicked:(TBStationDetailsView*)detailsView;
 
 @end

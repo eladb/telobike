@@ -19,8 +19,9 @@
 #import "TBStationDetailsView.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
+#import "TBStationActivityViewController.h"
 
-@interface TBMapViewController () <MKMapViewDelegate>
+@interface TBMapViewController () <MKMapViewDelegate, TBStationDetailsViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView* mapView;
 @property (strong, nonatomic) IBOutlet UIView*    stationDetailsContainerView;
@@ -67,16 +68,15 @@
     
     // station details
     self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
-    CGRect stationDetailsContainerFrame = self.stationDetailsContainerView.frame;
-    stationDetailsContainerFrame.size.height = self.stationDetails.frame.size.height + 49.0f;
-    
+    self.stationDetails.stationDetailsDelegate = self;
 //    CGRect stationDetailsFrame = self.stationDetails.frame;
-//    stationDetailsFrame.size.height = stationDetailsContainerFrame.size.height;
-//    self.stationDetails.frame =stationDetailsFrame;
-    
-    self.stationDetailsContainerView.frame = stationDetailsContainerFrame;
-    self.stationDetailsContainerView.backgroundColor = [UIColor barDimColor];
-    [self.stationDetailsContainerView addSubview:self.stationDetails];
+//    stationDetailsFrame.origin.y = 64.0;
+//    self.stationDetails.frame = stationDetailsFrame;
+
+    UIToolbar* tb = [[UIToolbar alloc] initWithFrame:self.stationDetailsContainerView.bounds];
+    tb.barTintColor = [UIColor detailsBackgroundColor];
+    [self.stationDetailsContainerView addSubview:tb];
+    [tb addSubview:self.stationDetails];
     
     [self loadRoutesFromKML];
 }
@@ -102,7 +102,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    self.selectedStation = nil;
+//    self.selectedStation = nil;
 }
 
 #pragma mark - Annotations
@@ -202,13 +202,13 @@
 
 - (void)hideStationDetailsAnimated:(BOOL)animated {
     CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
-    stationDetailsFrame.origin.y = self.view.bounds.size.height;
+    stationDetailsFrame.origin.y = -self.stationDetailsContainerView.frame.size.height;
     [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
 }
 
 - (void)showStationDetailsAnimated:(BOOL)animated {
     CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
-    stationDetailsFrame.origin.y = self.view.bounds.size.height - stationDetailsFrame.size.height;
+    stationDetailsFrame.origin.y = 64.0f;
     [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
 }
 
@@ -226,6 +226,15 @@
     else {
         self.stationDetailsContainerView.frame = newFrame;
     }
+}
+
+- (void)stationDetailsActionClicked:(TBStationDetailsView *)detailsView {
+    TBStationActivityViewController* vc = [[TBStationActivityViewController alloc] initWithStation:detailsView.station];
+    vc.completionHandler = ^(NSString* activityName, BOOL completed){
+        NSLog(@"completed with %@", activityName);
+    };
+    
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - My location

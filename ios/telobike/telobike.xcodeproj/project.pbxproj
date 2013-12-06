@@ -48,6 +48,11 @@
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
 		F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02618514054003BD3A6 /* TBFavoritesViewController.m */; };
 		F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */; };
+		F498A02F1851A866003BD3A6 /* TBStationActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02E1851A866003BD3A6 /* TBStationActivityViewController.m */; };
+		F498A0731851B06F003BD3A6 /* TBToggleFavoritesActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A0721851B06F003BD3A6 /* TBToggleFavoritesActivity.m */; };
+		F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */; };
+		F498A0AC1851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */; };
+		F498A0AD1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0AA1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png */; };
 		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
 		F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */; };
 		F4D6FA8917FC4D5A000D0F2A /* TBStationDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */; };
@@ -137,6 +142,14 @@
 		F498A02618514054003BD3A6 /* TBFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBFavoritesViewController.m; path = telobike/TBFavoritesViewController.m; sourceTree = "<group>"; };
 		F498A0291851450F003BD3A6 /* TBTransparentToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTransparentToolbar.h; sourceTree = "<group>"; };
 		F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTransparentToolbar.m; sourceTree = "<group>"; };
+		F498A02D1851A866003BD3A6 /* TBStationActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationActivityViewController.h; sourceTree = "<group>"; };
+		F498A02E1851A866003BD3A6 /* TBStationActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationActivityViewController.m; sourceTree = "<group>"; };
+		F498A0711851B06F003BD3A6 /* TBToggleFavoritesActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBToggleFavoritesActivity.h; sourceTree = "<group>"; };
+		F498A0721851B06F003BD3A6 /* TBToggleFavoritesActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBToggleFavoritesActivity.m; sourceTree = "<group>"; };
+		F498A0A71851B44A003BD3A6 /* JNJGoogleMapsActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNJGoogleMapsActivity.h; sourceTree = "<group>"; };
+		F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNJGoogleMapsActivity.m; sourceTree = "<group>"; };
+		F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JNJGoogleMapsActivityMask.png; sourceTree = "<group>"; };
+		F498A0AA1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JNJGoogleMapsActivityMask@2x.png"; sourceTree = "<group>"; };
 		F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationTableViewCell.xib; sourceTree = "<group>"; };
 		F4D6FA8517FC4D4B000D0F2A /* TBStationDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsView.h; sourceTree = "<group>"; };
 		F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsView.m; sourceTree = "<group>"; };
@@ -180,6 +193,7 @@
 			children = (
 				F470EBEC17F11589006FD464 /* telobike */,
 				F470EC0E17F11589006FD464 /* telobikeTests */,
+				F498A0741851B3FC003BD3A6 /* external */,
 				F470EBE517F11589006FD464 /* Frameworks */,
 				F470EBE417F11589006FD464 /* Products */,
 				0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */,
@@ -222,7 +236,7 @@
 				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
 				F47B5CD617F6B37F00D88614 /* TBNavigationController.h */,
 				F47B5CD717F6B37F00D88614 /* TBNavigationController.m */,
-				F47B5CD117F668B000D88614 /* nearby */,
+				F47B5CD117F668B000D88614 /* nearme */,
 				F498A02818514059003BD3A6 /* favorites */,
 				F47B5CD217F668BE00D88614 /* map */,
 				F47B5CF617F78C7E00D88614 /* station */,
@@ -297,7 +311,7 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
-		F47B5CD117F668B000D88614 /* nearby */ = {
+		F47B5CD117F668B000D88614 /* nearme */ = {
 			isa = PBXGroup;
 			children = (
 				F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */,
@@ -310,7 +324,7 @@
 				F42FCA0F17FE52F700E24D50 /* TBTintedView.h */,
 				F42FCA1017FE52F700E24D50 /* TBTintedView.m */,
 			);
-			name = nearby;
+			name = nearme;
 			sourceTree = "<group>";
 		};
 		F47B5CD217F668BE00D88614 /* map */ = {
@@ -324,6 +338,10 @@
 				F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */,
 				F421E304180D8BB100213902 /* TBStationAnnotationView.h */,
 				F421E305180D8BB100213902 /* TBStationAnnotationView.m */,
+				F498A02D1851A866003BD3A6 /* TBStationActivityViewController.h */,
+				F498A02E1851A866003BD3A6 /* TBStationActivityViewController.m */,
+				F498A0711851B06F003BD3A6 /* TBToggleFavoritesActivity.h */,
+				F498A0721851B06F003BD3A6 /* TBToggleFavoritesActivity.m */,
 			);
 			name = map;
 			sourceTree = "<group>";
@@ -377,6 +395,26 @@
 			);
 			name = favorites;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		F498A0741851B3FC003BD3A6 /* external */ = {
+			isa = PBXGroup;
+			children = (
+				F498A0A61851B44A003BD3A6 /* JNJGoogleMapsActivity */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
+		F498A0A61851B44A003BD3A6 /* JNJGoogleMapsActivity */ = {
+			isa = PBXGroup;
+			children = (
+				F498A0A71851B44A003BD3A6 /* JNJGoogleMapsActivity.h */,
+				F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */,
+				F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */,
+				F498A0AA1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png */,
+			);
+			name = JNJGoogleMapsActivity;
+			path = JNJGoogleMapsActivity/JNJGoogleMapsActivity;
 			sourceTree = "<group>";
 		};
 		F4EE1E7317FEF582002F8A62 /* KMLParser */ = {
@@ -471,6 +509,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4D6FA8917FC4D5A000D0F2A /* TBStationDetailsView.xib in Resources */,
+				F498A0AC1851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png in Resources */,
+				F498A0AD1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png in Resources */,
 				F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */,
 				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
 				F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */,
@@ -545,15 +585,18 @@
 				F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */,
 				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,
 				F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */,
+				F498A02F1851A866003BD3A6 /* TBStationActivityViewController.m in Sources */,
 				F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */,
 				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
 				F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */,
 				F42E60BB17F123590099A1D0 /* Utils.m in Sources */,
 				F42E60AE17F11A2C0099A1D0 /* TBListViewController.m in Sources */,
+				F498A0731851B06F003BD3A6 /* TBToggleFavoritesActivity.m in Sources */,
 				F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */,
 				F47B5CC017F1293600D88614 /* TBFavorites.m in Sources */,
 				F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */,
 				F470EBF317F11589006FD464 /* main.m in Sources */,
+				F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */,
 				F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */,
 				F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */,
 			);

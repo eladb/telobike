@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel* stationAddressLabel;
 
 @property (strong, nonatomic) IBOutlet TBTintedView* indicatorView;
+@property (strong, nonatomic) IBOutlet TBTintedView* topIndicatorView;
 
 @end
 
@@ -30,7 +31,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.barTintColor = [UIColor detailsBackgroundColor];
 }
 
 - (void)setStation:(TBStation *)station {
@@ -38,13 +38,20 @@
 
     self.stationNameLabel.textColor = [UIColor detailsTintColor];
     
-    self.indicatorView.fillColor = station.indicatorColor;
+//    self.indicatorView.fillColor = station.indicatorColor;
+//    self.topIndicatorView.fillColor = [UIColor grayColor];
+    self.indicatorView.hidden = YES;
+    self.topIndicatorView.fillColor = station.indicatorColor;
 
     self.availSpaceLabel.text = [NSString stringWithFormat:@"%ld", (long)station.availSpace];
     self.availBikeLabel.text = [NSString stringWithFormat:@"%ld", (long)station.availBike];
     
-    self.parkingContainerView.layer.cornerRadius = 5.0f;
-    self.bikeContainerView.layer.cornerRadius = 5.0f;
+    self.parkingContainerView.layer.cornerRadius = 1.0f;
+    self.bikeContainerView.layer.cornerRadius = 1.0f;
+    self.parkingContainerView.layer.borderWidth = 1.0f;
+    self.parkingContainerView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.bikeContainerView.layer.borderColor = self.parkingContainerView.layer.borderColor;
+    self.bikeContainerView.layer.borderWidth = self.parkingContainerView.layer.borderWidth;
     
     self.parkingContainerView.backgroundColor = station.availSpaceColor;
     self.bikeContainerView.backgroundColor = station.availBikeColor;
@@ -54,20 +61,21 @@
 }
 
 - (IBAction)action:(id)sender {
-    
-    NSString* favoritesToggleAction = self.station.isFavorite ?
-        NSLocalizedString(@"Remove from Favorites", @"station action: remove from favorites") :
-        NSLocalizedString(@"Add to Favorites", @"station action: add to favorites");
-    
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"station action cancel button")
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:favoritesToggleAction,
-                                                                      NSLocalizedString(@"Navigate", @"station action: navigate"),
-                                  nil];
-
-    [actionSheet showInView:self.superview];
+    [self.stationDetailsDelegate stationDetailsActionClicked:self];
+//
+//    NSString* favoritesToggleAction = self.station.isFavorite ?
+//        NSLocalizedString(@"Remove from Favorites", @"station action: remove from favorites") :
+//        NSLocalizedString(@"Add to Favorites", @"station action: add to favorites");
+//    
+//    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+//                                                             delegate:self
+//                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"station action cancel button")
+//                                               destructiveButtonTitle:nil
+//                                                    otherButtonTitles:favoritesToggleAction,
+//                                                                      NSLocalizedString(@"Navigate", @"station action: navigate"),
+//                                  nil];
+//
+//    [actionSheet showInView:self.superview];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
