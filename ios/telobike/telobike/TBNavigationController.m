@@ -34,6 +34,12 @@ static const NSUInteger kTabBarHeight = 49.0f;
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
 //    self.timerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"timer"];
     
+    
+    // create tabbars
+    self.nearByViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Near Me", nil) image:[UIImage imageNamed:@"TabBar-NearMe"] selectedImage:[UIImage imageNamed:@"TabBar-NearMe-Highlighted"]];
+    self.mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Map", nil) image:[UIImage imageNamed:@"TabBar-Map"] selectedImage:[UIImage imageNamed:@"TabBar-Map-Highlighted"]];
+    self.favoritesViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Favorites", nil) image:[UIImage imageNamed:@"TabBar-Favorites"] selectedImage:[UIImage imageNamed:@"TabBar-Favorites-Highlighted"]];
+    
     self.settingsViewController = [[TBSettingsViewController alloc] init];
     
     // add tabbar to navigation controller so it will be visible everywhere
@@ -42,8 +48,7 @@ static const NSUInteger kTabBarHeight = 49.0f;
     tabBarFrame.size   = CGSizeMake(self.view.frame.size.width, kTabBarHeight);
     self.tabBar = [[UITabBar alloc] initWithFrame:tabBarFrame];
     self.tabBar.itemPositioning = UITabBarItemPositioningCentered;
-    self.tabBar.itemSpacing = 0.5f;
-
+    self.tabBar.itemSpacing = 0.3f;
 
     NSMutableArray* items = [[NSMutableArray alloc] init];
     [items addObject:self.nearByViewController.tabBarItem];

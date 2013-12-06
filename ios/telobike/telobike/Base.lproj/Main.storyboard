@@ -43,14 +43,14 @@
                             <outlet property="delegate" destination="ttd-dx-cuw" id="Ujr-LE-jb0"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Near Me" image="Near_Me" id="NpL-YH-X2J"/>
+                    <tabBarItem key="tabBarItem" title="Near Me" image="TabBar-NearMe" id="NpL-YH-X2J"/>
                     <navigationItem key="navigationItem" id="Y0l-8p-age">
                         <nil key="title"/>
                         <view key="titleView" opaque="NO" contentMode="scaleToFill" id="hOB-Zr-td8">
                             <rect key="frame" x="135" y="12" width="50" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="M3z-yx-oqR">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TitleBar" translatesAutoresizingMaskIntoConstraints="NO" id="M3z-yx-oqR">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
@@ -244,7 +244,7 @@
                             <constraint firstItem="9fR-hE-Glj" firstAttribute="top" secondItem="gMD-aP-Fq6" secondAttribute="top" constant="64" id="aPK-Jh-EDW"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="tabbar-map" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="TabBar-Map" id="Z7h-1E-pvt"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eU6-FG-ZOj">
                         <nil key="title"/>
@@ -252,7 +252,7 @@
                             <rect key="frame" x="135" y="12" width="50" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="4J6-dZ-wSJ">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TitleBar" translatesAutoresizingMaskIntoConstraints="NO" id="4J6-dZ-wSJ">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
@@ -284,14 +284,14 @@
                             <outlet property="delegate" destination="fTB-lH-Ag0" id="ySS-Y4-0RK"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="p3P-0s-Lyb"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="TabBar-Favorites" id="p3P-0s-Lyb"/>
                     <navigationItem key="navigationItem" id="C7F-Ob-UjT">
                         <nil key="title"/>
                         <view key="titleView" opaque="NO" contentMode="scaleToFill" id="dxK-5Q-qdQ">
                             <rect key="frame" x="135" y="12" width="50" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="fz4-Er-CDW">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TitleBar" translatesAutoresizingMaskIntoConstraints="NO" id="fz4-Er-CDW">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
@@ -317,12 +317,13 @@
     </scenes>
     <resources>
         <image name="Headset" width="26" height="28"/>
-        <image name="Near_Me" width="25" height="25"/>
+        <image name="TabBar-Favorites" width="25" height="24"/>
+        <image name="TabBar-Map" width="25" height="25"/>
+        <image name="TabBar-NearMe" width="24" height="25"/>
         <image name="Timer" width="27" height="27"/>
+        <image name="TitleBar" width="31" height="20"/>
         <image name="accessory-bike" width="42" height="28"/>
         <image name="accessory-parking" width="39" height="38"/>
-        <image name="tabbar-map" width="27" height="23"/>
-        <image name="title2" width="54" height="35"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

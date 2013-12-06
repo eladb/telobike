@@ -73,10 +73,11 @@
 //    stationDetailsFrame.origin.y = 64.0;
 //    self.stationDetails.frame = stationDetailsFrame;
 
-    UIToolbar* tb = [[UIToolbar alloc] initWithFrame:self.stationDetailsContainerView.bounds];
-    tb.barTintColor = [UIColor detailsBackgroundColor];
-    [self.stationDetailsContainerView addSubview:tb];
-    [tb addSubview:self.stationDetails];
+//    UIToolbar* tb = [[UIToolbar alloc] initWithFrame:self.stationDetailsContainerView.bounds];
+//    tb.barTintColor = [UIColor detailsBackgroundColor];
+//    [self.stationDetailsContainerView addSubview:tb];
+    self.stationDetailsContainerView.backgroundColor = [UIColor detailsBackgroundColor];
+    [self.stationDetailsContainerView addSubview:self.stationDetails];
     
     [self loadRoutesFromKML];
 }

@@ -25,7 +25,7 @@
 + (UIColor*)navigationBarTintColor       { return [UIColor tintColor];  }
 + (UIColor*)tabbarBackgroundColor        { return [UIColor themeColor]; }
 + (UIColor*)tabbarTintColor              { return [UIColor tintColor];  }
-+ (UIColor*)detailsBackgroundColor       { return [UIColor themeColor]; }
++ (UIColor*)detailsBackgroundColor       { return [[UIColor themeColor] colorWithAlphaComponent:0.7f]; }
 + (UIColor*)detailsTintColor             { return [UIColor tintColor];  }
 
 

@@ -18,21 +18,35 @@
 
 - (id)initWithStation:(TBStation*)station {
     TBToggleFavoritesActivity* toggleFavorites = [[TBToggleFavoritesActivity alloc] initWithStation:station];
-    JNJGoogleMapsActivity* navigate = [[JNJGoogleMapsActivity alloc] init];
+    NSString* sourceAddress = @"";
+    NSString* destAddress = [NSString stringWithFormat:@"%g,%g", station.coordinate.latitude, station.coordinate.longitude];
+    JNJGoogleMapsActivity* navigate = [[JNJGoogleMapsActivity alloc] initWithSourceAddress:sourceAddress destinationAddress:destAddress];
     navigate.latitude = @(station.coordinate.latitude);
     navigate.longitude = @(station.coordinate.longitude);
     navigate.directionMode = JNJGoogleMapsDirectionMode.walking;
-    NSString* sourceAddress = @"";
-    NSString* destAddress = [NSString stringWithFormat:@"%g,%g", station.coordinate.latitude, station.coordinate.longitude];
-    NSArray* activityItems = @[ @"Tel-o-Fun station", sourceAddress, destAddress ];
+    
+    // create share string
+    NSMutableString* shareString = [[NSMutableString alloc] init];
+    [shareString appendFormat:NSLocalizedString(@"Tel-o-Fun Station: %@", nil), station.stationName];
+    
+    if (station.address) {
+        [shareString appendString:@"\n"];
+        [shareString appendFormat:@"Address: %@", station.address];
+    }
+    
+    [shareString appendString:@"\n"];
+    NSString* googleMapsLink = [NSString stringWithFormat:@"http://maps.google.com?q=%g,%g", station.coordinate.latitude, station.coordinate.longitude];
+    [shareString appendString:googleMapsLink];
+    
+    NSArray* activityItems = @[ shareString ];
     NSArray* applicationActivities = @[ toggleFavorites, navigate ];
     self = [super initWithActivityItems:activityItems applicationActivities:applicationActivities];
     if (self) {
         self.excludedActivityTypes = @[ UIActivityTypePostToFacebook,
                                         UIActivityTypePostToTwitter,
                                         UIActivityTypePostToWeibo,
-                                        UIActivityTypeMessage,
-                                        UIActivityTypeMail,
+//                                        UIActivityTypeMessage,
+//                                        UIActivityTypeMail,
                                         UIActivityTypePrint,
                                         UIActivityTypeCopyToPasteboard,
                                         UIActivityTypeAssignToContact,

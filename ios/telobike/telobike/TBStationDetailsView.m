@@ -46,12 +46,12 @@
     self.availSpaceLabel.text = [NSString stringWithFormat:@"%ld", (long)station.availSpace];
     self.availBikeLabel.text = [NSString stringWithFormat:@"%ld", (long)station.availBike];
     
-    self.parkingContainerView.layer.cornerRadius = 1.0f;
-    self.bikeContainerView.layer.cornerRadius = 1.0f;
-    self.parkingContainerView.layer.borderWidth = 1.0f;
-    self.parkingContainerView.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.bikeContainerView.layer.borderColor = self.parkingContainerView.layer.borderColor;
-    self.bikeContainerView.layer.borderWidth = self.parkingContainerView.layer.borderWidth;
+    self.parkingContainerView.layer.cornerRadius = 0.0f;
+    self.bikeContainerView.layer.cornerRadius = 0.0f;
+//    self.parkingContainerView.layer.borderWidth = 1.0f;
+//    self.parkingContainerView.layer.borderColor = [[UIColor grayColor] CGColor];
+//    self.bikeContainerView.layer.borderColor = self.parkingContainerView.layer.borderColor;
+//    self.bikeContainerView.layer.borderWidth = self.parkingContainerView.layer.borderWidth;
     
     self.parkingContainerView.backgroundColor = station.availSpaceColor;
     self.bikeContainerView.backgroundColor = station.availBikeColor;

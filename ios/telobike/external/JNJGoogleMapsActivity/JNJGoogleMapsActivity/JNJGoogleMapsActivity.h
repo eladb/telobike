@@ -49,4 +49,6 @@ extern const struct JNJGoogleMapsDirectionMode {
 
 - (void)addViewType:(NSString *)viewtype;
 
+- (id)initWithSourceAddress:(NSString*)src destinationAddress:(NSString*)dst;
+
 @end

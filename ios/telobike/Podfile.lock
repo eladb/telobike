@@ -20,6 +20,7 @@ PODS:
   - Appirater (2.0.2)
   - GoogleAnalytics-iOS-SDK (3.0.2)
   - InAppSettingsKit (2.0)
+  - RESideMenu (3.3.1)
   - SBJson (3.2)
 
 DEPENDENCIES:
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - Appirater
   - GoogleAnalytics-iOS-SDK
   - InAppSettingsKit
+  - RESideMenu
   - SBJson
 
 SPEC CHECKSUMS:
@@ -34,6 +36,7 @@ SPEC CHECKSUMS:
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
   GoogleAnalytics-iOS-SDK: 86393b99f7328ae8d8e975fcaa8632a39dafafe8
   InAppSettingsKit: 2b85ba925a81634860461c21274f54b130c84614
+  RESideMenu: dcd3af0b8fcdc32e2d306ecc6d6a20b928248105
   SBJson: abc2bf2baef456d5dae213f9826fe2b6fdf19861
 
 COCOAPODS: 0.25.0

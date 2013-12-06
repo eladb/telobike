@@ -79,6 +79,16 @@ const struct JNJGoogleMapsDirectionMode JNJGoogleMapsDirectionMode = {
 	return self;
 }
 
+- (id)initWithSourceAddress:(NSString*)src destinationAddress:(NSString*)dst {
+    self = [self init];
+    if (self) {
+        self.startAddress = src;
+        self.destinationAddress = dst;
+    }
+    return self;
+}
+
+
 #pragma mark - JNJGoogleMapsActivity
 
 - (void)addViewType:(NSString *)viewtype
@@ -115,14 +125,14 @@ const struct JNJGoogleMapsDirectionMode JNJGoogleMapsDirectionMode = {
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
 {
-	// TODO: Probably should make sure it is a string
-	if ([activityItems count] > 1) {
-		self.startAddress = [activityItems objectAtIndex:0];
-		self.destinationAddress = [activityItems objectAtIndex:1];
-	} else if ([activityItems count] == 1 && [activityItems[0] isKindOfClass:[NSString class]]) {
-		self.queryString = [activityItems lastObject];
-	}
-	
+//	// TODO: Probably should make sure it is a string
+//	if ([activityItems count] > 1) {
+//		self.startAddress = [activityItems objectAtIndex:0];
+//		self.destinationAddress = [activityItems objectAtIndex:1];
+//	} else if ([activityItems count] == 1 && [activityItems[0] isKindOfClass:[NSString class]]) {
+//		self.queryString = [activityItems lastObject];
+//	}
+//	
 	return [[self class] canOpenGoogleMapsURLScheme:[NSURL URLWithString:kJNJGoogleMapsURLSchemeString]];
 }
 
