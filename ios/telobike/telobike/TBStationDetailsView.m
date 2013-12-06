@@ -9,8 +9,9 @@
 #import "TBStationDetailsView.h"
 #import "UIColor+Style.h"
 #import "TBTintedView.h"
+#import "TBFavorites.h"
 
-@interface TBStationDetailsView()
+@interface TBStationDetailsView() <UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView* parkingContainerView;
 @property (strong, nonatomic) IBOutlet UIView* bikeContainerView;
@@ -51,5 +52,34 @@
     self.stationNameLabel.text = station.stationName;
     self.stationAddressLabel.text = station.address;
 }
+
+- (IBAction)action:(id)sender {
+    
+    NSString* favoritesToggleAction = self.station.isFavorite ?
+        NSLocalizedString(@"Remove from Favorites", @"station action: remove from favorites") :
+        NSLocalizedString(@"Add to Favorites", @"station action: add to favorites");
+    
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"station action cancel button")
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:favoritesToggleAction,
+                                                                      NSLocalizedString(@"Navigate", @"station action: navigate"),
+                                  nil];
+
+    [actionSheet showInView:self.superview];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) { // favorites toggle
+        [self.station setFavorite:!self.station.isFavorite];
+        return;
+    }
+    
+    if (buttonIndex == 1) { // navigte
+        
+    }
+}
+
 
 @end

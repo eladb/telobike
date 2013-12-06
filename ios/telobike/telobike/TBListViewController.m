@@ -18,7 +18,6 @@
 #import "TBFeedbackActionSheet.h"
 #import "TBFeedbackMailComposeViewController.h"
 
-static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
 
 @interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
@@ -53,9 +52,9 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     UINib* nib = [UINib nibWithNibName:NSStringFromClass([TBStationTableViewCell class]) bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:CELL_REUSE_IDENTIFIER];
+    [self.tableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
     
-    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:CELL_REUSE_IDENTIFIER];
+    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
     self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;
     self.searchDisplayController.searchResultsTableView.separatorStyle = self.tableView.separatorStyle;
 }
@@ -63,7 +62,7 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
-    navigationController.tabBar.selectedItem = navigationController.listViewController.tabBarItem;
+    navigationController.tabBar.selectedItem = navigationController.nearByViewController.tabBarItem;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -81,7 +80,7 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
 
 #pragma mark - Stations
 
-- (void)refresh:(id)sender {
+- (IBAction)refresh:(id)sender {
     [[TBServer instance] reloadStations:nil];
 }
 
@@ -120,7 +119,7 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TBStationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
+    TBStationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STATION_CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
 
     if (tableView == self.tableView) {
         cell.station = self.sortedStations[indexPath.row];
@@ -153,7 +152,7 @@ static NSString* const CELL_REUSE_IDENTIFIER = @"STATION_CELL";
 
 #pragma mark - Feedback
 
-- (void)feedback:(id)sender {
+- (IBAction)feedback:(id)sender {
     TBFeedbackActionSheet* feedbackActionSheet = [[TBFeedbackActionSheet alloc] initWithDelegate:self];
     TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
     feedbackActionSheet.delegate = self;

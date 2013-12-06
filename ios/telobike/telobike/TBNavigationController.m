@@ -16,7 +16,8 @@ static const NSUInteger kTabBarHeight = 49.0f;
 @property (strong, nonatomic) UITabBar* tabBar;
 
 @property (strong, nonatomic) TBMapViewController*      mapViewController;
-@property (strong, nonatomic) TBListViewController*     listViewController;
+@property (strong, nonatomic) TBListViewController*     nearByViewController;
+@property (strong, nonatomic) TBListViewController*     favoritesViewController;
 @property (strong, nonatomic) TBTimerViewController*    timerViewController;
 @property (strong, nonatomic) TBSettingsViewController* settingsViewController;
 
@@ -28,7 +29,8 @@ static const NSUInteger kTabBarHeight = 49.0f;
 {
     [super viewDidLoad];
     
-    self.listViewController = [self.viewControllers objectAtIndex:0];
+    self.nearByViewController = [self.viewControllers objectAtIndex:0];
+    self.favoritesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"favorites"];
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
 //    self.timerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"timer"];
     
@@ -44,7 +46,8 @@ static const NSUInteger kTabBarHeight = 49.0f;
 
 
     NSMutableArray* items = [[NSMutableArray alloc] init];
-    [items addObject:self.listViewController.tabBarItem];
+    [items addObject:self.nearByViewController.tabBarItem];
+    [items addObject:self.favoritesViewController.tabBarItem];
     [items addObject:self.mapViewController.tabBarItem];
 //    [items addObject:self.timerViewController.tabBarItem];
     
@@ -88,13 +91,17 @@ static const NSUInteger kTabBarHeight = 49.0f;
             return;
         }
         
-        self.viewControllers = @[ self.listViewController ];
-        [self pushViewController:self.mapViewController animated:NO];
+        self.viewControllers = @[ self.mapViewController ];
         return;
     }
     
-    if (item == self.listViewController.tabBarItem) {
-        self.viewControllers = @[ self.listViewController ];
+    if (item == self.nearByViewController.tabBarItem) {
+        self.viewControllers = @[ self.nearByViewController ];
+        return;
+    }
+    
+    if (item == self.favoritesViewController.tabBarItem) {
+        self.viewControllers = @[ self.favoritesViewController ];
         return;
     }
     

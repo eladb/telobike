@@ -44,3 +44,15 @@
 }
 
 @end
+
+@implementation TBStation (Favorite)
+
+- (BOOL)isFavorite {
+    return [[TBFavorites instance] isFavoriteStationID:self.sid];
+}
+
+- (void)setFavorite:(BOOL)favorite {
+    [[TBFavorites instance] setStationID:self.sid favorite:favorite];
+}
+
+@end

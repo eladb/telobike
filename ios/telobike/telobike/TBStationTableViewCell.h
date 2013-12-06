@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TBStation.h"
 
+#define STATION_CELL_REUSE_IDENTIFIER @"STATION_CELL"
+
 @interface TBStationTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) TBStation* station;

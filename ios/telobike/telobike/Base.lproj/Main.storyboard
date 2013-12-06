@@ -21,14 +21,14 @@
             </objects>
             <point key="canvasLocation" x="1067" y="-138"/>
         </scene>
-        <!--List View Controller - List-->
+        <!--List View Controller - Nearby-->
         <scene sceneID="BFF-jS-Zsb">
             <objects>
-                <tableViewController storyboardIdentifier="list" id="ttd-dx-cuw" customClass="TBListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="nearby" title="Nearby" id="ttd-dx-cuw" customClass="TBListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="5ge-jH-8uA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="O9L-X6-VvB">
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
@@ -44,7 +44,7 @@
                             <outlet property="delegate" destination="ttd-dx-cuw" id="Ujr-LE-jb0"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="List" image="Top_Charts" id="NpL-YH-X2J"/>
+                    <tabBarItem key="tabBarItem" title="Nearby" image="Near_Me" id="NpL-YH-X2J"/>
                     <navigationItem key="navigationItem" id="Y0l-8p-age">
                         <nil key="title"/>
                         <view key="titleView" opaque="NO" contentMode="scaleToFill" id="hOB-Zr-td8">
@@ -57,6 +57,11 @@
                                 </imageView>
                             </subviews>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" image="Headset" id="6ii-Mr-v1K">
+                            <connections>
+                                <action selector="feedback:" destination="ttd-dx-cuw" id="Lic-DW-tO0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="9Yc-bi-CDj">
@@ -97,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hGT-Sg-8VO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1472" y="524"/>
+            <point key="canvasLocation" x="1344" y="624"/>
         </scene>
         <!--Station View Controller - Station Details-->
         <scene sceneID="chY-w9-AKl">
@@ -204,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bli-NP-nP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1901" y="524"/>
+            <point key="canvasLocation" x="1753" y="624"/>
         </scene>
         <!--Map View Controller - Map-->
         <scene sceneID="ot8-2e-RuS">
@@ -232,7 +237,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="World_Times" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="tabbar-map" id="Z7h-1E-pvt"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eU6-FG-ZOj">
                         <nil key="title"/>
@@ -256,15 +261,60 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2071" y="-138"/>
+            <point key="canvasLocation" x="2567" y="-138"/>
+        </scene>
+        <!--Favorites View Controller - Favorites-->
+        <scene sceneID="8UL-Ol-dg5">
+            <objects>
+                <tableViewController storyboardIdentifier="favorites" title="Favorites" id="fTB-lH-Ag0" customClass="TBFavoritesViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="h58-aw-Tly">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="fTB-lH-Ag0" id="Nhw-PX-ccw"/>
+                            <outlet property="delegate" destination="fTB-lH-Ag0" id="ySS-Y4-0RK"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="p3P-0s-Lyb"/>
+                    <navigationItem key="navigationItem" id="C7F-Ob-UjT">
+                        <nil key="title"/>
+                        <view key="titleView" opaque="NO" contentMode="scaleToFill" id="dxK-5Q-qdQ">
+                            <rect key="frame" x="135" y="12" width="50" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="fz4-Er-CDW">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </imageView>
+                            </subviews>
+                        </view>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ZBb-uv-Mit">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="fTB-lH-Ag0" eventType="valueChanged" id="dso-7p-82u"/>
+                        </connections>
+                    </refreshControl>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="fFy-Dt-9MN" id="Wk5-ty-XON"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0jO-r7-8sh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2104" y="-138"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Headset" width="26" height="28"/>
+        <image name="Near_Me" width="25" height="25"/>
         <image name="Timer" width="27" height="27"/>
-        <image name="Top_Charts" width="27" height="24"/>
-        <image name="World_Times" width="25" height="25"/>
         <image name="accessory-bike" width="42" height="28"/>
         <image name="accessory-parking" width="39" height="38"/>
+        <image name="tabbar-map" width="27" height="23"/>
         <image name="title2" width="54" height="35"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

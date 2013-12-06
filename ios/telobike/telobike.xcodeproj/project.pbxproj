@@ -46,6 +46,8 @@
 		F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F47B5CFB17F7937400D88614 /* Settings.bundle */; };
 		F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */; };
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
+		F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02618514054003BD3A6 /* TBFavoritesViewController.m */; };
+		F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */; };
 		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
 		F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */; };
 		F4D6FA8917FC4D5A000D0F2A /* TBStationDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */; };
@@ -131,6 +133,10 @@
 		F47B5D0017F797DA00D88614 /* UIColor+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
 		F47B5D0117F797DA00D88614 /* UIColor+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
 		F47B5D0F17F7CFB700D88614 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		F498A02518514054003BD3A6 /* TBFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBFavoritesViewController.h; path = telobike/TBFavoritesViewController.h; sourceTree = "<group>"; };
+		F498A02618514054003BD3A6 /* TBFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBFavoritesViewController.m; path = telobike/TBFavoritesViewController.m; sourceTree = "<group>"; };
+		F498A0291851450F003BD3A6 /* TBTransparentToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTransparentToolbar.h; sourceTree = "<group>"; };
+		F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTransparentToolbar.m; sourceTree = "<group>"; };
 		F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationTableViewCell.xib; sourceTree = "<group>"; };
 		F4D6FA8517FC4D4B000D0F2A /* TBStationDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsView.h; sourceTree = "<group>"; };
 		F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsView.m; sourceTree = "<group>"; };
@@ -208,15 +214,16 @@
 		F470EBEC17F11589006FD464 /* telobike */ = {
 			isa = PBXGroup;
 			children = (
+				F42E60AF17F11AF60099A1D0 /* Assets.xcassets */,
 				F4D6FA8A17FC8442000D0F2A /* sample-data.json */,
 				F4EE1E4717FEEE86002F8A62 /* routes.kml */,
 				F470EBF817F11589006FD464 /* Main.storyboard */,
-				F42E60AF17F11AF60099A1D0 /* Assets.xcassets */,
 				F470EBF517F11589006FD464 /* TBAppDelegate.h */,
 				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
 				F47B5CD617F6B37F00D88614 /* TBNavigationController.h */,
 				F47B5CD717F6B37F00D88614 /* TBNavigationController.m */,
-				F47B5CD117F668B000D88614 /* list */,
+				F47B5CD117F668B000D88614 /* nearby */,
+				F498A02818514059003BD3A6 /* favorites */,
 				F47B5CD217F668BE00D88614 /* map */,
 				F47B5CF617F78C7E00D88614 /* station */,
 				F47B5CF217F78B0700D88614 /* timer */,
@@ -284,11 +291,13 @@
 				F47B5CD417F66D1100D88614 /* NSObject+Binding.m */,
 				F47B5CED17F6D43C00D88614 /* NSBundle+View.h */,
 				F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */,
+				F498A0291851450F003BD3A6 /* TBTransparentToolbar.h */,
+				F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
 		};
-		F47B5CD117F668B000D88614 /* list */ = {
+		F47B5CD117F668B000D88614 /* nearby */ = {
 			isa = PBXGroup;
 			children = (
 				F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */,
@@ -301,7 +310,7 @@
 				F42FCA0F17FE52F700E24D50 /* TBTintedView.h */,
 				F42FCA1017FE52F700E24D50 /* TBTintedView.m */,
 			);
-			name = list;
+			name = nearby;
 			sourceTree = "<group>";
 		};
 		F47B5CD217F668BE00D88614 /* map */ = {
@@ -358,6 +367,16 @@
 				F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */,
 			);
 			name = settings;
+			sourceTree = "<group>";
+		};
+		F498A02818514059003BD3A6 /* favorites */ = {
+			isa = PBXGroup;
+			children = (
+				F498A02518514054003BD3A6 /* TBFavoritesViewController.h */,
+				F498A02618514054003BD3A6 /* TBFavoritesViewController.m */,
+			);
+			name = favorites;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F4EE1E7317FEF582002F8A62 /* KMLParser */ = {
@@ -520,10 +539,12 @@
 				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
 				F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */,
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,
+				F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */,
 				F42E60B817F123060099A1D0 /* TBStation.m in Sources */,
 				F47B5CF517F78B1A00D88614 /* TBTimerViewController.m in Sources */,
 				F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */,
 				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,
+				F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */,
 				F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */,
 				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
 				F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */,
