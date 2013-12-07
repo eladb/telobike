@@ -638,9 +638,9 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
 
 - (void)applyToOverlayRenderer:(MKOverlayPathRenderer *)renderer
 {
-    renderer.strokeColor = [UIColor colorWithRed:0.0f green:0.5f blue:0.0f alpha:0.4f];
+    renderer.strokeColor = [UIColor colorWithRed:1/255.0 green:119/255.0 blue:180/255.0 alpha:0.4f];
     renderer.fillColor = fillColor;
-    renderer.lineWidth = 2.0f;
+    renderer.lineWidth = 4.0f;
 }
 
 @end

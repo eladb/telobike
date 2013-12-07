@@ -48,14 +48,15 @@
 
 
     UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = ((TBNavigationController*)self.navigationController).tabBar.frame.size.height;
+    insets.bottom = self.navigation.tabBar.frame.size.height;
     self.tableView.contentInset = insets;
+    
+    self.navigationItem.title = @"";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
-    navigationController.tabBar.selectedItem = navigationController.favoritesViewController.tabBarItem;
+    self.navigation.tabBar.selectedItem = self.navigation.favoritesViewController.tabBarItem;
     [self updateFavoritesWithReload:YES];
 }
 
@@ -92,8 +93,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
-    TBMapViewController* mapViewController = navigationController.mapViewController;
+    TBMapViewController* mapViewController = self.navigation.mapViewController;
     mapViewController.selectedStation = self.favoriteStations[indexPath.row];
     [self.navigationController pushViewController:mapViewController animated:YES];
 }

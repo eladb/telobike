@@ -21,4 +21,12 @@
 @property (strong, readonly) TBTimerViewController*    timerViewController;
 @property (strong, readonly) TBSettingsViewController* settingsViewController;
 
+- (UIBarButtonItem*)sideMenuBarButtonItem;
+
+@end
+
+@interface UIViewController (TB)
+
+- (TBNavigationController*)navigation;
+
 @end

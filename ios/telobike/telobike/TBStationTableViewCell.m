@@ -69,7 +69,7 @@
         CLLocationDistance distance = [self.station distanceFromLocation:self.locationManager.location];
         NSMutableAttributedString* desc = [[NSMutableAttributedString alloc] init];
 
-        if (distance < 10000) {
+        if (distance < 100000) {
             [desc appendAttributedString:[[NSAttributedString alloc] initWithString:[self.distanceFormatter stringFromDistance:distance] attributes:@{ NSForegroundColorAttributeName: [UIColor lightGrayColor] }]];
         }
         else {

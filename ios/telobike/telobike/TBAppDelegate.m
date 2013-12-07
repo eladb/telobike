@@ -7,14 +7,25 @@
 //
 
 #import "TBAppDelegate.h"
+#import <RESideMenu/RESideMenu.h>
 
 @interface TBAppDelegate ()
+
+@property (strong, nonatomic)  RESideMenu* sideMenuController;
 
 @end
 
 @implementation TBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController* contentViewController = [storyboard instantiateInitialViewController];
+    UIViewController* menuViewController = [storyboard instantiateViewControllerWithIdentifier:@"menu"];
+    self.sideMenuController = [[RESideMenu alloc] initWithContentViewController:contentViewController menuViewController:menuViewController];
+    self.sideMenuController.backgroundImage = [UIImage imageNamed:@"tlv-blur"];
+    self.sideMenuController.panGestureEnabled = NO;
+    self.sideMenuController.panFromEdge = YES;
+    self.window.rootViewController = self.sideMenuController;
     return YES;
 }
 							

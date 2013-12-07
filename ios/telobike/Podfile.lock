@@ -22,6 +22,7 @@ PODS:
   - InAppSettingsKit (2.0)
   - RESideMenu (3.3.1)
   - SBJson (3.2)
+  - SVGeocoder (0.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - InAppSettingsKit
   - RESideMenu
   - SBJson
+  - SVGeocoder
 
 SPEC CHECKSUMS:
   AFNetworking: e499052cbf3d743e9bb727bb37adb9dc2547ba15
@@ -38,5 +40,6 @@ SPEC CHECKSUMS:
   InAppSettingsKit: 2b85ba925a81634860461c21274f54b130c84614
   RESideMenu: dcd3af0b8fcdc32e2d306ecc6d6a20b928248105
   SBJson: abc2bf2baef456d5dae213f9826fe2b6fdf19861
+  SVGeocoder: 22661b5bae88a53e040d9fecbb5304bbd8f81cd5
 
 COCOAPODS: 0.25.0

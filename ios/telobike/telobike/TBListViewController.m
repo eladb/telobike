@@ -18,7 +18,6 @@
 #import "TBFeedbackActionSheet.h"
 #import "TBFeedbackMailComposeViewController.h"
 
-
 @interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) CLLocationManager* locationManager;
@@ -47,22 +46,27 @@
     [self refresh:nil];
     
     UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = ((TBNavigationController*)self.navigationController).tabBar.frame.size.height;
+    insets.bottom = self.navigation.tabBar.frame.size.height;
     self.tableView.contentInset = insets;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     UINib* nib = [UINib nibWithNibName:NSStringFromClass([TBStationTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
     
+    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+
     [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
     self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;
     self.searchDisplayController.searchResultsTableView.separatorStyle = self.tableView.separatorStyle;
+    self.searchDisplayController.searchResultsTableView.backgroundColor = self.tableView.backgroundColor;
+
+    self.searchDisplayController.navigationItem.title = @"";
+    self.searchDisplayController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
-    navigationController.tabBar.selectedItem = navigationController.nearByViewController.tabBarItem;
+    self.navigation.tabBar.selectedItem = self.navigation.nearByViewController.tabBarItem;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -144,8 +148,7 @@
         return;
     }
     
-    TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
-    TBMapViewController* mapViewController = navigationController.mapViewController;
+    TBMapViewController* mapViewController = self.navigation.mapViewController;
     mapViewController.selectedStation = station;
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
@@ -154,9 +157,8 @@
 
 - (IBAction)feedback:(id)sender {
     TBFeedbackActionSheet* feedbackActionSheet = [[TBFeedbackActionSheet alloc] initWithDelegate:self];
-    TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
     feedbackActionSheet.delegate = self;
-    [feedbackActionSheet showFromTabBar:navigationController.tabBar];
+    [feedbackActionSheet showFromTabBar:self.navigation.tabBar];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -201,12 +203,8 @@
 }
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
-    [UIView animateWithDuration:0.2f animations:^{
-        self.navigationItem.titleView.alpha = 0.0f;
-    }];
-
     UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = ((TBNavigationController*)self.navigationController).tabBar.frame.size.height;
+    insets.bottom = self.navigation.tabBar.frame.size.height;
     self.searchDisplayController.searchResultsTableView.contentInset = insets;
 }
 

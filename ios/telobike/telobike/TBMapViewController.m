@@ -6,8 +6,11 @@
 //  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
-#import <QuartzCore/QuartzCore.h>
+@import MapKit;
+@import QuartzCore;
+
+#import <SVGeocoder/SVGeocoder.h>
+
 #import "TBStation.h"
 #import "TBMapViewController.h"
 #import "TBServer.h"
@@ -20,11 +23,13 @@
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
 #import "TBStationActivityViewController.h"
+#import "TBPlacemarkAnnotation.h"
 
-@interface TBMapViewController () <MKMapViewDelegate, TBStationDetailsViewDelegate>
+@interface TBMapViewController () <MKMapViewDelegate, TBStationDetailsViewDelegate, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView* mapView;
 @property (strong, nonatomic) IBOutlet UIView*    stationDetailsContainerView;
+@property (strong, nonatomic) IBOutlet UIToolbar* bottomToolbar;
 
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
@@ -32,6 +37,10 @@
 @property (strong, nonatomic) KMLParser* kmlParser;
 
 @property (assign, nonatomic) BOOL regionChangingForSelection;
+
+// search
+@property (strong, nonatomic) NSArray* searchResults;
+@property (strong, nonatomic) TBPlacemarkAnnotation* placemarkAnnotation;
 
 @end
 
@@ -62,26 +71,23 @@
         [self.mapView setRegion:region animated:NO];
     }];
     
-    MKUserTrackingBarButtonItem* trackingBarButtonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
-    self.navigationItem.rightBarButtonItem = trackingBarButtonItem;
-    
     
     // station details
     self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
     self.stationDetails.stationDetailsDelegate = self;
-//    CGRect stationDetailsFrame = self.stationDetails.frame;
-//    stationDetailsFrame.origin.y = 64.0;
-//    self.stationDetails.frame = stationDetailsFrame;
-
-//    UIToolbar* tb = [[UIToolbar alloc] initWithFrame:self.stationDetailsContainerView.bounds];
-//    tb.barTintColor = [UIColor detailsBackgroundColor];
-//    [self.stationDetailsContainerView addSubview:tb];
     self.stationDetailsContainerView.backgroundColor = [UIColor detailsBackgroundColor];
     [self.stationDetailsContainerView addSubview:self.stationDetails];
     
     [self loadRoutesFromKML];
-}
+  
+    MKUserTrackingBarButtonItem* trackingBarButtonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
+    [self.bottomToolbar setItems:[self.bottomToolbar.items arrayByAddingObject:trackingBarButtonItem]];
 
+    self.navigationItem.title = self.title;
+    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    self.searchDisplayController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
+    self.searchDisplayController.navigationItem.leftBarButtonItem = self.navigationItem.backBarButtonItem;
+}
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
@@ -95,9 +101,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    TBNavigationController* navigationController = (TBNavigationController*)self.navigationController;
-    navigationController.tabBar.selectedItem = navigationController.mapViewController.tabBarItem;
-    
+    self.navigation.tabBar.selectedItem = self.navigation.mapViewController.tabBarItem;
     [self refresh:nil];
 }
 
@@ -125,19 +129,32 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    static NSString* identifier = @"station";
+    static NSString* stationID = @"station";
+    static NSString* placemarkID = @"placemark";
+    
+    if ([annotation isKindOfClass:[TBPlacemarkAnnotation class]]) {
+        MKAnnotationView* view = [mapView dequeueReusableAnnotationViewWithIdentifier:placemarkID];
+        if (!view) {
+            MKPinAnnotationView* v = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:placemarkID];
+            view = v;
+            v.pinColor = MKPinAnnotationColorPurple;
+            v.animatesDrop = YES;
+        }
+        view.annotation = annotation;
+        return view;
+    }
     
     // only if this is a station annotation
-    if (![annotation isKindOfClass:[TBStation class]]) {
-        return nil;
+    if ([annotation isKindOfClass:[TBStation class]]) {
+        MKAnnotationView* view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:stationID];
+        if (!view) {
+            view = [[TBStationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:stationID];
+        }
+        view.annotation = annotation;
+        return view;
     }
     
-    MKAnnotationView* view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    if (!view) {
-        view = [[TBStationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-    }
-    
-    return view;
+    return nil;
 }
 
 
@@ -174,17 +191,19 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    _selectedStation = (TBStation*)view.annotation;
+    if ([view.annotation isKindOfClass:[TBStation class]]) {
+        _selectedStation = (TBStation*)view.annotation;
 
-    self.stationDetails.station = (TBStation*)view.annotation;
-    [self showStationDetailsAnimated:YES];
-    
-    MKCoordinateRegion region;
-    region.span = MKCoordinateSpanMake(0.004, 0.004);
-    region.center = self.selectedStation.coordinate;
-    
-    self.regionChangingForSelection = YES;
-    [self.mapView setRegion:region animated:YES];
+        self.stationDetails.station = (TBStation*)view.annotation;
+        [self showStationDetailsAnimated:YES];
+        
+        MKCoordinateRegion region;
+        region.span = MKCoordinateSpanMake(0.004, 0.004);
+        region.center = self.selectedStation.coordinate;
+        
+        self.regionChangingForSelection = YES;
+        [self.mapView setRegion:region animated:YES];
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
@@ -256,5 +275,83 @@
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     return [self.kmlParser rendererForOverlay:overlay];
 }
+
+#pragma mark - Search
+
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+    controller.searchBar.tintColor = [UIColor blackColor];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.searchResults.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.searchDisplayController.searchBar resignFirstResponder];
+    [self.searchDisplayController setActive:NO animated:YES];
+    
+    SVPlacemark* placemark = self.searchResults[indexPath.row];
+    
+    if (self.placemarkAnnotation) {
+        [self.mapView removeAnnotation:self.placemarkAnnotation];
+    }
+    
+    self.placemarkAnnotation = [[TBPlacemarkAnnotation alloc] initWithPlacemark:placemark];
+    [self.mapView addAnnotation:self.placemarkAnnotation];
+    
+    MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(placemark.region.center, 1000.0f, 1000.0f);
+    [self.mapView setRegion:r animated:YES];
+    
+    self.searchDisplayController.searchBar.text = placemark.formattedAddress;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SVPlacemark* placemark = self.searchResults[indexPath.row];
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchResult"];
+    }
+    
+    cell.textLabel.text = placemark.formattedAddress;
+    return cell;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    return NO;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self.mapView removeAnnotation:self.placemarkAnnotation];
+    self.placemarkAnnotation = nil;
+    self.selectedStation = nil;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    TBCity* city = [TBServer instance].city;
+    [SVGeocoder geocode:searchBar.text region:city.region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        
+        // filter results only from the city
+        self.searchResults = [placemarks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            SVPlacemark* placemark = evaluatedObject;
+            
+            if (![city.region containsCoordinate:placemark.coordinate]) {
+                return NO;
+            }
+            
+            // also check that the city name appears in the formatted address
+            if ([placemark.formattedAddress rangeOfString:city.cityName options:NSCaseInsensitiveSearch].length == 0) {
+                return NO;
+            }
+            
+            return YES;
+        }]];
+        
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }];
+    
+    return YES;
+}
+
+
 
 @end

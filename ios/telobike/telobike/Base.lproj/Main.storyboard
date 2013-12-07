@@ -30,14 +30,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="O9L-X6-VvB">
-                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="ttd-dx-cuw" id="v5A-ad-g9h"/>
-                            </connections>
-                        </searchBar>
                         <connections>
                             <outlet property="dataSource" destination="ttd-dx-cuw" id="mlV-DL-Bcw"/>
                             <outlet property="delegate" destination="ttd-dx-cuw" id="Ujr-LE-jb0"/>
@@ -46,21 +38,6 @@
                     <tabBarItem key="tabBarItem" title="Near Me" image="TabBar-NearMe" id="NpL-YH-X2J"/>
                     <navigationItem key="navigationItem" id="Y0l-8p-age">
                         <nil key="title"/>
-                        <view key="titleView" opaque="NO" contentMode="scaleToFill" id="hOB-Zr-td8">
-                            <rect key="frame" x="135" y="12" width="50" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TitleBar" translatesAutoresizingMaskIntoConstraints="NO" id="M3z-yx-oqR">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
-                            </subviews>
-                        </view>
-                        <barButtonItem key="rightBarButtonItem" image="Headset" id="6ii-Mr-v1K">
-                            <connections>
-                                <action selector="feedback:" destination="ttd-dx-cuw" id="Lic-DW-tO0"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="9Yc-bi-CDj">
@@ -71,6 +48,15 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OhR-Pl-HAp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchBar contentMode="redraw" id="O9L-X6-VvB">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="ttd-dx-cuw" id="v5A-ad-g9h"/>
+                    </connections>
+                </searchBar>
                 <searchDisplayController searchResultsTitle="" id="fFy-Dt-9MN">
                     <connections>
                         <outlet property="delegate" destination="ttd-dx-cuw" id="Lot-Hz-2Dy"/>
@@ -210,6 +196,69 @@
             </objects>
             <point key="canvasLocation" x="1753" y="624"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="hvR-pt-zfM">
+            <objects>
+                <viewController storyboardIdentifier="menu" id="Gyt-vN-6OA" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j0t-xZ-Ay3"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Aa-TS-Igj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="01H-af-GTx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jk4-fO-xsV">
+                                <rect key="frame" x="0.0" y="408" width="218" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Bike routes">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIf-SQ-tgJ">
+                                <rect key="frame" x="0.0" y="443" width="218" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Contact Tel-o-Fun">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCL-Qn-hba">
+                                <rect key="frame" x="0.0" y="478" width="218" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Send app feedback">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayn-Z8-Hfu">
+                                <rect key="frame" x="0.0" y="513" width="218" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="About">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9v-qs-Ps3">
+                                <rect key="frame" x="136" y="410" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                        </subviews>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Wy-6y-Hz1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2150" y="624"/>
+        </scene>
         <!--Map View Controller - Map-->
         <scene sceneID="ot8-2e-RuS">
             <objects>
@@ -236,6 +285,13 @@
                                     <constraint firstAttribute="height" constant="112" id="CJb-4g-xWK"/>
                                 </constraints>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Jo-kIO" customClass="TBTransparentToolbar">
+                                <rect key="frame" x="0.0" y="473" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="t0d-6v-0tU"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -248,25 +304,34 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eU6-FG-ZOj">
                         <nil key="title"/>
-                        <view key="titleView" opaque="NO" contentMode="scaleToFill" id="P0s-cf-imS">
-                            <rect key="frame" x="135" y="12" width="50" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TitleBar" translatesAutoresizingMaskIntoConstraints="NO" id="4J6-dZ-wSJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
-                            </subviews>
-                        </view>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bottomToolbar" destination="x7O-Jo-kIO" id="w3x-I4-mMi"/>
                         <outlet property="mapView" destination="NvQ-L0-EqX" id="lih-ea-PSp"/>
+                        <outlet property="searchDisplayController" destination="qi6-bi-V1G" id="nBR-H7-mv5"/>
                         <outlet property="stationDetailsContainerView" destination="9fR-hE-Glj" id="pjm-q0-xqM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
+                <searchBar contentMode="redraw" placeholder="Search address on map" id="tlI-eD-bwc">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="QUy-BD-bpt" id="JDC-4K-ET8"/>
+                    </connections>
+                </searchBar>
+                <searchDisplayController id="qi6-bi-V1G">
+                    <connections>
+                        <outlet property="delegate" destination="QUy-BD-bpt" id="F3Q-dd-6Fd"/>
+                        <outlet property="searchBar" destination="tlI-eD-bwc" id="uq3-Bu-MLe"/>
+                        <outlet property="searchContentsController" destination="QUy-BD-bpt" id="bS7-2k-qEd"/>
+                        <outlet property="searchResultsDataSource" destination="QUy-BD-bpt" id="ugK-xh-gRo"/>
+                        <outlet property="searchResultsDelegate" destination="QUy-BD-bpt" id="mhW-29-ZrP"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2567" y="-138"/>
         </scene>
@@ -316,7 +381,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Headset" width="26" height="28"/>
         <image name="TabBar-Favorites" width="25" height="24"/>
         <image name="TabBar-Map" width="25" height="25"/>
         <image name="TabBar-NearMe" width="24" height="25"/>

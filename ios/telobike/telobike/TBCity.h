@@ -20,6 +20,8 @@
 @property (strong, readonly) NSString*   disclaimer;
 @property (strong, readonly) NSURL*      infoURL;
 
+@property (strong, readonly) CLCircularRegion* region;
+
 - (instancetype)initWithDictionary:(NSDictionary*)dict;
 
 @end

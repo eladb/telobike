@@ -54,6 +54,7 @@
 		F498A0AC1851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */; };
 		F498A0AD1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0AA1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png */; };
 		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
+		F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */; };
 		F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */; };
 		F4D6FA8917FC4D5A000D0F2A /* TBStationDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
@@ -151,6 +152,8 @@
 		F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JNJGoogleMapsActivityMask.png; sourceTree = "<group>"; };
 		F498A0AA1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JNJGoogleMapsActivityMask@2x.png"; sourceTree = "<group>"; };
 		F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationTableViewCell.xib; sourceTree = "<group>"; };
+		F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPlacemarkAnnotation.h; sourceTree = "<group>"; };
+		F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPlacemarkAnnotation.m; sourceTree = "<group>"; };
 		F4D6FA8517FC4D4B000D0F2A /* TBStationDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsView.h; sourceTree = "<group>"; };
 		F4D6FA8617FC4D4B000D0F2A /* TBStationDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsView.m; sourceTree = "<group>"; };
 		F4D6FA8817FC4D5A000D0F2A /* TBStationDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationDetailsView.xib; sourceTree = "<group>"; };
@@ -236,7 +239,7 @@
 				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
 				F47B5CD617F6B37F00D88614 /* TBNavigationController.h */,
 				F47B5CD717F6B37F00D88614 /* TBNavigationController.m */,
-				F47B5CD117F668B000D88614 /* nearme */,
+				F47B5CD117F668B000D88614 /* list */,
 				F498A02818514059003BD3A6 /* favorites */,
 				F47B5CD217F668BE00D88614 /* map */,
 				F47B5CF617F78C7E00D88614 /* station */,
@@ -311,7 +314,7 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
-		F47B5CD117F668B000D88614 /* nearme */ = {
+		F47B5CD117F668B000D88614 /* list */ = {
 			isa = PBXGroup;
 			children = (
 				F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */,
@@ -324,7 +327,7 @@
 				F42FCA0F17FE52F700E24D50 /* TBTintedView.h */,
 				F42FCA1017FE52F700E24D50 /* TBTintedView.m */,
 			);
-			name = nearme;
+			name = list;
 			sourceTree = "<group>";
 		};
 		F47B5CD217F668BE00D88614 /* map */ = {
@@ -342,6 +345,8 @@
 				F498A02E1851A866003BD3A6 /* TBStationActivityViewController.m */,
 				F498A0711851B06F003BD3A6 /* TBToggleFavoritesActivity.h */,
 				F498A0721851B06F003BD3A6 /* TBToggleFavoritesActivity.m */,
+				F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */,
+				F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */,
 			);
 			name = map;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,
 				F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */,
 				F42E60B817F123060099A1D0 /* TBStation.m in Sources */,
+				F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */,
 				F47B5CF517F78B1A00D88614 /* TBTimerViewController.m in Sources */,
 				F4D6FA8717FC4D4B000D0F2A /* TBStationDetailsView.m in Sources */,
 				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,

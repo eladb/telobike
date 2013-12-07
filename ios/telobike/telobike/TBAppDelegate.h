@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "TBMapViewController.h"
 #import "TBListViewController.h"
+#import <RESideMenu/RESideMenu.h>
 
 @interface TBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic, readonly) RESideMenu* sideMenuController;
 
 @end

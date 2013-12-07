@@ -8,6 +8,8 @@
 
 #import "TBNavigationController.h"
 #import "UIColor+Style.h"
+#import "TBAppDelegate.h"
+
 
 static const NSUInteger kTabBarHeight = 49.0f;
 
@@ -117,6 +119,26 @@ static const NSUInteger kTabBarHeight = 49.0f;
         self.viewControllers = @ [ self.settingsViewController ];
         return;
     }
+}
+
+#pragma mark - Side menu
+
+- (void)presentSideMenu:(id)sender {
+    TBAppDelegate* app = (TBAppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.sideMenuController presentMenuViewController];
+}
+
+- (UIBarButtonItem*)sideMenuBarButtonItem {
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hamburger"] style:UIBarButtonItemStyleBordered target:self action:@selector(presentSideMenu:)];
+}
+
+@end
+
+@implementation UIViewController (TB)
+
+- (TBNavigationController*)navigation {
+    NSAssert([self.navigationController isKindOfClass:[TBNavigationController class]], @"navigation controller must be a TBNavigationController");
+    return (TBNavigationController*)self.navigationController;
 }
 
 @end
