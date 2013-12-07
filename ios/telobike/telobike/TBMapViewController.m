@@ -184,10 +184,12 @@
     
     _selectedStation = selectedStation;
     [self.mapView selectAnnotation:selectedStation animated:YES];
+    
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [self hideStationDetailsAnimated:YES];
+    self.searchDisplayController.searchBar.text = nil;
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -203,6 +205,15 @@
         
         self.regionChangingForSelection = YES;
         [self.mapView setRegion:region animated:YES];
+
+        self.searchDisplayController.searchBar.text = self.selectedStation.stationName;
+        return;
+    }
+    
+    if ([view.annotation isKindOfClass:[TBPlacemarkAnnotation class]]) {
+        TBPlacemarkAnnotation* annoation = view.annotation;
+        self.searchDisplayController.searchBar.text = annoation.placemark.formattedAddress;
+        return;
     }
 }
 
