@@ -18,7 +18,7 @@
 
 + (UIColor*)themeColor                   { return [UIColor colorWithWhite:0.0f alpha:0.9f]; }
 
-+ (UIColor*)tintColor                    { return [UIColor whiteColor]; }
++ (UIColor*)tintColor                    { return [UIColor lightGrayColor]; }
 
 + (UIColor*)navigationBarBackgroundColor { return [UIColor themeColor]; }
 + (UIColor*)navigationBarTitleColor      { return [UIColor tintColor];  }
