@@ -41,6 +41,7 @@
 // search
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) TBPlacemarkAnnotation* placemarkAnnotation;
+@property (strong, nonatomic) MKDistanceFormatter* distanceFormatter;
 
 @end
 
@@ -80,14 +81,19 @@
     
     [self loadRoutesFromKML];
   
+    // map view
     MKUserTrackingBarButtonItem* trackingBarButtonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
     [self.bottomToolbar setItems:[self.bottomToolbar.items arrayByAddingObject:trackingBarButtonItem]];
-
-
+    self.mapView.showsUserLocation = YES;
+    
+    // search
     self.navigationItem.title = self.title;
     self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
     self.searchDisplayController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
     self.searchDisplayController.navigationItem.leftBarButtonItem = self.navigationItem.backBarButtonItem;
+    self.distanceFormatter = [[MKDistanceFormatter alloc] init];
+    self.distanceFormatter.units = MKDistanceFormatterUnitsMetric;
+    self.distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleAbbreviated;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -298,6 +304,10 @@
     self.navigation.tabBar.alpha = 1.0f;
 }
 
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
+    tableView.rowHeight = 50.0f;
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [self.mapView removeAnnotation:self.placemarkAnnotation];
     self.placemarkAnnotation = nil;
@@ -404,28 +414,42 @@
     
     NSString* title;
     UIImage* image;
+    CLLocationDistance distance = -1.0f;
+    CLLocation* currentLocation = self.mapView.userLocation.location;
     
     if ([result isKindOfClass:[SVPlacemark class]]) {
         SVPlacemark* placemark = result;
         title = placemark.formattedAddress;
         image = [UIImage imageNamed:@"Placemark"];
+        
+        if (currentLocation && placemark.location) {
+            distance = [placemark.location distanceFromLocation:currentLocation];
+        }
     }
     else if ([result isKindOfClass:[TBStation class]]) {
         TBStation* station = result;
         title = station.stationName;
         image = station.markerImage;
+
+        if (currentLocation && station.location) {
+            distance = [station.location distanceFromLocation:currentLocation];
+        }
     }
     
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchResult"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchResult"];
     }
     
     cell.textLabel.text = title;
+    cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     cell.imageView.image = image;
+    if (distance != -1.0f) {
+        cell.detailTextLabel.text = [self.distanceFormatter stringFromDistance:distance];
+    }
+
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.searchDisplayController.searchBar resignFirstResponder];
