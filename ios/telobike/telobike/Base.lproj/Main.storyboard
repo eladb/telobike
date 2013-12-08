@@ -315,7 +315,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
-                <searchBar contentMode="redraw" placeholder="Search address on map" id="tlI-eD-bwc">
+                <searchBar contentMode="redraw" placeholder="Search on map" id="tlI-eD-bwc">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>

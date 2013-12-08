@@ -83,6 +83,7 @@
     MKUserTrackingBarButtonItem* trackingBarButtonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
     [self.bottomToolbar setItems:[self.bottomToolbar.items arrayByAddingObject:trackingBarButtonItem]];
 
+
     self.navigationItem.title = self.title;
     self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
     self.searchDisplayController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
@@ -290,45 +291,11 @@
 #pragma mark - Search
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
-    controller.searchBar.tintColor = [UIColor blackColor];
+    self.navigation.tabBar.alpha = 0.0f;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.searchResults.count;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.searchDisplayController.searchBar resignFirstResponder];
-    [self.searchDisplayController setActive:NO animated:YES];
-    
-    SVPlacemark* placemark = self.searchResults[indexPath.row];
-    
-    if (self.placemarkAnnotation) {
-        [self.mapView removeAnnotation:self.placemarkAnnotation];
-    }
-    
-    self.placemarkAnnotation = [[TBPlacemarkAnnotation alloc] initWithPlacemark:placemark];
-    [self.mapView addAnnotation:self.placemarkAnnotation];
-    
-    MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(placemark.region.center, 1000.0f, 1000.0f);
-    [self.mapView setRegion:r animated:YES];
-    
-    self.searchDisplayController.searchBar.text = placemark.formattedAddress;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SVPlacemark* placemark = self.searchResults[indexPath.row];
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchResult"];
-    }
-    
-    cell.textLabel.text = placemark.formattedAddress;
-    return cell;
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    return NO;
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
+    self.navigation.tabBar.alpha = 1.0f;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -337,12 +304,35 @@
     self.selectedStation = nil;
 }
 
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    TBCity* city = [TBServer instance].city;
-    [SVGeocoder geocode:searchBar.text region:city.region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // this means the change in the search bar was coming from the change in selection
+    if (self.selectedStation) {
+        return NO;
+    }
+    
+    // do not search in case we have a placemark annotation selected
+    if (self.placemarkAnnotation) {
+        return NO;
+    }
+    
+    [self search:searchString];
+    return NO;
+}
+
+- (void)search:(NSString*)query {
+    if (query.length == 0) {
+        self.searchResults = nil;
+        [self.searchDisplayController.searchResultsTableView reloadData];
+        return;
+    }
+    
+    TBServer* server = [TBServer instance];
+    TBCity* city = server.city;
+    
+    [SVGeocoder geocode:query region:city.region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         
         // filter results only from the city
-        self.searchResults = [placemarks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        NSArray* placemarkResults = [placemarks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
             SVPlacemark* placemark = evaluatedObject;
             
             if (![city.region containsCoordinate:placemark.coordinate]) {
@@ -357,12 +347,100 @@
             return YES;
         }]];
         
+        // now also search stations
+        NSArray* stationsResults = [server.stations filteredStationsArrayWithQuery:query];
+        
+        NSArray* results = [placemarkResults arrayByAddingObjectsFromArray:stationsResults];
+
+        CLLocation* referenceLocation = self.mapView.userLocation.location;
+        if (!referenceLocation) {
+            referenceLocation = [[CLLocation alloc] initWithLatitude:0.0f longitude:50.0];
+        }
+
+        self.searchResults = [results sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            CLLocation* location1 = [self locationFromSearchResult:obj1];
+            CLLocation* location2 = [self locationFromSearchResult:obj2];
+            CLLocationDistance distance1 = [referenceLocation distanceFromLocation:location1];
+            CLLocationDistance distance2 = [referenceLocation distanceFromLocation:location2];
+            return distance1 - distance2;
+        }];
+        
         [self.searchDisplayController.searchResultsTableView reloadData];
     }];
+}
+
+- (CLLocation*)locationFromSearchResult:(id)result {
+    if ([result isKindOfClass:[TBStation class]]) {
+        return ((TBStation*)result).location;
+    }
     
-    return YES;
+    if ([result isKindOfClass:[SVPlacemark class]]) {
+        return ((SVPlacemark*)result).location;
+    }
+    
+    return nil;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.searchResults.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    id result = self.searchResults[indexPath.row];
+    
+    NSString* title;
+    UIImage* image;
+    
+    if ([result isKindOfClass:[SVPlacemark class]]) {
+        SVPlacemark* placemark = result;
+        title = placemark.formattedAddress;
+        image = [UIImage imageNamed:@"Placemark"];
+    }
+    else if ([result isKindOfClass:[TBStation class]]) {
+        TBStation* station = result;
+        title = station.stationName;
+        image = station.markerImage;
+    }
+    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"searchResult"];
+    }
+    
+    cell.textLabel.text = title;
+    cell.imageView.image = image;
+    return cell;
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.searchDisplayController.searchBar resignFirstResponder];
+    [self.searchDisplayController setActive:NO animated:YES];
+    
+    id result = self.searchResults[indexPath.row];
+    
+    if ([result isKindOfClass:[SVPlacemark class]]) {
+        SVPlacemark* placemark = result;
+        
+        if (self.placemarkAnnotation) {
+            [self.mapView removeAnnotation:self.placemarkAnnotation];
+        }
+        
+        self.placemarkAnnotation = [[TBPlacemarkAnnotation alloc] initWithPlacemark:placemark];
+        [self.mapView addAnnotation:self.placemarkAnnotation];
+        
+        MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 1000.0f, 1000.0f);
+        [self.mapView setRegion:r animated:YES];
+        
+        self.searchDisplayController.searchBar.text = placemark.formattedAddress;
+        return;
+    }
+    
+    if ([result isKindOfClass:[TBStation class]]) {
+        TBStation* station = result;
+        self.selectedStation = station;
+        return;
+    }
+}
 
 @end

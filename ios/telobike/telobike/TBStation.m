@@ -8,7 +8,6 @@
 
 #import "Utils.h"
 #import "TBStation.h"
-#import "TBFavorites.h"
 
 static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
 static const NSInteger kMarginalBikeAmount = 3;
@@ -291,16 +290,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     return [aLocation distanceFromLocation:stationLocation];
 }
 
-- (BOOL)favorite
-{
-    return [[TBFavorites instance] isFavoriteStationID:_sid];
-}
-
-- (void)setFavorite:(BOOL)isFavorite
-{
-    [[TBFavorites instance] setStationID:_sid favorite:isFavorite];
-}
-
 #pragma mark - MKAnnotation
 
 - (NSString *)title
@@ -342,6 +331,34 @@ static const NSInteger kMarginalBikeAmount = 3;
     }
     
     return NO;
+}
+
+@end
+
+@implementation NSArray (FilterStations)
+
+- (NSArray*)filteredStationsArrayWithQuery:(NSString*)query {
+    NSPredicate* predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        if (query.length == 0) {
+            return YES;
+        }
+        
+        TBStation* station = evaluatedObject;
+        
+        // split filter to words and see if this station match all the words.
+        NSArray* keywords = [query componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        for (NSString* keyword in keywords) {
+            if (![station queryKeyword:keyword]) {
+                return NO;
+            }
+        }
+        
+        // station contains all keywords, it should be included in the list.
+        return YES;
+    }];
+    
+    return [self filteredArrayUsingPredicate:predicate];
 }
 
 @end

@@ -179,27 +179,7 @@
 
 - (NSArray*)searchResults {
     NSString* filter = self.searchDisplayController.searchBar.text;
-    NSPredicate* predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        if (filter.length == 0) {
-            return YES;
-        }
-        
-        TBStation* station = evaluatedObject;
-        
-        // split filter to words and see if this station match all the words.
-        NSArray* keywords = [filter componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        for (NSString* keyword in keywords) {
-            if (![station queryKeyword:keyword]) {
-                return NO;
-            }
-        }
-        
-        // station contains all keywords, it should be included in the list.
-        return YES;
-    }];
-    
-    return [self.sortedStations filteredArrayUsingPredicate:predicate];
+    return [self.sortedStations filteredStationsArrayWithQuery:filter];
 }
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {

@@ -51,8 +51,6 @@ typedef enum {
 
 @property (nonatomic, readonly) CGFloat totalSlots;
 
-@property (nonatomic, assign) BOOL favorite;
-
 @property (nonatomic, readonly) UIColor* indicatorColor;
 
 @property (nonatomic, readonly) StationState state;
@@ -76,5 +74,11 @@ typedef enum {
 - (CLLocationDistance)distanceFromLocation:(CLLocation*)location;
 
 - (BOOL)queryKeyword:(NSString*)keyword;
+
+@end
+
+@interface NSArray (FilterStations)
+
+- (NSArray*)filteredStationsArrayWithQuery:(NSString*)query;
 
 @end
