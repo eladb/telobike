@@ -18,6 +18,10 @@
 @implementation TBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSDictionary* d = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+    NSLog(@"keyboards: %@", d[@"AppleKeyboards"]);
+    
+    
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController* contentViewController = [storyboard instantiateInitialViewController];
     UIViewController* menuViewController = [storyboard instantiateViewControllerWithIdentifier:@"menu"];

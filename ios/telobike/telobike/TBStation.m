@@ -112,49 +112,13 @@ static const NSInteger kMarginalBikeAmount = 3;
     return cachedImage;
 }
 
-
-- (NSString*)filterStupidPartsInStationName:(NSString*)name {
-    NSString* n = name;
-    NSDictionary* replacements = @{
-      @"st.": @"",
-      @"street": @"",
-      @"av.": @"",
-      @"—": @"-",
-      @"‑": @"-",
-      @"–": @"-",
-      @"-": @"-",
-      @"‒": @"-",
-      @"  / ": @" / ",
-      @"  -": @" -",
-      @"  ": @" ",
-      @" St/": @"/",
-      @"Opp. ": @"",
-      @"-": @"[*]",
-      @"[^\\ ]-": @" -",
-      @"-[^\\ ]": @"- ",
-      @"[^\\ ]\\/": @" /",
-      @"\\/[^\\ ]": @"/ ",
-    };
-
-    for (NSString* search in [replacements allKeys]) {
-        NSString* replace = [replacements objectForKey:search];
-        n = [n stringByReplacingOccurrencesOfString:search
-                                         withString:replace
-                                            options:NSCaseInsensitiveSearch | NSRegularExpressionSearch
-                                              range:NSMakeRange(0, n.length)];
-    }
-    
-    n = [n capitalizedString];
-    return [n stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-}
-
 - (void)setDict:(NSDictionary *)dict
 {
     _dict = dict;
 
     _sid = [dict objectForKey:@"sid"];
     
-    _stationName = [self filterStupidPartsInStationName:[dict localizedStringForKey:@"name"]];
+    _stationName = [dict localizedStringForKey:@"name"];
     _latitude    = [[dict objectForKey:@"latitude"] doubleValue];
     _longitude   = [[dict objectForKey:@"longitude"] doubleValue];
     _location    = [dict locationForKey:@"location"];
@@ -316,19 +280,28 @@ static const NSInteger kMarginalBikeAmount = 3;
 
     // trim any whitespace from the keyword
     keyword = [keyword stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
-    // check if the filter text is in the station name
-    if (self.stationName.length > 0 && [self.stationName rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
     
-    // check if the filter text is in the address
-    if (self.address.length > 0 && [self.address rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
-    
-    if (self.tags) {
-        // check if any of the tags match
-        for (NSString* tag in self.tags) {
-            if ([tag rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
+    for (id value in [self.dict allValues]) {
+        if ([value isKindOfClass:[NSString class]]) {
+            NSString* valueString = value;
+            if ([valueString rangeOfString:keyword options:NSCaseInsensitiveSearch].length) {
+                return YES;
+            }
         }
     }
+
+//    // check if the filter text is in the station name
+//    if (self.stationName.length > 0 && [self.stationName rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
+//    
+//    // check if the filter text is in the address
+//    if (self.address.length > 0 && [self.address rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
+//    
+//    if (self.tags) {
+//        // check if any of the tags match
+//        for (NSString* tag in self.tags) {
+//            if ([tag rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
+//        }
+//    }
     
     return NO;
 }

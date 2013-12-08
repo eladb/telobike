@@ -42,7 +42,6 @@
 		F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */; };
 		F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */; };
 		F47B5CF517F78B1A00D88614 /* TBTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CF417F78B1A00D88614 /* TBTimerViewController.m */; };
-		F47B5CF917F78C9000D88614 /* TBStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CF817F78C9000D88614 /* TBStationViewController.m */; };
 		F47B5CFC17F7937400D88614 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F47B5CFB17F7937400D88614 /* Settings.bundle */; };
 		F47B5CFF17F7939200D88614 /* TBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */; };
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
@@ -131,8 +130,6 @@
 		F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F47B5CF317F78B1A00D88614 /* TBTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTimerViewController.h; sourceTree = "<group>"; };
 		F47B5CF417F78B1A00D88614 /* TBTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTimerViewController.m; sourceTree = "<group>"; };
-		F47B5CF717F78C9000D88614 /* TBStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationViewController.h; sourceTree = "<group>"; };
-		F47B5CF817F78C9000D88614 /* TBStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationViewController.m; sourceTree = "<group>"; };
 		F47B5CFB17F7937400D88614 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F47B5CFD17F7939200D88614 /* TBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSettingsViewController.h; sourceTree = "<group>"; };
 		F47B5CFE17F7939200D88614 /* TBSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSettingsViewController.m; sourceTree = "<group>"; };
@@ -242,7 +239,6 @@
 				F47B5CD117F668B000D88614 /* list */,
 				F498A02818514059003BD3A6 /* favorites */,
 				F47B5CD217F668BE00D88614 /* map */,
-				F47B5CF617F78C7E00D88614 /* station */,
 				F47B5CF217F78B0700D88614 /* timer */,
 				F47B5CFA17F7935900D88614 /* settings */,
 				F47B5CD017F6689400D88614 /* utils */,
@@ -371,15 +367,6 @@
 				F47B5CF417F78B1A00D88614 /* TBTimerViewController.m */,
 			);
 			name = timer;
-			sourceTree = "<group>";
-		};
-		F47B5CF617F78C7E00D88614 /* station */ = {
-			isa = PBXGroup;
-			children = (
-				F47B5CF717F78C9000D88614 /* TBStationViewController.h */,
-				F47B5CF817F78C9000D88614 /* TBStationViewController.m */,
-			);
-			name = station;
 			sourceTree = "<group>";
 		};
 		F47B5CFA17F7935900D88614 /* settings */ = {
@@ -580,7 +567,6 @@
 				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
 				F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */,
-				F47B5CF917F78C9000D88614 /* TBStationViewController.m in Sources */,
 				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
 				F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */,
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,

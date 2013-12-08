@@ -18,7 +18,6 @@
 #import "UIColor+Style.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
-#import "TBStationViewController.h"
 #import "TBStationDetailsView.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
@@ -296,14 +295,6 @@
 
 #pragma mark - Search
 
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
-    self.navigation.tabBar.alpha = 0.0f;
-}
-
-- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
-    self.navigation.tabBar.alpha = 1.0f;
-}
-
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
     tableView.rowHeight = 50.0f;
 }
@@ -348,7 +339,7 @@
             if (![city.region containsCoordinate:placemark.coordinate]) {
                 return NO;
             }
-            
+
             // also check that the city name appears in the formatted address
             if ([placemark.formattedAddress rangeOfString:city.cityName options:NSCaseInsensitiveSearch].length == 0) {
                 return NO;
@@ -389,6 +380,10 @@
     TBCity* city = server.city;
     
     [SVGeocoder geocode:query region:city.region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            NSLog(@"geocode error: %@", error);
+        }
+        
         return completion(placemarks);
     }];
 }

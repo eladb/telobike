@@ -22,6 +22,18 @@
     return preferredLang;
 }
 
++ (BOOL)hebrewKeyboardInstalled {
+    NSDictionary* settings = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+    NSArray* keyboards = settings[@"AppleKeyboards"];
+    for (NSString* keyboard in keyboards) {
+        if ([keyboard rangeOfString:@"he_IL"].length != 0) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 + (NSString*)formattedDistance:(CLLocationDistance)distance
 {
     NSString* dist;
@@ -40,6 +52,12 @@
     
     // try 'key.lang' first as the key
     NSString* lang = [TBCategories currentLanguage];
+    
+    // hack: if hebrew keyboard is installed, try hebrew
+    if ([TBCategories hebrewKeyboardInstalled]) {
+        lang = @"he";
+    }
+    
     result = [self objectForKey:[NSString stringWithFormat:@"%@.%@", key, lang]];
     
     if (!result) result = [self objectForKey:[NSString stringWithFormat:@"%@_%@", key, lang]];

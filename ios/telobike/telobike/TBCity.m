@@ -25,7 +25,7 @@
     return self;
 }
 
-- (NSString*)cityName { return [[_dict localizedStringForKey:@"city_name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "]; }
+- (NSString*)cityName { return [[_dict objectForKey:@"city_name.en"] stringByReplacingOccurrencesOfString:@"-" withString:@" "]; }
 - (NSString*)mail { return [_dict objectForKey:@"mail"]; }
 - (NSString*)serviceName { return [_dict localizedStringForKey:@"service_name"]; }
 - (NSString*)mailTags { return [_dict objectForKey:@"mail_tags"]; }
