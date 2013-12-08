@@ -328,8 +328,8 @@
     
     TBServer* server = [TBServer instance];
     TBCity* city = server.city;
-    
-    [SVGeocoder geocode:query region:city.region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+
+    [self geocodeSearch:query completion:^(NSArray *placemarks) {
         
         // filter results only from the city
         NSArray* placemarkResults = [placemarks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -350,6 +350,7 @@
         // now also search stations
         NSArray* stationsResults = [server.stations filteredStationsArrayWithQuery:query];
         
+        // combine results
         NSArray* results = [placemarkResults arrayByAddingObjectsFromArray:stationsResults];
 
         CLLocation* referenceLocation = self.mapView.userLocation.location;
@@ -366,6 +367,19 @@
         }];
         
         [self.searchDisplayController.searchResultsTableView reloadData];
+    }];
+}
+
+- (void)geocodeSearch:(NSString*)query completion:(void(^)(NSArray* placemarks))completion {
+    if (query.length < 3) {
+        return completion(@[]); // search query too short
+    }
+
+    TBServer* server = [TBServer instance];
+    TBCity* city = server.city;
+    
+    [SVGeocoder geocode:query region:city.region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        return completion(placemarks);
     }];
 }
 
