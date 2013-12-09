@@ -45,17 +45,10 @@
                                                                      attributes:@{ NSParagraphStyleAttributeName: style }];
     self.emptyLabel.textColor = [UIColor colorWithWhite:204/255.0f alpha:1.0f];
     self.tableView.backgroundView = self.emptyLabel;
-
-#warning fix insets
-//    UIEdgeInsets insets = self.tableView.contentInset;
-//    insets.bottom = self.main.tabBar.frame.size.height;
-//    self.tableView.contentInset = insets;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-#warning fix tabbar selection
-//    self.tabBar.selectedItem = self.favoritesViewController.tabBarItem;
     [self updateFavoritesWithReload:YES];
 }
 

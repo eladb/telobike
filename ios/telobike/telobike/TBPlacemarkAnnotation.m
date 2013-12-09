@@ -28,4 +28,8 @@
     return self.placemark.coordinate;
 }
 
+- (NSString *)title {
+    return self.placemark.formattedAddress;
+}
+
 @end

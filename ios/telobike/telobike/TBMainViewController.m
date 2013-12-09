@@ -93,6 +93,15 @@
 #pragma mark - Navigation
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    // fix insets for table view controllers
+    if ([viewController isKindOfClass:[UITableViewController class]]) {
+        UITableView* tableView = (UITableView*)viewController.view;
+        UIEdgeInsets insets = tableView.contentInset;
+        insets.bottom = self.tabBar.frame.size.height;
+        tableView.contentInset = insets;
+    }
+    
     viewController.navigationItem.rightBarButtonItems = @[ self.sideMenuBarButtonItem, self.searchBarButtonItem ];
     self.tabBar.selectedItem = viewController.tabBarItem;
 }

@@ -22,7 +22,6 @@
 
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) NSArray* sortedStations;
-@property (strong, nonatomic) UISearchDisplayController* searchController;
 
 @end
 
@@ -44,29 +43,15 @@
         [self.tableView reloadData];
     }];
     
-    [self refresh:nil];
-
-#warning insets
-//    UIEdgeInsets insets = self.tableView.contentInset;
-//    insets.bottom = self.navigation.tabBar.frame.size.height;
-//    self.tableView.contentInset = insets;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     UINib* nib = [UINib nibWithNibName:NSStringFromClass([TBStationTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    if (self.searchController.active) {
-        return UIStatusBarStyleDefault;
-    }
-    else {
-        return UIStatusBarStyleLightContent;
-    }
-}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return UIStatusBarAnimationFade;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[TBServer instance] reloadStations:nil];
 }
 
 #pragma mark - Stations

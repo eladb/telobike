@@ -36,10 +36,6 @@
 
 @property (assign, nonatomic) BOOL regionChangingForSelection;
 
-// search
-@property (strong, nonatomic) UISearchDisplayController* searchController;
-
-
 @end
 
 @implementation TBMapViewController
@@ -54,7 +50,6 @@
     
     [self observeValueOfKeyPath:@"stations" object:self.server with:^(id new, id old) {
         [self refresh:nil];
-
         [self reselectAnnotation];
     }];
     
@@ -70,7 +65,6 @@
         [self.mapView setRegion:region animated:NO];
     }];
     
-    
     // station details
     self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
     self.stationDetails.stationDetailsDelegate = self;
@@ -84,13 +78,12 @@
     [self.bottomToolbar setItems:[self.bottomToolbar.items arrayByAddingObject:trackingBarButtonItem]];
     self.mapView.showsUserLocation = YES;
     
-    // search
-//    self.navigationItem.title = self.title;
-    
-//    self.searchController.navigationItem.backBarButtonItem = self.navigationItem.backBarButtonItem;
-//    self.searchController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
-    
     [self reselectAnnotation];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[TBServer instance] reloadStations:nil];
 }
 
 - (void)reselectAnnotation {
@@ -316,8 +309,13 @@
     if (placemarkAnnotation) {
         self.selectedStation = nil;
     }
+
+    // only remove previous placemark if there is a new one to select
+    // otherwise, we just want to deselect it.
+    if (placemarkAnnotation) {
+        [self.mapView removeAnnotation:_selectedPlacemark];
+    }
     
-    [self.mapView removeAnnotation:_selectedPlacemark];
     [self.mapView addAnnotation:placemarkAnnotation];
     _selectedPlacemark = placemarkAnnotation;
     [self.mapView selectAnnotation:placemarkAnnotation animated:YES];
