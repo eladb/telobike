@@ -119,11 +119,6 @@
     [self refresh:nil];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-//    self.selectedStation = nil;
-}
-
 #pragma mark - Annotations
 
 - (void)refresh:(id)sender {
@@ -203,10 +198,13 @@
     
 }
 
+- (void)updateTitle:(NSString*)title {
+    self.navigationItem.title = title ? title : self.title;
+}
+
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [self hideStationDetailsAnimated:YES];
-    self.title = NSLocalizedString(@"Map", nil);
-//    self.navigation.searchBarText = nil;
+    [self updateTitle:nil];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -233,7 +231,7 @@
         annotationRegion = MKCoordinateRegionMakeWithDistance(annoation.coordinate, 1000.0f, 1000.0f);;
     }
     
-    self.title = annotationTitle;
+    [self updateTitle:annotationTitle];
     self.regionChangingForSelection = YES;
     [self.mapView setRegion:annotationRegion animated:YES];
 }
