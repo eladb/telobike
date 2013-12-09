@@ -14,7 +14,7 @@
 #import "TBStationTableViewCell.h"
 #import "TBStation.h"
 #import "NSObject+Binding.h"
-#import "TBNavigationController.h"
+#import "TBMainViewController.h"
 #import "TBFeedbackActionSheet.h"
 #import "TBFeedbackMailComposeViewController.h"
 
@@ -22,6 +22,7 @@
 
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) NSArray* sortedStations;
+@property (strong, nonatomic) UISearchDisplayController* searchController;
 
 @end
 
@@ -44,33 +45,19 @@
     }];
     
     [self refresh:nil];
-    
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = self.navigation.tabBar.frame.size.height;
-    self.tableView.contentInset = insets;
+
+#warning insets
+//    UIEdgeInsets insets = self.tableView.contentInset;
+//    insets.bottom = self.navigation.tabBar.frame.size.height;
+//    self.tableView.contentInset = insets;
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     UINib* nib = [UINib nibWithNibName:NSStringFromClass([TBStationTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
-    
-    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
-
-    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
-    self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;
-    self.searchDisplayController.searchResultsTableView.separatorStyle = self.tableView.separatorStyle;
-    self.searchDisplayController.searchResultsTableView.backgroundColor = self.tableView.backgroundColor;
-
-    self.searchDisplayController.navigationItem.title = @"";
-    self.searchDisplayController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.navigation.tabBar.selectedItem = self.navigation.nearByViewController.tabBarItem;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    if (self.searchDisplayController.active) {
+    if (self.searchController.active) {
         return UIStatusBarStyleDefault;
     }
     else {
@@ -110,45 +97,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView == self.tableView) {
-        // list table view
-        return self.sortedStations.count;
-    }
-    else if (tableView == self.searchDisplayController.searchResultsTableView) {
-        // search table view
-        return  self.searchResults.count;
-    }
-    
-    return 0;
+    return self.sortedStations.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TBStationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STATION_CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
-
-    if (tableView == self.tableView) {
-        cell.station = self.sortedStations[indexPath.row];
-    }
-    else {
-        cell.station = self.searchResults[indexPath.row];
-    }
-    
+    cell.station = self.sortedStations[indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TBStation* station;
-    
-    if (tableView == self.tableView) {
-        station = self.sortedStations[indexPath.row];
-    }
-    else if (tableView == self.searchDisplayController.searchResultsTableView) {
-        station = self.searchResults[indexPath.row];
-    }
-    else {
-        return;
-    }
-    
-    TBMapViewController* mapViewController = self.navigation.mapViewController;
+    TBStation* station = self.sortedStations[indexPath.row];
+    TBMapViewController* mapViewController = self.main.mapViewController;
     mapViewController.selectedStation = station;
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
@@ -158,7 +118,8 @@
 - (IBAction)feedback:(id)sender {
     TBFeedbackActionSheet* feedbackActionSheet = [[TBFeedbackActionSheet alloc] initWithDelegate:self];
     feedbackActionSheet.delegate = self;
-    [feedbackActionSheet showFromTabBar:self.navigation.tabBar];
+#warning fix show from tabbar feedback
+//    [feedbackActionSheet showFromTabBar:self.navigation.tabBar];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -173,19 +134,6 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Search
-
-- (NSArray*)searchResults {
-    NSString* filter = self.searchDisplayController.searchBar.text;
-    return [self.sortedStations filteredStationsArrayWithQuery:filter];
-}
-
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = self.navigation.tabBar.frame.size.height;
-    self.searchDisplayController.searchResultsTableView.contentInset = insets;
 }
 
 @end

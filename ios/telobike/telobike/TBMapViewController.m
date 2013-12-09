@@ -22,9 +22,8 @@
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
 #import "TBStationActivityViewController.h"
-#import "TBPlacemarkAnnotation.h"
 
-@interface TBMapViewController () <MKMapViewDelegate, TBStationDetailsViewDelegate, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface TBMapViewController () <MKMapViewDelegate, TBStationDetailsViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView* mapView;
 @property (strong, nonatomic) IBOutlet UIView*    stationDetailsContainerView;
@@ -38,9 +37,8 @@
 @property (assign, nonatomic) BOOL regionChangingForSelection;
 
 // search
-@property (strong, nonatomic) NSArray* searchResults;
-@property (strong, nonatomic) TBPlacemarkAnnotation* placemarkAnnotation;
-@property (strong, nonatomic) MKDistanceFormatter* distanceFormatter;
+@property (strong, nonatomic) UISearchDisplayController* searchController;
+
 
 @end
 
@@ -56,12 +54,13 @@
     
     [self observeValueOfKeyPath:@"stations" object:self.server with:^(id new, id old) {
         [self refresh:nil];
-        self.selectedStation = self.selectedStation;
+
+        [self reselectAnnotation];
     }];
     
     [self observeValueOfKeyPath:@"city" object:self.server with:^(id new, id old) {
         // if we have a selected station, don't update the region
-        if (self.selectedStation) {
+        if (self.selectedStation || self.selectedPlacemark) {
             return;
         }
         
@@ -86,13 +85,23 @@
     self.mapView.showsUserLocation = YES;
     
     // search
-    self.navigationItem.title = self.title;
-    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
-    self.searchDisplayController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
-    self.searchDisplayController.navigationItem.leftBarButtonItem = self.navigationItem.backBarButtonItem;
-    self.distanceFormatter = [[MKDistanceFormatter alloc] init];
-    self.distanceFormatter.units = MKDistanceFormatterUnitsMetric;
-    self.distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleAbbreviated;
+//    self.navigationItem.title = self.title;
+    
+//    self.searchController.navigationItem.backBarButtonItem = self.navigationItem.backBarButtonItem;
+//    self.searchController.navigationItem.rightBarButtonItem = [self.navigation sideMenuBarButtonItem];
+    
+    [self reselectAnnotation];
+}
+
+- (void)reselectAnnotation {
+    // make sure selected station/placemark are respected after view load
+    if (self.selectedPlacemark) {
+        self.selectedPlacemark = self.selectedPlacemark;
+    }
+    
+    if (self.selectedStation) {
+        self.selectedStation = self.selectedStation;
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -107,7 +116,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigation.tabBar.selectedItem = self.navigation.mapViewController.tabBarItem;
     [self refresh:nil];
 }
 
@@ -143,7 +151,7 @@
         if (!view) {
             MKPinAnnotationView* v = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:placemarkID];
             view = v;
-            v.pinColor = MKPinAnnotationColorPurple;
+            v.pinColor = MKPinAnnotationColorRed;
             v.animatesDrop = YES;
         }
         view.annotation = annotation;
@@ -167,6 +175,8 @@
 #pragma mark - Selection
 
 - (void)setSelectedStation:(TBStation *)selectedStation {
+    self.selectedPlacemark = nil;
+    
     // look for annotation based on sid
     for (TBStation* annotation in self.mapView.annotations) {
         if (![annotation isKindOfClass:[TBStation class]]) {
@@ -195,10 +205,14 @@
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [self hideStationDetailsAnimated:YES];
-    self.searchDisplayController.searchBar.text = nil;
+    self.title = NSLocalizedString(@"Map", nil);
+//    self.navigation.searchBarText = nil;
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    NSString* annotationTitle;
+    MKCoordinateRegion annotationRegion;
+
     if ([view.annotation isKindOfClass:[TBStation class]]) {
         _selectedStation = (TBStation*)view.annotation;
 
@@ -209,18 +223,19 @@
         region.span = MKCoordinateSpanMake(0.004, 0.004);
         region.center = self.selectedStation.coordinate;
         
-        self.regionChangingForSelection = YES;
-        [self.mapView setRegion:region animated:YES];
-
-        self.searchDisplayController.searchBar.text = self.selectedStation.stationName;
-        return;
+        annotationRegion = region;
+        annotationTitle = self.selectedStation.stationName;
     }
     
     if ([view.annotation isKindOfClass:[TBPlacemarkAnnotation class]]) {
         TBPlacemarkAnnotation* annoation = view.annotation;
-        self.searchDisplayController.searchBar.text = annoation.placemark.formattedAddress;
-        return;
+        annotationTitle = annoation.placemark.formattedAddress;;
+        annotationRegion = MKCoordinateRegionMakeWithDistance(annoation.coordinate, 1000.0f, 1000.0f);;
     }
+    
+    self.title = annotationTitle;
+    self.regionChangingForSelection = YES;
+    [self.mapView setRegion:annotationRegion animated:YES];
 }
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
@@ -241,12 +256,16 @@
     CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
     stationDetailsFrame.origin.y = -self.stationDetailsContainerView.frame.size.height;
     [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
+
+//    self.navigationItem.prompt = nil;
 }
 
 - (void)showStationDetailsAnimated:(BOOL)animated {
     CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
     stationDetailsFrame.origin.y = 64.0f;
     [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
+    
+//    self.navigationItem.prompt = self.selectedStation.stationName;
 }
 
 - (void)changeStationDetailsFrame:(CGRect)newFrame animated:(BOOL)animated {
@@ -293,187 +312,17 @@
     return [self.kmlParser rendererForOverlay:overlay];
 }
 
-#pragma mark - Search
+#pragma mark - Placemark search result
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
-    tableView.rowHeight = 50.0f;
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.mapView removeAnnotation:self.placemarkAnnotation];
-    self.placemarkAnnotation = nil;
-    self.selectedStation = nil;
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    // this means the change in the search bar was coming from the change in selection
-    if (self.selectedStation) {
-        return NO;
+- (void)setSelectedPlacemark:(TBPlacemarkAnnotation *)placemarkAnnotation {
+    if (placemarkAnnotation) {
+        self.selectedStation = nil;
     }
     
-    // do not search in case we have a placemark annotation selected
-    if (self.placemarkAnnotation) {
-        return NO;
-    }
-    
-    [self search:searchString];
-    return NO;
-}
-
-- (void)search:(NSString*)query {
-    if (query.length == 0) {
-        self.searchResults = nil;
-        [self.searchDisplayController.searchResultsTableView reloadData];
-        return;
-    }
-    
-    TBServer* server = [TBServer instance];
-    TBCity* city = server.city;
-
-    [self geocodeSearch:query completion:^(NSArray *placemarks) {
-        
-        // filter results only from the city
-        NSArray* placemarkResults = [placemarks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            SVPlacemark* placemark = evaluatedObject;
-            
-            if (![city.region containsCoordinate:placemark.coordinate]) {
-                return NO;
-            }
-
-            // also check that the city name appears in the formatted address
-            if ([placemark.formattedAddress rangeOfString:city.cityName options:NSCaseInsensitiveSearch].length == 0) {
-                return NO;
-            }
-            
-            return YES;
-        }]];
-        
-        // now also search stations
-        NSArray* stationsResults = [server.stations filteredStationsArrayWithQuery:query];
-        
-        // combine results
-        NSArray* results = [placemarkResults arrayByAddingObjectsFromArray:stationsResults];
-
-        CLLocation* referenceLocation = self.mapView.userLocation.location;
-        if (!referenceLocation) {
-            referenceLocation = [[CLLocation alloc] initWithLatitude:0.0f longitude:50.0];
-        }
-
-        self.searchResults = [results sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            CLLocation* location1 = [self locationFromSearchResult:obj1];
-            CLLocation* location2 = [self locationFromSearchResult:obj2];
-            CLLocationDistance distance1 = [referenceLocation distanceFromLocation:location1];
-            CLLocationDistance distance2 = [referenceLocation distanceFromLocation:location2];
-            return distance1 - distance2;
-        }];
-        
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    }];
-}
-
-- (void)geocodeSearch:(NSString*)query completion:(void(^)(NSArray* placemarks))completion {
-    if (query.length < 3) {
-        return completion(@[]); // search query too short
-    }
-
-    TBServer* server = [TBServer instance];
-    TBCity* city = server.city;
-    
-    [SVGeocoder geocode:query region:city.region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            NSLog(@"geocode error: %@", error);
-        }
-        
-        return completion(placemarks);
-    }];
-}
-
-- (CLLocation*)locationFromSearchResult:(id)result {
-    if ([result isKindOfClass:[TBStation class]]) {
-        return ((TBStation*)result).location;
-    }
-    
-    if ([result isKindOfClass:[SVPlacemark class]]) {
-        return ((SVPlacemark*)result).location;
-    }
-    
-    return nil;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.searchResults.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    id result = self.searchResults[indexPath.row];
-    
-    NSString* title;
-    UIImage* image;
-    CLLocationDistance distance = -1.0f;
-    CLLocation* currentLocation = self.mapView.userLocation.location;
-    
-    if ([result isKindOfClass:[SVPlacemark class]]) {
-        SVPlacemark* placemark = result;
-        title = placemark.formattedAddress;
-        image = [UIImage imageNamed:@"Placemark"];
-        
-        if (currentLocation && placemark.location) {
-            distance = [placemark.location distanceFromLocation:currentLocation];
-        }
-    }
-    else if ([result isKindOfClass:[TBStation class]]) {
-        TBStation* station = result;
-        title = station.stationName;
-        image = station.markerImage;
-
-        if (currentLocation && station.location) {
-            distance = [station.location distanceFromLocation:currentLocation];
-        }
-    }
-    
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchResult"];
-    }
-    
-    cell.textLabel.text = title;
-    cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    cell.imageView.image = image;
-    if (distance != -1.0f) {
-        cell.detailTextLabel.text = [self.distanceFormatter stringFromDistance:distance];
-    }
-
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.searchDisplayController.searchBar resignFirstResponder];
-    [self.searchDisplayController setActive:NO animated:YES];
-    
-    id result = self.searchResults[indexPath.row];
-    
-    if ([result isKindOfClass:[SVPlacemark class]]) {
-        SVPlacemark* placemark = result;
-        
-        if (self.placemarkAnnotation) {
-            [self.mapView removeAnnotation:self.placemarkAnnotation];
-        }
-        
-        self.placemarkAnnotation = [[TBPlacemarkAnnotation alloc] initWithPlacemark:placemark];
-        [self.mapView addAnnotation:self.placemarkAnnotation];
-        
-        MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 1000.0f, 1000.0f);
-        [self.mapView setRegion:r animated:YES];
-        
-        self.searchDisplayController.searchBar.text = placemark.formattedAddress;
-        return;
-    }
-    
-    if ([result isKindOfClass:[TBStation class]]) {
-        TBStation* station = result;
-        self.selectedStation = station;
-        return;
-    }
+    [self.mapView removeAnnotation:_selectedPlacemark];
+    [self.mapView addAnnotation:placemarkAnnotation];
+    _selectedPlacemark = placemarkAnnotation;
+    [self.mapView selectAnnotation:placemarkAnnotation animated:YES];
 }
 
 @end

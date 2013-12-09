@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "TBStation.h"
+#import "TBPlacemarkAnnotation.h"
 
 @interface TBMapViewController : UIViewController
 
 @property (strong, nonatomic) TBStation* selectedStation;
+@property (strong, nonatomic) TBPlacemarkAnnotation* selectedPlacemark;
 
 @end

@@ -12,7 +12,7 @@
 #import "TBStation.h"
 #import "TBFavorites.h"
 #import "NSObject+Binding.h"
-#import "TBNavigationController.h"
+#import "TBMainViewController.h"
 #import "TBMapViewController.h"
 
 @interface TBFavoritesViewController ()
@@ -46,17 +46,16 @@
     self.emptyLabel.textColor = [UIColor colorWithWhite:204/255.0f alpha:1.0f];
     self.tableView.backgroundView = self.emptyLabel;
 
-
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = self.navigation.tabBar.frame.size.height;
-    self.tableView.contentInset = insets;
-    
-    self.navigationItem.title = @"";
+#warning fix insets
+//    UIEdgeInsets insets = self.tableView.contentInset;
+//    insets.bottom = self.main.tabBar.frame.size.height;
+//    self.tableView.contentInset = insets;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigation.tabBar.selectedItem = self.navigation.favoritesViewController.tabBarItem;
+#warning fix tabbar selection
+//    self.tabBar.selectedItem = self.favoritesViewController.tabBarItem;
     [self updateFavoritesWithReload:YES];
 }
 
@@ -93,7 +92,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TBMapViewController* mapViewController = self.navigation.mapViewController;
+    TBMapViewController* mapViewController = self.main.mapViewController;
     mapViewController.selectedStation = self.favoriteStations[indexPath.row];
     [self.navigationController pushViewController:mapViewController animated:YES];
 }

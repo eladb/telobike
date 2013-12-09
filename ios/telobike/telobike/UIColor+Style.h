@@ -10,6 +10,8 @@
 
 @interface UIColor (Style)
 
++ (UIColor*)tintColor;
+
 + (UIColor*)navigationBarBackgroundColor;
 + (UIColor*)navigationBarTitleColor;
 + (UIColor*)navigationBarTintColor;

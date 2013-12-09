@@ -7,26 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TBMapViewController.h"
-#import "TBListViewController.h"
-#import "TBTimerViewController.h"
-#import "TBSettingsViewController.h"
 
 @interface TBNavigationController : UINavigationController
-
-@property (strong, readonly) UITabBar* tabBar;
-@property (strong, readonly) TBListViewController*     nearByViewController;
-@property (strong, readonly) TBListViewController*     favoritesViewController;
-@property (strong, readonly) TBMapViewController*      mapViewController;
-@property (strong, readonly) TBTimerViewController*    timerViewController;
-@property (strong, readonly) TBSettingsViewController* settingsViewController;
-
-- (UIBarButtonItem*)sideMenuBarButtonItem;
-
 @end
 
-@interface UIViewController (TB)
-
-- (TBNavigationController*)navigation;
-
-@end
