@@ -7,8 +7,6 @@
 //
 
 #import "TBStationActivityViewController.h"
-#import "TBToggleFavoritesActivity.h"
-#import "JNJGoogleMapsActivity.h"
 
 @interface TBStationActivityViewController ()
 
@@ -17,14 +15,6 @@
 @implementation TBStationActivityViewController
 
 - (id)initWithStation:(TBStation*)station {
-    TBToggleFavoritesActivity* toggleFavorites = [[TBToggleFavoritesActivity alloc] initWithStation:station];
-    NSString* sourceAddress = @"";
-    NSString* destAddress = [NSString stringWithFormat:@"%g,%g", station.coordinate.latitude, station.coordinate.longitude];
-    JNJGoogleMapsActivity* navigate = [[JNJGoogleMapsActivity alloc] initWithSourceAddress:sourceAddress destinationAddress:destAddress];
-    navigate.latitude = @(station.coordinate.latitude);
-    navigate.longitude = @(station.coordinate.longitude);
-    navigate.directionMode = JNJGoogleMapsDirectionMode.walking;
-    
     // create share string
     NSMutableString* shareString = [[NSMutableString alloc] init];
     [shareString appendFormat:NSLocalizedString(@"Tel-o-Fun Station: %@", nil), station.stationName];
@@ -39,7 +29,7 @@
     [shareString appendString:googleMapsLink];
     
     NSArray* activityItems = @[ shareString ];
-    NSArray* applicationActivities = @[ toggleFavorites, navigate ];
+    NSArray* applicationActivities = @[ ];
     self = [super initWithActivityItems:activityItems applicationActivities:applicationActivities];
     if (self) {
         self.excludedActivityTypes = @[ UIActivityTypePostToFacebook,

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87874FC9433042AAADAE0F63 /* libPods.a */; };
 		F40C943D1858A80300B64908 /* TBStationDetailsDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */; };
+		F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */; };
 		F4141EBA1855E67600918F71 /* TBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4141EB91855E67600918F71 /* TBMainViewController.m */; };
 		F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F421E305180D8BB100213902 /* TBStationAnnotationView.m */; };
 		F42E60AE17F11A2C0099A1D0 /* TBListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60AD17F11A2C0099A1D0 /* TBListViewController.m */; };
@@ -49,7 +50,6 @@
 		F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02618514054003BD3A6 /* TBFavoritesViewController.m */; };
 		F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */; };
 		F498A02F1851A866003BD3A6 /* TBStationActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02E1851A866003BD3A6 /* TBStationActivityViewController.m */; };
-		F498A0731851B06F003BD3A6 /* TBToggleFavoritesActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A0721851B06F003BD3A6 /* TBToggleFavoritesActivity.m */; };
 		F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */; };
 		F498A0AC1851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */; };
 		F498A0AD1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0AA1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png */; };
@@ -75,6 +75,8 @@
 		87874FC9433042AAADAE0F63 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40C943B1858A80300B64908 /* TBStationDetailsDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsDrawer.h; sourceTree = "<group>"; };
 		F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsDrawer.m; sourceTree = "<group>"; };
+		F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGoogleMapsRouting.h; sourceTree = "<group>"; };
+		F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGoogleMapsRouting.m; sourceTree = "<group>"; };
 		F4141EB81855E67600918F71 /* TBMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMainViewController.h; sourceTree = "<group>"; };
 		F4141EB91855E67600918F71 /* TBMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMainViewController.m; sourceTree = "<group>"; };
 		F421E304180D8BB100213902 /* TBStationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationAnnotationView.h; sourceTree = "<group>"; };
@@ -144,8 +146,6 @@
 		F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTransparentToolbar.m; sourceTree = "<group>"; };
 		F498A02D1851A866003BD3A6 /* TBStationActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationActivityViewController.h; sourceTree = "<group>"; };
 		F498A02E1851A866003BD3A6 /* TBStationActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationActivityViewController.m; sourceTree = "<group>"; };
-		F498A0711851B06F003BD3A6 /* TBToggleFavoritesActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBToggleFavoritesActivity.h; sourceTree = "<group>"; };
-		F498A0721851B06F003BD3A6 /* TBToggleFavoritesActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBToggleFavoritesActivity.m; sourceTree = "<group>"; };
 		F498A0A71851B44A003BD3A6 /* JNJGoogleMapsActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNJGoogleMapsActivity.h; sourceTree = "<group>"; };
 		F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNJGoogleMapsActivity.m; sourceTree = "<group>"; };
 		F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JNJGoogleMapsActivityMask.png; sourceTree = "<group>"; };
@@ -317,6 +317,8 @@
 				F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */,
 				F437D5CA1858896F00E1381B /* TBGradientBackgroundView.h */,
 				F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */,
+				F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */,
+				F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -347,8 +349,6 @@
 				F421E305180D8BB100213902 /* TBStationAnnotationView.m */,
 				F498A02D1851A866003BD3A6 /* TBStationActivityViewController.h */,
 				F498A02E1851A866003BD3A6 /* TBStationActivityViewController.m */,
-				F498A0711851B06F003BD3A6 /* TBToggleFavoritesActivity.h */,
-				F498A0721851B06F003BD3A6 /* TBToggleFavoritesActivity.m */,
 				F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */,
 				F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */,
 				F40C943B1858A80300B64908 /* TBStationDetailsDrawer.h */,
@@ -572,7 +572,6 @@
 				F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */,
 				F42E60BB17F123590099A1D0 /* Utils.m in Sources */,
 				F42E60AE17F11A2C0099A1D0 /* TBListViewController.m in Sources */,
-				F498A0731851B06F003BD3A6 /* TBToggleFavoritesActivity.m in Sources */,
 				F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */,
 				F47B5CC017F1293600D88614 /* TBFavorites.m in Sources */,
 				F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */,
@@ -581,6 +580,7 @@
 				F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */,
 				F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */,
 				F437D5C91858867900E1381B /* TBDrawerView.m in Sources */,
+				F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

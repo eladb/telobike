@@ -23,15 +23,19 @@
 #import "TBStationAnnotationView.h"
 #import "TBStationActivityViewController.h"
 #import "TBAvailabilityView.h"
+#import "TBFavorites.h"
+#import "TBGoogleMapsRouting.h"
 
 @interface TBMapViewController () <MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView* mapView;
 @property (strong, nonatomic) IBOutlet UIToolbar* bottomToolbar;
 
+// station details
 @property (strong, nonatomic) IBOutlet TBDrawerView* stationDetails;
 @property (strong, nonatomic) IBOutlet TBAvailabilityView* stationAvailabilityView;
 @property (strong, nonatomic) IBOutlet UILabel* availabilityLabel;
+@property (strong, nonatomic) IBOutlet UIButton* toggleStationFavoriteButton;
 
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
@@ -248,39 +252,7 @@
         annotationRegion = region;
         annotationTitle = self.selectedStation.stationName;
         
-        self.stationAvailabilityView.station = _selectedStation;
-        
-        NSString* labelText = nil;
-        switch (_selectedStation.state) {
-            case StationFull:
-                labelText = NSLocalizedString(@"No parking", nil);
-                break;
-                
-            case StationEmpty:
-                labelText = NSLocalizedString(@"No bicycles", nil);
-                break;
-                
-            case StationMarginal:
-                labelText = NSLocalizedString(@"Almost empty", nil);
-                break;
-                
-            case StationMarginalFull:
-                labelText = NSLocalizedString(@"Almost full", nil);
-                break;
-            
-            case StationInactive:
-                labelText = NSLocalizedString(@"Not operational", nil);
-                break;
-            
-            case StationUnknown:
-            case StationOK:
-            default:
-                break;
-        }
-        
-        self.availabilityLabel.hidden = !labelText;
-        self.availabilityLabel.text = labelText;
-        self.availabilityLabel.textColor = self.selectedStation.indicatorColor;
+        [self updateStationDetails];
     }
     
     if ([view.annotation isKindOfClass:[TBPlacemarkAnnotation class]]) {
@@ -308,7 +280,66 @@
 
 #pragma mark - Station details
 
-- (IBAction)stationDetailsActionClicked:(id)sender {
+- (void)updateStationDetails {
+    self.stationAvailabilityView.station = _selectedStation;
+    
+    NSString* labelText = nil;
+    switch (_selectedStation.state) {
+        case StationFull:
+            labelText = NSLocalizedString(@"No parking", nil);
+            break;
+            
+        case StationEmpty:
+            labelText = NSLocalizedString(@"No bicycles", nil);
+            break;
+            
+        case StationMarginal:
+            labelText = NSLocalizedString(@"Almost empty", nil);
+            break;
+            
+        case StationMarginalFull:
+            labelText = NSLocalizedString(@"Almost full", nil);
+            break;
+            
+        case StationInactive:
+            labelText = NSLocalizedString(@"Not operational", nil);
+            break;
+            
+        case StationUnknown:
+        case StationOK:
+        default:
+            break;
+    }
+    
+    self.availabilityLabel.hidden = !labelText;
+    self.availabilityLabel.text = labelText;
+    self.availabilityLabel.textColor = self.selectedStation.indicatorColor;
+    
+    // set favorite
+    UIImage* favoriteButtonImage = self.selectedStation.isFavorite ?
+        [UIImage imageNamed:@"station-favorite-selected"] :
+        [UIImage imageNamed:@"station-favorite-unselected"];
+    
+    [self.toggleStationFavoriteButton setImage:favoriteButtonImage forState:UIControlStateNormal];
+}
+
+- (IBAction)toggleStationFavorite:(id)sender {
+    [self.selectedStation setFavorite:!self.selectedStation.isFavorite];
+    [self updateStationDetails];
+}
+
+- (IBAction)sendStationReport:(id)sender {
+    
+}
+
+- (IBAction)navigateToStation:(id)sender {
+    NSString* dest = [NSString stringWithFormat:@"%g,%g", self.selectedStation.coordinate.latitude, self.selectedStation.coordinate.longitude];
+    if (![TBGoogleMapsRouting routeFromAddress:@"" toAddress:dest]) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Google Maps is not installed", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    }
+}
+
+- (IBAction)shareStation:(id)sender {
     TBStationActivityViewController* vc = [[TBStationActivityViewController alloc] initWithStation:self.selectedStation];
     vc.completionHandler = ^(NSString* activityName, BOOL completed){
         NSLog(@"completed with %@", activityName);

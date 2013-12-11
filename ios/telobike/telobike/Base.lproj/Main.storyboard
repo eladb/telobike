@@ -227,11 +227,14 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agz-u5-DaT">
-                                        <rect key="frame" x="45" y="48" width="22" height="22"/>
+                                        <rect key="frame" x="44" y="48" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="station-navigation">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="navigateToStation:" destination="QUy-BD-bpt" eventType="touchUpInside" id="sgD-AE-GbM"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGy-c8-u5S">
                                         <rect key="frame" x="20" y="47" width="22" height="22"/>
@@ -239,20 +242,29 @@
                                         <state key="normal" image="station-favorite-unselected">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="toggleStationFavorite:" destination="QUy-BD-bpt" eventType="touchUpInside" id="5bA-DT-7KQ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFf-Ew-1GQ">
-                                        <rect key="frame" x="70" y="48" width="22" height="22"/>
+                                        <rect key="frame" x="69" y="48" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="station-report">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendStationReport:" destination="QUy-BD-bpt" eventType="touchUpInside" id="jHg-MQ-pCa"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQh-xd-Jh4">
-                                        <rect key="frame" x="96" y="47" width="22" height="22"/>
+                                        <rect key="frame" x="95" y="47" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="station-share">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="shareStation:" destination="QUy-BD-bpt" eventType="touchUpInside" id="MZf-AX-6yQ"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No available bikes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7W-Ai-ID6">
                                         <rect key="frame" x="126" y="48" width="172" height="21"/>
@@ -285,6 +297,7 @@
                         <outlet property="mapView" destination="NvQ-L0-EqX" id="lih-ea-PSp"/>
                         <outlet property="stationAvailabilityView" destination="ReE-oF-ZUd" id="vQZ-Fa-8a8"/>
                         <outlet property="stationDetails" destination="9fR-hE-Glj" id="Xz7-Hr-ANq"/>
+                        <outlet property="toggleStationFavoriteButton" destination="GGy-c8-u5S" id="C7V-ej-i0x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
