@@ -18,23 +18,49 @@
 #import "UIColor+Style.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
-#import "TBStationDetailsView.h"
+#import "TBDrawerView.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
 #import "TBStationActivityViewController.h"
+#import "TBAvailabilityView.h"
 
-@interface TBMapViewController () <MKMapViewDelegate, TBStationDetailsViewDelegate>
+@interface TBMapViewController () <MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView* mapView;
-@property (strong, nonatomic) IBOutlet UIView*    stationDetailsContainerView;
 @property (strong, nonatomic) IBOutlet UIToolbar* bottomToolbar;
+
+@property (strong, nonatomic) IBOutlet TBDrawerView* stationDetails;
+@property (strong, nonatomic) IBOutlet TBAvailabilityView* stationAvailabilityView;
 
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
-@property (strong, nonatomic) TBStationDetailsView* stationDetails;
 @property (strong, nonatomic) KMLParser* kmlParser;
 
 @property (assign, nonatomic) BOOL regionChangingForSelection;
+
+@end
+
+@interface UIView (FlatSubviews)
+
+- (NSArray*)allSubviewsOfClass:(Class)class;
+
+@end
+
+@implementation UIView (FlatSubviews)
+
+- (NSArray *)allSubviewsOfClass:(Class)class {
+    NSMutableArray* all = [[NSMutableArray alloc] init];
+    if ([self isKindOfClass:class]) {
+        [all addObject:self];
+    }
+    
+    for (UIView* subview in self.subviews) {
+        NSArray* subviews = [subview allSubviewsOfClass:class];
+        [all addObjectsFromArray:subviews];
+    }
+    
+    return all;
+}
 
 @end
 
@@ -65,12 +91,6 @@
         [self.mapView setRegion:region animated:NO];
     }];
     
-    // station details
-    self.stationDetails = [[NSBundle mainBundle] loadViewFromNibForClass:[TBStationDetailsView class]];
-    self.stationDetails.stationDetailsDelegate = self;
-    self.stationDetailsContainerView.backgroundColor = [UIColor detailsBackgroundColor];
-    [self.stationDetailsContainerView addSubview:self.stationDetails];
-    
     [self loadRoutesFromKML];
   
     // map view
@@ -79,6 +99,33 @@
     self.mapView.showsUserLocation = YES;
     
     [self reselectAnnotation];
+    
+//    NSArray* imageViews = [self.stationDetails allSubviewsOfClass:[UIImageView class]];
+//    NSLog(@"%@", imageViews);
+//    for (UIImageView* imageView in imageViews) {
+//        CGRect frame = imageView.frame;
+//        frame.size.width = 10.0f;
+//        frame.size.height = 10.0f;
+//        imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        imageView.frame = frame;
+//    }
+//
+//    for (UIView* sv in self.stationDetails.subviews) {
+//        if ([sv isKindOfClass:[UIToolbar class]]) {
+//            UIToolbar* tb = (UIToolbar*)sv;
+//            CGRect f = tb.frame;
+//            f.size.height = 10.0f;
+//            tb.frame = f;
+//        }
+//    }
+
+//    self.stationDetails.layer.cornerRadius = 10.0f;
+//    self.stationDetails.layer.shadowOpacity = 0.6f;
+//    self.stationDetails.layer.shadowColor = [[UIColor blackColor] CGColor];
+//    self.stationDetails.layer.shadowOffset = CGSizeMake(0, 10);
+//    self.stationDetails.layer.borderColor = [[UIColor colorWithWhite:0.0f alpha:0.3f] CGColor];
+//    self.stationDetails.layer.borderWidth = 1.0f;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,7 +149,8 @@
     
     static BOOL oneOff = YES;
     if (oneOff || !self.selectedStation) {
-        [self hideStationDetailsAnimated:NO];
+        [self.stationDetails closeAnimated:NO];
+//        [self hideStationDetailsAnimated:NO];
         oneOff = NO;
     }
 }
@@ -136,6 +184,7 @@
             view = v;
             v.pinColor = MKPinAnnotationColorRed;
             v.animatesDrop = YES;
+            v.canShowCallout = YES;
         }
         view.annotation = annotation;
         return view;
@@ -178,7 +227,8 @@
 
     // hide details of previous station
     if (_selectedStation) {
-        [self hideStationDetailsAnimated:YES];
+        [self.stationDetails closeAnimated:YES];
+//        [self hideStationDetailsAnimated:YES];
     }
     
     _selectedStation = selectedStation;
@@ -191,7 +241,8 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    [self hideStationDetailsAnimated:YES];
+    [self.stationDetails closeAnimated:YES];
+//    [self hideStationDetailsAnimated:YES];
     [self updateTitle:nil];
 }
 
@@ -202,8 +253,9 @@
     if ([view.annotation isKindOfClass:[TBStation class]]) {
         _selectedStation = (TBStation*)view.annotation;
 
-        self.stationDetails.station = (TBStation*)view.annotation;
-        [self showStationDetailsAnimated:YES];
+        [self.stationDetails openAnimated:YES];
+//        self.stationDetails.station = (TBStation*)view.annotation;
+//        [self showStationDetailsAnimated:YES];
         
         MKCoordinateRegion region;
         region.span = MKCoordinateSpanMake(0.004, 0.004);
@@ -211,6 +263,8 @@
         
         annotationRegion = region;
         annotationTitle = self.selectedStation.stationName;
+        
+        self.stationAvailabilityView.station = _selectedStation;
     }
     
     if ([view.annotation isKindOfClass:[TBPlacemarkAnnotation class]]) {
@@ -238,40 +292,8 @@
 
 #pragma mark - Station details
 
-- (void)hideStationDetailsAnimated:(BOOL)animated {
-    CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
-    stationDetailsFrame.origin.y = -self.stationDetailsContainerView.frame.size.height;
-    [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
-
-//    self.navigationItem.prompt = nil;
-}
-
-- (void)showStationDetailsAnimated:(BOOL)animated {
-    CGRect stationDetailsFrame = self.stationDetailsContainerView.frame;
-    stationDetailsFrame.origin.y = 64.0f;
-    [self changeStationDetailsFrame:stationDetailsFrame animated:animated];
-    
-//    self.navigationItem.prompt = self.selectedStation.stationName;
-}
-
-- (void)changeStationDetailsFrame:(CGRect)newFrame animated:(BOOL)animated {
-    
-    if (!self.parentViewController) {
-        animated = NO;
-    }
-    
-    if (animated) {
-        [UIView animateWithDuration:0.25f animations:^{
-            self.stationDetailsContainerView.frame = newFrame;
-        }];
-    }
-    else {
-        self.stationDetailsContainerView.frame = newFrame;
-    }
-}
-
-- (void)stationDetailsActionClicked:(TBStationDetailsView *)detailsView {
-    TBStationActivityViewController* vc = [[TBStationActivityViewController alloc] initWithStation:detailsView.station];
+- (IBAction)stationDetailsActionClicked:(id)sender {
+    TBStationActivityViewController* vc = [[TBStationActivityViewController alloc] initWithStation:self.selectedStation];
     vc.completionHandler = ^(NSString* activityName, BOOL completed){
         NSLog(@"completed with %@", activityName);
     };
@@ -300,20 +322,19 @@
 
 #pragma mark - Placemark search result
 
-- (void)setSelectedPlacemark:(TBPlacemarkAnnotation *)placemarkAnnotation {
-    if (placemarkAnnotation) {
-        self.selectedStation = nil;
-    }
+- (void)setSelectedPlacemark:(TBPlacemarkAnnotation *)selectedPlacemark {
 
-    // only remove previous placemark if there is a new one to select
-    // otherwise, we just want to deselect it.
-    if (placemarkAnnotation) {
+    if (selectedPlacemark) {
+        self.selectedStation = nil;
+
+        // only remove previous placemark if there is a new one to select
+        // otherwise, we just want to deselect it.
         [self.mapView removeAnnotation:_selectedPlacemark];
+        [self.mapView addAnnotation:selectedPlacemark];
     }
     
-    [self.mapView addAnnotation:placemarkAnnotation];
-    _selectedPlacemark = placemarkAnnotation;
-    [self.mapView selectAnnotation:placemarkAnnotation animated:YES];
+    _selectedPlacemark = selectedPlacemark;
+    [self.mapView selectAnnotation:selectedPlacemark animated:YES];
 }
 
 @end

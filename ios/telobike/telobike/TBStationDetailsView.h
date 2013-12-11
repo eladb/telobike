@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "TBStation.h"
+#import "TBDrawerView.h"
 
 @protocol TBStationDetailsViewDelegate;
 
-@interface TBStationDetailsView : UIView
+@interface TBStationDetailsView : TBDrawerView
 
 @property (assign, nonatomic) id<TBStationDetailsViewDelegate> stationDetailsDelegate;
 @property (strong, nonatomic) TBStation* station;

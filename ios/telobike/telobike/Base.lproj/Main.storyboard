@@ -131,26 +131,6 @@
             </objects>
             <point key="canvasLocation" x="1632" y="-138"/>
         </scene>
-        <!--Timer View Controller - Timer-->
-        <scene sceneID="nKY-fQ-evo">
-            <objects>
-                <viewController storyboardIdentifier="timer" title="Timer" id="GSp-ay-NrC" customClass="TBTimerViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="P3j-ow-PXN"/>
-                        <viewControllerLayoutGuide type="bottom" id="G0o-Qy-SnL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hLg-xb-CqX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Timer" image="Timer" id="UVm-AZ-4qW"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hGT-Sg-8VO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1344" y="624"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="hvR-pt-zfM">
             <objects>
@@ -233,12 +213,58 @@
                                     <outlet property="delegate" destination="QUy-BD-bpt" id="xVq-Ah-f9a"/>
                                 </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-hE-Glj" userLabel="stationDetailsContainer">
-                                <rect key="frame" x="0.0" y="64" width="320" height="112"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-hE-Glj" userLabel="stationDetails" customClass="TBDrawerView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="89"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="112" id="CJb-4g-xWK"/>
-                                </constraints>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VYi-z5-edV" userLabel="topFill">
+                                        <rect key="frame" x="0.0" y="-60" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPd-I0-Z0n" customClass="TBTransparentToolbar">
+                                        <rect key="frame" x="0.0" y="45" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <items>
+                                            <barButtonItem image="Favorites" id="EQB-T4-CwJ">
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </barButtonItem>
+                                            <barButtonItem image="GoogleMaps" id="CaF-Re-rfH">
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </barButtonItem>
+                                            <barButtonItem image="Headset" id="miz-c5-XpN">
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="Ljw-zC-tpq"/>
+                                            <barButtonItem systemItem="action" id="YUz-QF-RQZ">
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aat-MU-oZE" userLabel="middleLine">
+                                        <rect key="frame" x="6" y="44" width="308" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="0.85901626275510201" green="0.85901626275510201" blue="0.85901626275510201" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fzV-Df-4c0" userLabel="middleLine">
+                                        <rect key="frame" x="6" y="45" width="308" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X3k-tD-QPE" userLabel="bottomLine">
+                                        <rect key="frame" x="0.0" y="88" width="320" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="0.76905293370000005" green="0.76905293370000005" blue="0.76905293370000005" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView">
+                                        <rect key="frame" x="20" y="16" width="280" height="14"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Jo-kIO" customClass="TBTransparentToolbar">
                                 <rect key="frame" x="0.0" y="473" width="320" height="44"/>
@@ -249,11 +275,6 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="9fR-hE-Glj" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" id="TC8-3p-7Ek"/>
-                            <constraint firstAttribute="trailing" secondItem="9fR-hE-Glj" secondAttribute="trailing" id="Vr1-5p-Qjo"/>
-                            <constraint firstItem="9fR-hE-Glj" firstAttribute="top" secondItem="gMD-aP-Fq6" secondAttribute="top" constant="64" id="aPK-Jh-EDW"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="TabBar-Map" id="Z7h-1E-pvt"/>
                     <toolbarItems/>
@@ -263,7 +284,8 @@
                     <connections>
                         <outlet property="bottomToolbar" destination="x7O-Jo-kIO" id="w3x-I4-mMi"/>
                         <outlet property="mapView" destination="NvQ-L0-EqX" id="lih-ea-PSp"/>
-                        <outlet property="stationDetailsContainerView" destination="9fR-hE-Glj" id="pjm-q0-xqM"/>
+                        <outlet property="stationAvailabilityView" destination="ReE-oF-ZUd" id="vQZ-Fa-8a8"/>
+                        <outlet property="stationDetails" destination="9fR-hE-Glj" id="Xz7-Hr-ANq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
@@ -301,10 +323,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Favorites" width="27" height="26"/>
+        <image name="GoogleMaps" width="19" height="31"/>
+        <image name="Headset" width="26" height="28"/>
         <image name="TabBar-Favorites" width="25" height="24"/>
         <image name="TabBar-Map" width="25" height="25"/>
         <image name="TabBar-NearMe" width="24" height="25"/>
-        <image name="Timer" width="27" height="27"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

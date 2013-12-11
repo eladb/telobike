@@ -12,6 +12,7 @@
 
 - (void)setStation:(TBStation *)station {
     _station = station;
+    self.backgroundColor = [UIColor clearColor];
     [self setNeedsDisplay];
 }
 
@@ -25,14 +26,14 @@
     CGFloat spacing = 3.5f;
     long totalSlots = self.station.availSpace + self.station.availBike;
 //    CGFloat slotWidth = 8.0f;//;rect.size.width / totalSlots - spacing;
-    CGFloat slotWidth = 9.0f;//;rect.size.width / totalSlots - spacing;
+    CGFloat slotSize = rect.size.height - spacing;//9.0f;//;rect.size.width / totalSlots - spacing;
     CGFloat startX = 1.0f;
-    CGFloat startY = rect.size.height / 2.0f - slotWidth / 2.0f + 1.0f;
+    CGFloat startY = rect.size.height / 2.0f - slotSize / 2.0f + 1.0f;
     CGFloat x = startX;
     CGFloat y = startY;
     
     
-    CGFloat maxSlots = rect.size.width / (slotWidth + spacing);
+    CGFloat maxSlots = rect.size.width / (slotSize + spacing);
 
     NSInteger availSpace = self.station.availSpace;
     NSInteger availBike = self.station.availBike;
@@ -76,15 +77,15 @@
             CGContextSetFillColorWithColor(ctx, [[UIColor clearColor] CGColor]);
         }
 
-        CGRect slotRect = CGRectMake(x, y, slotWidth, slotWidth);
+        CGRect slotRect = CGRectMake(x, y, slotSize, slotSize);
         UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:slotRect.size.width / 2.0f];
         [path fill];
         [path stroke];
 
-        x += slotWidth + spacing;
-        if (x + slotWidth > rect.size.width) {
+        x += slotSize + spacing;
+        if (x + slotSize > rect.size.width) {
             x = startX;
-            y += slotWidth + spacing;
+            y += slotSize + spacing;
         }
     }
 }
