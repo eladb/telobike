@@ -25,8 +25,9 @@
 #import "TBAvailabilityView.h"
 #import "TBFavorites.h"
 #import "TBGoogleMapsRouting.h"
+#import "TBFeedbackMailComposeViewController.h"
 
-@interface TBMapViewController () <MKMapViewDelegate>
+@interface TBMapViewController () <MKMapViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView* mapView;
 @property (strong, nonatomic) IBOutlet UIToolbar* bottomToolbar;
@@ -329,8 +330,25 @@
 }
 
 - (IBAction)sendStationReport:(id)sender {
+    TBFeedbackMailComposeViewController* vc = [[TBFeedbackMailComposeViewController alloc] initWithFeedbackOption:TBFeedbackActionSheetService];
+    NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Problem in station %@", nil), self.selectedStation.sid];
+    vc.mailComposeDelegate = self;
+    [vc setSubject:subject];
     
+    NSString* body = [NSString stringWithFormat:NSLocalizedString(@"Please describe the problem:\n\n\n=====================\nStation ID: %@\nName: %@\nAddress: %@", nil),
+                      self.selectedStation.sid,
+                      self.selectedStation.stationName,
+                      self.selectedStation.address ? self.selectedStation.address : NSLocalizedString(@"N/A", nil)];
+    
+    [vc setMessageBody:body isHTML:NO];
+    
+    [self presentViewController:vc animated:YES completion:nil];
 }
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 - (IBAction)navigateToStation:(id)sender {
     NSString* dest = [NSString stringWithFormat:@"%g,%g", self.selectedStation.coordinate.latitude, self.selectedStation.coordinate.longitude];
