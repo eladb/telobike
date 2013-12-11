@@ -12,5 +12,6 @@
 @interface TBAvailabilityView : UIView
 
 @property (strong, nonatomic) TBStation* station;
+@property (assign, nonatomic) BOOL alignCenter;
 
 @end

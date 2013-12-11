@@ -31,6 +31,7 @@
 
 @property (strong, nonatomic) IBOutlet TBDrawerView* stationDetails;
 @property (strong, nonatomic) IBOutlet TBAvailabilityView* stationAvailabilityView;
+@property (strong, nonatomic) IBOutlet UILabel* availabilityLabel;
 
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
@@ -100,25 +101,8 @@
     
     [self reselectAnnotation];
     
-//    NSArray* imageViews = [self.stationDetails allSubviewsOfClass:[UIImageView class]];
-//    NSLog(@"%@", imageViews);
-//    for (UIImageView* imageView in imageViews) {
-//        CGRect frame = imageView.frame;
-//        frame.size.width = 10.0f;
-//        frame.size.height = 10.0f;
-//        imageView.contentMode = UIViewContentModeScaleAspectFit;
-//        imageView.frame = frame;
-//    }
-//
-//    for (UIView* sv in self.stationDetails.subviews) {
-//        if ([sv isKindOfClass:[UIToolbar class]]) {
-//            UIToolbar* tb = (UIToolbar*)sv;
-//            CGRect f = tb.frame;
-//            f.size.height = 10.0f;
-//            tb.frame = f;
-//        }
-//    }
 
+    self.stationAvailabilityView.alignCenter = NO;
 //    self.stationDetails.layer.cornerRadius = 10.0f;
 //    self.stationDetails.layer.shadowOpacity = 0.6f;
 //    self.stationDetails.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -265,6 +249,38 @@
         annotationTitle = self.selectedStation.stationName;
         
         self.stationAvailabilityView.station = _selectedStation;
+        
+        NSString* labelText = nil;
+        switch (_selectedStation.state) {
+            case StationFull:
+                labelText = NSLocalizedString(@"No parking", nil);
+                break;
+                
+            case StationEmpty:
+                labelText = NSLocalizedString(@"No bicycles", nil);
+                break;
+                
+            case StationMarginal:
+                labelText = NSLocalizedString(@"Almost empty", nil);
+                break;
+                
+            case StationMarginalFull:
+                labelText = NSLocalizedString(@"Almost full", nil);
+                break;
+            
+            case StationInactive:
+                labelText = NSLocalizedString(@"Not operational", nil);
+                break;
+            
+            case StationUnknown:
+            case StationOK:
+            default:
+                break;
+        }
+        
+        self.availabilityLabel.hidden = !labelText;
+        self.availabilityLabel.text = labelText;
+        self.availabilityLabel.textColor = self.selectedStation.indicatorColor;
     }
     
     if ([view.annotation isKindOfClass:[TBPlacemarkAnnotation class]]) {

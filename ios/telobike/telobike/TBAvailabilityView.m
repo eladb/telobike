@@ -25,7 +25,6 @@
 
     CGFloat spacing = 3.5f;
     long totalSlots = self.station.availSpace + self.station.availBike;
-//    CGFloat slotWidth = 8.0f;//;rect.size.width / totalSlots - spacing;
     CGFloat slotSize = rect.size.height - spacing;//9.0f;//;rect.size.width / totalSlots - spacing;
     CGFloat startX = 1.0f;
     CGFloat startY = rect.size.height / 2.0f - slotSize / 2.0f + 1.0f;
@@ -60,6 +59,10 @@
         }
         
         totalSlots = maxSlots;
+    }
+
+    if (self.alignCenter) {
+        x = rect.size.width / 2.0 - (totalSlots * (slotSize + spacing)) / 2.0;
     }
     
     UIColor* fullSlotColor = self.station.fullSlotColor;
