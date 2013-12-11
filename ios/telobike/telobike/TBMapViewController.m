@@ -107,11 +107,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self refresh:nil];
-}
-
 #pragma mark - Annotations
 
 - (void)refresh:(id)sender {

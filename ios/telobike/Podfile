@@ -2,7 +2,6 @@ platform :ios, '6.0'
 
 pod 'AFNetworking'
 pod 'SBJson'
-pod 'InAppSettingsKit'
 pod 'Appirater'
 pod 'GoogleAnalytics-iOS-SDK'
 pod 'RESideMenu'
