@@ -36,7 +36,7 @@
 @property (strong, nonatomic) IBOutlet TBDrawerView* stationDetails;
 @property (strong, nonatomic) IBOutlet TBAvailabilityView* stationAvailabilityView;
 @property (strong, nonatomic) IBOutlet UILabel* availabilityLabel;
-@property (strong, nonatomic) IBOutlet UIButton* toggleStationFavoriteButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem* toggleStationFavoriteButton;
 
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
@@ -321,7 +321,7 @@
         [UIImage imageNamed:@"station-favorite-selected"] :
         [UIImage imageNamed:@"station-favorite-unselected"];
     
-    [self.toggleStationFavoriteButton setImage:favoriteButtonImage forState:UIControlStateNormal];
+    [self.toggleStationFavoriteButton setImage:favoriteButtonImage];
 }
 
 - (IBAction)toggleStationFavorite:(id)sender {
