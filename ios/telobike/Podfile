@@ -4,7 +4,7 @@ pod 'AFNetworking'
 pod 'SBJson'
 pod 'Appirater'
 pod 'GoogleAnalytics-iOS-SDK'
-pod 'RESideMenu'
 pod 'SVGeocoder'
 pod 'InAppSettings'
+pod 'TTCounterLabel'
 

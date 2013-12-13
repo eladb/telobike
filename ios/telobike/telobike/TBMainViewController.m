@@ -119,11 +119,6 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)showSideMenu:(id)sender {
-    TBAppDelegate* app = (TBAppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.sideMenuController presentMenuViewController];
-}
-
 #pragma mark - Tab Bar
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
