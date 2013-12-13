@@ -9,6 +9,7 @@
 @import MapKit;
 
 #import <SVGeocoder.h>
+#import <InAppSettings.h>
 
 #import "TBMainViewController.h"
 #import "TBNavigationController.h"
@@ -67,7 +68,8 @@
     
     // global actions
     self.navigation.delegate = self;
-    self.sideMenuBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hamburger"] style:UIBarButtonItemStyleBordered target:self action:@selector(showSideMenu:)];
+//    self.sideMenuBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hamburger"] style:UIBarButtonItemStyleBordered target:self action:@selector(showSideMenu:)];
+    self.sideMenuBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hamburger"] style:UIBarButtonItemStyleBordered target:self action:@selector(showSettings:)];
     self.searchBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     
     // search
@@ -110,6 +112,11 @@
 
 - (void)showSearch:(id)sender {
     [self.searchDisplayController setActive:YES animated:YES];
+}
+
+- (void)showSettings:(id)sender {
+    InAppSettingsModalViewController* vc = [[InAppSettingsModalViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)showSideMenu:(id)sender {

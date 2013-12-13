@@ -10,6 +10,7 @@
 		51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87874FC9433042AAADAE0F63 /* libPods.a */; };
 		F40C943D1858A80300B64908 /* TBStationDetailsDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */; };
 		F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */; };
+		F40C94501858DA6700B64908 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F40C944F1858DA6700B64908 /* Settings.bundle */; };
 		F4141EBA1855E67600918F71 /* TBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4141EB91855E67600918F71 /* TBMainViewController.m */; };
 		F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F421E305180D8BB100213902 /* TBStationAnnotationView.m */; };
 		F42E60AE17F11A2C0099A1D0 /* TBListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60AD17F11A2C0099A1D0 /* TBListViewController.m */; };
@@ -77,6 +78,7 @@
 		F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsDrawer.m; sourceTree = "<group>"; };
 		F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGoogleMapsRouting.h; sourceTree = "<group>"; };
 		F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGoogleMapsRouting.m; sourceTree = "<group>"; };
+		F40C944F1858DA6700B64908 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F4141EB81855E67600918F71 /* TBMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMainViewController.h; sourceTree = "<group>"; };
 		F4141EB91855E67600918F71 /* TBMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMainViewController.m; sourceTree = "<group>"; };
 		F421E304180D8BB100213902 /* TBStationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationAnnotationView.h; sourceTree = "<group>"; };
@@ -187,13 +189,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F4141EB71855E66A00918F71 /* search */ = {
+		F40C94411858D51600B64908 /* settings */ = {
 			isa = PBXGroup;
 			children = (
-				F4141EB81855E67600918F71 /* TBMainViewController.h */,
-				F4141EB91855E67600918F71 /* TBMainViewController.m */,
+				F40C944F1858DA6700B64908 /* Settings.bundle */,
 			);
-			name = search;
+			name = settings;
 			sourceTree = "<group>";
 		};
 		F470EBDA17F11589006FD464 = {
@@ -242,9 +243,11 @@
 				F470EBF817F11589006FD464 /* Main.storyboard */,
 				F470EBF517F11589006FD464 /* TBAppDelegate.h */,
 				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
+				F4141EB81855E67600918F71 /* TBMainViewController.h */,
+				F4141EB91855E67600918F71 /* TBMainViewController.m */,
 				F47B5CD617F6B37F00D88614 /* TBNavigationController.h */,
 				F47B5CD717F6B37F00D88614 /* TBNavigationController.m */,
-				F4141EB71855E66A00918F71 /* search */,
+				F40C94411858D51600B64908 /* settings */,
 				F47B5CD117F668B000D88614 /* list */,
 				F498A02818514059003BD3A6 /* favorites */,
 				F47B5CD217F668BE00D88614 /* map */,
@@ -493,6 +496,7 @@
 			files = (
 				F498A0AC1851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png in Resources */,
 				F498A0AD1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png in Resources */,
+				F40C94501858DA6700B64908 /* Settings.bundle in Resources */,
 				F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */,
 				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
 				F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */,
