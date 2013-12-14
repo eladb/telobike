@@ -16,6 +16,7 @@ setTimeout(function() {
   console.log(overrides_db.entries);
 }, 5000);
 
+server.use(express.logger({ format: 'dev' }));
 server.use(express.methodOverride());
 server.use(cors());
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
@@ -28,7 +29,7 @@ function read_stations(callback) {
   logule.trace('reading station information from tel-o-fun');
 
   return telofun_api(function(err, updated_stations) {
-    if (err) {
+    if (err || !updated_stations) {
       console.error('error: unable to read telofun stations:', err);
       return callback(err);
     }
