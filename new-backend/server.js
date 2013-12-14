@@ -16,7 +16,7 @@ setTimeout(function() {
   console.log(overrides_db.entries);
 }, 5000);
 
-server.use(express.logger({ format: 'dev' }));
+server.use(express.logger());
 server.use(express.methodOverride());
 server.use(cors());
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
