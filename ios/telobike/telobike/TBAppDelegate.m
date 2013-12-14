@@ -8,10 +8,6 @@
 
 #import "TBAppDelegate.h"
 
-@interface TBAppDelegate ()
-
-@end
-
 @implementation TBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

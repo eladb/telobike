@@ -5,6 +5,6 @@ pod 'SBJson'
 pod 'Appirater'
 pod 'GoogleAnalytics-iOS-SDK'
 pod 'SVGeocoder'
-pod 'InAppSettings'
+pod 'InAppSettingsKit'
 pod 'TTCounterLabel'
 
