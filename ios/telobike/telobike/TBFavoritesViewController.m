@@ -14,6 +14,7 @@
 #import "NSObject+Binding.h"
 #import "TBMainViewController.h"
 #import "TBMapViewController.h"
+#import "UIViewController+GAI.h"
 
 @interface TBFavoritesViewController ()
 
@@ -50,6 +51,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateFavoritesWithReload:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self analyticsScreenDidAppear:@"favorites"];
 }
 
 #pragma mark - Data

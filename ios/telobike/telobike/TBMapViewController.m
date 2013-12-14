@@ -26,6 +26,7 @@
 #import "TBFavorites.h"
 #import "TBGoogleMapsRouting.h"
 #import "TBFeedbackMailComposeViewController.h"
+#import "UIViewController+GAI.h"
 
 @interface TBMapViewController () <MKMapViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -46,30 +47,6 @@
 @property (strong, nonatomic) KMLParser* kmlParser;
 
 @property (assign, nonatomic) BOOL regionChangingForSelection;
-
-@end
-
-@interface UIView (FlatSubviews)
-
-- (NSArray*)allSubviewsOfClass:(Class)class;
-
-@end
-
-@implementation UIView (FlatSubviews)
-
-- (NSArray *)allSubviewsOfClass:(Class)class {
-    NSMutableArray* all = [[NSMutableArray alloc] init];
-    if ([self isKindOfClass:class]) {
-        [all addObject:self];
-    }
-    
-    for (UIView* subview in self.subviews) {
-        NSArray* subviews = [subview allSubviewsOfClass:class];
-        [all addObjectsFromArray:subviews];
-    }
-    
-    return all;
-}
 
 @end
 
@@ -115,6 +92,11 @@
     [[TBServer instance] reloadStations:nil];
     
     [self showOrHideRoutesOnMap];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self analyticsScreenDidAppear:@"map"];
 }
 
 - (void)reselectAnnotation {

@@ -17,6 +17,7 @@
 #import "TBMainViewController.h"
 #import "TBFeedbackActionSheet.h"
 #import "TBFeedbackMailComposeViewController.h"
+#import "UIViewController+GAI.h"
 
 @interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
@@ -52,6 +53,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[TBServer instance] reloadStations:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self analyticsScreenDidAppear:@"list"];
 }
 
 #pragma mark - Stations

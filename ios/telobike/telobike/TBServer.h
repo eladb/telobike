@@ -18,5 +18,6 @@
 
 - (void)reloadStations:(void(^)())completion;
 - (void)reloadCity:(void(^)())completion;
+- (void)postPushToken:(NSString*)token completion:(void(^)(void))completion;
 
 @end

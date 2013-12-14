@@ -110,4 +110,17 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
     }];
 }
 
+#pragma mark - Push token
+
+- (void)postPushToken:(NSString*)token completion:(void(^)(void))completion {
+    if (!completion) completion = ^{};
+    NSString* path = [NSString stringWithFormat:@"/push?token=%@", token];
+    [_server POST:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"push succeeded");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"push failed");
+    }];
+}
+
+
 @end

@@ -10,6 +10,7 @@
 
 #import "TBTimerViewController.h"
 #import <TTCounterLabel.h>
+#import "UIViewController+GAI.h"
 
 #define TIMER_INTERVAL_SEC (25 * 60)
 
@@ -35,6 +36,11 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"didReceiveLocalNotification" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self analyticsScreenDidAppear:@"timer"];
 }
 
 #pragma mark - Start/stop

@@ -7,7 +7,10 @@
 //
 
 #import <Appirater.h>
+#import <GoogleAnalytics-iOS-SDK/GAI.h>
+
 #import "TBAppDelegate.h"
+#import "TBServer.h"
 
 @interface TBAppDelegate () <CLLocationManagerDelegate>
 
@@ -18,6 +21,8 @@
 @implementation TBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    // rate app
     [Appirater setAppId:@"436915919"];
     [Appirater setDaysUntilPrompt:3];
     [Appirater setUsesUntilPrompt:5];
@@ -25,8 +30,20 @@
     [Appirater setTimeBeforeReminding:2];
     [Appirater setDebug:NO];
 
+    // location alert
     [self alertOnLocationServicesDisabled];
+    
+    // analytics
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = 20;
+#ifdef DEBUG
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+#endif
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-27122332-1"];
 
+    // push notifications
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];
+    
     [Appirater appLaunched:YES];
     return YES;
 }
@@ -38,6 +55,8 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"didReceiveLocalNotification" object:notification];
 }
+
+#pragma mark - Location services alert
 
 - (void)alertOnLocationServicesDisabled {
     if (!self.locationManager) {
@@ -57,6 +76,29 @@
                                    delegate:nil
                           cancelButtonTitle:NSLocalizedString(@"OK", nil)
                           otherButtonTitles:nil] show];
+    }
+}
+
+#pragma mark - Push notifications
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString* deviceTokenString = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                               stringByReplacingOccurrencesOfString: @">" withString: @""]
+                              stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+    NSLog(@"device token: %@", deviceTokenString);
+    
+    [[TBServer instance] postPushToken:deviceTokenString completion:^{
+        NSLog(@"push token posted");
+    }];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSDictionary* aps = userInfo[@"aps"];
+    NSString* alert = aps[@"alert"];
+    
+    if (alert) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:alert delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     }
 }
 

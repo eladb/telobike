@@ -60,6 +60,7 @@
 		F498A0AD1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0AA1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png */; };
 		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
 		F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */; };
+		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
 		F4EE1E4817FEEE86002F8A62 /* routes.kml in Resources */ = {isa = PBXBuildFile; fileRef = F4EE1E4717FEEE86002F8A62 /* routes.kml */; };
 		F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EE1E7517FEF58C002F8A62 /* KMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -126,8 +127,8 @@
 		F470EC1217F11589006FD464 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F470EC1417F11589006FD464 /* telobikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = telobikeTests.m; sourceTree = "<group>"; };
 		F479287E185CBE9400834E0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		F4792882185CBF7100834E0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F4792884185CBF7500834E0D /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F4792882185CBF7100834E0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F4792884185CBF7500834E0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F47B5CBE17F1293600D88614 /* TBFavorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFavorites.h; sourceTree = "<group>"; };
 		F47B5CBF17F1293600D88614 /* TBFavorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFavorites.m; sourceTree = "<group>"; };
 		F47B5CC617F655EC00D88614 /* TBStationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationTableViewCell.h; sourceTree = "<group>"; };
@@ -166,6 +167,8 @@
 		F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationTableViewCell.xib; sourceTree = "<group>"; };
 		F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPlacemarkAnnotation.h; sourceTree = "<group>"; };
 		F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPlacemarkAnnotation.m; sourceTree = "<group>"; };
+		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
+		F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GAI.m"; sourceTree = "<group>"; };
 		F4D6FA8A17FC8442000D0F2A /* sample-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sample-data.json"; sourceTree = "<group>"; };
 		F4EE1E4717FEEE86002F8A62 /* routes.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = routes.kml; sourceTree = "<group>"; };
 		F4EE1E7417FEF58C002F8A62 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */,
 				F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */,
 				F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */,
+				F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */,
+				F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -612,6 +617,7 @@
 				F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */,
 				F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */,
 				F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */,
+				F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */,
 				F437D5C91858867900E1381B /* TBDrawerView.m in Sources */,
 				F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */,
 			);
