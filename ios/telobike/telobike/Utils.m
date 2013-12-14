@@ -10,10 +10,20 @@
 
 @implementation TBCategories
 
-+ (NSString*)currentLanguage
-{
++ (NSString*)currentLanguage {
     NSString* langSetting = [[NSUserDefaults standardUserDefaults] stringForKey:@"stationsLanguage"];
-    if (langSetting && langSetting.length > 0) return langSetting;
+    
+    // if a specific language was defined in settings, use it
+    if (langSetting && langSetting.length > 0 && ![langSetting isEqualToString:@"auto"]) {
+        return langSetting;
+    }
+    
+    // we are in `auto` mode.
+
+    // hack: if hebrew keyboard is installed, use hebrew
+    if ([TBCategories hebrewKeyboardInstalled]) {
+        return @"he";
+    }
 
     // return the iOS settings
     NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
@@ -34,8 +44,7 @@
     return NO;
 }
 
-+ (NSString*)formattedDistance:(CLLocationDistance)distance
-{
++ (NSString*)formattedDistance:(CLLocationDistance)distance {
     NSString* dist;
     if (distance < 1000) dist = [NSString stringWithFormat:@"%.0f%@", distance, NSLocalizedString(@"DISTANCE_METERS", nil)];
     else dist = [NSString stringWithFormat:@"%.1f%@", (distance/1000.0), NSLocalizedString(@"DISTANCE_KM", nil)];
@@ -46,25 +55,20 @@
 
 @implementation NSDictionary (Extensions)
 
-- (NSString*)localizedStringForKey:(NSString*)key
-{
+- (NSString*)localizedStringForKey:(NSString*)key {
     NSString* result;
     
     // try 'key.lang' first as the key
     NSString* lang = [TBCategories currentLanguage];
     
-    // hack: if hebrew keyboard is installed, try hebrew
-    if ([TBCategories hebrewKeyboardInstalled]) {
-        lang = @"he";
-    }
-    
     result = [self objectForKey:[NSString stringWithFormat:@"%@.%@", key, lang]];
     
-    if (!result) result = [self objectForKey:[NSString stringWithFormat:@"%@_%@", key, lang]];
+    if (!result) {
+        result = [self objectForKey:[NSString stringWithFormat:@"%@_%@", key, lang]];
+    }
     
     // if we couldn't find this, fall back to the non-localized version
-    if (!result) 
-    {
+    if (!result)  {
         result = [self objectForKey:key];
     }
     

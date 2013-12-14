@@ -16,7 +16,7 @@
 			<key>Title</key>
 			<string>Station names</string>
 			<key>Key</key>
-			<string>station_names_language</string>
+			<string>stationsLanguage</string>
 			<key>DefaultValue</key>
 			<string>auto</string>
 			<key>Titles</key>
@@ -41,6 +41,16 @@
 			<string>Bicycle routes on map</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Show inactive stations</string>
+			<key>Key</key>
+			<string>showInactiveStations</string>
+			<key>DefaultValue</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>Type</key>
