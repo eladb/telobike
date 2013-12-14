@@ -40,6 +40,9 @@
 
 @property (strong, nonatomic) TBServer* server;
 @property (strong, nonatomic) NSMutableDictionary*  markers;
+
+// routes
+@property (assign, nonatomic) BOOL routesVisible;
 @property (strong, nonatomic) KMLParser* kmlParser;
 
 @property (assign, nonatomic) BOOL regionChangingForSelection;
@@ -97,29 +100,21 @@
         [self.mapView setRegion:region animated:NO];
     }];
     
-    [self loadRoutesFromKML];
-  
     // map view
     MKUserTrackingBarButtonItem* trackingBarButtonItem = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
     [self.bottomToolbar setItems:[self.bottomToolbar.items arrayByAddingObject:trackingBarButtonItem]];
     self.mapView.showsUserLocation = YES;
     
     [self reselectAnnotation];
-    
 
     self.stationAvailabilityView.alignCenter = NO;
-//    self.stationDetails.layer.cornerRadius = 10.0f;
-//    self.stationDetails.layer.shadowOpacity = 0.6f;
-//    self.stationDetails.layer.shadowColor = [[UIColor blackColor] CGColor];
-//    self.stationDetails.layer.shadowOffset = CGSizeMake(0, 10);
-//    self.stationDetails.layer.borderColor = [[UIColor colorWithWhite:0.0f alpha:0.3f] CGColor];
-//    self.stationDetails.layer.borderWidth = 1.0f;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[TBServer instance] reloadStations:nil];
+    
+    [self showOrHideRoutesOnMap];
 }
 
 - (void)reselectAnnotation {
@@ -374,11 +369,25 @@
 
 #pragma mark - Routes
 
-- (void)loadRoutesFromKML {
-    NSURL* url = [[NSBundle mainBundle] URLForResource:@"routes" withExtension:@"kml"];
-    self.kmlParser = [[KMLParser alloc] initWithURL:url];
-    [self.kmlParser parseKML];
-    [self.mapView addOverlays:self.kmlParser.overlays];
+- (void)showOrHideRoutesOnMap {
+    BOOL showRoutes = [[NSUserDefaults standardUserDefaults] boolForKey:@"show_bicycle_routes"];
+    
+    if (showRoutes && !self.routesVisible) {
+        if (!self.kmlParser) {
+            NSURL* url = [[NSBundle mainBundle] URLForResource:@"routes" withExtension:@"kml"];
+            self.kmlParser = [[KMLParser alloc] initWithURL:url];
+            [self.kmlParser parseKML];
+        }
+        
+        [self.mapView addOverlays:self.kmlParser.overlays];
+        self.routesVisible = YES;
+        return;
+    }
+    
+    if (!showRoutes && self.routesVisible) {
+        [self.mapView removeOverlays:self.kmlParser.overlays];
+        self.routesVisible = NO;
+    }
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {

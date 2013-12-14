@@ -36,21 +36,11 @@
 			<key>DefaultValue</key>
 			<true/>
 			<key>Key</key>
-			<string>enabled_preference</string>
+			<string>show_bicycle_routes</string>
 			<key>Title</key>
 			<string>Bicycle routes on map</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Show inactive stations</string>
-			<key>Key</key>
-			<string>showInactiveStations</string>
-			<key>DefaultValue</key>
-			<true/>
 		</dict>
 		<dict>
 			<key>Type</key>
