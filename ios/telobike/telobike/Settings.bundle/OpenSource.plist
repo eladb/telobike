@@ -12,15 +12,15 @@
 			<key>Key</key>
 			<string>oss_afnetworking</string>
 			<key>DefaultValue</key>
-			<string>1</string>
+			<string>2.0.3</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>DefaultValue</key>
-			<string>1</string>
+			<string>2.0</string>
 			<key>Title</key>
-			<string>InAppSettings</string>
+			<string>InAppSettingsKit</string>
 			<key>Key</key>
 			<string>oss_inappsettings</string>
 		</dict>
@@ -28,7 +28,7 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>DefaultValue</key>
-			<string>1</string>
+			<string>2.0.2</string>
 			<key>Title</key>
 			<string>Appirater</string>
 			<key>Key</key>
@@ -38,12 +38,24 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>DefaultValue</key>
-			<string>1</string>
+			<string>0.1</string>
 			<key>Title</key>
 			<string>SVGeocoder</string>
 			<key>Key</key>
 			<string>oss_svgeocoder</string>
 		</dict>
+
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>DefaultValue</key>
+            <string>1.0.3</string>
+            <key>Title</key>
+            <string>TTCounterLabel</string>
+            <key>Key</key>
+            <string>oss_ttcounterlabel</string>
+        </dict>
+
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>

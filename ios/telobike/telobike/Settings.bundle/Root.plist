@@ -14,7 +14,7 @@
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Station names</string>
+			<string>Station Names</string>
 			<key>Key</key>
 			<string>stationsLanguage</string>
 			<key>DefaultValue</key>
@@ -38,44 +38,11 @@
 			<key>Key</key>
 			<string>show_bicycle_routes</string>
 			<key>Title</key>
-			<string>Bicycle routes on map</string>
+			<string>Bicycle Routes on Map</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>About</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>Version</string>
-			<key>Key</key>
-			<string>version</string>
-			<key>DefaultValue</key>
-			<string>2.0</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-			<key>File</key>
-			<string>OpenSource</string>
-			<key>Title</key>
-			<string>Open Source</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
-			<key>Title</key>
-			<string>Send us feedback</string>
-			<key>Key</key>
-			<string>feedback</string>
-			<key>InAppURL</key>
-			<string>mailto://telobike@citylifeapps.com</string>
-		</dict>
+
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
