@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87874FC9433042AAADAE0F63 /* libPods.a */; };
+		F40672D7185B41550078860B /* TBTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40672D6185B41550078860B /* TBTimerViewController.m */; };
+		F40672D9185B43940078860B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40672D8185B43940078860B /* CoreAudio.framework */; };
+		F40672DB185B45180078860B /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F40672DA185B45180078860B /* bikebell.wav */; };
 		F40C943D1858A80300B64908 /* TBStationDetailsDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */; };
 		F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */; };
 		F40C94501858DA6700B64908 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F40C944F1858DA6700B64908 /* Settings.bundle */; };
@@ -74,6 +77,10 @@
 /* Begin PBXFileReference section */
 		0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		87874FC9433042AAADAE0F63 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F40672D5185B41550078860B /* TBTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTimerViewController.h; sourceTree = "<group>"; };
+		F40672D6185B41550078860B /* TBTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTimerViewController.m; sourceTree = "<group>"; };
+		F40672D8185B43940078860B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		F40672DA185B45180078860B /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bikebell.wav; sourceTree = "<group>"; };
 		F40C943B1858A80300B64908 /* TBStationDetailsDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsDrawer.h; sourceTree = "<group>"; };
 		F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsDrawer.m; sourceTree = "<group>"; };
 		F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGoogleMapsRouting.h; sourceTree = "<group>"; };
@@ -166,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40672D9185B43940078860B /* CoreAudio.framework in Frameworks */,
 				F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */,
 				F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */,
 				F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */,
@@ -189,6 +197,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F40672D4185B41470078860B /* timer */ = {
+			isa = PBXGroup;
+			children = (
+				F40672DA185B45180078860B /* bikebell.wav */,
+				F40672D5185B41550078860B /* TBTimerViewController.h */,
+				F40672D6185B41550078860B /* TBTimerViewController.m */,
+			);
+			name = timer;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		F40C94411858D51600B64908 /* settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +240,7 @@
 		F470EBE517F11589006FD464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F40672D8185B43940078860B /* CoreAudio.framework */,
 				F47B5D0F17F7CFB700D88614 /* ImageIO.framework */,
 				F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */,
 				F47B5CE017F6C97100D88614 /* MessageUI.framework */,
@@ -250,6 +270,7 @@
 				F40C94411858D51600B64908 /* settings */,
 				F47B5CD117F668B000D88614 /* list */,
 				F498A02818514059003BD3A6 /* favorites */,
+				F40672D4185B41470078860B /* timer */,
 				F47B5CD217F668BE00D88614 /* map */,
 				F47B5CD017F6689400D88614 /* utils */,
 				F47B5CDC17F6C7C800D88614 /* feedback */,
@@ -496,6 +517,7 @@
 			files = (
 				F498A0AC1851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png in Resources */,
 				F498A0AD1851B44A003BD3A6 /* JNJGoogleMapsActivityMask@2x.png in Resources */,
+				F40672DB185B45180078860B /* bikebell.wav in Resources */,
 				F40C94501858DA6700B64908 /* Settings.bundle in Resources */,
 				F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */,
 				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
@@ -562,6 +584,7 @@
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
 				F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */,
 				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
+				F40672D7185B41550078860B /* TBTimerViewController.m in Sources */,
 				F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */,
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,
 				F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */,

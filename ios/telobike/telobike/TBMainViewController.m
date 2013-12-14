@@ -23,6 +23,8 @@
 @property (strong, nonatomic) TBListViewController* nearByViewController;
 @property (strong, nonatomic) TBListViewController* favoritesViewController;
 @property (strong, nonatomic) TBMapViewController* mapViewController;
+@property (strong, nonatomic) TBTimerViewController* timerViewController;
+@property (strong, nonatomic) InAppSettingsViewController* settingsViewController;
 
 // tabbar
 @property (strong, nonatomic) IBOutlet UITabBar* tabBar;
@@ -44,22 +46,29 @@
     [super viewDidLoad];
     
     // tabbar
-    self.tabBar.itemPositioning = UITabBarItemPositioningCentered;
-    self.tabBar.itemSpacing = 0.3f;
+//    self.tabBar.itemPositioning = UITabBarItemPositioningCentered;
+//    self.tabBar.itemSpacing = 0.3f;
 
     self.nearByViewController = [self.navigation.viewControllers objectAtIndex:0];
     self.favoritesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"favorites"];
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
-    
+    self.timerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"timer"];
+    self.settingsViewController = [[InAppSettingsViewController alloc] init];
+
+
     // create tabbar items with proper selected images
     self.nearByViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Near Me", nil) image:[UIImage imageNamed:@"TabBar-NearMe"] selectedImage:[UIImage imageNamed:@"TabBar-NearMe-Highlighted"]];
     self.mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Map", nil) image:[UIImage imageNamed:@"TabBar-Map"] selectedImage:[UIImage imageNamed:@"TabBar-Map-Highlighted"]];
     self.favoritesViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Favorites", nil) image:[UIImage imageNamed:@"TabBar-Favorites"] selectedImage:[UIImage imageNamed:@"TabBar-Favorites-Highlighted"]];
+    self.timerViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Timer", nil) image:[UIImage imageNamed:@"TabBar-Timer"] selectedImage:[UIImage imageNamed:@"TabBar-Timer-Highlighted"]];
+    self.settingsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Settings", nil) image:[UIImage imageNamed:@"TabBar-Gear"] selectedImage:[UIImage imageNamed:@"TabBar-Gear-Highlighted"]];
     
     NSMutableArray* items = [[NSMutableArray alloc] init];
     [items addObject:self.nearByViewController.tabBarItem];
     [items addObject:self.favoritesViewController.tabBarItem];
     [items addObject:self.mapViewController.tabBarItem];
+    [items addObject:self.timerViewController.tabBarItem];
+    [items addObject:self.settingsViewController.tabBarItem];
     
     self.tabBar.items = items;
     self.tabBar.selectedItem = [self.tabBar.items objectAtIndex:0];
@@ -69,7 +78,7 @@
     // global actions
     self.navigation.delegate = self;
 //    self.sideMenuBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hamburger"] style:UIBarButtonItemStyleBordered target:self action:@selector(showSideMenu:)];
-    self.sideMenuBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hamburger"] style:UIBarButtonItemStyleBordered target:self action:@selector(showSettings:)];
+//    self.sideMenuBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Settings"] style:UIBarButtonItemStyleBordered target:self action:@selector(showSettings:)];
     self.searchBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch:)];
     
     // search
@@ -104,9 +113,18 @@
         tableView.contentInset = insets;
     }
     
-    viewController.navigationItem.rightBarButtonItems = @[ self.sideMenuBarButtonItem, self.searchBarButtonItem ];
+    if ([viewController isKindOfClass:[InAppSettingsViewController class]]) {
+        UITableView* tableView = self.settingsViewController.settingsTableView;
+        UIEdgeInsets insets = tableView.contentInset;
+        insets.top = navigationController.navigationBar.frame.origin.y + navigationController.navigationBar.frame.size.height;
+        insets.bottom = self.tabBar.frame.size.height;
+        tableView.contentInset = insets;
+    }
+    
+    viewController.navigationItem.rightBarButtonItems = @[ /*self.sideMenuBarButtonItem, */self.searchBarButtonItem ];
     self.tabBar.selectedItem = viewController.tabBarItem;
 }
+
 
 #pragma mark - Global actions
 
@@ -145,6 +163,16 @@
         CGPoint offset = CGPointZero;
         offset.y = -self.favoritesViewController.tableView.contentInset.top;
         [self.favoritesViewController.tableView setContentOffset:offset animated:YES];
+        return;
+    }
+    
+    if (item == self.timerViewController.tabBarItem) {
+        self.navigation.viewControllers = @ [ self.timerViewController ];
+        return;
+    }
+    
+    if (item == self.settingsViewController.tabBarItem) {
+        self.navigation.viewControllers = @ [ self.settingsViewController ];
         return;
     }
 }
