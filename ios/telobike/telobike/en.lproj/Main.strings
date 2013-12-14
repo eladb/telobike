@@ -1,0 +1,45 @@
+
+/* Class = "IBUIButton"; normalTitle = "Button"; ObjectID = "47X-DK-zW8"; */
+"47X-DK-zW8.normalTitle" = "Button";
+
+/* Class = "IBUINavigationController"; title = "Telobike"; ObjectID = "5QG-au-E4T"; */
+"5QG-au-E4T.title" = "Telobike";
+
+/* Class = "IBUINavigationItem"; title = "Favorites"; ObjectID = "C7F-Ob-UjT"; */
+"C7F-Ob-UjT.title" = "Favorites";
+
+/* Class = "IBUINavigationItem"; title = "Timer"; ObjectID = "DYj-On-CSx"; */
+"DYj-On-CSx.title" = "Timer";
+
+/* Class = "IBUITabBarItem"; title = "Near Me"; ObjectID = "NpL-YH-X2J"; */
+"NpL-YH-X2J.title" = "Near Me";
+
+/* Class = "IBUIViewController"; title = "Map"; ObjectID = "QUy-BD-bpt"; */
+"QUy-BD-bpt.title" = "Map";
+
+/* Class = "IBUINavigationItem"; title = "Near Me"; ObjectID = "Y0l-8p-age"; */
+"Y0l-8p-age.title" = "Near Me";
+
+/* Class = "IBUITabBarItem"; title = "Map"; ObjectID = "Z7h-1E-pvt"; */
+"Z7h-1E-pvt.title" = "Map";
+
+/* Class = "IBUITabBarItem"; title = "Timer"; ObjectID = "aTJ-p2-fjK"; */
+"aTJ-p2-fjK.title" = "Timer";
+
+/* Class = "IBUIViewController"; title = "Timer"; ObjectID = "d2H-A7-Ize"; */
+"d2H-A7-Ize.title" = "Timer";
+
+/* Class = "IBUILabel"; text = "No available bikes"; ObjectID = "e7W-Ai-ID6"; */
+"e7W-Ai-ID6.text" = "No available bikes";
+
+/* Class = "IBUINavigationItem"; title = "Map"; ObjectID = "eU6-FG-ZOj"; */
+"eU6-FG-ZOj.title" = "Map";
+
+/* Class = "IBUITableViewController"; title = "Favorites"; ObjectID = "fTB-lH-Ag0"; */
+"fTB-lH-Ag0.title" = "Favorites";
+
+/* Class = "IBUITabBarItem"; title = "Favorites"; ObjectID = "p3P-0s-Lyb"; */
+"p3P-0s-Lyb.title" = "Favorites";
+
+/* Class = "IBUITableViewController"; title = "Near Me"; ObjectID = "ttd-dx-cuw"; */
+"ttd-dx-cuw.title" = "Near Me";

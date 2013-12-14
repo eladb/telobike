@@ -47,11 +47,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Contact Tel-o-Fun</string>
-            <!--
-            <key>FooterText</key>
-            <string>Telobike is an independent app created as a public service and is not affiliated with the Tel-o-Fun project. All data is taken from the public domain.</string>
-             -->
+			<string>Tel-o-Fun</string>
 		</dict>
         
 		<dict>
@@ -78,7 +74,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Telobike for iPhone</string>
+			<string>Contact Us</string>
 		</dict>
 
 		<dict>
@@ -96,6 +92,15 @@
 			<string>Telobike Feedback</string>
 		</dict>
         
+        <dict>
+            <key>Type</key>
+            <string>IASKOpenURLSpecifier</string>
+            <key>Title</key>
+            <string>App Store Review</string>
+            <key>File</key>
+            <string>itms-apps://itunes.apple.com/app/id436915919</string>
+        </dict>
+
 		<dict>
 			<key>Type</key>
 			<string>IASKOpenURLSpecifier</string>
@@ -104,6 +109,23 @@
 			<key>File</key>
 			<string>https://www.facebook.com/telobike</string>
 		</dict>
+
+
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
+            <key>Title</key>
+            <string>About</string>
+        </dict>
+
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Created by Nir and Elad</string>
+            <key>Key</key>
+            <string>created_by</string>
+        </dict>
 
         <dict>
             <key>Type</key>
