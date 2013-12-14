@@ -115,6 +115,11 @@ server.get('/cities/tlv', function(req, res) {
   return res.send(city);
 });
 
+server.post('/push', function(req, res, next) {
+  console.log('received push token:', req.url);
+  return res.send('OK');
+});
+
 server.post('/_deploy_dskfjh484jk09k', function(req, res) {
   var backoff_sec = Math.round(5 + Math.random() * 35); // between 5s and 30s
   console.log('deployment request. Exit in', backoff_sec + 's');
