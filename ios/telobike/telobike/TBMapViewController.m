@@ -190,7 +190,6 @@
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [self.stationDetails closeAnimated:YES];
-//    [self hideStationDetailsAnimated:YES];
     [self updateTitle:nil];
 }
 
@@ -202,8 +201,6 @@
         _selectedStation = (TBStation*)view.annotation;
 
         [self.stationDetails openAnimated:YES];
-//        self.stationDetails.station = (TBStation*)view.annotation;
-//        [self showStationDetailsAnimated:YES];
         
         MKCoordinateRegion region;
         region.span = MKCoordinateSpanMake(0.004, 0.004);

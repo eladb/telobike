@@ -42,10 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // tabbar
-//    self.tabBar.itemPositioning = UITabBarItemPositioningCentered;
-//    self.tabBar.itemSpacing = 0.3f;
-
     self.nearByViewController = [self.navigation.viewControllers objectAtIndex:0];
     self.favoritesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"favorites"];
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
