@@ -53,6 +53,10 @@
     self.settingsViewController = [[IASKAppSettingsViewController alloc] init];
     self.settingsViewController.showCreditsFooter = NO;
     
+    // load nibs
+    [self.mapViewController view];
+    [self.nearByViewController view];
+    
     // create tabbar items with proper selected images
     self.nearByViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Near Me", nil) image:[UIImage imageNamed:@"TabBar-NearMe"] selectedImage:[UIImage imageNamed:@"TabBar-NearMe-Highlighted"]];
     self.mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Map", nil) image:[UIImage imageNamed:@"TabBar-Map"] selectedImage:[UIImage imageNamed:@"TabBar-Map-Highlighted"]];
@@ -78,6 +82,7 @@
     
     // search
     self.searchDisplayController.searchBar.alpha = 0.0f;
+    self.searchDisplayController.searchBar.placeholder = NSLocalizedString(@"Search anything", nil);
     self.searchDisplayController.searchBar.tintColor = [UIColor tintColor];
 
     self.locationManager = [[CLLocationManager alloc] init];
