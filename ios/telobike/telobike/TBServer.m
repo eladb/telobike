@@ -118,7 +118,7 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
     [_server POST:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"push succeeded");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"push failed");
+        NSLog(@"push failed: %@", error);
     }];
 }
 
