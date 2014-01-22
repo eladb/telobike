@@ -21,7 +21,6 @@
 #import "TBDrawerView.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
-#import "TBStationActivityViewController.h"
 #import "TBAvailabilityView.h"
 #import "TBFavorites.h"
 #import "TBGoogleMapsRouting.h"
@@ -333,15 +332,6 @@
     if (![TBGoogleMapsRouting routeFromAddress:@"" toAddress:dest]) {
         [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Google Maps is not installed", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     }
-}
-
-- (IBAction)shareStation:(id)sender {
-    TBStationActivityViewController* vc = [[TBStationActivityViewController alloc] initWithStation:self.openedStation];
-    vc.completionHandler = ^(NSString* activityName, BOOL completed){
-        NSLog(@"completed with %@", activityName);
-    };
-    
-    [self presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - My location

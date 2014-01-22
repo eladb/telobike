@@ -104,27 +104,4 @@
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
 
-#pragma mark - Feedback
-
-- (IBAction)feedback:(id)sender {
-    TBFeedbackActionSheet* feedbackActionSheet = [[TBFeedbackActionSheet alloc] initWithDelegate:self];
-    feedbackActionSheet.delegate = self;
-#warning fix show from tabbar feedback
-//    [feedbackActionSheet showFromTabBar:self.navigation.tabBar];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    TBFeedbackMailComposeViewController* vc = [[TBFeedbackMailComposeViewController alloc] initWithFeedbackOption:(TBFeedbackActionSheetOptions)buttonIndex];
-    if (!vc) {
-        return; // cancel
-    }
-    
-    vc.mailComposeDelegate = self;
-    [self presentViewController:vc animated:YES completion:nil];
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 @end
