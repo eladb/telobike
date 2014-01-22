@@ -44,15 +44,12 @@
         return;
     }
     
-    NSLog(@"didMoveToSuperview");
-    
     CGRect containerRect = self.frame;
-    containerRect.size.height += 50.0f;
     self.containerView = [[UIView alloc] initWithFrame:containerRect];
     self.containerView.backgroundColor = [UIColor clearColor];
-    self.containerView.clipsToBounds = YES;
+    self.containerView.userInteractionEnabled = YES;
+    self.containerView.clipsToBounds = NO;
     [[self superview] addSubview:self.containerView];
-    
     [self.containerView addSubview:self];
 }
 
