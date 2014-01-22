@@ -199,21 +199,11 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    self.mapViewController.selectedPlacemark = nil;
-    self.mapViewController.selectedStation = nil;
+    [self.mapViewController deselectAllAnnoations];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    // this means the change in the search bar was coming from the change in selection
-    if (self.mapViewController.selectedStation) {
-        return NO;
-    }
-    
-    // do not search in case we have a placemark annotation selected
-    if (self.mapViewController.selectedPlacemark) {
-        return NO;
-    }
-    
+
     if (searchString.length == 0) {
         self.searchResults = nil;
         return YES;
@@ -348,14 +338,13 @@
     id result = self.searchResults[indexPath.row];
     
     if ([result isKindOfClass:[SVPlacemark class]]) {
-        SVPlacemark* placemark = result;
-        self.mapViewController.selectedPlacemark = [[TBPlacemarkAnnotation alloc] initWithPlacemark:placemark];
+        [self.mapViewController showPlacemark:result];
         return;
     }
     
     if ([result isKindOfClass:[TBStation class]]) {
         TBStation* station = result;
-        self.mapViewController.selectedStation = station;
+        [self.mapViewController selectAnnotation:station animated:YES];
         return;
     }
 }

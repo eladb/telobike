@@ -21,3 +21,9 @@
 - (void)postPushToken:(NSString*)token completion:(void(^)(void))completion;
 
 @end
+
+@interface NSArray (Stations)
+
+- (NSDictionary*)dictionaryForStationsByID;
+
+@end

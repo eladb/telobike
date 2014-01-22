@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 #import "TBStation.h"
-#import "TBPlacemarkAnnotation.h"
+#import "SVPlacemark.h"
 
 @interface TBMapViewController : UIViewController
 
-@property (strong, nonatomic) TBStation* selectedStation;
-@property (strong, nonatomic) TBPlacemarkAnnotation* selectedPlacemark;
+- (void)deselectAllAnnoations;
+- (void)selectAnnotation:(id<MKAnnotation>)annotation animated:(BOOL)animated;
+- (NSArray*)annoations;
+
+- (void)showPlacemark:(SVPlacemark*)placemark;
 
 @end

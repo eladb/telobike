@@ -55,21 +55,25 @@
 
 #pragma mark - Open/close
 
-- (void)openAnimated:(BOOL)animated {
+- (void)openAnimated:(BOOL)animated completion:(void (^)(void))completion {
     CGRect frame = self.frame;
     frame.origin.y = 0.0f;
+    self.containerView.clipsToBounds = NO;
     [self updateFrame:frame initialVelocity:8.0f animated:animated completion:^(BOOL finished) {
         self.isOpened = YES;
         self.containerView.userInteractionEnabled = YES;
+        if (completion) completion();
     }];
 }
 
-- (void)closeAnimated:(BOOL)animated {
+- (void)closeAnimated:(BOOL)animated completion:(void (^)(void))completion {
     CGRect frame = self.frame;
     frame.origin.y = -frame.size.height;
+    self.containerView.clipsToBounds = YES;
     [self updateFrame:frame initialVelocity:-8.0f animated:animated completion:^(BOOL finished) {
         self.isOpened = NO;
         self.containerView.userInteractionEnabled = NO;
+        if (completion) completion();
     }];
 }
 

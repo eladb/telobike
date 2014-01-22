@@ -58,15 +58,27 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
 
 #pragma mark - Stations
 
+
 - (void)parseStationsResponse:(NSArray*)responseObject {
     if (!responseObject || ![responseObject isKindOfClass:[NSArray class]]) {
         return;
     }
     
-    NSMutableArray* stations = [[NSMutableArray alloc] init];
+    NSDictionary* stationByID = [self.stations dictionaryForStationsByID];
+    
+    NSMutableArray* stations = [[NSMutableArray alloc] initWithArray:self.stations];
     for (NSDictionary* s in responseObject) {
         TBStation* station = [[TBStation alloc] initWithDictionary:s];
-        [stations addObject:station];
+
+        // if we already have a station, just replace it's content and don't replace the object
+        TBStation* existingStation = stationByID[station.sid];
+        if (existingStation) {
+            existingStation.dict = s;
+        }
+        else {
+            NSLog(@"new station %@", station.sid);
+            [stations addObject:station];
+        }
     }
     
     self.stations = stations;
@@ -122,5 +134,17 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
     }];
 }
 
+
+@end
+
+@implementation NSArray (Stations)
+
+- (NSDictionary*)dictionaryForStationsByID {
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    for (TBStation* station in self) {
+        dict[station.sid] = station;
+    }
+    return dict;
+}
 
 @end

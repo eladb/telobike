@@ -12,7 +12,7 @@
 
 @property (readonly, nonatomic) BOOL isOpened;
 
-- (void)openAnimated:(BOOL)animated;
-- (void)closeAnimated:(BOOL)animated;
+- (void)openAnimated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)closeAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
 @end

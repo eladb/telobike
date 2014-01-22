@@ -100,7 +100,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TBStation* station = self.sortedStations[indexPath.row];
     TBMapViewController* mapViewController = self.main.mapViewController;
-    mapViewController.selectedStation = station;
+    [mapViewController selectAnnotation:station animated:NO];
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
 

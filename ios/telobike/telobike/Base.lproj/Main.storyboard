@@ -145,35 +145,31 @@
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-hE-Glj" userLabel="stationDetails" customClass="TBStationDetailsDrawer">
-                                <rect key="frame" x="0.0" y="64" width="320" height="90"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="107"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYi-z5-edV" userLabel="topFill">
-                                        <rect key="frame" x="0.0" y="-14" width="320" height="14"/>
+                                        <rect key="frame" x="0.0" y="-75" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.1450980392" green="0.1450980392" blue="0.1450980392" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="UyT-yL-oTZ"/>
+                                            <constraint firstAttribute="height" constant="75" id="hEE-le-80v"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView">
-                                        <rect key="frame" x="20" y="16" width="288" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </view>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lFl-6Z-a96" customClass="TBTransparentToolbar">
-                                        <rect key="frame" x="5" y="46" width="310" height="44"/>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFl-6Z-a96" customClass="TBTransparentToolbar">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.1450980392" green="0.1450980392" blue="0.1450980392" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="SrF-6W-92l"/>
+                                        </constraints>
                                         <items>
-                                            <barButtonItem systemItem="action" id="qcP-tx-l1z" userLabel="share">
-                                                <connections>
-                                                    <action selector="shareStation:" destination="QUy-BD-bpt" id="O6W-OF-nR7"/>
-                                                </connections>
-                                            </barButtonItem>
                                             <barButtonItem image="station-favorite-unselected" id="GRp-7d-RlZ" userLabel="favorite">
                                                 <connections>
                                                     <action selector="toggleStationFavorite:" destination="QUy-BD-bpt" id="cun-jm-4Iu"/>
                                                 </connections>
                                             </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="7YE-2g-92l"/>
                                             <barButtonItem image="station-report" id="7b9-8D-VaQ" userLabel="report">
                                                 <connections>
                                                     <action selector="sendStationReport:" destination="QUy-BD-bpt" id="d6h-0X-NCH"/>
@@ -185,22 +181,53 @@
                                                 </connections>
                                             </barButtonItem>
                                         </items>
-                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="barTintColor" red="0.1450980392" green="0.1450980392" blue="0.1450980392" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
                                     </toolbar>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No available bikes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7W-Ai-ID6">
-                                        <rect key="frame" x="163" y="57" width="136" height="21"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djS-1e-TGN">
+                                        <rect key="frame" x="0.0" y="44" width="320" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.050000000000000003" alpha="0.95000000000000007" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="Zim-G1-QdH"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView">
+                                        <rect key="frame" x="0.0" y="59" width="320" height="14"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veS-gQ-F7e" userLabel="label background">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.050000000000000003" alpha="0.95000000000000007" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="j1u-mm-eYV"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No available bikes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7W-Ai-ID6">
+                                        <rect key="frame" x="0.0" y="75" width="320" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="VYi-z5-edV" firstAttribute="top" secondItem="9fR-hE-Glj" secondAttribute="top" constant="-14" id="9DM-mD-63y"/>
-                                    <constraint firstAttribute="height" constant="90" id="ABK-bW-uOA"/>
-                                    <constraint firstAttribute="trailing" secondItem="VYi-z5-edV" secondAttribute="trailing" id="HkG-2S-yAT"/>
-                                    <constraint firstItem="VYi-z5-edV" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="px6-4H-eiQ"/>
+                                    <constraint firstItem="lFl-6Z-a96" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="24W-LL-bNo"/>
+                                    <constraint firstItem="veS-gQ-F7e" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="7do-pR-u0y"/>
+                                    <constraint firstAttribute="height" constant="107" id="9CW-jE-S24"/>
+                                    <constraint firstItem="djS-1e-TGN" firstAttribute="top" secondItem="lFl-6Z-a96" secondAttribute="bottom" id="AJQ-Ur-S6b"/>
+                                    <constraint firstAttribute="trailing" secondItem="djS-1e-TGN" secondAttribute="trailing" id="Cyq-4b-8F3"/>
+                                    <constraint firstAttribute="trailing" secondItem="VYi-z5-edV" secondAttribute="trailing" id="DvF-1O-Icf"/>
+                                    <constraint firstItem="veS-gQ-F7e" firstAttribute="top" secondItem="djS-1e-TGN" secondAttribute="bottom" id="NaW-K1-5wx"/>
+                                    <constraint firstAttribute="trailing" secondItem="veS-gQ-F7e" secondAttribute="trailing" id="OST-9X-kaJ"/>
+                                    <constraint firstItem="VYi-z5-edV" firstAttribute="top" secondItem="9fR-hE-Glj" secondAttribute="top" constant="-75" id="Uc2-Pj-Tuc"/>
+                                    <constraint firstItem="VYi-z5-edV" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="WaO-32-I2d"/>
+                                    <constraint firstItem="lFl-6Z-a96" firstAttribute="top" secondItem="VYi-z5-edV" secondAttribute="bottom" id="Y0G-gm-KQT"/>
+                                    <constraint firstItem="lFl-6Z-a96" firstAttribute="top" secondItem="VYi-z5-edV" secondAttribute="bottom" id="au4-mP-Rxo"/>
+                                    <constraint firstItem="djS-1e-TGN" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="b8b-QA-1dv"/>
+                                    <constraint firstAttribute="trailing" secondItem="lFl-6Z-a96" secondAttribute="trailing" id="mNX-T3-yA6"/>
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Jo-kIO" customClass="TBTransparentToolbar">
@@ -213,19 +240,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9fR-hE-Glj" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" id="Epf-ih-FiQ"/>
-                            <constraint firstAttribute="trailing" secondItem="9fR-hE-Glj" secondAttribute="trailing" id="IGp-6X-898"/>
-                            <constraint firstItem="9fR-hE-Glj" firstAttribute="top" secondItem="VDn-gC-H17" secondAttribute="bottom" id="ejc-d3-GXg"/>
+                            <constraint firstAttribute="trailing" secondItem="9fR-hE-Glj" secondAttribute="trailing" id="CRr-fB-Ukh"/>
+                            <constraint firstItem="9fR-hE-Glj" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" id="IvC-ny-cHv"/>
+                            <constraint firstItem="9fR-hE-Glj" firstAttribute="top" secondItem="VDn-gC-H17" secondAttribute="bottom" id="etB-EG-e0F"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="TabBar-Map" id="Z7h-1E-pvt"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Map" id="eU6-FG-ZOj"/>
+                    <navigationItem key="navigationItem" title="Map" id="eU6-FG-ZOj">
+                        <barButtonItem key="leftBarButtonItem" image="BackButton" id="Fat-cA-KHy">
+                            <connections>
+                                <action selector="back:" destination="QUy-BD-bpt" id="VRd-dt-YFY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="availabilityLabel" destination="e7W-Ai-ID6" id="bc2-c6-f77"/>
                         <outlet property="bottomToolbar" destination="x7O-Jo-kIO" id="w3x-I4-mMi"/>
+                        <outlet property="labelBackgroundView" destination="veS-gQ-F7e" id="bsC-35-kzO"/>
                         <outlet property="mapView" destination="NvQ-L0-EqX" id="lih-ea-PSp"/>
                         <outlet property="stationAvailabilityView" destination="ReE-oF-ZUd" id="vQZ-Fa-8a8"/>
                         <outlet property="stationDetails" destination="9fR-hE-Glj" id="Xz7-Hr-ANq"/>
@@ -311,6 +345,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackButton" width="13" height="22"/>
         <image name="TabBar-Favorites" width="25" height="24"/>
         <image name="TabBar-Map" width="25" height="25"/>
         <image name="TabBar-NearMe" width="24" height="25"/>
