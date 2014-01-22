@@ -64,24 +64,26 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
         return;
     }
     
-    NSDictionary* stationByID = [self.stations dictionaryForStationsByID];
-    
-    NSMutableArray* stations = [[NSMutableArray alloc] initWithArray:self.stations];
-    for (NSDictionary* s in responseObject) {
-        TBStation* station = [[TBStation alloc] initWithDictionary:s];
-
-        // if we already have a station, just replace it's content and don't replace the object
-        TBStation* existingStation = stationByID[station.sid];
-        if (existingStation) {
-            existingStation.dict = s;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSDictionary* stationByID = [self.stations dictionaryForStationsByID];
+        
+        NSMutableArray* stations = [[NSMutableArray alloc] initWithArray:self.stations];
+        for (NSDictionary* s in responseObject) {
+            TBStation* station = [[TBStation alloc] initWithDictionary:s];
+            
+            // if we already have a station, just replace it's content and don't replace the object
+            TBStation* existingStation = stationByID[station.sid];
+            if (existingStation) {
+                existingStation.dict = s;
+            }
+            else {
+                NSLog(@"new station %@", station.sid);
+                [stations addObject:station];
+            }
         }
-        else {
-            NSLog(@"new station %@", station.sid);
-            [stations addObject:station];
-        }
-    }
-    
-    self.stations = stations;
+        
+        self.stations = stations;
+    });
 }
 
 - (void)reloadStations:(void (^)())completion {
