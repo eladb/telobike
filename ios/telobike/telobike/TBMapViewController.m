@@ -62,15 +62,9 @@
     
     [self observeValueOfKeyPath:@"stations" object:self.server with:^(id new, id old) {
         [self refresh:nil];
-        [self reselectAnnotation];
     }];
     
     [self observeValueOfKeyPath:@"city" object:self.server with:^(id new, id old) {
-        // if we have a selected station, don't update the region
-        if (self.selectedStation || self.selectedPlacemark) {
-            return;
-        }
-        
         MKCoordinateRegion region;
         region.center = self.server.city.cityCenter.coordinate;
         region.span = MKCoordinateSpanMake(0.05, 0.05);
@@ -82,8 +76,6 @@
     [self.bottomToolbar setItems:[self.bottomToolbar.items arrayByAddingObject:trackingBarButtonItem]];
     self.mapView.showsUserLocation = YES;
     
-    [self reselectAnnotation];
-
     self.stationAvailabilityView.alignCenter = NO;
 }
 
@@ -97,27 +89,17 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self analyticsScreenDidAppear:@"map"];
-}
 
-- (void)reselectAnnotation {
-    // make sure selected station/placemark are respected after view load
-    if (self.selectedPlacemark) {
-        self.selectedPlacemark = self.selectedPlacemark;
-    }
-    
-    if (self.selectedStation) {
-        self.selectedStation = self.selectedStation;
+    if (!self.selectedStation) {
+        [self.stationDetails closeAnimated:NO];
     }
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    static BOOL oneOff = YES;
-    if (oneOff || !self.selectedStation) {
+    if (!self.selectedStation) {
         [self.stationDetails closeAnimated:NO];
-//        [self hideStationDetailsAnimated:NO];
-        oneOff = NO;
     }
 }
 
