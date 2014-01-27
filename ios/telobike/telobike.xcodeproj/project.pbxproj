@@ -58,6 +58,7 @@
 		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
 		F4AF49831896B4C00045612D /* TBSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49821896B4C00045612D /* TBSearchResultTableViewCell.xib */; };
 		F4AF49861896B4D30045612D /* TBSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF49851896B4D30045612D /* TBSearchResultTableViewCell.m */; };
+		F4AF49881896C0110045612D /* NoFavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49871896C0110045612D /* NoFavoritesView.xib */; };
 		F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */; };
 		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
@@ -161,6 +162,7 @@
 		F4AF49821896B4C00045612D /* TBSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		F4AF49841896B4D30045612D /* TBSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSearchResultTableViewCell.h; sourceTree = "<group>"; };
 		F4AF49851896B4D30045612D /* TBSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSearchResultTableViewCell.m; sourceTree = "<group>"; };
+		F4AF49871896C0110045612D /* NoFavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoFavoritesView.xib; sourceTree = "<group>"; };
 		F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPlacemarkAnnotation.h; sourceTree = "<group>"; };
 		F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPlacemarkAnnotation.m; sourceTree = "<group>"; };
 		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			children = (
 				F498A02518514054003BD3A6 /* TBFavoritesViewController.h */,
 				F498A02618514054003BD3A6 /* TBFavoritesViewController.m */,
+				F4AF49871896C0110045612D /* NoFavoritesView.xib */,
 			);
 			name = favorites;
 			path = ..;
@@ -527,6 +530,7 @@
 				F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */,
 				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
 				F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */,
+				F4AF49881896C0110045612D /* NoFavoritesView.xib in Resources */,
 				F470EBFA17F11589006FD464 /* Main.storyboard in Resources */,
 				F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */,
 				F4EE1E4817FEEE86002F8A62 /* routes.kml in Resources */,
