@@ -19,7 +19,7 @@
 @interface TBFavoritesViewController ()
 
 @property (strong, nonatomic) NSArray* favoriteStations;
-@property (strong, nonatomic) IBOutlet UILabel* emptyLabel;
+@property (strong, nonatomic) UIView* emptyLabel;
 
 @end
 
@@ -36,15 +36,7 @@
         [self.refreshControl endRefreshing];
     }];
     
-    self.emptyLabel = [[UILabel alloc] init];
-    self.emptyLabel.font = [UIFont boldSystemFontOfSize:20.0f];
-
-    
-    NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
-    style.alignment = NSTextAlignmentCenter;
-    self.emptyLabel.attributedText = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No Favorites", nil)
-                                                                     attributes:@{ NSParagraphStyleAttributeName: style }];
-    self.emptyLabel.textColor = [UIColor colorWithWhite:204/255.0f alpha:1.0f];
+    self.emptyLabel = [[NSBundle mainBundle] loadNibNamed:@"NoFavoritesView" owner:nil options:nil][0];
     self.tableView.backgroundView = self.emptyLabel;
 }
 
