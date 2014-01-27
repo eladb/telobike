@@ -34,11 +34,7 @@
     [self alertOnLocationServicesDisabled];
     
     // analytics
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
-#ifdef DEBUG
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-#endif
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-27122332-1"];
 
     // push notifications
