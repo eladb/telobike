@@ -11,7 +11,6 @@
 		F40672D7185B41550078860B /* TBTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40672D6185B41550078860B /* TBTimerViewController.m */; };
 		F40672D9185B43940078860B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40672D8185B43940078860B /* CoreAudio.framework */; };
 		F40672DB185B45180078860B /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F40672DA185B45180078860B /* bikebell.wav */; };
-		F40C943D1858A80300B64908 /* TBStationDetailsDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */; };
 		F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */; };
 		F40C94501858DA6700B64908 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F40C944F1858DA6700B64908 /* Settings.bundle */; };
 		F4141EBA1855E67600918F71 /* TBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4141EB91855E67600918F71 /* TBMainViewController.m */; };
@@ -23,7 +22,6 @@
 		F42E60BB17F123590099A1D0 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60BA17F123590099A1D0 /* Utils.m */; };
 		F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */; };
 		F42FCA1117FE52F700E24D50 /* TBTintedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42FCA1017FE52F700E24D50 /* TBTintedView.m */; };
-		F437D5C91858867900E1381B /* TBDrawerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437D5C81858867900E1381B /* TBDrawerView.m */; };
 		F437D5CC1858896F00E1381B /* TBGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */; };
 		F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
 		F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE817F11589006FD464 /* CoreGraphics.framework */; };
@@ -82,8 +80,6 @@
 		F40672D6185B41550078860B /* TBTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTimerViewController.m; sourceTree = "<group>"; };
 		F40672D8185B43940078860B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		F40672DA185B45180078860B /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bikebell.wav; sourceTree = "<group>"; };
-		F40C943B1858A80300B64908 /* TBStationDetailsDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationDetailsDrawer.h; sourceTree = "<group>"; };
-		F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationDetailsDrawer.m; sourceTree = "<group>"; };
 		F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGoogleMapsRouting.h; sourceTree = "<group>"; };
 		F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGoogleMapsRouting.m; sourceTree = "<group>"; };
 		F40C944F1858DA6700B64908 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -103,8 +99,6 @@
 		F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAvailabilityView.m; sourceTree = "<group>"; };
 		F42FCA0F17FE52F700E24D50 /* TBTintedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTintedView.h; sourceTree = "<group>"; };
 		F42FCA1017FE52F700E24D50 /* TBTintedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTintedView.m; sourceTree = "<group>"; };
-		F437D5C71858867900E1381B /* TBDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBDrawerView.h; sourceTree = "<group>"; };
-		F437D5C81858867900E1381B /* TBDrawerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBDrawerView.m; sourceTree = "<group>"; };
 		F437D5CA1858896F00E1381B /* TBGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGradientBackgroundView.h; sourceTree = "<group>"; };
 		F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGradientBackgroundView.m; sourceTree = "<group>"; };
 		F470EBE317F11589006FD464 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,8 +326,6 @@
 		F47B5CD017F6689400D88614 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				F437D5C71858867900E1381B /* TBDrawerView.h */,
-				F437D5C81858867900E1381B /* TBDrawerView.m */,
 				F47B5D0017F797DA00D88614 /* UIColor+Style.h */,
 				F47B5D0117F797DA00D88614 /* UIColor+Style.m */,
 				F42E60B917F123590099A1D0 /* Utils.h */,
@@ -380,8 +372,6 @@
 				F421E305180D8BB100213902 /* TBStationAnnotationView.m */,
 				F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */,
 				F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */,
-				F40C943B1858A80300B64908 /* TBStationDetailsDrawer.h */,
-				F40C943C1858A80300B64908 /* TBStationDetailsDrawer.m */,
 			);
 			name = map;
 			sourceTree = "<group>";
@@ -584,7 +574,6 @@
 			files = (
 				F47B5CCE17F6675B00D88614 /* TBCity.m in Sources */,
 				F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */,
-				F40C943D1858A80300B64908 /* TBStationDetailsDrawer.m in Sources */,
 				F42FCA1117FE52F700E24D50 /* TBTintedView.m in Sources */,
 				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
@@ -612,7 +601,6 @@
 				F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */,
 				F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */,
 				F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */,
-				F437D5C91858867900E1381B /* TBDrawerView.m in Sources */,
 				F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

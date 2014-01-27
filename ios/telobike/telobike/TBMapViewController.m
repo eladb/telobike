@@ -18,7 +18,6 @@
 #import "UIColor+Style.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
-#import "TBDrawerView.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
 #import "TBAvailabilityView.h"
@@ -35,12 +34,13 @@
 @property (strong, nonatomic) UIBarButtonItem* backButtonItem;
 
 // station details
-@property (strong, nonatomic) IBOutlet TBDrawerView* stationDetails;
+@property (strong, nonatomic) IBOutlet UIView* stationDetails;
 @property (strong, nonatomic) IBOutlet TBAvailabilityView* stationAvailabilityView;
 @property (strong, nonatomic) IBOutlet UILabel* availabilityLabel;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* toggleStationFavoriteButton;
 @property (strong, nonatomic) IBOutlet UIView* labelBackgroundView;
 @property (strong, nonatomic) IBOutlet UIView* topFillerView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint* drawerTopConstraint;
 
 @property (strong, nonatomic) TBServer* server;
 
@@ -81,10 +81,39 @@
     
     self.stationAvailabilityView.alignCenter = YES;
     
-    NSLog(@"constraints: %@", self.stationDetails.constraints);
-    [self.stationDetails closeAnimated:NO completion:^{
-        self.topFillerView.hidden = NO;
-    }];
+    [self closeDetailsAnimated:NO];
+}
+
+- (void)openDetailsAnimated:(BOOL)animated {
+    self.drawerTopConstraint.constant = 0.0f;
+    self.topFillerView.hidden = YES;
+    
+    if (animated) {
+        [UIView animateWithDuration:0.5f
+                              delay:0.0f
+             usingSpringWithDamping:0.6f
+              initialSpringVelocity:8.0f
+                            options:0
+                         animations:^{ [self.view layoutIfNeeded]; }
+                         completion:nil];
+    }
+}
+
+- (void)closeDetailsAnimated:(BOOL)animated {
+    self.drawerTopConstraint.constant = -self.stationDetails.frame.size.height;
+    self.topFillerView.hidden = NO;
+
+    if (animated) {
+        [UIView animateWithDuration:0.5f
+                              delay:0.0f
+             usingSpringWithDamping:0.6f
+              initialSpringVelocity:-8.0f
+                            options:0
+                         animations:^{
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -104,15 +133,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self analyticsScreenDidAppear:@"map"];
-
-//    if (self.selectedStation) {
-//        [self.stationDetails openAnimated:NO];
-//    }
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-//    [self.stationDetails closeAnimated:NO];
 }
 
 #pragma mark - Navigation
@@ -190,9 +210,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    [self.stationDetails closeAnimated:YES completion:^{
-        self.topFillerView.hidden = NO;
-    }];
+    [self closeDetailsAnimated:YES];
     [self updateTitle:nil];
 }
 
@@ -203,9 +221,7 @@
     if ([view.annotation isKindOfClass:[TBStation class]]) {
         TBStation* selectedStation = (TBStation*)view.annotation;
 
-        [self.stationDetails openAnimated:YES completion:^{
-            self.topFillerView.hidden = YES;
-        }];
+        [self openDetailsAnimated:YES];
         
         MKCoordinateRegion region;
         region.span = MKCoordinateSpanMake(0.004, 0.004);

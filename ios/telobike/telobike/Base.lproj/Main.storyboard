@@ -144,7 +144,7 @@
                                     <outlet property="delegate" destination="QUy-BD-bpt" id="xVq-Ah-f9a"/>
                                 </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-hE-Glj" userLabel="stationDetails" customClass="TBStationDetailsDrawer">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-hE-Glj" userLabel="stationDetails">
                                 <rect key="frame" x="0.0" y="64" width="320" height="107"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -259,6 +259,7 @@
                     <connections>
                         <outlet property="availabilityLabel" destination="e7W-Ai-ID6" id="bc2-c6-f77"/>
                         <outlet property="bottomToolbar" destination="x7O-Jo-kIO" id="w3x-I4-mMi"/>
+                        <outlet property="drawerTopConstraint" destination="etB-EG-e0F" id="pcZ-d9-3aI"/>
                         <outlet property="labelBackgroundView" destination="veS-gQ-F7e" id="bsC-35-kzO"/>
                         <outlet property="mapView" destination="NvQ-L0-EqX" id="lih-ea-PSp"/>
                         <outlet property="stationAvailabilityView" destination="ReE-oF-ZUd" id="vQZ-Fa-8a8"/>
