@@ -11,6 +11,7 @@
 
 #import "TBAppDelegate.h"
 #import "TBServer.h"
+#import "TestFlight.h"
 
 @interface TBAppDelegate () <CLLocationManagerDelegate>
 
@@ -22,6 +23,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    [TestFlight takeOff:@"6deef968-4bcc-4e57-ab70-cf075da6f8a0"];
+    
     // rate app
     [Appirater setAppId:@"436915919"];
     [Appirater setDaysUntilPrompt:3];
