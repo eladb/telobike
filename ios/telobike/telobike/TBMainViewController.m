@@ -79,7 +79,6 @@
     
     // search
     self.searchDisplayController.searchBar.alpha = 0.0f;
-    self.searchDisplayController.searchBar.placeholder = NSLocalizedString(@"Search anything", nil);
     self.searchDisplayController.searchBar.tintColor = [UIColor tintColor];
     [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:NSStringFromClass([TBSearchResultTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"TBSearchResultTableViewCell"];
 
