@@ -354,6 +354,10 @@
 
 #pragma mark - My location
 
+- (void)showMyLocation {
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+}
+
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
     NSLog(@"ERROR: unable to determine location: %@", error);
 }

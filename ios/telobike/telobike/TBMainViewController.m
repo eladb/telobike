@@ -133,11 +133,14 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     if (item == self.mapViewController.tabBarItem) {
+        [self.mapViewController showMyLocation];
+
+        // if the top view controller is already the map, don't do anything
         if (self.navigation.topViewController == self.mapViewController) {
             return;
         }
-        
         self.navigation.viewControllers = @[ self.mapViewController ];
+        
         return;
     }
     

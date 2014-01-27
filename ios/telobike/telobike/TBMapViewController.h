@@ -18,5 +18,6 @@
 - (NSArray*)annoations;
 
 - (void)showPlacemark:(SVPlacemark*)placemark;
+- (void)showMyLocation;
 
 @end
