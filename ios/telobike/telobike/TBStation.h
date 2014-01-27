@@ -37,13 +37,9 @@ typedef enum {
 @property (nonatomic, readonly) BOOL isActive;
 @property (nonatomic, readonly) NSDate* lastUpdate;
 @property (nonatomic, readonly) NSTimeInterval freshness;
-@property (nonatomic, readonly) NSString* lastUpdateDesc;
 @property (nonatomic, readonly) BOOL isOnline;
-@property (nonatomic, readonly) NSString* statusText;
 @property (nonatomic, readonly) NSInteger availBike;
 @property (nonatomic, readonly) NSInteger availSpace;
-//@property (nonatomic, readonly) NSString* availBikeDesc;
-//@property (nonatomic, readonly) NSString* availSpaceDesc;
 @property (nonatomic, readonly) UIColor* availSpaceColor;
 @property (nonatomic, readonly) UIColor* availBikeColor;
 @property (nonatomic, readonly) UIColor* fullSlotColor;

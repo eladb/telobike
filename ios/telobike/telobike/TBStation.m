@@ -139,18 +139,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     _isOnline = _lastUpdate != nil && _freshness < kFreshnessTimeInterval;
     _isActive = !_isOnline || _availBike > 0 || _availSpace > 0;
     
-    if (!_lastUpdate) _lastUpdateDesc = NSLocalizedString(@"Offline", nil);
-    else _lastUpdateDesc = [NSString stringWithFormat:@"Last updated: %.0fmin ago", _freshness / 60.0];
-    
-    if (!_isOnline) _statusText = NSLocalizedString(@"Offline", nil);
-    else if (!_isActive) _statusText = NSLocalizedString(@"Inactive station", nil);
-    
-//    if (_statusText) _availBikeDesc = _statusText;
-//    else _availBikeDesc = [NSString stringWithFormat:@"%ld", (long)_availBike, NSLocalizedString(@"Bicycles", @"Number of bicycle")];
-//    
-//    if (!_isOnline || !_isActive) _availSpaceDesc = @"";
-//    else _availSpaceDesc = [NSString stringWithFormat:@"%ld", (long)_availSpace, NSLocalizedString(@"Slots", @"number of slots available")];
-    
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
     UIColor* yellow = [UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0];
     UIColor* green  = [UIColor colorWithRed:0.0f green:122.0f/255.0f blue:0.0f alpha:1.0f];
