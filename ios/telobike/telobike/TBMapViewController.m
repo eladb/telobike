@@ -155,7 +155,9 @@
 }
 
 - (void)deselectAllAnnoations {
-    self.mapView.selectedAnnotations = @[];
+    for (id ann in self.mapView.annotations) {
+        [self.mapView deselectAnnotation:ann animated:YES];
+    }
 }
 
 - (void)selectAnnotation:(id<MKAnnotation>)annotation animated:(BOOL)animated {
