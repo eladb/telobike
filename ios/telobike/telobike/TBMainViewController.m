@@ -16,6 +16,7 @@
 #import "TBServer.h"
 #import "UIColor+Style.h"
 #import "TBAppDelegate.h"
+#import "TBSearchResultTableViewCell.h"
 
 @interface TBMainViewController () <UITabBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UINavigationControllerDelegate>
 
@@ -80,6 +81,7 @@
     self.searchDisplayController.searchBar.alpha = 0.0f;
     self.searchDisplayController.searchBar.placeholder = NSLocalizedString(@"Search anything", nil);
     self.searchDisplayController.searchBar.tintColor = [UIColor tintColor];
+    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:NSStringFromClass([TBSearchResultTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"TBSearchResultTableViewCell"];
 
     self.locationManager = [[CLLocationManager alloc] init];
     self.distanceFormatter = [[MKDistanceFormatter alloc] init];
@@ -318,16 +320,11 @@
         }
     }
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchResult"];
-    }
-    
-    cell.textLabel.text = title;
-    cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    cell.imageView.image = image;
+    TBSearchResultTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"TBSearchResultTableViewCell"];
+    cell.title = title;
+    cell.image = image;
     if (distance != -1.0f) {
-        cell.detailTextLabel.text = [self.distanceFormatter stringFromDistance:distance];
+        cell.detail = [self.distanceFormatter stringFromDistance:distance];
     }
     
     return cell;

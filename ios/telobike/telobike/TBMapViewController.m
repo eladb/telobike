@@ -81,7 +81,7 @@
     
     self.stationAvailabilityView.alignCenter = YES;
     
-    [self closeDetailsAnimated:NO];
+    [self updateStationDetails:nil animated:NO];
 }
 
 - (void)openDetailsAnimated:(BOOL)animated {
@@ -212,36 +212,28 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    [self closeDetailsAnimated:YES];
-    [self updateTitle:nil];
+    [self updateStationDetails:nil animated:YES];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    NSString* annotationTitle;
     MKCoordinateRegion annotationRegion;
 
     if ([view.annotation isKindOfClass:[TBStation class]]) {
         TBStation* selectedStation = (TBStation*)view.annotation;
+        [self updateStationDetails:selectedStation animated:YES];
 
-        [self openDetailsAnimated:YES];
-        
         MKCoordinateRegion region;
         region.span = MKCoordinateSpanMake(0.004, 0.004);
         region.center = selectedStation.coordinate;
-        
         annotationRegion = region;
-        annotationTitle = selectedStation.stationName;
-        
-        [self updateStationDetails];
     }
     
     if ([view.annotation isKindOfClass:[TBPlacemarkAnnotation class]]) {
         TBPlacemarkAnnotation* annoation = view.annotation;
-        annotationTitle = annoation.placemark.formattedAddress;;
+        [self updateTitle:annoation.placemark.formattedAddress];
         annotationRegion = MKCoordinateRegionMakeWithDistance(annoation.coordinate, 1000.0f, 1000.0f);;
     }
     
-    [self updateTitle:annotationTitle];
     self.regionChangingForSelection = YES;
     [self.mapView setRegion:annotationRegion animated:YES];
 }
@@ -270,9 +262,10 @@
     return  selectedStation;
 }
 
-- (void)updateStationDetails {
-    TBStation* station = self.openedStation;
+- (void)updateStationDetails:(TBStation*)station animated:(BOOL)animated {
     if (!station) {
+        [self closeDetailsAnimated:animated];
+        [self updateTitle:nil];
         return;
     }
     
@@ -311,6 +304,12 @@
     self.availabilityLabel.textColor = station.indicatorColor;
     self.labelBackgroundView.hidden = self.availabilityLabel.hidden;
     
+    [self updateFavoriteButton:station];
+    [self openDetailsAnimated:YES];
+    [self updateTitle:station.stationName];
+}
+
+- (void)updateFavoriteButton:(TBStation*)station {
     // set favorite
     UIImage* favoriteButtonImage = station.isFavorite ?
         [UIImage imageNamed:@"station-favorite-selected"] :
@@ -321,7 +320,7 @@
 
 - (IBAction)toggleStationFavorite:(id)sender {
     [self.openedStation setFavorite:!self.openedStation.isFavorite];
-    [self updateStationDetails];
+    [self updateFavoriteButton:self.openedStation];
 }
 
 - (IBAction)sendStationReport:(id)sender {
