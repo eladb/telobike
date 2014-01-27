@@ -21,7 +21,8 @@ static CGFloat kSelectedSize = 48.0f;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    CGRect startBounds, endBounds;
+    CGRect startBounds = CGRectZero;
+    CGRect endBounds = CGRectZero;
     
     if (selected) {
         startBounds.size = CGSizeMake(kDeselectedSize, kDeselectedSize);
