@@ -9,9 +9,14 @@
 #import "TBStationAnnotationView.h"
 #import "TBStation.h"
 
-static CGFloat kDeselectedSize = 24.0f;
-static CGFloat kSelectedSize = 48.0f;
+//static CGFloat kDeselectedSize = 24.0f;
+//static CGFloat kSelectedSize = 48.0f;
 
+@interface TBStationAnnotationView ()
+
+@property (strong, nonatomic) TBStation* station;
+
+@end
 @implementation TBStationAnnotationView
 
 - (TBStation*)station {
@@ -21,16 +26,16 @@ static CGFloat kSelectedSize = 48.0f;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    CGRect startBounds = CGRectZero;
-    CGRect endBounds = CGRectZero;
+    CGRect startBounds;
+    CGRect endBounds;
     
     if (selected) {
-        startBounds.size = CGSizeMake(kDeselectedSize, kDeselectedSize);
-        endBounds.size = CGSizeMake(kSelectedSize, kSelectedSize);
+        startBounds = [self deselectedBounds];
+        endBounds = [self selectedBounds];
     }
     else {
-        startBounds.size = CGSizeMake(kSelectedSize, kSelectedSize);
-        endBounds.size = CGSizeMake(kDeselectedSize, kDeselectedSize);
+        startBounds = [self selectedBounds];
+        endBounds = [self deselectedBounds];
     }
     
     if (animated) {
@@ -49,10 +54,24 @@ static CGFloat kSelectedSize = 48.0f;
     }
 }
 
+- (CGRect)selectedBounds {
+    CGRect r = CGRectZero;
+    r.size = self.station.markerImage.size;
+    return r;
+}
+
+- (CGRect)deselectedBounds {
+    CGRect r = [self selectedBounds];
+    r.size.width = 0.5 * r.size.width;
+    r.size.height = 0.5 * r.size.height;
+    return r;
+}
+
 - (void)setAnnotation:(id<MKAnnotation>)annotation {
     [super setAnnotation:annotation];
-    self.layer.contents = (id)[self.station.selectedMarkerImage CGImage];
-    self.layer.bounds = CGRectMake(0, 0, kDeselectedSize, kDeselectedSize);
+    self.station = annotation;
+    self.layer.contents = (id)[self.station.markerImage CGImage];
+    self.layer.bounds = [self deselectedBounds];
 }
 
 @end

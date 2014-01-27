@@ -52,10 +52,10 @@ static const NSInteger kMarginalBikeAmount = 3;
     return [UIImage imageNamed:[NSString stringWithFormat:fmt, name]];    
 }
 
-//+ (UIImage*)markerImageForState:(StationState)state
-//{
-//    return [TBStation imageWithNameFormat:@"map-%@.png" state:state];
-//}
++ (UIImage*)markerImageForState:(StationState)state
+{
+    return [TBStation imageWithNameFormat:@"map-%@.png" state:state];
+}
 
 + (UIImage*)circleWithRadius:(CGFloat)sz fillColor:(UIColor*)fillColor borderWidth:(CGFloat)borderWidth borderColor:(UIColor*)borderColor {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(sz, sz), NO, 0.0f);
@@ -99,8 +99,8 @@ static const NSInteger kMarginalBikeAmount = 3;
     NSNumber* key = [NSNumber numberWithInt:state];
     UIImage* cachedImage = [cache objectForKey:key];
     if (!cachedImage) {
-        UIImage* inner = [TBStation imageWithNameFormat:@"map-%@.png" state:state];
-        UIImage* overlay = [UIImage imageNamed:@"map-selection-mask.png"];
+        UIImage* inner = [TBStation imageWithNameFormat:@"map-%@" state:state];
+        UIImage* overlay = [UIImage imageNamed:@"map-selection-mask"];
         UIGraphicsBeginImageContextWithOptions(overlay.size, NO, 0.0f);
         [overlay drawAtPoint:CGPointMake(0.0f, 0.0f)];
         [inner drawAtPoint:CGPointMake(8.5f, 8.5f) blendMode:kCGBlendModeOverlay alpha:1.0];
@@ -145,11 +145,11 @@ static const NSInteger kMarginalBikeAmount = 3;
     if (!_isOnline) _statusText = NSLocalizedString(@"Offline", nil);
     else if (!_isActive) _statusText = NSLocalizedString(@"Inactive station", nil);
     
-    if (_statusText) _availBikeDesc = _statusText;
-    else _availBikeDesc = [NSString stringWithFormat:@"%ld", (long)_availBike, NSLocalizedString(@"Bicycles", @"Number of bicycle")];
-    
-    if (!_isOnline || !_isActive) _availSpaceDesc = @"";
-    else _availSpaceDesc = [NSString stringWithFormat:@"%ld", (long)_availSpace, NSLocalizedString(@"Slots", @"number of slots available")];
+//    if (_statusText) _availBikeDesc = _statusText;
+//    else _availBikeDesc = [NSString stringWithFormat:@"%ld", (long)_availBike, NSLocalizedString(@"Bicycles", @"Number of bicycle")];
+//    
+//    if (!_isOnline || !_isActive) _availSpaceDesc = @"";
+//    else _availSpaceDesc = [NSString stringWithFormat:@"%ld", (long)_availSpace, NSLocalizedString(@"Slots", @"number of slots available")];
     
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
     UIColor* yellow = [UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0];
@@ -187,17 +187,17 @@ static const NSInteger kMarginalBikeAmount = 3;
     
     // load images for list and markers
     _listImage = [TBStation imageWithNameFormat:@"list-%@.png" state:[self state]];
-//    _markerImage = [TBStation markerImageForState:[self state]];
-    _markerImage = [TBStation markerImageForColor:self.indicatorColor];
-//    _selectedMarkerImage = [TBStation selectedMarkerImageForState:[self state]];
-    _selectedMarkerImage = [TBStation selectedMarkerImageForColor:self.indicatorColor];
+    _markerImage = [TBStation markerImageForState:[self state]];
+//    _markerImage = [TBStation markerImageForColor:self.indicatorColor];
+    _selectedMarkerImage = _markerImage;
+//    _selectedMarkerImage = [TBStation selectedMarkerImageForColor:self.indicatorColor];
     
     _isMyLocation = [_sid isEqualToString:@"0"];
     if (_isMyLocation)
     {
         _stationName = NSLocalizedString(@"MYLOCATION_TITLE", nil);
-        _availBikeDesc = NSLocalizedString(@"MYLOCATION_DESC", nil);
-        _availSpaceDesc = [NSString string];
+//        _availBikeDesc = NSLocalizedString(@"MYLOCATION_DESC", nil);
+//        _availSpaceDesc = [NSString string];
         _listImage = [UIImage imageNamed:@"list-current-location.png"];
     }
 }
