@@ -62,6 +62,7 @@
 		F4AF49961896C9100045612D /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49931896C9100045612D /* bikebell.wav */; };
 		F4AF49971896C9100045612D /* TBTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF49951896C9100045612D /* TBTimerViewController.m */; };
 		F4AF49991896C91E0045612D /* NoFavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49981896C91E0045612D /* NoFavoritesView.xib */; };
+		F4AF499F189904790045612D /* NSUserDefaults+OneOff.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF499E189904790045612D /* NSUserDefaults+OneOff.m */; };
 		F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */; };
 		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
@@ -172,6 +173,8 @@
 		F4AF49941896C9100045612D /* TBTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBTimerViewController.h; path = telobike/TBTimerViewController.h; sourceTree = "<group>"; };
 		F4AF49951896C9100045612D /* TBTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBTimerViewController.m; path = telobike/TBTimerViewController.m; sourceTree = "<group>"; };
 		F4AF49981896C91E0045612D /* NoFavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoFavoritesView.xib; path = telobike/NoFavoritesView.xib; sourceTree = "<group>"; };
+		F4AF499D189904790045612D /* NSUserDefaults+OneOff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+OneOff.h"; sourceTree = "<group>"; };
+		F4AF499E189904790045612D /* NSUserDefaults+OneOff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+OneOff.m"; sourceTree = "<group>"; };
 		F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPlacemarkAnnotation.h; sourceTree = "<group>"; };
 		F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPlacemarkAnnotation.m; sourceTree = "<group>"; };
 		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 				F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */,
 				F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */,
 				F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */,
+				F4AF499D189904790045612D /* NSUserDefaults+OneOff.h */,
+				F4AF499E189904790045612D /* NSUserDefaults+OneOff.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -631,6 +636,7 @@
 				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
 				F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */,
 				F42E60BB17F123590099A1D0 /* Utils.m in Sources */,
+				F4AF499F189904790045612D /* NSUserDefaults+OneOff.m in Sources */,
 				F42E60AE17F11A2C0099A1D0 /* TBListViewController.m in Sources */,
 				F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */,
 				F47B5CC017F1293600D88614 /* TBFavorites.m in Sources */,

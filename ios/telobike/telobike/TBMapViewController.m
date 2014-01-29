@@ -26,6 +26,7 @@
 #import "TBFeedbackMailComposeViewController.h"
 #import "UIViewController+GAI.h"
 #import "TBPlacemarkAnnotation.h"
+#import "NSUserDefaults+OneOff.h"
 
 @interface TBMapViewController () <MKMapViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -320,14 +321,10 @@
 }
 
 - (IBAction)toggleStationFavorite:(id)sender {
-    static NSString* key = @"do_not_show_favorites_alert";
-    BOOL showFavoritesAlert = ![[NSUserDefaults standardUserDefaults] boolForKey:key];
-#ifdef DEBUG
-    showFavoritesAlert = YES;
-#endif
-    if (showFavoritesAlert && !self.openedStation.favorite) {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"This station has been added to your list of favorite stations", nil) message:NSLocalizedString(@"Tap again to unstar", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key]; // do not show this alert again
+    if (!self.openedStation.favorite) {
+        if ([[NSUserDefaults standardUserDefaults] oneOff:@"favorites_alert_one_off"]) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"This station has been added to your list of favorite stations", nil) message:NSLocalizedString(@"Tap again to unstar", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+        }
     }
     
     [self.openedStation setFavorite:!self.openedStation.isFavorite];
