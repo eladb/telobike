@@ -19,9 +19,8 @@
 #import "TBFeedbackMailComposeViewController.h"
 #import "UIViewController+GAI.h"
 
-@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
+@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
-@property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) NSArray* sortedStations;
 
 @end
@@ -33,14 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager startUpdatingLocation];
-    self.locationManager.delegate = self;
-    
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
     [self observeValueOfKeyPath:@"stations" object:[TBServer instance] with:^(id new, id old) {
-        self.sortedStations = [self sortByDistance:[TBServer instance].stations];
+        self.sortedStations = [[TBServer instance] sortStationsByDistance:[TBServer instance].stations];
         [self.refreshControl endRefreshing];
         [self.tableView reloadData];
     }];
@@ -70,30 +65,6 @@
 
 - (IBAction)refresh:(id)sender {
     [[TBServer instance] reloadStations:nil];
-}
-
-// returns an array sorted by distance from current location (if user approved location)
-- (NSArray*)sortByDistance:(NSArray*)stations {
-    CLLocation* location = self.locationManager.location;
-    
-    // no location, sort array from north to south by fixing current location
-    // to the north of city center.
-    if (!location) {
-        location = [[CLLocation alloc] initWithLatitude:0.0f longitude:[TBServer instance].city.cityCenter.coordinate.longitude];
-    }
-
-    return [stations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        TBStation* station1 = obj1;
-        TBStation* station2 = obj2;
-        CLLocationDistance distance1 = [station1 distanceFromLocation:location];
-        CLLocationDistance distance2 = [station2 distanceFromLocation:location];
-        return distance1 - distance2;
-    }];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    
 }
 
 

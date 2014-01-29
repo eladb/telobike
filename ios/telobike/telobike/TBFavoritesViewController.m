@@ -57,10 +57,12 @@
 }
 
 - (void)updateFavoritesWithReload:(BOOL)reload {
-    self.favoriteStations = [[TBServer instance].stations filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    NSArray* favorites = [[TBServer instance].stations filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         TBStation* station = evaluatedObject;
         return station.isFavorite;
     }]];
+    
+    self.favoriteStations = [[TBServer instance] sortStationsByDistance:favorites];
     
     self.emptyLabel.hidden = self.favoriteStations.count > 0;
     self.tableView.scrollEnabled = self.emptyLabel.hidden;
