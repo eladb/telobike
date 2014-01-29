@@ -27,6 +27,7 @@
 #import "UIViewController+GAI.h"
 #import "TBPlacemarkAnnotation.h"
 #import "NSUserDefaults+OneOff.h"
+#import "UIAlertView+Blocks.h"
 
 @interface TBMapViewController () <MKMapViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -353,10 +354,24 @@
 
 
 - (IBAction)navigateToStation:(id)sender {
-    NSString* dest = [NSString stringWithFormat:@"%g,%g", self.openedStation.coordinate.latitude, self.openedStation.coordinate.longitude];
-    if (![TBGoogleMapsRouting routeFromAddress:@"" toAddress:dest]) {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Google Maps is not installed", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    void(^openGoogleMaps)(void) = ^{
+        NSString* dest = [NSString stringWithFormat:@"%g,%g", self.openedStation.coordinate.latitude, self.openedStation.coordinate.longitude];
+        if (![TBGoogleMapsRouting routeFromAddress:@"" toAddress:dest]) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Google Maps is not installed", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+        }
+    };
+    
+    if ([[NSUserDefaults standardUserDefaults] oneOff:@"navigate_alert_one_off"]) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Navigate to Station", nil) message:NSLocalizedString(@"Google Maps will be used to route you from your current location to this station", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitle:NSLocalizedString(@"OK", nil) completion:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                openGoogleMaps();
+            }
+        }] show];
     }
+    else {
+        openGoogleMaps();
+    }
+    
 }
 
 #pragma mark - My location
@@ -396,23 +411,5 @@
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     return [self.kmlParser rendererForOverlay:overlay];
 }
-
-//#pragma mark - Placemark search result
-//
-//- (void)setSelectedPlacemark:(TBPlacemarkAnnotation *)selectedPlacemark {
-//
-//    if (selectedPlacemark) {
-//        [self deselectAllAnnoations];
-//        self.selectedStation = nil;
-//
-//        // only remove previous placemark if there is a new one to select
-//        // otherwise, we just want to deselect it.
-//        [self.mapView removeAnnotation:_selectedPlacemark];
-//        [self.mapView addAnnotation:selectedPlacemark];
-//    }
-//    
-//    _selectedPlacemark = selectedPlacemark;
-//    [self.mapView selectAnnotation:selectedPlacemark animated:YES];
-//}
 
 @end
