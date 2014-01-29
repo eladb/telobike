@@ -170,14 +170,14 @@
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="7YE-2g-92l"/>
-                                            <barButtonItem image="station-report" id="7b9-8D-VaQ" userLabel="report">
-                                                <connections>
-                                                    <action selector="sendStationReport:" destination="QUy-BD-bpt" id="d6h-0X-NCH"/>
-                                                </connections>
-                                            </barButtonItem>
                                             <barButtonItem image="station-navigation" id="kkb-eM-j8j" userLabel="navigate">
                                                 <connections>
                                                     <action selector="navigateToStation:" destination="QUy-BD-bpt" id="vhf-aZ-xxs"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem image="station-report" id="7b9-8D-VaQ" userLabel="report">
+                                                <connections>
+                                                    <action selector="sendStationReport:" destination="QUy-BD-bpt" id="d6h-0X-NCH"/>
                                                 </connections>
                                             </barButtonItem>
                                         </items>
