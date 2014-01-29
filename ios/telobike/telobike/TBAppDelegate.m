@@ -8,6 +8,7 @@
 
 #import <Appirater.h>
 #import <GoogleAnalytics-iOS-SDK/GAI.h>
+#import <Crashlytics/Crashlytics.h>
 
 #import "TBAppDelegate.h"
 #import "TBServer.h"
@@ -22,7 +23,6 @@
 @implementation TBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
     [TestFlight takeOff:@"6deef968-4bcc-4e57-ab70-cf075da6f8a0"];
     
     // rate app
@@ -39,6 +39,8 @@
     // analytics
     [GAI sharedInstance].dispatchInterval = 20;
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-27122332-1"];
+
+    [Crashlytics startWithAPIKey:@"d164a3f45648ccbfa001f8958d403135d23a4dbf"];
 
     // push notifications
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];

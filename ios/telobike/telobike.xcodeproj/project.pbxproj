@@ -48,6 +48,7 @@
 		F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */; };
 		F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */; };
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
+		F48870B618994B9900AA1143 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48870B518994B9900AA1143 /* Crashlytics.framework */; };
 		F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02618514054003BD3A6 /* TBFavoritesViewController.m */; };
 		F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */; };
 		F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */; };
@@ -152,6 +153,7 @@
 		F47B5D0017F797DA00D88614 /* UIColor+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
 		F47B5D0117F797DA00D88614 /* UIColor+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
 		F47B5D0F17F7CFB700D88614 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		F48870B518994B9900AA1143 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F498A02518514054003BD3A6 /* TBFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBFavoritesViewController.h; path = telobike/TBFavoritesViewController.h; sourceTree = "<group>"; };
 		F498A02618514054003BD3A6 /* TBFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBFavoritesViewController.m; path = telobike/TBFavoritesViewController.m; sourceTree = "<group>"; };
 		F498A0291851450F003BD3A6 /* TBTransparentToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTransparentToolbar.h; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */,
 				F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */,
 				F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */,
+				F48870B618994B9900AA1143 /* Crashlytics.framework in Frameworks */,
 				F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */,
 				F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */,
 				51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */,
@@ -261,6 +264,7 @@
 		F470EBE517F11589006FD464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F48870B518994B9900AA1143 /* Crashlytics.framework */,
 				F40672D8185B43940078860B /* CoreAudio.framework */,
 				F47B5D0F17F7CFB700D88614 /* ImageIO.framework */,
 				F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */,
@@ -485,6 +489,7 @@
 				F470EBE017F11589006FD464 /* Frameworks */,
 				F470EBE117F11589006FD464 /* Resources */,
 				B2B8448F929D4572B5A2E7D3 /* Copy Pods Resources */,
+				F48870B418994B6E00AA1143 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -613,6 +618,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F48870B418994B6E00AA1143 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run d164a3f45648ccbfa001f8958d403135d23a4dbf";
 		};
 /* End PBXShellScriptBuildPhase section */
 
