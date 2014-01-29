@@ -351,9 +351,9 @@
         <image name="TabBar-Map" width="25" height="25"/>
         <image name="TabBar-NearMe" width="24" height="25"/>
         <image name="Timer" width="27" height="27"/>
-        <image name="station-favorite-unselected" width="27" height="26"/>
-        <image name="station-navigation" width="16" height="27"/>
-        <image name="station-report" width="25" height="27"/>
+        <image name="station-favorite-unselected" width="25" height="25"/>
+        <image name="station-navigation" width="25" height="25"/>
+        <image name="station-report" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
