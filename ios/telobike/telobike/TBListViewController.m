@@ -19,7 +19,7 @@
 #import "TBFeedbackMailComposeViewController.h"
 #import "UIViewController+GAI.h"
 
-@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) NSArray* sortedStations;
@@ -35,6 +35,7 @@
     
     self.locationManager = [[CLLocationManager alloc] init];
     [self.locationManager startUpdatingLocation];
+    self.locationManager.delegate = self;
     
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
@@ -89,6 +90,12 @@
         return distance1 - distance2;
     }];
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    
+}
+
 
 #pragma mark - Table view data source
 
