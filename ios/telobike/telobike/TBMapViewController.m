@@ -324,7 +324,7 @@
 - (IBAction)toggleStationFavorite:(id)sender {
     if (!self.openedStation.favorite) {
         if ([[NSUserDefaults standardUserDefaults] oneOff:@"favorites_alert_one_off"]) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"This station has been added to your list of favorite stations", nil) message:NSLocalizedString(@"Tap again to unstar", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Star/Unstar Station", nil) message:NSLocalizedString(@"This station has been added to your list of favorites. Tap again to unstar", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
         }
     }
     
