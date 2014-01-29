@@ -20,6 +20,7 @@
 - (void)reloadCity:(void(^)())completion;
 - (void)postPushToken:(NSString*)token completion:(void(^)(void))completion;
 
+- (CLLocation*)currentLocation;
 - (NSArray*)sortStationsByDistance:(NSArray*)stations;
 
 @end

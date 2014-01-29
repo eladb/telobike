@@ -236,11 +236,11 @@ static const NSInteger kMarginalBikeAmount = 3;
     return [[TBStation alloc] initWithDictionary:[NSDictionary dictionaryWithObject:@"0" forKey:@"sid"]];
 }
 
-- (CLLocationDistance)distanceFromLocation:(CLLocation*)aLocation
-{
-    CLLocation* stationLocation = [[CLLocation new] initWithLatitude:self.latitude longitude:self.longitude];
-    return [aLocation distanceFromLocation:stationLocation];
-}
+//- (CLLocationDistance)distanceFromLocation:(CLLocation*)aLocation
+//{
+//    CLLocation* stationLocation = [[CLLocation new] initWithLatitude:self.latitude longitude:self.longitude];
+//    return [aLocation distanceFromLocation:stationLocation];
+//}
 
 #pragma mark - MKAnnotation
 

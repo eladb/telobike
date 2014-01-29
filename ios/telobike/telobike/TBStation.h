@@ -67,7 +67,7 @@ typedef enum {
 - (id)initWithDictionary:(NSDictionary*)dict;
 + (TBStation*)myLocationStation;
 
-- (CLLocationDistance)distanceFromLocation:(CLLocation*)location;
+//- (CLLocationDistance)distanceFromLocation:(CLLocation*)location;
 
 - (BOOL)queryKeyword:(NSString*)keyword;
 

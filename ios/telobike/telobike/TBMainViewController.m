@@ -32,7 +32,6 @@
 
 // search
 @property (strong, nonatomic) UIBarButtonItem* searchBarButtonItem;
-@property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) MKDistanceFormatter* distanceFormatter;
 
@@ -82,7 +81,6 @@
     self.searchDisplayController.searchBar.tintColor = [UIColor tintColor];
     [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:NSStringFromClass([TBSearchResultTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"TBSearchResultTableViewCell"];
 
-    self.locationManager = [[CLLocationManager alloc] init];
     self.distanceFormatter = [[MKDistanceFormatter alloc] init];
     self.distanceFormatter.units = MKDistanceFormatterUnitsMetric;
     self.distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleAbbreviated;
@@ -110,18 +108,9 @@
         tableView.contentInset = insets;
     }
     
-//    if ([viewController isKindOfClass:[InAppSettingsViewController class]]) {
-//        UITableView* tableView = self.settingsViewController.settingsTableView;
-//        UIEdgeInsets insets = tableView.contentInset;
-//        insets.top = navigationController.navigationBar.frame.origin.y + navigationController.navigationBar.frame.size.height;
-//        insets.bottom = self.tabBar.frame.size.height;
-//        tableView.contentInset = insets;
-//    }
-    
     viewController.navigationItem.rightBarButtonItems = @[ /*self.sideMenuBarButtonItem, */self.searchBarButtonItem ];
     self.tabBar.selectedItem = viewController.tabBarItem;
 }
-
 
 #pragma mark - Global actions
 
@@ -219,7 +208,7 @@
     [self geocodeSearch:searchString completion:^(NSArray *placemarks) {
         
         // filter results only from the city
-        NSArray* placemarkResults = [placemarks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        NSArray* results = [placemarks filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
             SVPlacemark* placemark = evaluatedObject;
             
             if (![city.region containsCoordinate:placemark.coordinate]) {
@@ -234,29 +223,38 @@
             return YES;
         }]];
         
-        // now also search stations
+        // add stations that are nearby any of the placemarks
+        results = [results arrayByAddingObjectsFromArray:[self stationsNearPlacemarks:results]];
+        
+        // add stations with names matching the search query
         NSArray* stationsResults = [server.stations filteredStationsArrayWithQuery:searchString];
+        results = [results arrayByAddingObjectsFromArray:stationsResults];
         
-        // combine results
-        NSArray* results = [placemarkResults arrayByAddingObjectsFromArray:stationsResults];
-        
-        CLLocation* referenceLocation = self.locationManager.location;
-        if (!referenceLocation) {
-            referenceLocation = [[CLLocation alloc] initWithLatitude:0.0f longitude:50.0];
-        }
-        
-        self.searchResults = [results sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            CLLocation* location1 = [self locationFromSearchResult:obj1];
-            CLLocation* location2 = [self locationFromSearchResult:obj2];
-            CLLocationDistance distance1 = [referenceLocation distanceFromLocation:location1];
-            CLLocationDistance distance2 = [referenceLocation distanceFromLocation:location2];
-            return distance1 - distance2;
-        }];
-        
+        // uniqify
+        results = [[NSSet setWithArray:results] allObjects];
+
+        // sort by distance
+        self.searchResults = [[TBServer instance] sortStationsByDistance:results];
         [controller.searchResultsTableView reloadData];
     }];
     
     return NO;
+}
+
+- (NSArray*)stationsNearPlacemarks:(NSArray*)placemarks {
+    NSArray* stations = [TBServer instance].stations;
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+    for (SVPlacemark* placemark in placemarks) {
+        // for close by stations (< 1km)
+        for (TBStation* station in stations) {
+            CLLocationDistance distance = [station.location distanceFromLocation:placemark.location];
+            if (distance <= 500) {
+                [result addObject:station];
+            }
+        }
+    }
+
+    return result;
 }
 
 - (void)geocodeSearch:(NSString*)query completion:(void(^)(NSArray* placemarks))completion {
@@ -298,7 +296,7 @@
     NSString* title;
     UIImage* image;
     CLLocationDistance distance = -1.0f;
-    CLLocation* currentLocation = self.locationManager.location;
+    CLLocation* currentLocation = [TBServer instance].currentLocation;
     
     if ([result isKindOfClass:[SVPlacemark class]]) {
         SVPlacemark* placemark = result;

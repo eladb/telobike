@@ -143,6 +143,10 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
 
 #pragma mark - Sort
 
+- (CLLocation *)currentLocation {
+    return self.locationManager.location;
+}
+
 - (NSArray*)sortStationsByDistance:(NSArray*)stations {
     CLLocation* location = self.locationManager.location;
     
@@ -155,8 +159,8 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
     return [stations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         TBStation* station1 = obj1;
         TBStation* station2 = obj2;
-        CLLocationDistance distance1 = [station1 distanceFromLocation:location];
-        CLLocationDistance distance2 = [station2 distanceFromLocation:location];
+        CLLocationDistance distance1 = [station1.location distanceFromLocation:location];
+        CLLocationDistance distance2 = [station2.location distanceFromLocation:location];
         return distance1 - distance2;
     }];
 }
