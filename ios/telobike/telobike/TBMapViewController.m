@@ -333,19 +333,32 @@
 }
 
 - (IBAction)sendStationReport:(id)sender {
-    TBFeedbackMailComposeViewController* vc = [[TBFeedbackMailComposeViewController alloc] initWithFeedbackOption:TBFeedbackActionSheetService];
-    NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Problem in station %@", nil), self.openedStation.sid];
-    vc.mailComposeDelegate = self;
-    [vc setSubject:subject];
+    void(^openMailComposer)(void) = ^{
+        TBFeedbackMailComposeViewController* vc = [[TBFeedbackMailComposeViewController alloc] initWithFeedbackOption:TBFeedbackActionSheetService];
+        NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Problem in station %@", nil), self.openedStation.sid];
+        vc.mailComposeDelegate = self;
+        [vc setSubject:subject];
+        
+        NSString* body = [NSString stringWithFormat:NSLocalizedString(@"Please describe the problem:\n\n\n=====================\nStation ID: %@\nName: %@\nAddress: %@", nil),
+                          self.openedStation.sid,
+                          self.openedStation.stationName,
+                          self.openedStation.address ? self.openedStation.address : NSLocalizedString(@"N/A", nil)];
+        
+        [vc setMessageBody:body isHTML:NO];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    };
     
-    NSString* body = [NSString stringWithFormat:NSLocalizedString(@"Please describe the problem:\n\n\n=====================\nStation ID: %@\nName: %@\nAddress: %@", nil),
-                      self.openedStation.sid,
-                      self.openedStation.stationName,
-                      self.openedStation.address ? self.openedStation.address : NSLocalizedString(@"N/A", nil)];
-    
-    [vc setMessageBody:body isHTML:NO];
-    
-    [self presentViewController:vc animated:YES completion:nil];
+    if ([[NSUserDefaults standardUserDefaults] oneOff:@"report_oneoff"]) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Contact Customer Service", nil) message:NSLocalizedString(@"An email addressed to Telofun customer service will be opened so you can report any issues with stations or individual bicycles", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitle:NSLocalizedString(@"OK", nil) completion:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                openMailComposer();
+            }
+        }] show];
+    }
+    else {
+        openMailComposer();
+    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
