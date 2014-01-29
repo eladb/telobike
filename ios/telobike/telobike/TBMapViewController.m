@@ -372,7 +372,8 @@
 #pragma mark - Routes
 
 - (void)showOrHideRoutesOnMap {
-    BOOL showRoutes = [[NSUserDefaults standardUserDefaults] boolForKey:@"show_bicycle_routes"];
+    id showBicycleRoutesValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"show_bicycle_routes"];
+    BOOL showRoutes = showBicycleRoutesValue ? [showBicycleRoutesValue boolValue] : YES;
     
     if (showRoutes && !self.routesVisible) {
         if (!self.kmlParser) {
