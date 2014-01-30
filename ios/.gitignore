@@ -2,3 +2,5 @@ Pods
 xcshareddata
 xcuserdata
 *.xcworkspace
+xcuserdata/*
+project.xcworkspace/*
