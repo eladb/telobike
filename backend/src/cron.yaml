@@ -1,8 +1,0 @@
-cron:
-- description: refresh stations
-  url: /stations/refresh?city=tlv
-  schedule: every 5 minutes
-  
-#- description: refresh paris stations
-#  url: /stations/refresh?city=paris
-#  schedule: every 5 minutes

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import "EGORefreshTableHeaderView.h"
 #import "Station.h"
 
 @protocol RootViewControllerDelegate;
@@ -19,14 +18,11 @@
      UISearchBarDelegate, 
      UINavigationControllerDelegate,
      UIScrollViewDelegate,
-     EGORefreshTableHeaderDelegate,
      MFMailComposeViewControllerDelegate>
 {
     NSArray* stations;
     NSString* filter;
-    NSDate* lastRefresh;
 
-    EGORefreshTableHeaderView* _refreshHeaderView;
     BOOL _isLoading;
     
     CGFloat _myLocationCellHeight;

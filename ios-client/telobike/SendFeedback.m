@@ -17,10 +17,9 @@
   if (self)
   {
     NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSString* deviceid = [[UIDevice currentDevice] uniqueIdentifier];
     [self setToRecipients:[NSArray arrayWithObject:@"telobike@citylifeapps.com"]];
     [self setSubject:NSLocalizedString(@"telobike Feedback", @"feedback mail subject")];
-    [self setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT", nil), version, deviceid] isHTML:NO];
+    [self setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT", nil), version] isHTML:NO];
   }
   return self;
 }

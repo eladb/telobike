@@ -31,13 +31,11 @@
 - (void)openMailForAppFeedback
 {
     MFMailComposeViewController* viewController = [[[MFMailComposeViewController alloc] init] autorelease];
-    
     NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSString* deviceid = [[UIDevice currentDevice] uniqueIdentifier];
     [viewController setMailComposeDelegate:self];
     [viewController setToRecipients:[NSArray arrayWithObject:@"telobike@citylifeapps.com"]];
     [viewController setSubject:NSLocalizedString(@"Telobike App Feedback", @"feedback mail subject")];
-    [viewController setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT_APP", nil), version, deviceid] isHTML:NO];
+    [viewController setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT_APP", nil), version] isHTML:NO];
     [delegate presentModalViewController:viewController animated:YES];
 }
 
@@ -46,12 +44,11 @@
     MFMailComposeViewController* viewController = [[[MFMailComposeViewController alloc] init] autorelease];
     
     NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSString* deviceid = [[UIDevice currentDevice] uniqueIdentifier];
     [viewController setMailComposeDelegate:self];
     [viewController setToRecipients:[NSArray arrayWithObject:[[City instance] mail]]];
     [viewController setCcRecipients:[NSArray arrayWithObject:@"telobike@citylifeapps.com"]];
     [viewController setSubject:NSLocalizedString(@"Service Feedback (via Telobike)", @"feedback mail subject")];
-    [viewController setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT", nil), version, deviceid] isHTML:NO];
+    [viewController setMessageBody:[NSString stringWithFormat:NSLocalizedString(@"MAIL_BODY_FMT", nil), version] isHTML:NO];
     [delegate presentModalViewController:viewController animated:YES];
 }
 

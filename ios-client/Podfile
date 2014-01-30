@@ -1,0 +1,8 @@
+platform :ios, '6.0'
+
+pod 'NUI'
+pod 'ASIHTTPRequest'
+pod 'SBJson'
+pod 'InAppSettingsKit'
+pod 'Appirater'
+pod 'GoogleAnalytics-iOS-SDK'

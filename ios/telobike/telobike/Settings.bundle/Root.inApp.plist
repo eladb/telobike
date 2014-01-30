@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Settings</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Station Names</string>
+			<key>Key</key>
+			<string>stationsLanguage</string>
+			<key>DefaultValue</key>
+			<string>auto</string>
+			<key>Titles</key>
+			<array>
+				<string>Automatic</string>
+				<string>Hebrew</string>
+				<string>English</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>auto</string>
+				<string>he</string>
+				<string>en</string>
+			</array>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>show_bicycle_routes</string>
+			<key>Title</key>
+			<string>Bicycle Routes on Map</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Tel-o-Fun</string>
+		</dict>
+        
+		<dict>
+			<key>Type</key>
+			<string>IASKMailComposeSpecifier</string>
+			<key>Title</key>
+			<string>Email Customer Support</string>
+			<key>IASKMailComposeToRecipents</key>
+			<array>
+				<string>info@fsm-tlv.com</string>
+			</array>
+			<key>Key</key>
+			<string>feedback</string>
+			<key>IASKMailComposeCcRecipents</key>
+			<array>
+				<string>telobike@citylifeapps.com</string>
+			</array>
+			<key>IASKMailComposeSubject</key>
+			<string>Telobike Feedback</string>
+		</dict>
+        
+        
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Telobike for iPhone</string>
+		</dict>
+
+		<dict>
+			<key>Type</key>
+			<string>IASKMailComposeSpecifier</string>
+			<key>Title</key>
+			<string>Send us Feedback</string>
+			<key>IASKMailComposeToRecipents</key>
+			<array>
+				<string>telobike@citylifeapps.com</string>
+			</array>
+			<key>Key</key>
+			<string>feedback</string>
+			<key>IASKMailComposeSubject</key>
+			<string>Telobike Feedback</string>
+		</dict>
+        
+        <dict>
+            <key>Type</key>
+            <string>IASKOpenURLSpecifier</string>
+            <key>Title</key>
+            <string>App Store Review</string>
+            <key>File</key>
+            <string>itms-apps://itunes.apple.com/app/id436915919</string>
+        </dict>
+
+		<dict>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>Title</key>
+			<string>Telobike on Facebook</string>
+			<key>File</key>
+			<string>https://www.facebook.com/telobike</string>
+		</dict>
+
+
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
+            <key>Title</key>
+            <string>About</string>
+        </dict>
+
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Created by Nir and Elad</string>
+            <key>Key</key>
+            <string>created_by</string>
+        </dict>
+
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Version</string>
+            <key>Key</key>
+            <string>version</string>
+            <key>DefaultValue</key>
+            <string>2.0</string>
+        </dict>
+
+
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>File</key>
+			<string>OpenSource</string>
+			<key>Title</key>
+			<string>Open Source Credits</string>
+		</dict>
+        
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>Title</key>
+	<string>Telobike</string>
+</dict>
+</plist>

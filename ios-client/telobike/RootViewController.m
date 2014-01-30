@@ -19,6 +19,13 @@
 #import "Analytics.h"
 #import "MyLocationTableViewCell.h"
 
+@interface RootViewController()
+{
+    UIRefreshControl* _refreshControl;
+}
+
+@end
+
 static const NSTimeInterval kMinimumAutorefreshInterval = 5 * 60; // 5 minutes
 static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 
@@ -59,12 +66,20 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     [_searchBar release];
     [stations release];
     [filter release];
-    [lastRefresh release];
     [super dealloc];
 }
 
 - (void)viewDidLoad
 {
+    _refreshControl = [[UIRefreshControl alloc] init];
+    
+    [_refreshControl addTarget:self
+                        action:@selector(refreshStations:)
+              forControlEvents:UIControlEventValueChanged];
+    
+    [_tableView addSubview:_refreshControl];
+    [_tableView sendSubviewToBack:_refreshControl];
+
     [[AppDelegate app] addLocationChangeObserver:self selector:@selector(locationChanged:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kIASKAppSettingChanged object:nil];
@@ -77,14 +92,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Feedback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(about:)] autorelease];
         
     [self hideSearchBarAnimated:NO];
-    
-    if (!_refreshHeaderView) 
-    {
-      _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, -_tableView.bounds.size.height, self.view.frame.size.width, _tableView.bounds.size.height)];
-      _refreshHeaderView.delegate = self;
-      [_tableView addSubview:_refreshHeaderView];
-    }
-  
     [self showSearchBarAnimated:NO];
     
     BOOL showOnlyFavorites = [[NSUserDefaults standardUserDefaults] boolForKey:kFilterFavoritesDefaultsKey];
@@ -102,7 +109,7 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     [_noFavorites2 setText:NSLocalizedString(@"FAVORITES_EMPTY_LIST_2", nil)];
     
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(hideSearchBarFirstTime:) userInfo:nil repeats:NO];
-
+    
     [super viewDidLoad];
 }
 
@@ -110,13 +117,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
 {
     [super viewWillAppear:animated];
 
-    /*
-    // if the last refresh was more than 5 minutes ago, refresh. otherwise, just just sort by distance.
-    if (!lastRefresh || [[NSDate date] timeIntervalSinceDate:lastRefresh] > kMinimumAutorefreshInterval)
-    {
-        [self refreshStationsWithError:NO];
-    }
-*/
     [self sortStations];
     [_delegate rootViewControllerWillAppear:self];
 }    
@@ -133,16 +133,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     if (![_searchBar isFirstResponder]) {
         [self hideSearchBarAnimated:YES];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
 }
 
 #pragma mark - Table view
@@ -315,33 +305,6 @@ static NSString* kFilterFavoritesDefaultsKey = @"filterFavorites";
     [self searchBarSearchButtonClicked:_searchBar];
 }
 
-#pragma mark Refresh
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
-{
-    [self refreshStations:nil];
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
-{
-    return _isLoading;
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
-{
-    return lastRefresh;
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
 #pragma mark Feedback
 
 - (void)about:(id)sender
@@ -496,7 +459,7 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-  [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)settingsChanged:(NSNotification*)n
@@ -514,15 +477,12 @@ NSInteger compareDistance(id stationObj1, id stationObj2, void* ctx)
     _isLoading = YES;
     [[StationList instance] refreshStationsWithCompletion:^
     {
-        [lastRefresh release];
-        lastRefresh = [NSDate new];
         [self sortStations];
         _isLoading = NO;
-        
-        [_refreshHeaderView refreshLastUpdatedDate];
-        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+        [_refreshControl endRefreshing];
     } failure:^
     {
+        [_refreshControl endRefreshing];
         if (showError)
         {
             [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Telobike", nil) message:NSLocalizedString(@"REFRESH_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"REFRESH_ERROR_BUTTON", nil) otherButtonTitles:nil] autorelease] show];

@@ -35,8 +35,6 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 - (void)dealloc
 {
-    [[Analytics shared] stopTracker];
-    
     [_mapView release];
     [_listView release];
     [_window release];
@@ -54,6 +52,18 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [[Analytics shared] startTracker];
     [[Analytics shared] eventAppStart];
     
+    
+    
+    return YES;
+    
+    UIColor* barTint = [UIColor blackColor];
+    UIColor* tint = [UIColor whiteColor];
+    [[UITabBar appearance] setTintColor:tint];
+    [[UITabBar appearance] setBarTintColor:barTint];
+    [[UINavigationBar appearance] setBarTintColor:barTint];
+    [[UINavigationBar appearance] setTintColor:tint];
+    [[UIView appearance] setTintColor:tint];
+    
     _favorites = [[Favorites alloc] init];
     
     if (!_locationManager)
@@ -61,7 +71,6 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        _locationManager.purpose = NSLocalizedString(@"LOCATION_PURPOSE", nil);
         [_locationManager startUpdatingLocation];
     }
     
@@ -79,7 +88,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
 
     self.mainController.tabBarControllerDelegate = self;
-    
+
     return YES;
 }
 
@@ -180,12 +189,12 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 
 - (void)presentModalViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    [[self mainController] presentModalViewController:viewController animated:animated];
+    [[self mainController] presentViewController:viewController animated:animated completion:nil];
 }
 
 - (void)dismissModalViewControllerAnimated:(BOOL)animated
 {
-    [[self mainController] dismissModalViewControllerAnimated:animated];
+    [[self mainController] dismissViewControllerAnimated:animated completion:nil];
 }
 
 #pragma mark - Timer
@@ -226,7 +235,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
     infoViewController.delegate = self;
     UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:infoViewController] autorelease];
     navigationController.navigationBar.tintColor = _mapView.navigationController.navigationBar.tintColor;
-    [[self mainController] presentModalViewController:navigationController animated:YES];
+    [[self mainController] presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - Info
@@ -240,7 +249,7 @@ NSString* const kLocationChangedNotification = @"kLocationChangedNotification";
 - (void)infoViewControllerDidClose:(InfoViewController *)viewController
 {
     AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [[app mainController] dismissModalViewControllerAnimated:YES];
+    [[app mainController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Push

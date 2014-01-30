@@ -7,16 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GANTracker.h"
+#import <GoogleAnalytics-iOS-SDK/GAI.h>
 
-@interface Analytics : NSObject <GANTrackerDelegate>
+@interface Analytics : NSObject
 
 + (Analytics*)shared;
 
 #pragma mark - Lifetime
 
 - (void)startTracker;
-- (void)stopTracker;
 
 #pragma mark - Pageviews
 
