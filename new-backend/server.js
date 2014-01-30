@@ -7,6 +7,8 @@ var csvdb = require('csvdb');
 var telofun_api = require('./telofun-api');
 var telofun_mapper = require('./telofun-mapper');
 
+console.log('telobike server is running...');
+
 var overrides_url = 'https://docs.google.com/spreadsheet/pub?key=0AuP9sJn-WbrXdFdOV1lPV09EZDBrQ2RlZzM5ZmhPb2c&output=csv';
 var overrides_db = csvdb(overrides_url, { autofetch: 30 * 1000 }); // refresh overrides every 30s
 
@@ -14,6 +16,7 @@ setTimeout(function() {
   console.log(overrides_db.entries);
 }, 5000);
 
+server.use(express.logger());
 server.use(express.methodOverride());
 server.use(cors());
 server.use(express.favicon(path.join(__dirname, 'public/img/favicon.png')));
@@ -26,10 +29,7 @@ function read_stations(callback) {
   logule.trace('reading station information from tel-o-fun');
 
   return telofun_api(function(err, updated_stations) {
-
-    console.log(updated_stations);
-
-    if (err) {
+    if (err || !updated_stations) {
       console.error('error: unable to read telofun stations:', err);
       return callback(err);
     }
@@ -104,7 +104,7 @@ server.get('/cities/tlv', function(req, res) {
   city.city_center = "32.0664,34.7779";
   city.city_name = "תל-אביב יפו";
   city['city_name.en'] = "Tel-Aviv";
-  city.disclaimer = "Horray! The recent issues with the Tel-o-Fun database have been resolved. Enjoy cycling! Nir and Elad";
+  city.disclaimer = "Welcome to Telobike. We created this app as a public service for all the awesome people of Tel-Aviv. Let us know what you think! Nir and Elad.";
   city.info_url = "http://telobike.citylifeapps.com/static/en/tlv.html";
   city.info_url_he = "http://telobike.citylifeapps.com/static/he/tlv.html";
   city.last_update = "2011-06-15 18:47:50.982111";
@@ -113,6 +113,11 @@ server.get('/cities/tlv', function(req, res) {
   city.service_name= "תל-אופן";
   city['service_name.en'] = "Tel-o-Fun";
   return res.send(city);
+});
+
+server.post('/push', function(req, res, next) {
+  console.log('received push token:', req.url);
+  return res.send('OK');
 });
 
 server.post('/_deploy_dskfjh484jk09k', function(req, res) {
