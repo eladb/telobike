@@ -1,0 +1,37 @@
+PODS:
+  - Appirater (2.0.1)
+  - ASIHTTPRequest (1.8.1):
+    - ASIHTTPRequest/ASIWebPageRequest
+    - ASIHTTPRequest/CloudFiles
+    - ASIHTTPRequest/S3
+    - Reachability
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.1):
+    - Reachability
+  - ASIHTTPRequest/CloudFiles (1.8.1):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.1):
+    - Reachability
+  - GoogleAnalytics-iOS-SDK (3.0.1)
+  - InAppSettingsKit (1.1)
+  - NUI (0.3.5)
+  - Reachability (3.1.1)
+  - SBJson (3.2)
+
+DEPENDENCIES:
+  - Appirater
+  - ASIHTTPRequest
+  - GoogleAnalytics-iOS-SDK
+  - InAppSettingsKit
+  - NUI
+  - SBJson
+
+SPEC CHECKSUMS:
+  Appirater: 10cdcb23edc2d3b225afbb4a7d110539adac9b55
+  ASIHTTPRequest: 162783e0cd71bdd3ff1ceed0cd5fa9505e0116a8
+  GoogleAnalytics-iOS-SDK: 4a788a66154b395717a31bfec1050f8c47b6d122
+  InAppSettingsKit: cf2c4193c3269d6acf996f7975f310d18a5e1e3c
+  NUI: ad4c41528632f07dafe87764ab29fcac0000895f
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  SBJson: abc2bf2baef456d5dae213f9826fe2b6fdf19861
+
+COCOAPODS: 0.25.0
