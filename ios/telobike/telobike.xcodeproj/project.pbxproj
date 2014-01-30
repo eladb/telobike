@@ -48,7 +48,6 @@
 		F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */; };
 		F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */; };
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
-		F48870B618994B9900AA1143 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48870B518994B9900AA1143 /* Crashlytics.framework */; };
 		F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02618514054003BD3A6 /* TBFavoritesViewController.m */; };
 		F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */; };
 		F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */; };
@@ -68,6 +67,7 @@
 		F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */; };
 		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
+		F4ED06A9189A4617000CA56B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4ED06A8189A4617000CA56B /* Crashlytics.framework */; };
 		F4EE1E4817FEEE86002F8A62 /* routes.kml in Resources */ = {isa = PBXBuildFile; fileRef = F4EE1E4717FEEE86002F8A62 /* routes.kml */; };
 		F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EE1E7517FEF58C002F8A62 /* KMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
@@ -153,7 +153,6 @@
 		F47B5D0017F797DA00D88614 /* UIColor+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
 		F47B5D0117F797DA00D88614 /* UIColor+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
 		F47B5D0F17F7CFB700D88614 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		F48870B518994B9900AA1143 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F498A02518514054003BD3A6 /* TBFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBFavoritesViewController.h; path = telobike/TBFavoritesViewController.h; sourceTree = "<group>"; };
 		F498A02618514054003BD3A6 /* TBFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBFavoritesViewController.m; path = telobike/TBFavoritesViewController.m; sourceTree = "<group>"; };
 		F498A0291851450F003BD3A6 /* TBTransparentToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTransparentToolbar.h; sourceTree = "<group>"; };
@@ -185,6 +184,7 @@
 		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
 		F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GAI.m"; sourceTree = "<group>"; };
 		F4D6FA8A17FC8442000D0F2A /* sample-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sample-data.json"; sourceTree = "<group>"; };
+		F4ED06A8189A4617000CA56B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F4EE1E4717FEEE86002F8A62 /* routes.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = routes.kml; sourceTree = "<group>"; };
 		F4EE1E7417FEF58C002F8A62 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
 		F4EE1E7517FEF58C002F8A62 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 				F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */,
 				F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */,
 				F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */,
-				F48870B618994B9900AA1143 /* Crashlytics.framework in Frameworks */,
+				F4ED06A9189A4617000CA56B /* Crashlytics.framework in Frameworks */,
 				F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */,
 				F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */,
 				51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */,
@@ -264,7 +264,6 @@
 		F470EBE517F11589006FD464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F48870B518994B9900AA1143 /* Crashlytics.framework */,
 				F40672D8185B43940078860B /* CoreAudio.framework */,
 				F47B5D0F17F7CFB700D88614 /* ImageIO.framework */,
 				F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */,
@@ -437,6 +436,7 @@
 		F498A0741851B3FC003BD3A6 /* external */ = {
 			isa = PBXGroup;
 			children = (
+				F4ED06A8189A4617000CA56B /* Crashlytics.framework */,
 				F4AF49891896C4DA0045612D /* TestFlightSDK */,
 				F498A0A61851B44A003BD3A6 /* JNJGoogleMapsActivity */,
 			);
@@ -630,7 +630,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run d164a3f45648ccbfa001f8958d403135d23a4dbf";
+			shellScript = "external/Crashlytics.framework/run d164a3f45648ccbfa001f8958d403135d23a4dbf";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -813,6 +813,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/eladb/src/telobike/ios/telobike,
+					/Users/eladb/src/telobike/ios/telobike/external,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
@@ -837,6 +838,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/eladb/src/telobike/ios/telobike,
+					/Users/eladb/src/telobike/ios/telobike/external,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
