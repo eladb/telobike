@@ -2,12 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "station-report.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "13.png"
+      "filename" : "station-report@2x.png"
     }
   ],
   "info" : {

@@ -8,6 +8,7 @@
 
 #import <Appirater.h>
 #import <GoogleAnalytics-iOS-SDK/GAI.h>
+#import <Crashlytics/Crashlytics.h>
 
 #import "TBAppDelegate.h"
 #import "TBServer.h"
@@ -22,7 +23,6 @@
 @implementation TBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
     [TestFlight takeOff:@"6deef968-4bcc-4e57-ab70-cf075da6f8a0"];
     
     // rate app
@@ -40,11 +40,36 @@
     [GAI sharedInstance].dispatchInterval = 20;
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-27122332-1"];
 
+    [Crashlytics startWithAPIKey:@"d164a3f45648ccbfa001f8958d403135d23a4dbf"];
+
     // push notifications
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];
     
     [Appirater appLaunched:YES];
+    
+    [[TBServer instance] addObserver:self forKeyPath:@"city" options:0 context:0];
+    
     return YES;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"city"]) {
+        NSString* discl = [TBServer instance].city.disclaimer;
+        NSString* oldDiscl = [[NSUserDefaults standardUserDefaults] stringForKey:@"previous_disclaimer"];
+#ifdef DEBUG
+        oldDiscl = nil;
+#endif
+        if ([oldDiscl isEqualToString:discl]) {
+            return; // already showed this disclaimer
+        }
+        
+        [[[UIAlertView alloc] initWithTitle:nil message:discl delegate:nil cancelButtonTitle:NSLocalizedString(@"Start", nil) otherButtonTitles:nil] show];
+        [[NSUserDefaults standardUserDefaults] setObject:discl forKey:@"previous_disclaimer"];
+    }
+}
+
+- (void)dealloc {
+    [[TBServer instance] removeObserver:self forKeyPath:@"city"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

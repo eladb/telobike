@@ -170,14 +170,14 @@
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="7YE-2g-92l"/>
-                                            <barButtonItem image="station-report" id="7b9-8D-VaQ" userLabel="report">
-                                                <connections>
-                                                    <action selector="sendStationReport:" destination="QUy-BD-bpt" id="d6h-0X-NCH"/>
-                                                </connections>
-                                            </barButtonItem>
                                             <barButtonItem image="station-navigation" id="kkb-eM-j8j" userLabel="navigate">
                                                 <connections>
                                                     <action selector="navigateToStation:" destination="QUy-BD-bpt" id="vhf-aZ-xxs"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem image="station-report" id="7b9-8D-VaQ" userLabel="report">
+                                                <connections>
+                                                    <action selector="sendStationReport:" destination="QUy-BD-bpt" id="d6h-0X-NCH"/>
                                                 </connections>
                                             </barButtonItem>
                                         </items>
@@ -351,9 +351,9 @@
         <image name="TabBar-Map" width="25" height="25"/>
         <image name="TabBar-NearMe" width="24" height="25"/>
         <image name="Timer" width="27" height="27"/>
-        <image name="station-favorite-unselected" width="27" height="26"/>
-        <image name="station-navigation" width="16" height="27"/>
-        <image name="station-report" width="25" height="27"/>
+        <image name="station-favorite-unselected" width="25" height="25"/>
+        <image name="station-navigation" width="25" height="25"/>
+        <image name="station-report" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

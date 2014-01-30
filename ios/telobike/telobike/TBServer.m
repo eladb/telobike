@@ -12,12 +12,13 @@
 
 static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com";
 
-@interface TBServer ()
+@interface TBServer () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) AFHTTPRequestOperationManager* server;
 @property (strong, nonatomic) NSURLCache*                    cache;
 @property (strong, nonatomic) NSArray*                       stations;
 @property (strong, nonatomic) TBCity*                        city;
+@property (strong, nonatomic) CLLocationManager*             locationManager;
 
 @end
 
@@ -37,6 +38,10 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
 {
     self = [super init];
     if (self) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        [self.locationManager startUpdatingLocation];
+        
         NSURL* url  = [NSURL URLWithString:kServerBaseURL];
         self.server = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
         
@@ -136,6 +141,33 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
     }];
 }
 
+#pragma mark - Sort
+
+- (CLLocation *)currentLocation {
+    return self.locationManager.location;
+}
+
+- (NSArray*)sortStationsByDistance:(NSArray*)stations {
+    CLLocation* location = self.locationManager.location;
+    
+    // no location, sort array from north to south by fixing current location
+    // to the north of city center.
+    if (!location) {
+        location = [[CLLocation alloc] initWithLatitude:0.0f longitude:[TBServer instance].city.cityCenter.coordinate.longitude];
+    }
+    
+    return [stations sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        TBStation* station1 = obj1;
+        TBStation* station2 = obj2;
+        CLLocationDistance distance1 = [station1.location distanceFromLocation:location];
+        CLLocationDistance distance2 = [station2.location distanceFromLocation:location];
+        return distance1 - distance2;
+    }];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+}
 
 @end
 

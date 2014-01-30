@@ -66,7 +66,7 @@
     }
     
     if (self.locationManager.location) {
-        CLLocationDistance distance = [self.station distanceFromLocation:self.locationManager.location];
+        CLLocationDistance distance = [self.station.location distanceFromLocation:self.locationManager.location];
         NSMutableAttributedString* desc = [[NSMutableAttributedString alloc] init];
 
         if (distance < 100000) {

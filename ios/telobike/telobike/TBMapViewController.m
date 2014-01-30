@@ -26,6 +26,8 @@
 #import "TBFeedbackMailComposeViewController.h"
 #import "UIViewController+GAI.h"
 #import "TBPlacemarkAnnotation.h"
+#import "NSUserDefaults+OneOff.h"
+#import "UIAlertView+Blocks.h"
 
 @interface TBMapViewController () <MKMapViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -320,14 +322,10 @@
 }
 
 - (IBAction)toggleStationFavorite:(id)sender {
-    static NSString* key = @"do_not_show_favorites_alert";
-    BOOL showFavoritesAlert = ![[NSUserDefaults standardUserDefaults] boolForKey:key];
-#ifdef DEBUG
-    showFavoritesAlert = YES;
-#endif
-    if (showFavoritesAlert && !self.openedStation.favorite) {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"This station has been added to your list of favorite stations", nil) message:NSLocalizedString(@"Tap again to unstar", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key]; // do not show this alert again
+    if (!self.openedStation.favorite) {
+        if ([[NSUserDefaults standardUserDefaults] oneOff:@"favorites_alert_one_off"]) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Star/Unstar Station", nil) message:NSLocalizedString(@"This station has been added to your list of favorites. Tap again to unstar", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+        }
     }
     
     [self.openedStation setFavorite:!self.openedStation.isFavorite];
@@ -335,19 +333,32 @@
 }
 
 - (IBAction)sendStationReport:(id)sender {
-    TBFeedbackMailComposeViewController* vc = [[TBFeedbackMailComposeViewController alloc] initWithFeedbackOption:TBFeedbackActionSheetService];
-    NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Problem in station %@", nil), self.openedStation.sid];
-    vc.mailComposeDelegate = self;
-    [vc setSubject:subject];
+    void(^openMailComposer)(void) = ^{
+        TBFeedbackMailComposeViewController* vc = [[TBFeedbackMailComposeViewController alloc] initWithFeedbackOption:TBFeedbackActionSheetService];
+        NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Problem in station %@", nil), self.openedStation.sid];
+        vc.mailComposeDelegate = self;
+        [vc setSubject:subject];
+        
+        NSString* body = [NSString stringWithFormat:NSLocalizedString(@"Please describe the problem:\n\n\n=====================\nStation ID: %@\nName: %@\nAddress: %@", nil),
+                          self.openedStation.sid,
+                          self.openedStation.stationName,
+                          self.openedStation.address ? self.openedStation.address : NSLocalizedString(@"N/A", nil)];
+        
+        [vc setMessageBody:body isHTML:NO];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    };
     
-    NSString* body = [NSString stringWithFormat:NSLocalizedString(@"Please describe the problem:\n\n\n=====================\nStation ID: %@\nName: %@\nAddress: %@", nil),
-                      self.openedStation.sid,
-                      self.openedStation.stationName,
-                      self.openedStation.address ? self.openedStation.address : NSLocalizedString(@"N/A", nil)];
-    
-    [vc setMessageBody:body isHTML:NO];
-    
-    [self presentViewController:vc animated:YES completion:nil];
+    if ([[NSUserDefaults standardUserDefaults] oneOff:@"report_oneoff"]) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Contact Customer Service", nil) message:NSLocalizedString(@"An email addressed to Telofun customer service will be opened so you can report any issues with stations or individual bicycles", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitle:NSLocalizedString(@"OK", nil) completion:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                openMailComposer();
+            }
+        }] show];
+    }
+    else {
+        openMailComposer();
+    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
@@ -356,10 +367,24 @@
 
 
 - (IBAction)navigateToStation:(id)sender {
-    NSString* dest = [NSString stringWithFormat:@"%g,%g", self.openedStation.coordinate.latitude, self.openedStation.coordinate.longitude];
-    if (![TBGoogleMapsRouting routeFromAddress:@"" toAddress:dest]) {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Google Maps is not installed", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    void(^openGoogleMaps)(void) = ^{
+        NSString* dest = [NSString stringWithFormat:@"%g,%g", self.openedStation.coordinate.latitude, self.openedStation.coordinate.longitude];
+        if (![TBGoogleMapsRouting routeFromAddress:@"" toAddress:dest]) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Google Maps is not installed", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+        }
+    };
+    
+    if ([[NSUserDefaults standardUserDefaults] oneOff:@"navigate_alert_one_off"]) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Navigate to Station", nil) message:NSLocalizedString(@"Google Maps will be used to route you from your current location to this station", nil) cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitle:NSLocalizedString(@"OK", nil) completion:^(NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                openGoogleMaps();
+            }
+        }] show];
     }
+    else {
+        openGoogleMaps();
+    }
+    
 }
 
 #pragma mark - My location
@@ -375,7 +400,8 @@
 #pragma mark - Routes
 
 - (void)showOrHideRoutesOnMap {
-    BOOL showRoutes = [[NSUserDefaults standardUserDefaults] boolForKey:@"show_bicycle_routes"];
+    id showBicycleRoutesValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"show_bicycle_routes"];
+    BOOL showRoutes = showBicycleRoutesValue ? [showBicycleRoutesValue boolValue] : YES;
     
     if (showRoutes && !self.routesVisible) {
         if (!self.kmlParser) {
@@ -398,23 +424,5 @@
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     return [self.kmlParser rendererForOverlay:overlay];
 }
-
-//#pragma mark - Placemark search result
-//
-//- (void)setSelectedPlacemark:(TBPlacemarkAnnotation *)selectedPlacemark {
-//
-//    if (selectedPlacemark) {
-//        [self deselectAllAnnoations];
-//        self.selectedStation = nil;
-//
-//        // only remove previous placemark if there is a new one to select
-//        // otherwise, we just want to deselect it.
-//        [self.mapView removeAnnotation:_selectedPlacemark];
-//        [self.mapView addAnnotation:selectedPlacemark];
-//    }
-//    
-//    _selectedPlacemark = selectedPlacemark;
-//    [self.mapView selectAnnotation:selectedPlacemark animated:YES];
-//}
 
 @end
