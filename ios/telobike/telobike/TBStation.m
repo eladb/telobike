@@ -27,7 +27,6 @@ static const NSInteger kMarginalBikeAmount = 3;
 @property (assign, nonatomic) StationState state;
 @property (strong, nonatomic) UIImage* markerImage;
 @property (strong, nonatomic) UIImage* selectedMarkerImage;
-@property (strong, nonatomic) UIImage* listImage;
 @property (copy, nonatomic) NSString* address;
 @property (copy, nonatomic) NSString* sid;
 
@@ -194,7 +193,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     }
     
     // load images for list and markers
-    self.listImage = [TBStation imageWithNameFormat:@"list-%@.png" state:[self state]];
     self.markerImage = [TBStation markerImageForState:[self state]];
     self.selectedMarkerImage = self.markerImage;
 }

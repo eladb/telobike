@@ -45,7 +45,6 @@ typedef enum {
 
 @property (strong, nonatomic, readonly) UIImage* markerImage;
 @property (strong, nonatomic, readonly) UIImage* selectedMarkerImage;
-@property (strong, nonatomic, readonly) UIImage* listImage;
 
 @property (copy, nonatomic, readonly) NSString* address;
 @property (copy, nonatomic, readonly) NSString* sid;
