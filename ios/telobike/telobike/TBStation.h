@@ -31,10 +31,7 @@ typedef enum {
 
 @property (copy, nonatomic, readonly) NSString* stationName;
 @property (strong, nonatomic, readonly) CLLocation* location;
-@property (assign, nonatomic, readonly) BOOL isActive;
 @property (strong, nonatomic, readonly) NSDate* lastUpdate;
-@property (assign, nonatomic, readonly) NSTimeInterval freshness;
-@property (assign, nonatomic, readonly) BOOL isOnline;
 @property (assign, nonatomic, readonly) NSInteger availBike;
 @property (assign, nonatomic, readonly) NSInteger availSpace;
 @property (strong, nonatomic, readonly) UIColor* availSpaceColor;

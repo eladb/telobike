@@ -16,25 +16,23 @@ static const NSInteger kMarginalBikeAmount = 3;
 
 @property (copy, nonatomic) NSString* stationName;
 @property (strong, nonatomic) CLLocation* location;
-@property (assign, nonatomic) BOOL isActive;
 @property (strong, nonatomic) NSDate* lastUpdate;
-@property (assign, nonatomic) NSTimeInterval freshness;
-@property (assign, nonatomic) BOOL isOnline;
 @property (assign, nonatomic) NSInteger availBike;
 @property (assign, nonatomic) NSInteger availSpace;
 @property (strong, nonatomic) UIColor* availSpaceColor;
 @property (strong, nonatomic) UIColor* availBikeColor;
 @property (strong, nonatomic) UIColor* fullSlotColor;
 @property (strong, nonatomic) UIColor* emptySlotColor;
-
 @property (strong, nonatomic) UIColor* indicatorColor;
 @property (assign, nonatomic) StationState state;
 @property (strong, nonatomic) UIImage* markerImage;
 @property (strong, nonatomic) UIImage* selectedMarkerImage;
 @property (strong, nonatomic) UIImage* listImage;
-
 @property (copy, nonatomic) NSString* address;
 @property (copy, nonatomic) NSString* sid;
+
+@property (assign, nonatomic) BOOL isActive;
+@property (assign, nonatomic) BOOL isOnline;
 
 @end
 
@@ -156,8 +154,8 @@ static const NSInteger kMarginalBikeAmount = 3;
         self.address = nil;
     }
     
-    self.freshness = [self.lastUpdate timeIntervalSinceNow];
-    self.isOnline = self.lastUpdate != nil && self.freshness < kFreshnessTimeInterval;
+    NSTimeInterval freshness = [self.lastUpdate timeIntervalSinceNow];
+    self.isOnline = self.lastUpdate != nil && freshness < kFreshnessTimeInterval;
     self.isActive = !self.isOnline || self.availBike > 0 || self.availSpace > 0;
     
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
