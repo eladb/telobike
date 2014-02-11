@@ -37,7 +37,7 @@ static const NSInteger kMarginalBikeAmount = 3;
 @property (strong, nonatomic) UIImage* markerImage;
 @property (strong, nonatomic) UIImage* selectedMarkerImage;
 @property (strong, nonatomic) UIImage* listImage;
-@property (copy, nonatomic) NSArray* tags;
+
 @property (copy, nonatomic) NSString* address;
 @property (copy, nonatomic) NSString* sid;
 
@@ -154,7 +154,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     self.longitude   = [[dict objectForKey:@"longitude"] doubleValue];
     self.location    = [dict locationForKey:@"location"];
     self.lastUpdate  = [dict jsonDateForKey:@"last_update"];
-    self.tags        = [dict objectForKey:@"tags"];
     self.address     = [dict localizedStringForKey:@"address"];
     self.availBike   = [[dict objectForKey:@"available_bike"] intValue];
     self.availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
