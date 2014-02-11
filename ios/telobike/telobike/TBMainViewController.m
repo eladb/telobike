@@ -215,11 +215,6 @@
                 return NO;
             }
             
-            // also check that the city name appears in the formatted address
-            if ([placemark.formattedAddress rangeOfString:city.cityName options:NSCaseInsensitiveSearch].length == 0) {
-                return NO;
-            }
-            
             return YES;
         }]];
         
