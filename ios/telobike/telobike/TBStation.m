@@ -16,7 +16,6 @@ static const NSInteger kMarginalBikeAmount = 3;
 
 @property (copy, nonatomic) NSString* stationName;
 @property (strong, nonatomic) CLLocation* location;
-@property (strong, nonatomic) NSDate* lastUpdate;
 @property (assign, nonatomic) NSInteger availBike;
 @property (assign, nonatomic) NSInteger availSpace;
 @property (strong, nonatomic) UIColor* availSpaceColor;
@@ -143,7 +142,7 @@ static const NSInteger kMarginalBikeAmount = 3;
     
     self.stationName = [dict localizedStringForKey:@"name"];
     self.location    = [dict locationForKey:@"location"];
-    self.lastUpdate  = [dict jsonDateForKey:@"last_update"];
+    NSDate* lastUpdate  = [dict jsonDateForKey:@"last_update"];
     self.address     = [dict localizedStringForKey:@"address"];
     self.availBike   = [[dict objectForKey:@"available_bike"] intValue];
     self.availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
@@ -153,8 +152,8 @@ static const NSInteger kMarginalBikeAmount = 3;
         self.address = nil;
     }
     
-    NSTimeInterval freshness = [self.lastUpdate timeIntervalSinceNow];
-    self.isOnline = self.lastUpdate != nil && freshness < kFreshnessTimeInterval;
+    NSTimeInterval freshness = [lastUpdate timeIntervalSinceNow];
+    self.isOnline = lastUpdate != nil && freshness < kFreshnessTimeInterval;
     self.isActive = !self.isOnline || self.availBike > 0 || self.availSpace > 0;
     
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];

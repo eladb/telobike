@@ -31,7 +31,6 @@ typedef enum {
 
 @property (copy, nonatomic, readonly) NSString* stationName;
 @property (strong, nonatomic, readonly) CLLocation* location;
-@property (strong, nonatomic, readonly) NSDate* lastUpdate;
 @property (assign, nonatomic, readonly) NSInteger availBike;
 @property (assign, nonatomic, readonly) NSInteger availSpace;
 @property (strong, nonatomic, readonly) UIColor* availSpaceColor;
