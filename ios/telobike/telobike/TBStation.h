@@ -50,8 +50,6 @@ typedef enum {
 @property (strong, nonatomic, readonly) UIColor* indicatorColor;
 
 @property (assign, nonatomic, readonly) StationState state;
-@property (assign, nonatomic, readonly) AmountState parkState;
-@property (assign, nonatomic, readonly) AmountState bikeState;
 
 @property (strong, nonatomic, readonly) UIImage* markerImage;
 @property (strong, nonatomic, readonly) UIImage* selectedMarkerImage;

@@ -32,8 +32,6 @@ static const NSInteger kMarginalBikeAmount = 3;
 @property (assign, nonatomic) CGFloat totalSlots;
 @property (strong, nonatomic) UIColor* indicatorColor;
 @property (assign, nonatomic) StationState state;
-@property (assign, nonatomic) AmountState parkState;
-@property (assign, nonatomic) AmountState bikeState;
 @property (strong, nonatomic) UIImage* markerImage;
 @property (strong, nonatomic) UIImage* selectedMarkerImage;
 @property (strong, nonatomic) UIImage* listImage;
