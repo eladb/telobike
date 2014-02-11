@@ -15,10 +15,7 @@ static const NSInteger kMarginalBikeAmount = 3;
 @interface TBStation ()
 
 @property (copy, nonatomic) NSString* stationName;
-@property (assign, nonatomic) double latitude;
-@property (assign, nonatomic) double longitude;
 @property (strong, nonatomic) CLLocation* location;
-@property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (assign, nonatomic) BOOL isActive;
 @property (strong, nonatomic) NSDate* lastUpdate;
 @property (assign, nonatomic) NSTimeInterval freshness;
@@ -148,8 +145,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     self.sid = [dict objectForKey:@"sid"];
     
     self.stationName = [dict localizedStringForKey:@"name"];
-    self.latitude    = [[dict objectForKey:@"latitude"] doubleValue];
-    self.longitude   = [[dict objectForKey:@"longitude"] doubleValue];
     self.location    = [dict locationForKey:@"location"];
     self.lastUpdate  = [dict jsonDateForKey:@"last_update"];
     self.address     = [dict localizedStringForKey:@"address"];
@@ -162,7 +157,6 @@ static const NSInteger kMarginalBikeAmount = 3;
         self.address = nil;
     }
     
-    self.coordinate = CLLocationCoordinate2DMake([self latitude], [self longitude]);
     self.freshness = [self.lastUpdate timeIntervalSinceNow];
     self.isOnline = self.lastUpdate != nil && self.freshness < kFreshnessTimeInterval;
     self.isActive = !self.isOnline || self.availBike > 0 || self.availSpace > 0;
@@ -254,13 +248,11 @@ static const NSInteger kMarginalBikeAmount = 3;
     return [[TBStation alloc] initWithDictionary:[NSDictionary dictionaryWithObject:@"0" forKey:@"sid"]];
 }
 
-//- (CLLocationDistance)distanceFromLocation:(CLLocation*)aLocation
-//{
-//    CLLocation* stationLocation = [[CLLocation new] initWithLatitude:self.latitude longitude:self.longitude];
-//    return [aLocation distanceFromLocation:stationLocation];
-//}
-
 #pragma mark - MKAnnotation
+
+- (CLLocationCoordinate2D)coordinate {
+    return self.location.coordinate;
+}
 
 - (NSString *)title
 {
@@ -295,19 +287,6 @@ static const NSInteger kMarginalBikeAmount = 3;
             }
         }
     }
-
-//    // check if the filter text is in the station name
-//    if (self.stationName.length > 0 && [self.stationName rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
-//    
-//    // check if the filter text is in the address
-//    if (self.address.length > 0 && [self.address rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
-//    
-//    if (self.tags) {
-//        // check if any of the tags match
-//        for (NSString* tag in self.tags) {
-//            if ([tag rangeOfString:keyword options:NSCaseInsensitiveSearch].length) return YES;
-//        }
-//    }
     
     return NO;
 }

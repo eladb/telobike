@@ -30,10 +30,7 @@ typedef enum {
 @property (strong, nonatomic) NSDictionary* dict; // access raw dict
 
 @property (copy, nonatomic, readonly) NSString* stationName;
-@property (assign, nonatomic, readonly) double latitude;
-@property (assign, nonatomic, readonly) double longitude;
 @property (strong, nonatomic, readonly) CLLocation* location;
-@property (assign, nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (assign, nonatomic, readonly) BOOL isActive;
 @property (strong, nonatomic, readonly) NSDate* lastUpdate;
 @property (assign, nonatomic, readonly) NSTimeInterval freshness;
