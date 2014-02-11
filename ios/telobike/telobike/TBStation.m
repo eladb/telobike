@@ -12,6 +12,39 @@
 static const NSTimeInterval kFreshnessTimeInterval = 60 * 30; // 30 minutes
 static const NSInteger kMarginalBikeAmount = 3;
 
+@interface TBStation ()
+
+@property (copy, nonatomic) NSString* stationName;
+@property (assign, nonatomic) double latitude;
+@property (assign, nonatomic) double longitude;
+@property (strong, nonatomic) CLLocation* location;
+@property (assign, nonatomic) CLLocationCoordinate2D coordinate;
+@property (assign, nonatomic) BOOL isActive;
+@property (strong, nonatomic) NSDate* lastUpdate;
+@property (assign, nonatomic) NSTimeInterval freshness;
+@property (assign, nonatomic) BOOL isOnline;
+@property (assign, nonatomic) NSInteger availBike;
+@property (assign, nonatomic) NSInteger availSpace;
+@property (strong, nonatomic) UIColor* availSpaceColor;
+@property (strong, nonatomic) UIColor* availBikeColor;
+@property (strong, nonatomic) UIColor* fullSlotColor;
+@property (strong, nonatomic) UIColor* emptySlotColor;
+@property (assign, nonatomic) CGFloat totalSlots;
+@property (strong, nonatomic) UIColor* indicatorColor;
+@property (assign, nonatomic) StationState state;
+@property (assign, nonatomic) AmountState parkState;
+@property (assign, nonatomic) AmountState bikeState;
+@property (strong, nonatomic) UIImage* markerImage;
+@property (strong, nonatomic) UIImage* selectedMarkerImage;
+@property (strong, nonatomic) UIImage* listImage;
+@property (copy, nonatomic) NSArray* tags;
+@property (copy, nonatomic) NSString* address;
+@property (copy, nonatomic) NSString* sid;
+@property (assign, nonatomic) BOOL isMyLocation;
+@property (assign, nonatomic) double_t distance;
+
+@end
+
 @implementation TBStation
 
 + (UIImage*)imageWithNameFormat:(NSString*)fmt state:(StationState)state
@@ -116,77 +149,73 @@ static const NSInteger kMarginalBikeAmount = 3;
 {
     _dict = dict;
 
-    _sid = [dict objectForKey:@"sid"];
+    self.sid = [dict objectForKey:@"sid"];
     
-    _stationName = [dict localizedStringForKey:@"name"];
-    _latitude    = [[dict objectForKey:@"latitude"] doubleValue];
-    _longitude   = [[dict objectForKey:@"longitude"] doubleValue];
-    _location    = [dict locationForKey:@"location"];
-    _lastUpdate  = [dict jsonDateForKey:@"last_update"];
-    _tags        = [dict objectForKey:@"tags"];
-    _address     = [dict localizedStringForKey:@"address"];
-    _availBike   = [[dict objectForKey:@"available_bike"] intValue];
-    _availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
-    _totalSlots  = _availBike + _availSpace;
+    self.stationName = [dict localizedStringForKey:@"name"];
+    self.latitude    = [[dict objectForKey:@"latitude"] doubleValue];
+    self.longitude   = [[dict objectForKey:@"longitude"] doubleValue];
+    self.location    = [dict locationForKey:@"location"];
+    self.lastUpdate  = [dict jsonDateForKey:@"last_update"];
+    self.tags        = [dict objectForKey:@"tags"];
+    self.address     = [dict localizedStringForKey:@"address"];
+    self.availBike   = [[dict objectForKey:@"available_bike"] intValue];
+    self.availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
+    self.totalSlots  = self.availBike + self.availSpace;
     
     // if address and name are the same, remove the address
-    if ([_stationName localizedCaseInsensitiveCompare:_address] == NSOrderedSame) {
-        _address = nil;
+    if ([self.stationName localizedCaseInsensitiveCompare:self.address] == NSOrderedSame) {
+        self.address = nil;
     }
     
-    _coordinate = CLLocationCoordinate2DMake([self latitude], [self longitude]);
-    _freshness = [_lastUpdate timeIntervalSinceNow];
-    _isOnline = _lastUpdate != nil && _freshness < kFreshnessTimeInterval;
-    _isActive = !_isOnline || _availBike > 0 || _availSpace > 0;
+    self.coordinate = CLLocationCoordinate2DMake([self latitude], [self longitude]);
+    self.freshness = [self.lastUpdate timeIntervalSinceNow];
+    self.isOnline = self.lastUpdate != nil && self.freshness < kFreshnessTimeInterval;
+    self.isActive = !self.isOnline || self.availBike > 0 || self.availSpace > 0;
     
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
     UIColor* yellow = [UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0];
     UIColor* green  = [UIColor colorWithRed:0.0f green:122.0f/255.0f blue:0.0f alpha:1.0f];
     
-    _indicatorColor = nil;
+    self.indicatorColor = nil;
     
     // set red color for bike and space if either of them is 0.
-    if (_isActive) {
-        if (_availBike == 0) _availBikeColor = red;
-        else if (_availBike <= kMarginalBikeAmount) _availBikeColor = yellow;
-        else _availBikeColor = green;
+    if (self.isActive) {
+        if (self.availBike == 0) self.availBikeColor = red;
+        else if (self.availBike <= kMarginalBikeAmount) self.availBikeColor = yellow;
+        else self.availBikeColor = green;
         
-        if (_availSpace == 0) _availSpaceColor = red;
-        else if (_availSpace <= kMarginalBikeAmount) _availSpaceColor = yellow;
-        else _availSpaceColor = green;
+        if (self.availSpace == 0) self.availSpaceColor = red;
+        else if (self.availSpace <= kMarginalBikeAmount) self.availSpaceColor = yellow;
+        else self.availSpaceColor = green;
         
-        _indicatorColor = green;
-        if (_availBikeColor != green || _availSpaceColor != green) {
-            if (_availBikeColor == red || _availSpaceColor == red) {
-                _indicatorColor = red;
+        self.indicatorColor = green;
+        if (self.availBikeColor != green || self.availSpaceColor != green) {
+            if (self.availBikeColor == red || self.availSpaceColor == red) {
+                self.indicatorColor = red;
             }
             else {
-                _indicatorColor = yellow;
+                self.indicatorColor = yellow;
             }
         }
         
-        _fullSlotColor = _availBikeColor;
-        _emptySlotColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
+        self.fullSlotColor = self.availBikeColor;
+        self.emptySlotColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
         
-        if (_availSpaceColor == yellow) {
-            _emptySlotColor = yellow;
+        if (self.availSpaceColor == yellow) {
+            self.emptySlotColor = yellow;
         }
     }
     
     // load images for list and markers
-    _listImage = [TBStation imageWithNameFormat:@"list-%@.png" state:[self state]];
-    _markerImage = [TBStation markerImageForState:[self state]];
-//    _markerImage = [TBStation markerImageForColor:self.indicatorColor];
-    _selectedMarkerImage = _markerImage;
-//    _selectedMarkerImage = [TBStation selectedMarkerImageForColor:self.indicatorColor];
+    self.listImage = [TBStation imageWithNameFormat:@"list-%@.png" state:[self state]];
+    self.markerImage = [TBStation markerImageForState:[self state]];
+    self.selectedMarkerImage = self.markerImage;
     
-    _isMyLocation = [_sid isEqualToString:@"0"];
-    if (_isMyLocation)
+    self.isMyLocation = [self.sid isEqualToString:@"0"];
+    if (self.isMyLocation)
     {
-        _stationName = NSLocalizedString(@"MYLOCATION_TITLE", nil);
-//        _availBikeDesc = NSLocalizedString(@"MYLOCATION_DESC", nil);
-//        _availSpaceDesc = [NSString string];
-        _listImage = [UIImage imageNamed:@"list-current-location.png"];
+        self.stationName = NSLocalizedString(@"MYLOCATION_TITLE", nil);
+        self.listImage = [UIImage imageNamed:@"list-current-location.png"];
     }
 }
 
@@ -204,12 +233,12 @@ static const NSInteger kMarginalBikeAmount = 3;
 - (StationState)state
 {
     StationState state = StationOK;
-    if (!_isOnline) state = StationUnknown;
-    else if (!_isActive) state = StationInactive;
-    else if (_availBike == 0) state = StationEmpty;
-    else if (_availSpace == 0) state = StationFull;
-    else if (_availBike <= kMarginalBikeAmount) state = StationMarginal;
-    else if (_availSpace <= kMarginalBikeAmount) state = StationMarginalFull;
+    if (!self.isOnline) state = StationUnknown;
+    else if (!self.isActive) state = StationInactive;
+    else if (self.availBike == 0) state = StationEmpty;
+    else if (self.availSpace == 0) state = StationFull;
+    else if (self.availBike <= kMarginalBikeAmount) state = StationMarginal;
+    else if (self.availSpace <= kMarginalBikeAmount) state = StationMarginalFull;
     
     return state;
 }
@@ -223,12 +252,12 @@ static const NSInteger kMarginalBikeAmount = 3;
 
 - (AmountState)parkState
 {
-    return [self amountStateForAmount:_availSpace];
+    return [self amountStateForAmount:self.availSpace];
 }
 
 - (AmountState) bikeState
 {
-    return [self amountStateForAmount:_availBike];
+    return [self amountStateForAmount:self.availBike];
 }
 
 + (TBStation*)myLocationStation
