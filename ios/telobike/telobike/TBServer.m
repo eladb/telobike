@@ -82,7 +82,6 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
                 existingStation.dict = s;
             }
             else {
-//                NSLog(@"new station %@", station.sid);
                 [stations addObject:station];
             }
         }

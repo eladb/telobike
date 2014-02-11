@@ -3,7 +3,7 @@
 //  telofun
 //
 //  Created by eladb on 5/2/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Citylifeapps. All rights reserved.
 //
 
 #import "Utils.h"
