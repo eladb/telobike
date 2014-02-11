@@ -220,28 +220,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     return state;
 }
 
-- (AmountState)amountStateForAmount:(NSInteger)amount
-{
-    if (amount == 0) return Red;
-    if (amount <= kMarginalBikeAmount) return Yellow;
-    return Green;
-}
-
-- (AmountState)parkState
-{
-    return [self amountStateForAmount:self.availSpace];
-}
-
-- (AmountState) bikeState
-{
-    return [self amountStateForAmount:self.availBike];
-}
-
-+ (TBStation*)myLocationStation
-{
-    return [[TBStation alloc] initWithDictionary:[NSDictionary dictionaryWithObject:@"0" forKey:@"sid"]];
-}
-
 #pragma mark - MKAnnotation
 
 - (CLLocationCoordinate2D)coordinate {

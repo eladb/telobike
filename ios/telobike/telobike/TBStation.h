@@ -49,8 +49,6 @@ typedef enum {
 @property (copy, nonatomic, readonly) NSString* sid;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
-+ (TBStation*)myLocationStation;
-
 - (BOOL)queryKeyword:(NSString*)keyword;
 
 @end
