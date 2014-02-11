@@ -120,12 +120,14 @@
 
 - (NSDate*)jsonDate
 {
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    formatter.dateStyle = NSDateFormatterNoStyle;
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    static NSDateFormatter* formatter = NULL;
+    if (!formatter) {
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterNoStyle;
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    }
     
     NSString* str = [NSString stringWithString:self];
-    
     
     NSRange stringContainsFractionOfsecondRange = [str rangeOfString:@"."];
     if (stringContainsFractionOfsecondRange.length > 0)
