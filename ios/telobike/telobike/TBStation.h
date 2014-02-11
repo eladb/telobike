@@ -42,8 +42,6 @@ typedef enum {
 @property (strong, nonatomic, readonly) UIColor* fullSlotColor;
 @property (strong, nonatomic, readonly) UIColor* emptySlotColor;
 
-@property (assign, nonatomic, readonly) CGFloat totalSlots;
-
 @property (strong, nonatomic, readonly) UIColor* indicatorColor;
 
 @property (assign, nonatomic, readonly) StationState state;

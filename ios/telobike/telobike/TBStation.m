@@ -26,7 +26,7 @@ static const NSInteger kMarginalBikeAmount = 3;
 @property (strong, nonatomic) UIColor* availBikeColor;
 @property (strong, nonatomic) UIColor* fullSlotColor;
 @property (strong, nonatomic) UIColor* emptySlotColor;
-@property (assign, nonatomic) CGFloat totalSlots;
+
 @property (strong, nonatomic) UIColor* indicatorColor;
 @property (assign, nonatomic) StationState state;
 @property (strong, nonatomic) UIImage* markerImage;
@@ -150,7 +150,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     self.address     = [dict localizedStringForKey:@"address"];
     self.availBike   = [[dict objectForKey:@"available_bike"] intValue];
     self.availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
-    self.totalSlots  = self.availBike + self.availSpace;
     
     // if address and name are the same, remove the address
     if ([self.stationName localizedCaseInsensitiveCompare:self.address] == NSOrderedSame) {
