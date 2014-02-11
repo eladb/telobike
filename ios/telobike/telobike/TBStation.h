@@ -19,34 +19,26 @@ typedef enum {
     StationUnknown,      // black
 } StationState;
 
-typedef enum {
-    Green,
-    Yellow,
-    Red,
-} AmountState;
-
 @interface TBStation : NSObject <MKAnnotation>
 
 @property (strong, nonatomic) NSDictionary* dict; // access raw dict
 
+// station info
+@property (copy, nonatomic, readonly) NSString* sid;
+@property (copy, nonatomic, readonly) NSString* address;
 @property (copy, nonatomic, readonly) NSString* stationName;
 @property (strong, nonatomic, readonly) CLLocation* location;
 @property (assign, nonatomic, readonly) NSInteger availBike;
 @property (assign, nonatomic, readonly) NSInteger availSpace;
-@property (strong, nonatomic, readonly) UIColor* availSpaceColor;
-@property (strong, nonatomic, readonly) UIColor* availBikeColor;
+
+// colors
 @property (strong, nonatomic, readonly) UIColor* fullSlotColor;
 @property (strong, nonatomic, readonly) UIColor* emptySlotColor;
-
 @property (strong, nonatomic, readonly) UIColor* indicatorColor;
 
+// state (calculated)
 @property (assign, nonatomic, readonly) StationState state;
-
 @property (strong, nonatomic, readonly) UIImage* markerImage;
-@property (strong, nonatomic, readonly) UIImage* selectedMarkerImage;
-
-@property (copy, nonatomic, readonly) NSString* address;
-@property (copy, nonatomic, readonly) NSString* sid;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (BOOL)queryKeyword:(NSString*)keyword;

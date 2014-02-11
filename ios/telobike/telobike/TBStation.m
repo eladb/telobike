@@ -14,21 +14,20 @@ static const NSInteger kMarginalBikeAmount = 3;
 
 @interface TBStation ()
 
+// station info
+@property (copy, nonatomic) NSString* sid;
 @property (copy, nonatomic) NSString* stationName;
+@property (copy, nonatomic) NSString* address;
 @property (strong, nonatomic) CLLocation* location;
 @property (assign, nonatomic) NSInteger availBike;
 @property (assign, nonatomic) NSInteger availSpace;
-@property (strong, nonatomic) UIColor* availSpaceColor;
-@property (strong, nonatomic) UIColor* availBikeColor;
+
+// colors
 @property (strong, nonatomic) UIColor* fullSlotColor;
 @property (strong, nonatomic) UIColor* emptySlotColor;
 @property (strong, nonatomic) UIColor* indicatorColor;
-@property (assign, nonatomic) StationState state;
-@property (strong, nonatomic) UIImage* markerImage;
-@property (strong, nonatomic) UIImage* selectedMarkerImage;
-@property (copy, nonatomic) NSString* address;
-@property (copy, nonatomic) NSString* sid;
 
+// private
 @property (assign, nonatomic) BOOL isActive;
 @property (assign, nonatomic) BOOL isOnline;
 
@@ -36,102 +35,14 @@ static const NSInteger kMarginalBikeAmount = 3;
 
 @implementation TBStation
 
-+ (UIImage*)imageWithNameFormat:(NSString*)fmt state:(StationState)state
+- (id)initWithDictionary:(NSDictionary*)dict
 {
-    NSString* name = nil;
-    
-    switch (state) {
-        case StationOK:
-            name = @"green";
-            break;
-            
-        case StationEmpty:
-            name = @"redempty";
-            break;
-            
-        case StationFull:
-            name = @"redfull";
-            break;
-            
-        case StationInactive:
-            name = @"gray";
-            break;
-            
-        case StationMarginal:
-            name = @"yellow";
-            break;
-            
-        case StationMarginalFull:
-            name = @"yellowfull";
-            break;
-            
-        case StationUnknown:
-        default:
-            name = @"black";
-            break;
+    self = [super init];
+    if (self)
+    {
+        self.dict = dict;
     }
-    
-    return [UIImage imageNamed:[NSString stringWithFormat:fmt, name]];    
-}
-
-+ (UIImage*)markerImageForState:(StationState)state
-{
-    return [TBStation imageWithNameFormat:@"map-%@.png" state:state];
-}
-
-+ (UIImage*)circleWithRadius:(CGFloat)sz fillColor:(UIColor*)fillColor borderWidth:(CGFloat)borderWidth borderColor:(UIColor*)borderColor {
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(sz, sz), NO, 0.0f);
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-    CGFloat corderRadius = sz / 2.0;
-    CGFloat air = 1.0 + borderWidth;
-    CGRect slotRect = CGRectMake(air, air, sz - air * 2, sz - air * 2);
-    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:slotRect cornerRadius:corderRadius];
-    if (fillColor) {
-        CGContextSetFillColorWithColor(ctx, [fillColor CGColor]);
-        [path fill];
-    }
-    if (borderColor) {
-        CGContextSetStrokeColorWithColor(ctx, [borderColor CGColor]);
-        [path setLineWidth:borderWidth];
-        [path stroke];
-    }
-    UIImage* marker = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return marker;
-}
-
-+ (UIImage*)markerImageForColor:(UIColor*)color {
-    return [TBStation circleWithRadius:15.0f fillColor:color borderWidth:0.0f borderColor:nil];
-}
-
-+ (UIImage*)selectedMarkerImageForColor:(UIColor*)color {
-
-    return [TBStation circleWithRadius:50.0f
-                             fillColor:color
-                           borderWidth:10.0f
-                           borderColor:[color colorWithAlphaComponent:0.4]];
-}
-
-+ (UIImage*)selectedMarkerImageForState:(StationState)state
-{
-    static NSMutableDictionary* cache = NULL;
-    if (!cache) cache = [NSMutableDictionary new];
-    
-    NSNumber* key = [NSNumber numberWithInt:state];
-    UIImage* cachedImage = [cache objectForKey:key];
-    if (!cachedImage) {
-        UIImage* inner = [TBStation imageWithNameFormat:@"map-%@" state:state];
-        UIImage* overlay = [UIImage imageNamed:@"map-selection-mask"];
-        UIGraphicsBeginImageContextWithOptions(overlay.size, NO, 0.0f);
-        [overlay drawAtPoint:CGPointMake(0.0f, 0.0f)];
-        [inner drawAtPoint:CGPointMake(8.5f, 8.5f) blendMode:kCGBlendModeOverlay alpha:1.0];
-        cachedImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        [cache setObject:cachedImage forKey:key];
-    }
-    
-    return cachedImage;
+    return self;
 }
 
 - (void)setDict:(NSDictionary *)dict
@@ -162,50 +73,48 @@ static const NSInteger kMarginalBikeAmount = 3;
     UIColor* gray   = [UIColor colorWithWhite:0.8f alpha:1.0f];
     
     self.indicatorColor = nil;
+    self.fullSlotColor = nil;
+    self.emptySlotColor = nil;
     
     // set red color for bike and space if either of them is 0.
     if (self.isActive) {
-        if (self.availBike == 0) self.availBikeColor = red;
-        else if (self.availBike <= kMarginalBikeAmount) self.availBikeColor = yellow;
-        else self.availBikeColor = green;
+        UIColor* availBikeColor = nil;
+        UIColor* availSpaceColor = nil;
+
+        if (self.availBike == 0) availBikeColor = red;
+        else if (self.availBike <= kMarginalBikeAmount) availBikeColor = yellow;
+        else availBikeColor = green;
         
-        if (self.availSpace == 0) self.availSpaceColor = red;
-        else if (self.availSpace <= kMarginalBikeAmount) self.availSpaceColor = yellow;
-        else self.availSpaceColor = green;
+        if (self.availSpace == 0) availSpaceColor = red;
+        else if (self.availSpace <= kMarginalBikeAmount) availSpaceColor = yellow;
+        else availSpaceColor = green;
         
         self.indicatorColor = green;
-        if (self.availBikeColor != green || self.availSpaceColor != green) {
-            if (self.availBikeColor == red || self.availSpaceColor == red) {
-                self.indicatorColor = red;
-            }
-            else {
-                self.indicatorColor = yellow;
-            }
+        if (availBikeColor != green || availSpaceColor != green) {
+            if (availBikeColor == red || availSpaceColor == red) self.indicatorColor = red;
+            else self.indicatorColor = yellow;
         }
         
-        self.fullSlotColor = self.availBikeColor;
-        self.emptySlotColor = gray;
-        
-        if (self.availSpaceColor == yellow) {
-            self.emptySlotColor = yellow;
-        }
+        self.fullSlotColor = availBikeColor;
+        self.emptySlotColor = availSpaceColor == yellow ? yellow : gray;
     }
-    
-    // load images for list and markers
-    self.markerImage = [TBStation markerImageForState:[self state]];
-    self.selectedMarkerImage = self.markerImage;
 }
 
-- (id)initWithDictionary:(NSDictionary*)dict
+- (UIImage *)markerImage
 {
-    self = [super init];
-    if (self)
-    {
-        self.dict = dict;
+    switch (self.state) {
+        case StationOK: return [UIImage imageNamed:@"map-green.png"];
+        case StationEmpty: return [UIImage imageNamed:@"map-redempty.png"];
+        case StationFull: return [UIImage imageNamed:@"map-redfull.png"];
+        case StationInactive: return [UIImage imageNamed:@"map-gray.png"];
+        case StationMarginal: return [UIImage imageNamed:@"map-yellow.png"];
+        case StationMarginalFull: return [UIImage imageNamed:@"map-yellowfull.png"];
+            
+        case StationUnknown:
+        default:
+            return [UIImage imageNamed:@"map-black.png"];
     }
-    return self;
 }
-
 
 - (StationState)state
 {
@@ -218,27 +127,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     else if (self.availSpace <= kMarginalBikeAmount) state = StationMarginalFull;
     
     return state;
-}
-
-#pragma mark - MKAnnotation
-
-- (CLLocationCoordinate2D)coordinate {
-    return self.location.coordinate;
-}
-
-- (NSString *)title
-{
-    return self.stationName;
-}
-
-- (NSString *)subtitle
-{
-    return nil;
-}
-
-- (UIImage*)imageWithNameFormat:(NSString*)fmt
-{
-    return [TBStation imageWithNameFormat:fmt state:[self state]];
 }
 
 #pragma mark - Query
@@ -261,6 +149,22 @@ static const NSInteger kMarginalBikeAmount = 3;
     }
     
     return NO;
+}
+
+#pragma mark - MKAnnotation
+
+- (CLLocationCoordinate2D)coordinate {
+    return self.location.coordinate;
+}
+
+- (NSString *)title
+{
+    return self.stationName;
+}
+
+- (NSString *)subtitle
+{
+    return nil;
 }
 
 @end
