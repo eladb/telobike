@@ -60,14 +60,9 @@ typedef enum {
 @property (copy, nonatomic, readonly) NSArray* tags;
 @property (copy, nonatomic, readonly) NSString* address;
 @property (copy, nonatomic, readonly) NSString* sid;
-@property (assign, nonatomic, readonly) BOOL isMyLocation;
-
-@property (assign, nonatomic, readonly) double_t distance;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
 + (TBStation*)myLocationStation;
-
-//- (CLLocationDistance)distanceFromLocation:(CLLocation*)location;
 
 - (BOOL)queryKeyword:(NSString*)keyword;
 

@@ -40,8 +40,6 @@ static const NSInteger kMarginalBikeAmount = 3;
 @property (copy, nonatomic) NSArray* tags;
 @property (copy, nonatomic) NSString* address;
 @property (copy, nonatomic) NSString* sid;
-@property (assign, nonatomic) BOOL isMyLocation;
-@property (assign, nonatomic) double_t distance;
 
 @end
 
@@ -175,6 +173,7 @@ static const NSInteger kMarginalBikeAmount = 3;
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
     UIColor* yellow = [UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0];
     UIColor* green  = [UIColor colorWithRed:0.0f green:122.0f/255.0f blue:0.0f alpha:1.0f];
+    UIColor* gray   = [UIColor colorWithWhite:0.8f alpha:1.0f];
     
     self.indicatorColor = nil;
     
@@ -199,7 +198,7 @@ static const NSInteger kMarginalBikeAmount = 3;
         }
         
         self.fullSlotColor = self.availBikeColor;
-        self.emptySlotColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
+        self.emptySlotColor = gray;
         
         if (self.availSpaceColor == yellow) {
             self.emptySlotColor = yellow;
@@ -210,13 +209,6 @@ static const NSInteger kMarginalBikeAmount = 3;
     self.listImage = [TBStation imageWithNameFormat:@"list-%@.png" state:[self state]];
     self.markerImage = [TBStation markerImageForState:[self state]];
     self.selectedMarkerImage = self.markerImage;
-    
-    self.isMyLocation = [self.sid isEqualToString:@"0"];
-    if (self.isMyLocation)
-    {
-        self.stationName = NSLocalizedString(@"MYLOCATION_TITLE", nil);
-        self.listImage = [UIImage imageNamed:@"list-current-location.png"];
-    }
 }
 
 - (id)initWithDictionary:(NSDictionary*)dict
