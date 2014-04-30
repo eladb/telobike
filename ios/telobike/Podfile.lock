@@ -1,30 +1,31 @@
 PODS:
-  - AFNetworking (2.0.3):
+  - AFNetworking (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.0.3):
+  - AFNetworking/NSURLConnection (2.2.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.0.3):
+  - AFNetworking/NSURLSession (2.2.3):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.0.3)
-  - AFNetworking/Security (2.0.3)
-  - AFNetworking/Serialization (2.0.3)
-  - AFNetworking/UIKit (2.0.3):
+  - AFNetworking/Reachability (2.2.3)
+  - AFNetworking/Security (2.2.3)
+  - AFNetworking/Serialization (2.2.3)
+  - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - Appirater (2.0.2)
-  - GoogleAnalytics-iOS-SDK (3.0.2)
-  - InAppSettingsKit (2.0)
-  - SBJson (3.2)
+  - GoogleAnalytics-iOS-SDK (3.0.6)
+  - InAppSettingsKit (2.0.1)
+  - SBJson (4.0.1)
   - SVGeocoder (0.1)
-  - TTCounterLabel (1.0.3):
-    - TTTAttributedLabel (~> 1.7.1)
-  - TTTAttributedLabel (1.7.5)
+  - TTCounterLabel (1.0.5):
+    - TTTAttributedLabel
+  - TTTAttributedLabel (1.9.5)
 
 DEPENDENCIES:
   - AFNetworking
@@ -36,13 +37,13 @@ DEPENDENCIES:
   - TTCounterLabel
 
 SPEC CHECKSUMS:
-  AFNetworking: e499052cbf3d743e9bb727bb37adb9dc2547ba15
+  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  GoogleAnalytics-iOS-SDK: 86393b99f7328ae8d8e975fcaa8632a39dafafe8
-  InAppSettingsKit: 2b85ba925a81634860461c21274f54b130c84614
-  SBJson: abc2bf2baef456d5dae213f9826fe2b6fdf19861
+  GoogleAnalytics-iOS-SDK: 16dfcc0c4491148bf372edc85a8470cc405ffb72
+  InAppSettingsKit: 5e42f626b9be9c33e3b04c0cc9523ca5eabe7ad3
+  SBJson: 9749a0365b005bcb0b7adf74579d79372c11cc4f
   SVGeocoder: 22661b5bae88a53e040d9fecbb5304bbd8f81cd5
-  TTCounterLabel: c5067a72c7110647a170c0b3e03a899324004ca3
-  TTTAttributedLabel: 1eb635d4d844cb7abce4d839faefca2a3409950d
+  TTCounterLabel: 1b6ef3b54514fbc6953627214986ed3786e892aa
+  TTTAttributedLabel: 6154fd2407a03fb8d71abfa36f4710fff26a168e
 
-COCOAPODS: 0.25.0
+COCOAPODS: 0.32.1
