@@ -331,7 +331,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timer" image="Timer" id="aTJ-p2-fjK"/>
+                    <tabBarItem key="tabBarItem" title="Timer" image="TabBar-Timer" id="aTJ-p2-fjK"/>
                     <navigationItem key="navigationItem" title="Timer" id="DYj-On-CSx"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -350,7 +350,7 @@
         <image name="TabBar-Favorites" width="25" height="24"/>
         <image name="TabBar-Map" width="25" height="25"/>
         <image name="TabBar-NearMe" width="24" height="25"/>
-        <image name="Timer" width="27" height="27"/>
+        <image name="TabBar-Timer" width="24" height="25"/>
         <image name="station-favorite-unselected" width="25" height="25"/>
         <image name="station-navigation" width="25" height="25"/>
         <image name="station-report" width="25" height="25"/>
