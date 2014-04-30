@@ -32,16 +32,11 @@ static const NSInteger kMarginalBikeAmount = 3;
 @property (assign, nonatomic) TBStationState state;
 @property (strong, nonatomic) UIImage *markerImage;
 
-// private
-@property (assign, nonatomic) BOOL isActive;
-@property (assign, nonatomic) BOOL isOnline;
-
 @end
 
 @implementation TBStation
 
-- (id)initWithDictionary:(NSDictionary*)dict
-{
+- (id)initWithDictionary:(NSDictionary*)dict {
     self = [super init];
     if (self) {
         self.dict = dict;
@@ -49,15 +44,13 @@ static const NSInteger kMarginalBikeAmount = 3;
     return self;
 }
 
-- (void)setDict:(NSDictionary *)dict
-{
+- (void)setDict:(NSDictionary *)dict {
     _dict = dict;
 
     self.sid = [dict objectForKey:@"sid"];
     
     self.stationName = [dict localizedStringForKey:@"name"];
     self.location    = [dict locationForKey:@"location"];
-    NSDate* lastUpdate  = [dict jsonDateForKey:@"last_update"];
     self.address     = [dict localizedStringForKey:@"address"];
     self.availBike   = [[dict objectForKey:@"available_bike"] intValue];
     self.availSpace  = [[dict objectForKey:@"available_spaces"] intValue];
@@ -67,9 +60,10 @@ static const NSInteger kMarginalBikeAmount = 3;
         self.address = nil;
     }
     
+    NSDate* lastUpdate  = [dict jsonDateForKey:@"last_update"];
     NSTimeInterval freshness = [lastUpdate timeIntervalSinceNow];
-    self.isOnline = lastUpdate != nil && freshness < kFreshnessTimeInterval;
-    self.isActive = !self.isOnline || self.availBike > 0 || self.availSpace > 0;
+    BOOL isOnline = lastUpdate != nil && freshness < kFreshnessTimeInterval;
+    BOOL isActive = !isOnline || self.availBike > 0 || self.availSpace > 0;
     
     UIColor* red    = [UIColor colorWithRed:191.0f/255.0f green:0.0f blue:0.0f alpha:1.0f];
     UIColor* yellow = [UIColor colorWithRed:218/255.0 green:171/255.0 blue:0/255.0 alpha:1.0];
@@ -81,7 +75,7 @@ static const NSInteger kMarginalBikeAmount = 3;
     self.emptySlotColor = nil;
     
     // set red color for bike and space if either of them is 0.
-    if (self.isActive) {
+    if (isActive) {
         UIColor* availBikeColor = nil;
         UIColor* availSpaceColor = nil;
 
@@ -104,8 +98,8 @@ static const NSInteger kMarginalBikeAmount = 3;
     }
     
     TBStationState state = StationOK;
-    if (!self.isOnline) state = StationUnknown;
-    else if (!self.isActive) state = StationInactive;
+    if (!isOnline) state = StationUnknown;
+    else if (!isActive) state = StationInactive;
     else if (self.availBike == 0) state = StationEmpty;
     else if (self.availSpace == 0) state = StationFull;
     else if (self.availBike <= kMarginalBikeAmount) state = StationMarginal;
@@ -116,8 +110,7 @@ static const NSInteger kMarginalBikeAmount = 3;
     self.lastUpdateTime = [NSDate date];
 }
 
-- (UIImage *)determineMarkerImage
-{
+- (UIImage *)determineMarkerImage {
     switch (self.state) {
         case StationOK: return [UIImage imageNamed:@"map-green.png"];
         case StationEmpty: return [UIImage imageNamed:@"map-redempty.png"];
@@ -160,13 +153,11 @@ static const NSInteger kMarginalBikeAmount = 3;
     return self.location.coordinate;
 }
 
-- (NSString *)title
-{
+- (NSString *)title {
     return self.stationName;
 }
 
-- (NSString *)subtitle
-{
+- (NSString *)subtitle {
     return nil;
 }
 
