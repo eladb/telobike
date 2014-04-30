@@ -11,15 +11,16 @@
 #import "TBServer.h"
 #import "TBStation.h"
 #import "TBFavorites.h"
-#import "NSObject+Binding.h"
 #import "TBMainViewController.h"
 #import "TBMapViewController.h"
 #import "UIViewController+GAI.h"
+#import "TBObserver.h"
 
 @interface TBFavoritesViewController ()
 
 @property (strong, nonatomic) NSArray* favoriteStations;
 @property (strong, nonatomic) UIView* emptyLabel;
+@property (strong, nonatomic) TBObserver *stationsObserver;
 
 @end
 
@@ -31,7 +32,7 @@
     UINib* nib = [UINib nibWithNibName:NSStringFromClass([TBStationTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
     
-    [self observeValueOfKeyPath:@"stations" object:[TBServer instance] with:^(id new, id old) {
+    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"stations" block:^{
         [self updateFavoritesWithReload:YES];
         [self.refreshControl endRefreshing];
     }];

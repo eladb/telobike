@@ -15,9 +15,9 @@ static const NSInteger kMarginalBikeAmount = 3;
 @interface TBStation ()
 
 // station info
-@property (copy, nonatomic) NSString* sid;
-@property (copy, nonatomic) NSString* stationName;
-@property (copy, nonatomic) NSString* address;
+@property (strong, nonatomic) NSString* sid;
+@property (strong, nonatomic) NSString* stationName;
+@property (strong, nonatomic) NSString* address;
 @property (strong, nonatomic) CLLocation* location;
 @property (assign, nonatomic) NSInteger availBike;
 @property (assign, nonatomic) NSInteger availSpace;
@@ -26,6 +26,11 @@ static const NSInteger kMarginalBikeAmount = 3;
 @property (strong, nonatomic) UIColor* fullSlotColor;
 @property (strong, nonatomic) UIColor* emptySlotColor;
 @property (strong, nonatomic) UIColor* indicatorColor;
+
+// state
+@property (strong, nonatomic) NSDate *lastUpdateTime;
+@property (assign, nonatomic) TBStationState state;
+@property (strong, nonatomic) UIImage *markerImage;
 
 // private
 @property (assign, nonatomic) BOOL isActive;
@@ -38,8 +43,7 @@ static const NSInteger kMarginalBikeAmount = 3;
 - (id)initWithDictionary:(NSDictionary*)dict
 {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         self.dict = dict;
     }
     return self;
@@ -98,9 +102,21 @@ static const NSInteger kMarginalBikeAmount = 3;
         self.fullSlotColor = availBikeColor;
         self.emptySlotColor = availSpaceColor == yellow ? yellow : gray;
     }
+    
+    TBStationState state = StationOK;
+    if (!self.isOnline) state = StationUnknown;
+    else if (!self.isActive) state = StationInactive;
+    else if (self.availBike == 0) state = StationEmpty;
+    else if (self.availSpace == 0) state = StationFull;
+    else if (self.availBike <= kMarginalBikeAmount) state = StationMarginal;
+    else if (self.availSpace <= kMarginalBikeAmount) state = StationMarginalFull;
+
+    self.state = state;
+    self.markerImage = [self determineMarkerImage];
+    self.lastUpdateTime = [NSDate date];
 }
 
-- (UIImage *)markerImage
+- (UIImage *)determineMarkerImage
 {
     switch (self.state) {
         case StationOK: return [UIImage imageNamed:@"map-green.png"];
@@ -114,19 +130,6 @@ static const NSInteger kMarginalBikeAmount = 3;
         default:
             return [UIImage imageNamed:@"map-black.png"];
     }
-}
-
-- (StationState)state
-{
-    StationState state = StationOK;
-    if (!self.isOnline) state = StationUnknown;
-    else if (!self.isActive) state = StationInactive;
-    else if (self.availBike == 0) state = StationEmpty;
-    else if (self.availSpace == 0) state = StationFull;
-    else if (self.availBike <= kMarginalBikeAmount) state = StationMarginal;
-    else if (self.availSpace <= kMarginalBikeAmount) state = StationMarginalFull;
-    
-    return state;
 }
 
 #pragma mark - Query

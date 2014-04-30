@@ -17,28 +17,29 @@ typedef enum {
     StationMarginalFull, // yellow full
     StationInactive,     // gray
     StationUnknown,      // black
-} StationState;
+} TBStationState;
 
 @interface TBStation : NSObject <MKAnnotation>
 
 @property (strong, nonatomic) NSDictionary* dict; // access raw dict
 
 // station info
-@property (copy, nonatomic, readonly) NSString* sid;
-@property (copy, nonatomic, readonly) NSString* address;
-@property (copy, nonatomic, readonly) NSString* stationName;
-@property (strong, nonatomic, readonly) CLLocation* location;
-@property (assign, nonatomic, readonly) NSInteger availBike;
-@property (assign, nonatomic, readonly) NSInteger availSpace;
+@property (readonly, nonatomic) NSString* sid;
+@property (readonly, nonatomic) NSString* address;
+@property (readonly, nonatomic) NSString* stationName;
+@property (readonly, nonatomic) CLLocation* location;
+@property (readonly, nonatomic) NSInteger availBike;
+@property (readonly, nonatomic) NSInteger availSpace;
 
 // colors
-@property (strong, nonatomic, readonly) UIColor* fullSlotColor;
-@property (strong, nonatomic, readonly) UIColor* emptySlotColor;
-@property (strong, nonatomic, readonly) UIColor* indicatorColor;
+@property (readonly, nonatomic) UIColor* fullSlotColor;
+@property (readonly, nonatomic) UIColor* emptySlotColor;
+@property (readonly, nonatomic) UIColor* indicatorColor;
 
-// state (calculated)
-@property (assign, nonatomic, readonly) StationState state;
-@property (strong, nonatomic, readonly) UIImage* markerImage;
+// state (color)
+@property (readonly, nonatomic) NSDate *lastUpdateTime;
+@property (readonly, nonatomic) TBStationState state;
+@property (readonly, nonatomic) UIImage* markerImage;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (BOOL)queryKeyword:(NSString*)keyword;

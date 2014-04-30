@@ -1,14 +1,13 @@
 //
-//  JVObserver.m
-//  Jovie
+//  TBObserver.m
 //
 //  Created by Elad Ben-Israel on 4/24/14.
-//  Copyright (c) 2014 Jovie Inc. All rights reserved.
+//  Copyright (c) 2014 Citylifeapps. All rights reserved.
 //
 
-#import "JVObserver.h"
+#import "TBObserver.h"
 
-@interface JVObserver ()
+@interface TBObserver ()
 
 @property (strong, nonatomic) id object;
 @property (strong, nonatomic) NSString *keyPath;
@@ -16,7 +15,7 @@
 
 @end
 
-@implementation JVObserver
+@implementation TBObserver
 
 - (instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath block:(void(^)(void))block
 {
@@ -36,7 +35,7 @@
 
 + (instancetype)observerForObject:(id)object keyPath:(NSString *)keyPath block:(void(^)(void))block
 {
-    return [[JVObserver alloc] initWithObject:object keyPath:keyPath block:block];
+    return [[TBObserver alloc] initWithObject:object keyPath:keyPath block:block];
 }
 
 - (void)dealloc

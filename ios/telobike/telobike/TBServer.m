@@ -69,25 +69,34 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
         return;
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSDictionary* stationByID = [self.stations dictionaryForStationsByID];
+    NSDictionary* stationByID = [self.stations dictionaryForStationsByID];
+    
+    NSMutableArray* stations = [[NSMutableArray alloc] initWithArray:self.stations];
+    for (NSDictionary* dict in responseObject) {
+        NSDictionary *s = dict;
         
-        NSMutableArray* stations = [[NSMutableArray alloc] initWithArray:self.stations];
-        for (NSDictionary* s in responseObject) {
-            TBStation* station = [[TBStation alloc] initWithDictionary:s];
-            
-            // if we already have a station, just replace it's content and don't replace the object
-            TBStation* existingStation = stationByID[station.sid];
-            if (existingStation) {
-                existingStation.dict = s;
-            }
-            else {
-                [stations addObject:station];
-            }
+#ifdef DEBUG
+        NSInteger simulatedAvailableBike = arc4random() % [s[@"available_bike"] integerValue];
+        NSInteger simulatedAvailableSpace = arc4random() % [s[@"available_spaces"] integerValue];
+        NSMutableDictionary *modifiedDict = [NSMutableDictionary dictionaryWithDictionary:s];
+        modifiedDict[@"available_bike"] = @(simulatedAvailableBike);
+        modifiedDict[@"available_spaces"] = @(simulatedAvailableSpace);
+        s = modifiedDict;
+#endif
+
+        TBStation* station = [[TBStation alloc] initWithDictionary:s];
+        
+        // if we already have a station, just replace it's content and don't replace the object
+        TBStation* existingStation = stationByID[station.sid];
+        if (existingStation) {
+            existingStation.dict = s;
         }
-        
-        self.stations = stations;
-    });
+        else {
+            [stations addObject:station];
+        }
+    }
+    
+    self.stations = stations;
 }
 
 - (void)reloadStations:(void (^)())completion {

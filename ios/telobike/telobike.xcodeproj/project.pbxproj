@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87874FC9433042AAADAE0F63 /* libPods.a */; };
 		F40672D9185B43940078860B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40672D8185B43940078860B /* CoreAudio.framework */; };
+		F40A962B1910FE5D00E559D3 /* TBObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F40A962A1910FE5D00E559D3 /* TBObserver.m */; };
 		F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */; };
 		F40C94501858DA6700B64908 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F40C944F1858DA6700B64908 /* Settings.bundle */; };
 		F4141EBA1855E67600918F71 /* TBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4141EB91855E67600918F71 /* TBMainViewController.m */; };
@@ -39,7 +40,6 @@
 		F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */; };
 		F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CCA17F65DAC00D88614 /* TBServer.m */; };
 		F47B5CCE17F6675B00D88614 /* TBCity.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CCD17F6675B00D88614 /* TBCity.m */; };
-		F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CD417F66D1100D88614 /* NSObject+Binding.m */; };
 		F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CD717F6B37F00D88614 /* TBNavigationController.m */; };
 		F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CDE17F6C7E100D88614 /* TBFeedbackActionSheet.m */; };
 		F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CE017F6C97100D88614 /* MessageUI.framework */; };
@@ -86,6 +86,8 @@
 		0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		87874FC9433042AAADAE0F63 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40672D8185B43940078860B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		F40A96291910FE5D00E559D3 /* TBObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObserver.h; sourceTree = "<group>"; };
+		F40A962A1910FE5D00E559D3 /* TBObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBObserver.m; sourceTree = "<group>"; };
 		F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGoogleMapsRouting.h; sourceTree = "<group>"; };
 		F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGoogleMapsRouting.m; sourceTree = "<group>"; };
 		F40C944F1858DA6700B64908 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -136,8 +138,6 @@
 		F47B5CCA17F65DAC00D88614 /* TBServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBServer.m; sourceTree = "<group>"; };
 		F47B5CCC17F6675B00D88614 /* TBCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCity.h; sourceTree = "<group>"; };
 		F47B5CCD17F6675B00D88614 /* TBCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCity.m; sourceTree = "<group>"; };
-		F47B5CD317F66D1100D88614 /* NSObject+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Binding.h"; sourceTree = "<group>"; };
-		F47B5CD417F66D1100D88614 /* NSObject+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Binding.m"; sourceTree = "<group>"; };
 		F47B5CD617F6B37F00D88614 /* TBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBNavigationController.h; sourceTree = "<group>"; };
 		F47B5CD717F6B37F00D88614 /* TBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBNavigationController.m; sourceTree = "<group>"; };
 		F47B5CDD17F6C7E100D88614 /* TBFeedbackActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFeedbackActionSheet.h; sourceTree = "<group>"; };
@@ -355,12 +355,12 @@
 		F47B5CD017F6689400D88614 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				F40A96291910FE5D00E559D3 /* TBObserver.h */,
+				F40A962A1910FE5D00E559D3 /* TBObserver.m */,
 				F47B5D0017F797DA00D88614 /* UIColor+Style.h */,
 				F47B5D0117F797DA00D88614 /* UIColor+Style.m */,
 				F42E60B917F123590099A1D0 /* Utils.h */,
 				F42E60BA17F123590099A1D0 /* Utils.m */,
-				F47B5CD317F66D1100D88614 /* NSObject+Binding.h */,
-				F47B5CD417F66D1100D88614 /* NSObject+Binding.m */,
 				F47B5CED17F6D43C00D88614 /* NSBundle+View.h */,
 				F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */,
 				F498A0291851450F003BD3A6 /* TBTransparentToolbar.h */,
@@ -644,7 +644,6 @@
 				F42FCA1117FE52F700E24D50 /* TBTintedView.m in Sources */,
 				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
-				F47B5CD517F66D1100D88614 /* NSObject+Binding.m in Sources */,
 				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
 				F4AF49971896C9100045612D /* TBTimerViewController.m in Sources */,
 				F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */,
@@ -653,6 +652,7 @@
 				F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */,
 				F42E60B817F123060099A1D0 /* TBStation.m in Sources */,
 				F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */,
+				F40A962B1910FE5D00E559D3 /* TBObserver.m in Sources */,
 				F4141EBA1855E67600918F71 /* TBMainViewController.m in Sources */,
 				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,
 				F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */,

@@ -14,7 +14,6 @@
 #import "TBStation.h"
 #import "TBMapViewController.h"
 #import "TBServer.h"
-#import "NSObject+Binding.h"
 #import "UIColor+Style.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
@@ -28,6 +27,7 @@
 #import "TBPlacemarkAnnotation.h"
 #import "NSUserDefaults+OneOff.h"
 #import "UIAlertView+Blocks.h"
+#import "TBObserver.h"
 
 @interface TBMapViewController () <MKMapViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -52,6 +52,11 @@
 
 @property (assign, nonatomic) BOOL regionChangingForSelection;
 
+// observers
+@property (strong, nonatomic) TBObserver *stationsObserver;
+@property (strong, nonatomic) TBObserver *cityObserver;
+@property (strong, nonatomic) TBObserver *currentStationObserver;
+
 @end
 
 @implementation TBMapViewController
@@ -65,11 +70,11 @@
     
     self.server = [TBServer instance];
     
-    [self observeValueOfKeyPath:@"stations" object:self.server with:^(id new, id old) {
+    self.stationsObserver = [TBObserver observerForObject:self.server keyPath:@"stations" block:^{
         [self reloadAnnotations];
     }];
     
-    [self observeValueOfKeyPath:@"city" object:self.server with:^(id new, id old) {
+    self.cityObserver = [TBObserver observerForObject:self.server keyPath:@"city" block:^{
         MKCoordinateRegion region;
         region.center = self.server.city.cityCenter.coordinate;
         region.span = MKCoordinateSpanMake(0.05, 0.05);
@@ -264,47 +269,50 @@
     return  selectedStation;
 }
 
-- (void)updateStationDetails:(TBStation*)station animated:(BOOL)animated {
+- (void)updateStationDetails:(TBStation *)station animated:(BOOL)animated {
     if (!station) {
+        self.currentStationObserver = nil; // release all observers
         [self closeDetailsAnimated:animated];
         [self updateTitle:nil];
         return;
     }
     
-    self.stationAvailabilityView.station = station;
-    
-    NSString* labelText = nil;
-    switch (station.state) {
-        case StationFull:
-            labelText = NSLocalizedString(@"No parking", nil);
-            break;
-            
-        case StationEmpty:
-            labelText = NSLocalizedString(@"No bicycles", nil);
-            break;
-            
-        case StationMarginal:
-            labelText = NSLocalizedString(@"Almost empty", nil);
-            break;
-            
-        case StationMarginalFull:
-            labelText = NSLocalizedString(@"Almost full", nil);
-            break;
-            
-        case StationInactive:
-            labelText = NSLocalizedString(@"Not operational", nil);
-            break;
-            
-        case StationUnknown:
-        case StationOK:
-        default:
-            break;
-    }
-    
-    self.availabilityLabel.hidden = !labelText;
-    self.availabilityLabel.text = labelText;
-    self.availabilityLabel.textColor = station.indicatorColor;
-    self.labelBackgroundView.hidden = self.availabilityLabel.hidden;
+    self.currentStationObserver = [TBObserver observerForObject:station keyPath:@"lastUpdateTime" block:^{
+        self.stationAvailabilityView.station = station;
+        
+        NSString* labelText = nil;
+        switch (station.state) {
+            case StationFull:
+                labelText = NSLocalizedString(@"No parking", nil);
+                break;
+                
+            case StationEmpty:
+                labelText = NSLocalizedString(@"No bicycles", nil);
+                break;
+                
+            case StationMarginal:
+                labelText = NSLocalizedString(@"Almost empty", nil);
+                break;
+                
+            case StationMarginalFull:
+                labelText = NSLocalizedString(@"Almost full", nil);
+                break;
+                
+            case StationInactive:
+                labelText = NSLocalizedString(@"Not operational", nil);
+                break;
+                
+            case StationUnknown:
+            case StationOK:
+            default:
+                break;
+        }
+        
+        self.availabilityLabel.hidden = !labelText;
+        self.availabilityLabel.text = labelText;
+        self.availabilityLabel.textColor = station.indicatorColor;
+        self.labelBackgroundView.hidden = self.availabilityLabel.hidden;
+    }];
     
     [self openDetailsAnimated:YES];
 

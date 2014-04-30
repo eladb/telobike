@@ -158,7 +158,7 @@ const struct JNJGoogleMapsDirectionMode JNJGoogleMapsDirectionMode = {
 	}
 
 	if (self.zoomLevel > 0) {
-		NSString *zoomLevel = [NSString stringWithFormat:@"%i", self.zoomLevel];
+		NSString *zoomLevel = [NSString stringWithFormat:@"%lu", (unsigned long)self.zoomLevel];
 		[components addObject:[self parameterStringWithKey:kJNJGoogleMapsQueryKeyZoom value:zoomLevel]];
 	}
 	

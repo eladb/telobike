@@ -13,16 +13,16 @@
 #import "TBMapViewController.h"
 #import "TBStationTableViewCell.h"
 #import "TBStation.h"
-#import "NSObject+Binding.h"
 #import "TBMainViewController.h"
 #import "TBFeedbackActionSheet.h"
 #import "TBFeedbackMailComposeViewController.h"
 #import "UIViewController+GAI.h"
+#import "TBObserver.h"
 
 @interface TBListViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) NSArray* sortedStations;
-
+@property (strong, nonatomic) TBObserver *stationsObserver;
 @end
 
 @implementation TBListViewController
@@ -34,7 +34,7 @@
     
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
-    [self observeValueOfKeyPath:@"stations" object:[TBServer instance] with:^(id new, id old) {
+    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"stations" block:^{
         self.sortedStations = [[TBServer instance] sortStationsByDistance:[TBServer instance].stations];
         [self.refreshControl endRefreshing];
         [self.tableView reloadData];

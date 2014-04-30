@@ -8,16 +8,21 @@
 
 #import "TBStationAnnotationView.h"
 #import "TBStation.h"
-
-//static CGFloat kDeselectedSize = 24.0f;
-//static CGFloat kSelectedSize = 48.0f;
+#import "TBObserver.h"
 
 @interface TBStationAnnotationView ()
 
 @property (strong, nonatomic) TBStation* station;
+@property (strong, nonatomic) TBObserver *markerImageObserver;
 
 @end
 @implementation TBStationAnnotationView
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    self.station = nil;
+}
 
 - (TBStation*)station {
     return (TBStation*)self.annotation;
@@ -70,7 +75,9 @@
 - (void)setAnnotation:(id<MKAnnotation>)annotation {
     [super setAnnotation:annotation];
     self.station = annotation;
-    self.layer.contents = (id)[self.station.markerImage CGImage];
+    self.markerImageObserver = [TBObserver observerForObject:self.station keyPath:@"markerImage" block:^{
+        self.layer.contents = (id)[self.station.markerImage CGImage];
+    }];
     self.layer.bounds = [self deselectedBounds];
 }
 
