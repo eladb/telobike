@@ -115,6 +115,17 @@ server.get('/cities/tlv', function(req, res) {
   return res.send(city);
 });
 
+server.get('/ping', function(req, res) {
+  return telofun_api(function(err, stations) {
+    if (err) {
+      res.status(500);
+      return res.send({ error: err });
+    }
+
+    return res.send('OK');
+  });
+});
+
 server.post('/push', function(req, res, next) {
   console.log('received push token:', req.url);
   return res.send('OK');
