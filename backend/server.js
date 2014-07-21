@@ -105,7 +105,7 @@ server.get('/cities/tlv', function(req, res) {
   city.city_name = "תל-אביב יפו";
   city['city_name.en'] = "Tel-Aviv";
   // city.disclaimer = "Welcome to Telobike. We created this app as a public service for all the awesome people of Tel-Aviv. Let us know what you think! Nir and Elad.";
-  city.disclaimer = "Sorry, we have been experiencing some issues with tel-o-fun servers in the past few days";
+  city.disclaimer = "We are still working with Tel-o-fun to fix the problem. They have made some changes in the APIs without a notification and we are trying to figure this out. Sorry!";
   city.info_url = "http://telobike.citylifeapps.com/static/en/tlv.html";
   city.info_url_he = "http://telobike.citylifeapps.com/static/he/tlv.html";
   city.last_update = "2011-06-15 18:47:50.982111";
