@@ -75,21 +75,15 @@ static NSString*  kServerBaseURL            = @"http://telobike.citylifeapps.com
     for (NSDictionary* dict in responseObject) {
         NSDictionary *s = dict;
         
-#ifdef DEBUG
-        NSInteger simulatedAvailableBike = arc4random() % [s[@"available_bike"] integerValue];
-        NSInteger simulatedAvailableSpace = arc4random() % [s[@"available_spaces"] integerValue];
-        NSMutableDictionary *modifiedDict = [NSMutableDictionary dictionaryWithDictionary:s];
-        modifiedDict[@"available_bike"] = @(simulatedAvailableBike);
-        modifiedDict[@"available_spaces"] = @(simulatedAvailableSpace);
-        s = modifiedDict;
-#endif
-
-        TBStation* station = [[TBStation alloc] initWithDictionary:s];
+        TBStation* station = [TBStation stationFromDictionary:s];
+        if (!station) {
+            continue; // skipping station
+        }
         
         // if we already have a station, just replace it's content and don't replace the object
         TBStation* existingStation = stationByID[station.sid];
         if (existingStation) {
-            existingStation.dict = s;
+            [existingStation updateDictionary:s];
         }
         else {
             [stations addObject:station];

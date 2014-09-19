@@ -22,6 +22,8 @@
 - (CLLocation*)locationForKey:(NSString*)key;
 - (NSURL*)urlForKey:(NSString*)key;
 - (NSDate*)jsonDateForKey:(NSString*)key;
+- (NSString*)stringForKey:(NSString *)key;
+- (NSNumber*)numberForKey:(NSString *)key;
 
 @end
 

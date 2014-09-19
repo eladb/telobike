@@ -114,6 +114,16 @@
     return [[self objectForKey:key] jsonDate];
 }
 
+- (NSString *)stringForKey:(NSString *)key
+{
+    return [self objectForKey:key];
+}
+
+- (NSNumber *)numberForKey:(NSString *)key
+{
+    return [self objectForKey:key];
+}
+
 @end
 
 @implementation NSString (JsonDate)
