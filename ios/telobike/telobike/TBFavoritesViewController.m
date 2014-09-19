@@ -54,7 +54,7 @@
 #pragma mark - Data
 
 - (IBAction)refresh:(id)sender {
-    [[TBServer instance] reloadStations:nil];
+    [[TBServer instance] reloadStationsWithCompletion:^{}];
 }
 
 - (void)updateFavoritesWithReload:(BOOL)reload {

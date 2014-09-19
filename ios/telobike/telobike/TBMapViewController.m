@@ -125,7 +125,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[TBServer instance] reloadStations:nil];
+    [[TBServer instance] reloadStationsWithCompletion:^{}];
     
     [self showOrHideRoutesOnMap];
     

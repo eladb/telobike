@@ -34,7 +34,7 @@
     
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
-    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"stations" block:^{
+    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"lastStationUpdateTime" block:^{
         self.sortedStations = [[TBServer instance] sortStationsByDistance:[TBServer instance].stations];
         [self.refreshControl endRefreshing];
         [self.tableView reloadData];
@@ -53,7 +53,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[TBServer instance] reloadStations:nil];
+    [[TBServer instance] reloadStationsWithCompletion:^{}];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -64,7 +64,7 @@
 #pragma mark - Stations
 
 - (IBAction)refresh:(id)sender {
-    [[TBServer instance] reloadStations:nil];
+    [[TBServer instance] reloadStationsWithCompletion:^{}];
 }
 
 
