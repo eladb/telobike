@@ -70,11 +70,11 @@
     
     self.server = [TBServer instance];
     
-    self.stationsObserver = [TBObserver observerForObject:self.server keyPath:@"stations" block:^{
+    self.stationsObserver = [TBObserver observerForObject:self.server keyPath:@"stationsUpdateTime" block:^{
         [self reloadAnnotations];
     }];
     
-    self.cityObserver = [TBObserver observerForObject:self.server keyPath:@"city" block:^{
+    self.cityObserver = [TBObserver observerForObject:self.server keyPath:@"cityUpdateTime" block:^{
         MKCoordinateRegion region;
         region.center = self.server.city.cityCenter.coordinate;
         region.span = MKCoordinateSpanMake(0.05, 0.05);

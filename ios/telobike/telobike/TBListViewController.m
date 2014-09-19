@@ -34,7 +34,7 @@
     
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
-    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"lastStationUpdateTime" block:^{
+    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"stationsUpdateTime" block:^{
         self.sortedStations = [[TBServer instance] sortStationsByDistance:[TBServer instance].stations];
         [self.refreshControl endRefreshing];
         [self.tableView reloadData];

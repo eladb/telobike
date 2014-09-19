@@ -32,7 +32,7 @@
     UINib* nib = [UINib nibWithNibName:NSStringFromClass([TBStationTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:STATION_CELL_REUSE_IDENTIFIER];
     
-    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"stations" block:^{
+    self.stationsObserver = [TBObserver observerForObject:[TBServer instance] keyPath:@"stationsUpdateTime" block:^{
         [self updateFavoritesWithReload:YES];
         [self.refreshControl endRefreshing];
     }];

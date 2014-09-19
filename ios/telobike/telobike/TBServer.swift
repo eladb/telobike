@@ -15,7 +15,8 @@ import Foundation
     var stations: [TBStation] = []
     var city: TBCity? = nil
     
-    dynamic var lastStationUpdateTime = NSDate()
+    dynamic var stationsUpdateTime = NSDate()
+    dynamic var cityUpdateTime = NSDate()
     
     class var instance: TBServer {
         struct Singleton { static let instance = TBServer() }
@@ -50,7 +51,7 @@ import Foundation
             self.parseStationsResponse(responseObject)
             NSUserDefaults.standardUserDefaults().setObject(responseObject, forKey: "stations")
             NSUserDefaults.standardUserDefaults().synchronize()
-            self.lastStationUpdateTime = NSDate()
+            self.stationsUpdateTime = NSDate()
             completion()
         }, { (_, error) in
             println("error loading stations: \(error)")
@@ -84,7 +85,7 @@ import Foundation
     
     func sortStationsByDistance(stations: [TBStation]) -> [TBStation] {
         let location = self.currentLocation ?? TBServer.instance.city?.cityCenter
-        return sorted(self.stations) { (s1, s2) -> Bool in
+        return sorted(stations) { (s1, s2) -> Bool in
             let d1 = s1.location.distanceFromLocation(location)
             let d2 = s2.location.distanceFromLocation(location)
             return d1 > d2
@@ -114,54 +115,15 @@ import Foundation
                     println("warning: cannot parse station from dictionary: \(dict)")
                 }
             }
+            
+            self.stationsUpdateTime = NSDate()
         }
     }
 
     private func parseCityResponse(responseObject: AnyObject?) {
         if let dict = responseObject as? NSDictionary {
             self.city = TBCity(dictionary: dict)
+            self.cityUpdateTime = NSDate()
         }
     }
-
-
-    
 }
-
-/*
-#import <AFNetworking/AFNetworking.h>
-#import "TBServer.h"
-#import "TBStation.h"
-
-
-@interface TBServer () <CLLocationManagerDelegate>
-
-@property (strong, nonatomic) AFHTTPRequestOperationManager* server;
-@property (strong, nonatomic) NSURLCache*                    cache;
-@property (strong, nonatomic) NSArray*                       stations;
-@property (strong, nonatomic) TBCity*                        city;
-@property (strong, nonatomic) CLLocationManager*             locationManager;
-
-@end
-
-- (NSArray*)sortStationsByDistance:(NSArray*)stations {
-
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-}
-
-@end
-
-@implementation NSArray (Stations)
-
-- (NSDictionary*)dictionaryForStationsByID {
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    for (TBStation* station in self) {
-        dict[station.sid] = station;
-    }
-    return dict;
-}
-
-@end
-*/
