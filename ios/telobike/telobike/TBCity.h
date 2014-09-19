@@ -2,26 +2,13 @@
 //  TBCity.h
 //  telobike
 //
-//  Created by Elad Ben-Israel on 9/27/13.
-//  Copyright (c) 2013 Elad Ben-Israel. All rights reserved.
+//  Created by Elad Ben-Israel on 9/19/14.
+//  Copyright (c) 2014 Elad Ben-Israel. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
+#ifndef telobike_TBCity_h
+#define telobike_TBCity_h
 
-@interface TBCity : NSObject
+#import "telobike-Swift.h"
 
-
-@property (strong, readonly) NSString*   cityName;
-@property (strong, readonly) NSString*   mail;
-@property (strong, readonly) NSString*   serviceName;
-@property (strong, readonly) NSString*   mailTags;
-@property (strong, readonly) CLLocation* cityCenter;
-@property (strong, readonly) NSString*   disclaimer;
-@property (strong, readonly) NSURL*      infoURL;
-
-@property (strong, readonly) CLCircularRegion* region;
-
-- (instancetype)initWithDictionary:(NSDictionary*)dict;
-
-@end
+#endif

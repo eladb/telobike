@@ -23,6 +23,7 @@
 		F437D5CC1858896F00E1381B /* TBGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */; };
 		F44061D419CB4C4B00A069C5 /* TBStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF885719C6BFAC0073FB8D /* TBStation.swift */; };
 		F44061D719CBDA2F00A069C5 /* TBStationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44061D619CBDA2F00A069C5 /* TBStationSearch.swift */; };
+		F44061DA19CBF0D000A069C5 /* TBCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44061D919CBF0D000A069C5 /* TBCity.swift */; };
 		F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
 		F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE817F11589006FD464 /* CoreGraphics.framework */; };
 		F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
@@ -40,7 +41,6 @@
 		F47B5CC017F1293600D88614 /* TBFavorites.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CBF17F1293600D88614 /* TBFavorites.m */; };
 		F47B5CC817F655EC00D88614 /* TBStationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */; };
 		F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CCA17F65DAC00D88614 /* TBServer.m */; };
-		F47B5CCE17F6675B00D88614 /* TBCity.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CCD17F6675B00D88614 /* TBCity.m */; };
 		F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CD717F6B37F00D88614 /* TBNavigationController.m */; };
 		F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CDE17F6C7E100D88614 /* TBFeedbackActionSheet.m */; };
 		F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CE017F6C97100D88614 /* MessageUI.framework */; };
@@ -111,6 +111,8 @@
 		F44061D519CB7B0700A069C5 /* TBStationState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStationState.h; sourceTree = "<group>"; };
 		F44061D619CBDA2F00A069C5 /* TBStationSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStationSearch.swift; sourceTree = "<group>"; };
 		F44061D819CBDD8800A069C5 /* TBStation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStation.h; sourceTree = "<group>"; };
+		F44061D919CBF0D000A069C5 /* TBCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBCity.swift; sourceTree = "<group>"; };
+		F44061DB19CCB1ED00A069C5 /* TBCity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBCity.h; sourceTree = "<group>"; };
 		F470EBE317F11589006FD464 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F470EBE617F11589006FD464 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F470EBE817F11589006FD464 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,8 +140,6 @@
 		F47B5CC717F655EC00D88614 /* TBStationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationTableViewCell.m; sourceTree = "<group>"; };
 		F47B5CC917F65DAC00D88614 /* TBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBServer.h; sourceTree = "<group>"; };
 		F47B5CCA17F65DAC00D88614 /* TBServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBServer.m; sourceTree = "<group>"; };
-		F47B5CCC17F6675B00D88614 /* TBCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCity.h; sourceTree = "<group>"; };
-		F47B5CCD17F6675B00D88614 /* TBCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCity.m; sourceTree = "<group>"; };
 		F47B5CD617F6B37F00D88614 /* TBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBNavigationController.h; sourceTree = "<group>"; };
 		F47B5CD717F6B37F00D88614 /* TBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBNavigationController.m; sourceTree = "<group>"; };
 		F47B5CDD17F6C7E100D88614 /* TBFeedbackActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFeedbackActionSheet.h; sourceTree = "<group>"; };
@@ -344,17 +344,17 @@
 		F47B5CCF17F6687B00D88614 /* data model */ = {
 			isa = PBXGroup;
 			children = (
+				F44061DB19CCB1ED00A069C5 /* TBCity.h */,
+				F44061D819CBDD8800A069C5 /* TBStation.h */,
 				F47B5CC917F65DAC00D88614 /* TBServer.h */,
 				F47B5CCA17F65DAC00D88614 /* TBServer.m */,
-				F47B5CCC17F6675B00D88614 /* TBCity.h */,
-				F47B5CCD17F6675B00D88614 /* TBCity.m */,
 				F47B5CBE17F1293600D88614 /* TBFavorites.h */,
 				F47B5CBF17F1293600D88614 /* TBFavorites.m */,
 				F4CF885719C6BFAC0073FB8D /* TBStation.swift */,
 				F44061D619CBDA2F00A069C5 /* TBStationSearch.swift */,
 				F4CF885619C6BFAC0073FB8D /* telobike-Bridging-Header.h */,
 				F44061D519CB7B0700A069C5 /* TBStationState.h */,
-				F44061D819CBDD8800A069C5 /* TBStation.h */,
+				F44061D919CBF0D000A069C5 /* TBCity.swift */,
 			);
 			name = "data model";
 			sourceTree = "<group>";
@@ -647,11 +647,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44061D719CBDA2F00A069C5 /* TBStationSearch.swift in Sources */,
-				F47B5CCE17F6675B00D88614 /* TBCity.m in Sources */,
 				F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */,
 				F42FCA1117FE52F700E24D50 /* TBTintedView.m in Sources */,
 				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
 				F44061D419CB4C4B00A069C5 /* TBStation.swift in Sources */,
+				F44061DA19CBF0D000A069C5 /* TBCity.swift in Sources */,
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
 				F47B5CCB17F65DAC00D88614 /* TBServer.m in Sources */,
 				F4AF49971896C9100045612D /* TBTimerViewController.m in Sources */,
