@@ -13,6 +13,7 @@
 
 #import "TBMainViewController.h"
 #import "TBNavigationController.h"
+#import "TBTimerViewController.h"
 #import "TBServer.h"
 #import "UIColor+Style.h"
 #import "TBAppDelegate.h"

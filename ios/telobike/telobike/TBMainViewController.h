@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "TBMapViewController.h"
-#import "TBListViewController.h"
-#import "TBMainViewController.h"
-#import "TBTimerViewController.h"
+@class TBListViewController;
+@class TBMapViewController;
+@class TBTimerViewController;
 
 @interface TBMainViewController : UIViewController
 

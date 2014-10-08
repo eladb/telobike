@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class TBServer: NSObject, CLLocationManagerDelegate {
+class TBServer: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private let server = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://telobike.citylifeapps.com"))
     
@@ -105,6 +105,9 @@ import Foundation
                 if let station = TBStation.stationFromDictionary(dict) {
                     // if station already exists, just update its data
                     if let existingStation = stationByID[station.sid] {
+                        var mutableDict = NSMutableDictionary()
+                        mutableDict.addEntriesFromDictionary(dict)
+                        mutableDict["available_bike"] = 1
                         existingStation.updateDictionary(dict)
                     }
                     else {

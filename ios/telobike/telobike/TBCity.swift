@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class TBCity: NSObject {
+class TBCity: NSObject {
     private let dict: NSDictionary
     
     init(dictionary: NSDictionary) {

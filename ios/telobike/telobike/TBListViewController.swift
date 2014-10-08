@@ -1,0 +1,73 @@
+//
+//  TBListViewController.swift
+//  telobike
+//
+//  Created by Elad Ben-Israel on 9/23/13.
+//  Copyright (c) 2014 Elad Ben-Israel. All rights reserved.
+//
+
+import Foundation
+
+class TBListViewController: UITableViewController {
+
+    var sortedStations: [TBStation] = []
+    var stationsObserver: TBObserver?
+
+    // MARK: UIViewController Events
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        
+        self.stationsObserver = TBObserver.observerForObject(TBServer.instance, keyPath: "stationsUpdateTime") {
+            self.sortedStations = TBServer.instance.sortStationsByDistance(TBServer.instance.stations)
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
+        
+        self.tableView.keyboardDismissMode = .OnDrag
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        activityIndicator.startAnimating()
+        self.tableView.backgroundView = activityIndicator
+
+        let nib = UINib(nibName: NSStringFromClass(TBStationTableViewCell.self), bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: "STATION_CELL")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        TBServer.instance.reloadStations()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.analyticsScreenDidAppear("list")
+    }
+    
+    // MARK: Table View Data Source
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.sortedStations.count
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("STATION_CELL", forIndexPath: indexPath) as TBStationTableViewCell
+        cell.station = self.sortedStations[indexPath.row]
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let station = self.sortedStations[indexPath.row]
+        let mapViewController = self.main().mapViewController
+        mapViewController.selectAnnotation(station, animated: false)
+        self.navigationController?.pushViewController(mapViewController, animated: true)
+    }
+    
+    // MARK: Operations
+    
+    func refresh(sender: UIRefreshControl?) {
+        TBServer.instance.reloadStations()
+    }
+}

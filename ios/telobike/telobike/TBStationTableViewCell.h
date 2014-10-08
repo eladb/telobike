@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TBStation.h"
 
 #define STATION_CELL_REUSE_IDENTIFIER @"STATION_CELL"
+
+@class TBStation;
 
 @interface TBStationTableViewCell : UITableViewCell
 

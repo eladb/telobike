@@ -11,7 +11,7 @@ import CoreLocation
 import UIKit
 import MapKit
 
-@objc class TBStation: NSObject {
+class TBStation: NSObject {
     let kFreshnessTimeInterval: NSTimeInterval = 60 * 30; // 30 minutes
     let kMarginalBikeAmount = 3;
 

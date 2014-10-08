@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class TBFavorites: NSObject {
+class TBFavorites: NSObject {
     class var instance: TBFavorites {
         struct Singleton { static let instance = TBFavorites() }
         return Singleton.instance
