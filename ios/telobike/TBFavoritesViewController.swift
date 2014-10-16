@@ -17,7 +17,7 @@ class TBFavoritesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nib = UINib(nibName: NSStringFromClass(TBStationTableViewCell.self), bundle: nil) // change string to class name
+        let nib = UINib(nibName: "TBStationTableViewCell", bundle: nil) // change string to class name
         self.tableView.registerNib(nib, forCellReuseIdentifier: STATION_CELL_REUSE_IDENTIFIER)
         
         self.stationsObserver = TBObserver.observerForObject(TBServer.instance, keyPath: "stationsUpdateTime") {

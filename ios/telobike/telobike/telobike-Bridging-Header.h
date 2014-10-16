@@ -6,7 +6,8 @@
 #import "TBStationState.h"
 #import <AFNetworking/AFNetworking.h>
 
-#import "TBStationTableViewCell.h"
 #import "UIViewController+GAI.h"
 #import "TBMainViewController.h"
 #import "TBMapViewController.h"
+#import "TBTintedView.h"
+#import "TBAvailabilityView.h"

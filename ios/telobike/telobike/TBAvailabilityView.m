@@ -7,6 +7,7 @@
 //
 
 #import "TBAvailabilityView.h"
+#import "TBStation.h"
 
 @implementation TBAvailabilityView
 
