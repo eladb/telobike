@@ -25,7 +25,7 @@ PODS:
   - SVGeocoder (0.1)
   - TTCounterLabel (1.0.5):
     - TTTAttributedLabel
-  - TTTAttributedLabel (1.9.5)
+  - TTTAttributedLabel (1.10.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -37,13 +37,13 @@ DEPENDENCIES:
   - TTCounterLabel
 
 SPEC CHECKSUMS:
-  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
-  Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  GoogleAnalytics-iOS-SDK: 16dfcc0c4491148bf372edc85a8470cc405ffb72
-  InAppSettingsKit: 5e42f626b9be9c33e3b04c0cc9523ca5eabe7ad3
-  SBJson: 9749a0365b005bcb0b7adf74579d79372c11cc4f
-  SVGeocoder: 22661b5bae88a53e040d9fecbb5304bbd8f81cd5
-  TTCounterLabel: 1b6ef3b54514fbc6953627214986ed3786e892aa
-  TTTAttributedLabel: 6154fd2407a03fb8d71abfa36f4710fff26a168e
+  AFNetworking: 47947303319594706f48a55185ea95a95159ab94
+  Appirater: a5e00fb01d47a9a6acf4b2f22323b4ccf4f23fbb
+  GoogleAnalytics-iOS-SDK: 4577fb25381a71c5beac455b18ebb288fc4f44e9
+  InAppSettingsKit: e8c460b5e7ff310f3324d7d9536bb1935a507686
+  SBJson: d71212c078abf4679d54b0d0565260c474e46235
+  SVGeocoder: 67f187000ddf9abdd979137d136cd8b30b53e2f6
+  TTCounterLabel: 1b25160553f885c13b9cfe57b6bb1758dcaff60b
+  TTTAttributedLabel: 94bb04f1e005616002dd2cee0262a0082e533627
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.34.1

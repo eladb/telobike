@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CbE-jx-H1b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CbE-jx-H1b">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -262,7 +262,7 @@
         <!--Favorites-->
         <scene sceneID="8UL-Ol-dg5">
             <objects>
-                <tableViewController storyboardIdentifier="favorites" title="Favorites" id="fTB-lH-Ag0" customClass="TBFavoritesViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="favorites" title="Favorites" id="fTB-lH-Ag0" customClass="TBFavoritesViewController" customModule="telobike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="h58-aw-Tly">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -280,7 +280,7 @@
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ZBb-uv-Mit">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
-                            <action selector="refresh:" destination="fTB-lH-Ag0" eventType="valueChanged" id="dso-7p-82u"/>
+                            <action selector="refresh:" destination="fTB-lH-Ag0" eventType="valueChanged" id="xc5-9m-9lf"/>
                         </connections>
                     </refreshControl>
                 </tableViewController>

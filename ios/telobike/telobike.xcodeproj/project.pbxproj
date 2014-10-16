@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		51BEF59F5F7E4E858CB4E5D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87874FC9433042AAADAE0F63 /* libPods.a */; };
+		C8B5981419EF6E9B0065B752 /* TBFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B5981319EF6E9B0065B752 /* TBFavoritesViewController.swift */; };
 		F40672D9185B43940078860B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40672D8185B43940078860B /* CoreAudio.framework */; };
 		F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = F40C943F1858CFF800B64908 /* TBGoogleMapsRouting.m */; };
 		F40C94501858DA6700B64908 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F40C944F1858DA6700B64908 /* Settings.bundle */; };
@@ -50,7 +51,6 @@
 		F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5CEE17F6D43C00D88614 /* NSBundle+View.m */; };
 		F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47B5CF017F6D9BB00D88614 /* QuartzCore.framework */; };
 		F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = F47B5D0117F797DA00D88614 /* UIColor+Style.m */; };
-		F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02618514054003BD3A6 /* TBFavoritesViewController.m */; };
 		F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */; };
 		F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F498A0A81851B44A003BD3A6 /* JNJGoogleMapsActivity.m */; };
 		F498A0AC1851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png in Resources */ = {isa = PBXBuildFile; fileRef = F498A0A91851B44A003BD3A6 /* JNJGoogleMapsActivityMask.png */; };
@@ -85,8 +85,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		87874FC9433042AAADAE0F63 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A2B0F3788ED7C5EF048FBD7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AF226F23824F7842328AFB10 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C8B5981319EF6E9B0065B752 /* TBFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBFavoritesViewController.swift; sourceTree = "<group>"; };
 		F40672D8185B43940078860B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		F40A96291910FE5D00E559D3 /* TBObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBObserver.h; sourceTree = "<group>"; };
 		F40C943E1858CFF800B64908 /* TBGoogleMapsRouting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGoogleMapsRouting.h; sourceTree = "<group>"; };
@@ -157,8 +159,6 @@
 		F47B5D0017F797DA00D88614 /* UIColor+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
 		F47B5D0117F797DA00D88614 /* UIColor+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
 		F47B5D0F17F7CFB700D88614 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		F498A02518514054003BD3A6 /* TBFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBFavoritesViewController.h; path = telobike/TBFavoritesViewController.h; sourceTree = "<group>"; };
-		F498A02618514054003BD3A6 /* TBFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBFavoritesViewController.m; path = telobike/TBFavoritesViewController.m; sourceTree = "<group>"; };
 		F498A0291851450F003BD3A6 /* TBTransparentToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTransparentToolbar.h; sourceTree = "<group>"; };
 		F498A02A1851450F003BD3A6 /* TBTransparentToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTransparentToolbar.m; sourceTree = "<group>"; };
 		F498A0A71851B44A003BD3A6 /* JNJGoogleMapsActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNJGoogleMapsActivity.h; sourceTree = "<group>"; };
@@ -227,6 +227,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D14B2D94A85C43CB48CBDEA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A2B0F3788ED7C5EF048FBD7 /* Pods.debug.xcconfig */,
+				AF226F23824F7842328AFB10 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F40672D4185B41470078860B /* timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +276,7 @@
 				F498A0741851B3FC003BD3A6 /* external */,
 				F470EBE517F11589006FD464 /* Frameworks */,
 				F470EBE417F11589006FD464 /* Products */,
-				0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */,
+				3D14B2D94A85C43CB48CBDEA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -444,8 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				F4AF49981896C91E0045612D /* NoFavoritesView.xib */,
-				F498A02518514054003BD3A6 /* TBFavoritesViewController.h */,
-				F498A02618514054003BD3A6 /* TBFavoritesViewController.m */,
+				C8B5981319EF6E9B0065B752 /* TBFavoritesViewController.swift */,
 			);
 			name = favorites;
 			path = ..;
@@ -634,7 +642,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F48870B418994B6E00AA1143 /* ShellScript */ = {
@@ -659,6 +667,7 @@
 			files = (
 				F44061D719CBDA2F00A069C5 /* TBStationSearch.swift in Sources */,
 				F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */,
+				C8B5981419EF6E9B0065B752 /* TBFavoritesViewController.swift in Sources */,
 				F42FCA1117FE52F700E24D50 /* TBTintedView.m in Sources */,
 				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
 				F44061D419CB4C4B00A069C5 /* TBStation.swift in Sources */,
@@ -673,7 +682,6 @@
 				F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */,
 				F4141EBA1855E67600918F71 /* TBMainViewController.m in Sources */,
 				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,
-				F498A02718514054003BD3A6 /* TBFavoritesViewController.m in Sources */,
 				F437D5CC1858896F00E1381B /* TBGradientBackgroundView.m in Sources */,
 				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
 				F44061DF19CCC5B900A069C5 /* TBFavorites.swift in Sources */,
@@ -825,7 +833,7 @@
 		};
 		F470EC1917F11589006FD464 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */;
+			baseConfigurationReference = 9A2B0F3788ED7C5EF048FBD7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -833,8 +841,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/eladb/src/telobike/ios/telobike,
-					/Users/eladb/src/telobike/ios/telobike/external,
+					"$(SRCROOT)",
+					"$(SRCROOT)/external",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
@@ -843,7 +851,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/eladb/src/telobike/ios/telobike/external,
+					"$(SRCROOT)/external",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "telobike/telobike-Bridging-Header.h";
@@ -854,7 +862,7 @@
 		};
 		F470EC1A17F11589006FD464 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0ADB3458E0024C37A26C94D2 /* Pods.xcconfig */;
+			baseConfigurationReference = AF226F23824F7842328AFB10 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -862,8 +870,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/eladb/src/telobike/ios/telobike,
-					/Users/eladb/src/telobike/ios/telobike/external,
+					"$(SRCROOT)",
+					"$(SRCROOT)/external",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
@@ -872,7 +880,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/eladb/src/telobike/ios/telobike/external,
+					"$(SRCROOT)/external",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "telobike/telobike-Bridging-Header.h";
