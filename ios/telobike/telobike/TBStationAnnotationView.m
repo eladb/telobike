@@ -7,7 +7,7 @@
 //
 
 #import "TBStationAnnotationView.h"
-#import "TBStation.h"
+#import "telobike-Swift.h"
 #import "TBObserver.h"
 
 @interface TBStationAnnotationView ()

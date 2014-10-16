@@ -11,7 +11,7 @@
 #import <Crashlytics/Crashlytics.h>
 
 #import "TBAppDelegate.h"
-#import "TBServer.h"
+#import "telobike-Swift.h"
 #import "TestFlight.h"
 
 @interface TBAppDelegate () <CLLocationManagerDelegate>

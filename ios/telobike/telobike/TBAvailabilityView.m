@@ -7,7 +7,8 @@
 //
 
 #import "TBAvailabilityView.h"
-#import "TBStation.h"
+#import "TBStationState.h"
+#import "telobike-Swift.h"
 
 @implementation TBAvailabilityView
 

@@ -11,16 +11,15 @@
 
 #import <SVGeocoder/SVGeocoder.h>
 
-#import "TBStation.h"
+#import "telobike-Swift.h"
+#import "TBStationState.h"
 #import "TBMapViewController.h"
-#import "TBServer.h"
 #import "UIColor+Style.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
 #import "TBAvailabilityView.h"
-#import "TBFavorites.h"
 #import "TBGoogleMapsRouting.h"
 #import "TBFeedbackMailComposeViewController.h"
 #import "UIViewController+GAI.h"

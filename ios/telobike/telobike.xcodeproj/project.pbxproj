@@ -100,7 +100,6 @@
 		F4141EB91855E67600918F71 /* TBMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMainViewController.m; sourceTree = "<group>"; };
 		F421E304180D8BB100213902 /* TBStationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationAnnotationView.h; sourceTree = "<group>"; };
 		F421E305180D8BB100213902 /* TBStationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationAnnotationView.m; sourceTree = "<group>"; };
-		F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBListViewController.h; sourceTree = "<group>"; };
 		F42E60AD17F11A2C0099A1D0 /* TBListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBListViewController.swift; sourceTree = "<group>"; };
 		F42E60AF17F11AF60099A1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		F42E60B117F11C5A0099A1D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -114,12 +113,9 @@
 		F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGradientBackgroundView.m; sourceTree = "<group>"; };
 		F44061D519CB7B0700A069C5 /* TBStationState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStationState.h; sourceTree = "<group>"; };
 		F44061D619CBDA2F00A069C5 /* TBStationSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStationSearch.swift; sourceTree = "<group>"; };
-		F44061D819CBDD8800A069C5 /* TBStation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStation.h; sourceTree = "<group>"; };
 		F44061D919CBF0D000A069C5 /* TBCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBCity.swift; sourceTree = "<group>"; };
-		F44061DB19CCB1ED00A069C5 /* TBCity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBCity.h; sourceTree = "<group>"; };
 		F44061DC19CCB33B00A069C5 /* TBServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBServer.swift; sourceTree = "<group>"; };
 		F44061DE19CCC5B900A069C5 /* TBFavorites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBFavorites.swift; sourceTree = "<group>"; };
-		F44061E019CCE78B00A069C5 /* TBFavorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFavorites.h; sourceTree = "<group>"; };
 		F44061E119CCEAE500A069C5 /* TBObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBObserver.swift; sourceTree = "<group>"; };
 		F470EBE317F11589006FD464 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F470EBE617F11589006FD464 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,7 +138,6 @@
 		F479287E185CBE9400834E0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F4792882185CBF7100834E0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F4792884185CBF7500834E0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F47B5CC917F65DAC00D88614 /* TBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBServer.h; sourceTree = "<group>"; };
 		F47B5CD617F6B37F00D88614 /* TBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBNavigationController.h; sourceTree = "<group>"; };
 		F47B5CD717F6B37F00D88614 /* TBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBNavigationController.m; sourceTree = "<group>"; };
 		F47B5CDD17F6C7E100D88614 /* TBFeedbackActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFeedbackActionSheet.h; sourceTree = "<group>"; };
@@ -257,11 +252,6 @@
 		F467A17419CD2165007C88D6 /* interop */ = {
 			isa = PBXGroup;
 			children = (
-				F42E60AC17F11A2C0099A1D0 /* TBListViewController.h */,
-				F44061DB19CCB1ED00A069C5 /* TBCity.h */,
-				F44061D819CBDD8800A069C5 /* TBStation.h */,
-				F44061E019CCE78B00A069C5 /* TBFavorites.h */,
-				F47B5CC917F65DAC00D88614 /* TBServer.h */,
 				F44061D519CB7B0700A069C5 /* TBStationState.h */,
 			);
 			name = interop;
