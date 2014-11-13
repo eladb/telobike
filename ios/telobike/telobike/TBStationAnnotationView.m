@@ -7,7 +7,7 @@
 //
 
 #import "TBStationAnnotationView.h"
-#import "TBStation.h"
+#import "telobike-Swift.h"
 #import "TBObserver.h"
 
 @interface TBStationAnnotationView ()
@@ -75,7 +75,7 @@
 - (void)setAnnotation:(id<MKAnnotation>)annotation {
     [super setAnnotation:annotation];
     self.station = annotation;
-    self.markerImageObserver = [TBObserver observerForObject:self.station keyPath:@"markerImage" block:^{
+    self.markerImageObserver = [TBObserver observerForObject:self.station keyPath:@"lastUpdateTime" block:^{
         self.layer.contents = (id)[self.station.markerImage CGImage];
     }];
     self.layer.bounds = [self deselectedBounds];

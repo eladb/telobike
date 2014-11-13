@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "TBStation.h"
 #import "SVPlacemark.h"
+
+@class TBStation;
 
 @interface TBMapViewController : UIViewController
 

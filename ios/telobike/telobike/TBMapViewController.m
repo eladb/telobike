@@ -11,16 +11,15 @@
 
 #import <SVGeocoder/SVGeocoder.h>
 
-#import "TBStation.h"
+#import "telobike-Swift.h"
+#import "TBStationState.h"
 #import "TBMapViewController.h"
-#import "TBServer.h"
 #import "UIColor+Style.h"
 #import "NSBundle+View.h"
 #import "TBNavigationController.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
 #import "TBAvailabilityView.h"
-#import "TBFavorites.h"
 #import "TBGoogleMapsRouting.h"
 #import "TBFeedbackMailComposeViewController.h"
 #import "UIViewController+GAI.h"
@@ -70,11 +69,11 @@
     
     self.server = [TBServer instance];
     
-    self.stationsObserver = [TBObserver observerForObject:self.server keyPath:@"stations" block:^{
+    self.stationsObserver = [TBObserver observerForObject:self.server keyPath:@"stationsUpdateTime" block:^{
         [self reloadAnnotations];
     }];
     
-    self.cityObserver = [TBObserver observerForObject:self.server keyPath:@"city" block:^{
+    self.cityObserver = [TBObserver observerForObject:self.server keyPath:@"cityUpdateTime" block:^{
         MKCoordinateRegion region;
         region.center = self.server.city.cityCenter.coordinate;
         region.span = MKCoordinateSpanMake(0.05, 0.05);
@@ -125,7 +124,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[TBServer instance] reloadStations:nil];
+    [[TBServer instance] reloadStationsWithCompletion:^{}];
     
     [self showOrHideRoutesOnMap];
     

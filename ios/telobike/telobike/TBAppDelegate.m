@@ -11,8 +11,7 @@
 #import <Crashlytics/Crashlytics.h>
 
 #import "TBAppDelegate.h"
-#import "TBServer.h"
-#import "TestFlight.h"
+#import "telobike-Swift.h"
 
 @interface TBAppDelegate () <CLLocationManagerDelegate>
 
@@ -23,7 +22,6 @@
 @implementation TBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [TestFlight takeOff:@"6deef968-4bcc-4e57-ab70-cf075da6f8a0"];
     
     // rate app
     [Appirater setAppId:@"436915919"];
@@ -43,7 +41,9 @@
     [Crashlytics startWithAPIKey:@"d164a3f45648ccbfa001f8958d403135d23a4dbf"];
 
     // push notifications
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
     
     [Appirater appLaunched:YES];
     
@@ -63,7 +63,7 @@
             return; // already showed this disclaimer
         }
         
-        [[[UIAlertView alloc] initWithTitle:nil message:discl delegate:nil cancelButtonTitle:NSLocalizedString(@"Start", nil) otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:discl message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"Start", nil) otherButtonTitles:nil] show];
         [[NSUserDefaults standardUserDefaults] setObject:discl forKey:@"previous_disclaimer"];
     }
 }
@@ -88,6 +88,7 @@
         self.locationManager.delegate = self;
     }
     
+    [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
 }
 

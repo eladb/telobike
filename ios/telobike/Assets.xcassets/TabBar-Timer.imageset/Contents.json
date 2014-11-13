@@ -7,7 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "1.png"
+      "filename" : "TabBar-Timer@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "TabBar-Timer@3x.png"
     }
   ],
   "info" : {

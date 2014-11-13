@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TBStation.h"
+//#import "TBStation.h"
+
+@class TBStation;
 
 @interface TBAvailabilityView : UIView
 

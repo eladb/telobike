@@ -13,7 +13,8 @@
 
 #import "TBMainViewController.h"
 #import "TBNavigationController.h"
-#import "TBServer.h"
+#import "TBTimerViewController.h"
+#import "telobike-Swift.h"
 #import "UIColor+Style.h"
 #import "TBAppDelegate.h"
 #import "TBSearchResultTableViewCell.h"
@@ -229,7 +230,14 @@
         results = [[NSSet setWithArray:results] allObjects];
 
         // sort by distance
-        self.searchResults = [[TBServer instance] sortStationsByDistance:results];
+        self.searchResults = [results sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            CLLocation *l1 = [self locationFromSearchResult:obj1];
+            CLLocation *l2 = [self locationFromSearchResult:obj2];
+            CLLocationDistance d1 = [[TBServer instance] currentDistanceFromLocation:l1];
+            CLLocationDistance d2 = [[TBServer instance] currentDistanceFromLocation:l2];
+            return d1 - d2;
+        }];
+        
         [controller.searchResultsTableView reloadData];
     }];
     

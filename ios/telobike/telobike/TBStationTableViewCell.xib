@@ -1,49 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3745"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="STATION_CELL" id="CcV-Pi-sHh" customClass="TBStationTableViewCell">
+        <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="STATION_CELL" id="CcV-Pi-sHh" customClass="TBStationTableViewCell" customModule="telobike" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CcV-Pi-sHh" id="QjC-Tw-qVw">
                 <rect key="frame" x="0.0" y="0.0" width="287" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SAw-3p-BFb" userLabel="availabilityIndicatorView" customClass="TBTintedView">
-                        <rect key="frame" x="0.0" y="0.0" width="5" height="90"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAw-3p-BFb" userLabel="availabilityIndicatorView" customClass="TBTintedView">
+                        <rect key="frame" x="0.0" y="0.0" width="6" height="89"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="6" id="CzN-lT-aHm"/>
+                        </constraints>
                     </view>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jo-O4-EBv" userLabel="stationNameLabel">
-                        <rect key="frame" x="28" y="25" width="207" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jo-O4-EBv" userLabel="stationNameLabel">
+                        <rect key="frame" x="26" y="26" width="40" height="19.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="122m" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUv-ZK-yFi" userLabel="subtitleLabel">
-                        <rect key="frame" x="231" y="28" width="47" height="15"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="122m" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUv-ZK-yFi" userLabel="subtitleLabel">
+                        <rect key="frame" x="250" y="30" width="29" height="13.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1N-re-G2k" userLabel="availabilityView" customClass="TBAvailabilityView">
-                        <rect key="frame" x="28" y="52" width="250" height="12"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAw-JY-fta" userLabel="sep">
+                        <rect key="frame" x="0.0" y="88" width="321" height="1"/>
+                        <color key="backgroundColor" red="0.8876681923866272" green="0.88764166831970215" blue="0.88765662908554077" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="kqW-6u-vAj"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1N-re-G2k" userLabel="availabilityView" customClass="TBAvailabilityView">
+                        <rect key="frame" x="26" y="54" width="253" height="12"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="TJU-nA-1wB"/>
+                        </constraints>
                     </view>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="gAw-JY-fta" secondAttribute="trailing" constant="-34" id="1VO-sr-kDr"/>
+                    <constraint firstItem="z1N-re-G2k" firstAttribute="top" secondItem="0jo-O4-EBv" secondAttribute="bottom" constant="8" id="75J-my-5PF"/>
+                    <constraint firstItem="SAw-3p-BFb" firstAttribute="leading" secondItem="QjC-Tw-qVw" secondAttribute="leading" id="CBy-4R-yz4"/>
+                    <constraint firstAttribute="bottom" secondItem="gAw-JY-fta" secondAttribute="bottom" id="DOy-Bw-w8c"/>
+                    <constraint firstItem="gAw-JY-fta" firstAttribute="leading" secondItem="QjC-Tw-qVw" secondAttribute="leading" id="Fwl-Og-ECW"/>
+                    <constraint firstAttribute="bottom" secondItem="SAw-3p-BFb" secondAttribute="bottom" id="OKu-qa-hoG"/>
+                    <constraint firstItem="0jo-O4-EBv" firstAttribute="leading" secondItem="z1N-re-G2k" secondAttribute="leading" id="Wcv-ln-DnA"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qUv-ZK-yFi" secondAttribute="trailing" id="ayc-hU-sEW"/>
+                    <constraint firstItem="qUv-ZK-yFi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0jo-O4-EBv" secondAttribute="trailing" constant="8" id="kIC-lu-2Ub"/>
+                    <constraint firstItem="qUv-ZK-yFi" firstAttribute="baseline" secondItem="0jo-O4-EBv" secondAttribute="baseline" id="nh1-Fy-dpm"/>
+                    <constraint firstItem="0jo-O4-EBv" firstAttribute="leading" secondItem="QjC-Tw-qVw" secondAttribute="leadingMargin" constant="18" id="pgB-oN-G1d"/>
+                    <constraint firstItem="qUv-ZK-yFi" firstAttribute="trailing" secondItem="z1N-re-G2k" secondAttribute="trailing" id="pml-ey-e05"/>
+                    <constraint firstItem="SAw-3p-BFb" firstAttribute="top" secondItem="QjC-Tw-qVw" secondAttribute="top" id="qme-YQ-o8N"/>
+                    <constraint firstItem="0jo-O4-EBv" firstAttribute="top" secondItem="QjC-Tw-qVw" secondAttribute="topMargin" constant="18" id="sBe-Iv-fcU"/>
+                </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
-                <outlet property="availabilityIndicatorView" destination="SAw-3p-BFb" id="zjf-JK-80Z"/>
-                <outlet property="availabilityView" destination="z1N-re-G2k" id="LGF-Ak-4Jw"/>
-                <outlet property="stationNameLabel" destination="0jo-O4-EBv" id="ey8-Za-7LD"/>
-                <outlet property="subtitleLabel" destination="qUv-ZK-yFi" id="p9d-65-FdZ"/>
+                <outlet property="availabilityIndicatorView" destination="SAw-3p-BFb" id="GLW-b9-pdq"/>
+                <outlet property="availabilityView" destination="z1N-re-G2k" id="xUN-a4-cVq"/>
+                <outlet property="stationNameLabel" destination="0jo-O4-EBv" id="yCQ-Xc-j1K"/>
+                <outlet property="subtitleLabel" destination="qUv-ZK-yFi" id="QSR-on-MCD"/>
             </connections>
         </tableViewCell>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
