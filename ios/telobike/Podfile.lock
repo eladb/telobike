@@ -1,31 +1,33 @@
 PODS:
-  - AFNetworking (2.2.3):
+  - AFNetworking (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.3):
+  - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.3):
-    - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.3)
-  - AFNetworking/Security (2.2.3)
-  - AFNetworking/Serialization (2.2.3)
-  - AFNetworking/UIKit (2.2.3):
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Appirater (2.0.2)
-  - GoogleAnalytics-iOS-SDK (3.0.6)
-  - InAppSettingsKit (2.0.1)
+  - Appirater (2.0.4)
+  - GoogleAnalytics-iOS-SDK (3.10)
+  - InAppSettingsKit (2.2.2)
   - SBJson (4.0.1)
   - SVGeocoder (0.1)
-  - TTCounterLabel (1.0.5):
+  - TTCounterLabel (1.2.0):
     - TTTAttributedLabel
-  - TTTAttributedLabel (1.9.5)
+  - TTTAttributedLabel (1.10.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -37,13 +39,13 @@ DEPENDENCIES:
   - TTCounterLabel
 
 SPEC CHECKSUMS:
-  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
-  Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  GoogleAnalytics-iOS-SDK: 16dfcc0c4491148bf372edc85a8470cc405ffb72
-  InAppSettingsKit: 5e42f626b9be9c33e3b04c0cc9523ca5eabe7ad3
-  SBJson: 9749a0365b005bcb0b7adf74579d79372c11cc4f
-  SVGeocoder: 22661b5bae88a53e040d9fecbb5304bbd8f81cd5
-  TTCounterLabel: 1b6ef3b54514fbc6953627214986ed3786e892aa
-  TTTAttributedLabel: 6154fd2407a03fb8d71abfa36f4710fff26a168e
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  Appirater: cbdb7f305562cfde585300bfff86da01ae559deb
+  GoogleAnalytics-iOS-SDK: e5872d2acc120613d954320e206c7e3bc8357d7c
+  InAppSettingsKit: cd8ffa4266fb5c4778af8bda8aa9bf08b6733fd4
+  SBJson: d71212c078abf4679d54b0d0565260c474e46235
+  SVGeocoder: 67f187000ddf9abdd979137d136cd8b30b53e2f6
+  TTCounterLabel: 0225aaccaca6e55b4185d2977ce549b70d5dbb23
+  TTTAttributedLabel: 94bb04f1e005616002dd2cee0262a0082e533627
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.34.4
