@@ -15,7 +15,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="287" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SAw-3p-BFb" userLabel="availabilityIndicatorView" customClass="TBTintedView"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAw-3p-BFb" userLabel="availabilityIndicatorView" customClass="TBTintedView">
+                        <rect key="frame" x="0.0" y="0.0" width="6" height="89"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="6" id="CzN-lT-aHm"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jo-O4-EBv" userLabel="stationNameLabel">
                         <rect key="frame" x="26" y="26" width="40" height="19.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -35,7 +40,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1N-re-G2k" userLabel="availabilityView" customClass="TBAvailabilityView">
-                        <rect key="frame" x="26" y="53.5" width="253" height="12"/>
+                        <rect key="frame" x="26" y="54" width="253" height="12"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="TJU-nA-1wB"/>
@@ -45,14 +50,17 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="gAw-JY-fta" secondAttribute="trailing" constant="-34" id="1VO-sr-kDr"/>
                     <constraint firstItem="z1N-re-G2k" firstAttribute="top" secondItem="0jo-O4-EBv" secondAttribute="bottom" constant="8" id="75J-my-5PF"/>
+                    <constraint firstItem="SAw-3p-BFb" firstAttribute="leading" secondItem="QjC-Tw-qVw" secondAttribute="leading" id="CBy-4R-yz4"/>
                     <constraint firstAttribute="bottom" secondItem="gAw-JY-fta" secondAttribute="bottom" id="DOy-Bw-w8c"/>
                     <constraint firstItem="gAw-JY-fta" firstAttribute="leading" secondItem="QjC-Tw-qVw" secondAttribute="leading" id="Fwl-Og-ECW"/>
+                    <constraint firstAttribute="bottom" secondItem="SAw-3p-BFb" secondAttribute="bottom" id="OKu-qa-hoG"/>
                     <constraint firstItem="0jo-O4-EBv" firstAttribute="leading" secondItem="z1N-re-G2k" secondAttribute="leading" id="Wcv-ln-DnA"/>
                     <constraint firstAttribute="trailingMargin" secondItem="qUv-ZK-yFi" secondAttribute="trailing" id="ayc-hU-sEW"/>
                     <constraint firstItem="qUv-ZK-yFi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0jo-O4-EBv" secondAttribute="trailing" constant="8" id="kIC-lu-2Ub"/>
                     <constraint firstItem="qUv-ZK-yFi" firstAttribute="baseline" secondItem="0jo-O4-EBv" secondAttribute="baseline" id="nh1-Fy-dpm"/>
                     <constraint firstItem="0jo-O4-EBv" firstAttribute="leading" secondItem="QjC-Tw-qVw" secondAttribute="leadingMargin" constant="18" id="pgB-oN-G1d"/>
                     <constraint firstItem="qUv-ZK-yFi" firstAttribute="trailing" secondItem="z1N-re-G2k" secondAttribute="trailing" id="pml-ey-e05"/>
+                    <constraint firstItem="SAw-3p-BFb" firstAttribute="top" secondItem="QjC-Tw-qVw" secondAttribute="top" id="qme-YQ-o8N"/>
                     <constraint firstItem="0jo-O4-EBv" firstAttribute="top" secondItem="QjC-Tw-qVw" secondAttribute="topMargin" constant="18" id="sBe-Iv-fcU"/>
                 </constraints>
             </tableViewCellContentView>
