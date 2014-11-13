@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CbE-jx-H1b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CbE-jx-H1b">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Telobike-->
@@ -133,7 +134,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NvQ-L0-EqX">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NvQ-L0-EqX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <outlet property="delegate" destination="QUy-BD-bpt" id="xVq-Ah-f9a"/>
@@ -183,9 +184,7 @@
                                             <constraint firstAttribute="height" constant="47" id="Zim-G1-QdH"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView">
-                                        <rect key="frame" x="0.0" y="59" width="320" height="14"/>
-                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView"/>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veS-gQ-F7e" userLabel="label background">
                                         <rect key="frame" x="0.0" y="91" width="320" height="16"/>
                                         <color key="backgroundColor" white="0.050000000000000003" alpha="0.95000000000000007" colorSpace="calibratedWhite"/>
@@ -218,8 +217,8 @@
                                     <constraint firstAttribute="trailing" secondItem="lFl-6Z-a96" secondAttribute="trailing" id="mNX-T3-yA6"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Jo-kIO" customClass="TBTransparentToolbar">
-                                <rect key="frame" x="0.0" y="473" width="320" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Jo-kIO" customClass="TBTransparentToolbar">
+                                <rect key="frame" x="0.0" y="475" width="320" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="t0d-6v-0tU"/>
                                 </items>
@@ -227,9 +226,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NvQ-L0-EqX" secondAttribute="trailing" id="600-y4-JwC"/>
+                            <constraint firstItem="NvQ-L0-EqX" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" id="9CY-gs-CoX"/>
                             <constraint firstAttribute="trailing" secondItem="9fR-hE-Glj" secondAttribute="trailing" id="CRr-fB-Ukh"/>
+                            <constraint firstItem="xXe-n4-Ljh" firstAttribute="top" secondItem="x7O-Jo-kIO" secondAttribute="bottom" id="FeA-F1-Iam"/>
+                            <constraint firstAttribute="trailing" secondItem="x7O-Jo-kIO" secondAttribute="trailing" id="G1f-KK-89z"/>
                             <constraint firstItem="9fR-hE-Glj" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" id="IvC-ny-cHv"/>
+                            <constraint firstAttribute="bottom" secondItem="NvQ-L0-EqX" secondAttribute="bottom" id="Mqt-63-r8r"/>
                             <constraint firstItem="9fR-hE-Glj" firstAttribute="top" secondItem="VDn-gC-H17" secondAttribute="bottom" id="etB-EG-e0F"/>
+                            <constraint firstItem="NvQ-L0-EqX" firstAttribute="top" secondItem="gMD-aP-Fq6" secondAttribute="top" id="r43-Kc-hhH"/>
+                            <constraint firstItem="x7O-Jo-kIO" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" id="xjS-O4-HXQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="TabBar-Map" id="Z7h-1E-pvt"/>
@@ -299,12 +305,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DWw-Fk-9jU" customClass="TTCounterLabel">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWw-Fk-9jU" customClass="TTCounterLabel">
                                 <rect key="frame" x="0.0" y="236" width="320" height="95"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="Bsg-NH-enO"/>
+                                </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47X-DK-zW8">
-                                <rect key="frame" x="124" y="339" width="73" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47X-DK-zW8">
+                                <rect key="frame" x="133" y="339" width="55" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -315,6 +324,13 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="47X-DK-zW8" secondAttribute="centerX" id="2H6-mJ-dqP"/>
+                            <constraint firstAttribute="trailing" secondItem="DWw-Fk-9jU" secondAttribute="trailing" id="Nn7-VW-Z4j"/>
+                            <constraint firstItem="DWw-Fk-9jU" firstAttribute="leading" secondItem="Ca4-gO-Mh0" secondAttribute="leading" id="Z4z-h1-bsm"/>
+                            <constraint firstAttribute="centerY" secondItem="DWw-Fk-9jU" secondAttribute="centerY" id="lRy-NZ-fj1"/>
+                            <constraint firstItem="47X-DK-zW8" firstAttribute="top" secondItem="DWw-Fk-9jU" secondAttribute="bottom" constant="8" id="we4-12-aie"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Timer" image="TabBar-Timer" id="aTJ-p2-fjK"/>
                     <navigationItem key="navigationItem" title="Timer" id="DYj-On-CSx"/>

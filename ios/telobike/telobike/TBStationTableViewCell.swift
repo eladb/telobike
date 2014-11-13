@@ -37,6 +37,7 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
         // Initialization code
         
         self.locationManager = CLLocationManager()
+        self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.locationManager.delegate = self;
         
@@ -44,14 +45,7 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
         
         self.distanceFormatter.units = .Metric;
         self.distanceFormatter.unitStyle = .Abbreviated;
-        
-        // add a hairline layer as a separator
-        var separator = CALayer()
-        separator.frame = CGRectMake(0, 0, self.bounds.size.width, 0.5)
-        separator.backgroundColor = UIColor(white: 0.8, alpha: 1.0).CGColor
-        self.layer.addSublayer(separator)
     }
-
     
     override func prepareForReuse() {
         super.prepareForReuse()
