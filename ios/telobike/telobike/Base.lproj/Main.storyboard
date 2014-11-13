@@ -184,7 +184,12 @@
                                             <constraint firstAttribute="height" constant="47" id="Zim-G1-QdH"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView">
+                                        <rect key="frame" x="20" y="60" width="280" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="ZUf-he-Na3"/>
+                                        </constraints>
+                                    </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veS-gQ-F7e" userLabel="label background">
                                         <rect key="frame" x="0.0" y="91" width="320" height="16"/>
                                         <color key="backgroundColor" white="0.050000000000000003" alpha="0.95000000000000007" colorSpace="calibratedWhite"/>
@@ -192,8 +197,8 @@
                                             <constraint firstAttribute="height" constant="16" id="j1u-mm-eYV"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No available bikes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7W-Ai-ID6">
-                                        <rect key="frame" x="0.0" y="75" width="320" height="32"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No available bikes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7W-Ai-ID6">
+                                        <rect key="frame" x="0.0" y="81" width="320" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -202,10 +207,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="lFl-6Z-a96" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="24W-LL-bNo"/>
+                                    <constraint firstAttribute="trailing" secondItem="e7W-Ai-ID6" secondAttribute="trailing" id="5u3-0v-J31"/>
                                     <constraint firstItem="veS-gQ-F7e" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="7do-pR-u0y"/>
                                     <constraint firstAttribute="height" constant="107" id="9CW-jE-S24"/>
                                     <constraint firstItem="djS-1e-TGN" firstAttribute="top" secondItem="lFl-6Z-a96" secondAttribute="bottom" id="AJQ-Ur-S6b"/>
+                                    <constraint firstItem="e7W-Ai-ID6" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="CNH-yC-1N2"/>
                                     <constraint firstAttribute="trailing" secondItem="djS-1e-TGN" secondAttribute="trailing" id="Cyq-4b-8F3"/>
+                                    <constraint firstAttribute="trailing" secondItem="ReE-oF-ZUd" secondAttribute="trailing" constant="20" id="DEf-ph-3TB"/>
                                     <constraint firstAttribute="trailing" secondItem="VYi-z5-edV" secondAttribute="trailing" id="DvF-1O-Icf"/>
                                     <constraint firstItem="veS-gQ-F7e" firstAttribute="top" secondItem="djS-1e-TGN" secondAttribute="bottom" id="NaW-K1-5wx"/>
                                     <constraint firstAttribute="trailing" secondItem="veS-gQ-F7e" secondAttribute="trailing" id="OST-9X-kaJ"/>
@@ -215,6 +223,9 @@
                                     <constraint firstItem="lFl-6Z-a96" firstAttribute="top" secondItem="VYi-z5-edV" secondAttribute="bottom" id="au4-mP-Rxo"/>
                                     <constraint firstItem="djS-1e-TGN" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" id="b8b-QA-1dv"/>
                                     <constraint firstAttribute="trailing" secondItem="lFl-6Z-a96" secondAttribute="trailing" id="mNX-T3-yA6"/>
+                                    <constraint firstItem="ReE-oF-ZUd" firstAttribute="top" secondItem="lFl-6Z-a96" secondAttribute="bottom" constant="16" id="rNf-lD-4Yw"/>
+                                    <constraint firstItem="ReE-oF-ZUd" firstAttribute="leading" secondItem="9fR-hE-Glj" secondAttribute="leading" constant="20" id="uRt-7l-jTd"/>
+                                    <constraint firstAttribute="bottom" secondItem="e7W-Ai-ID6" secondAttribute="bottom" constant="10" id="vdf-en-ISc"/>
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-Jo-kIO" customClass="TBTransparentToolbar">
