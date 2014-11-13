@@ -35,7 +35,7 @@ class TBServer: NSObject, CLLocationManagerDelegate {
         // populate from bundled sample data
         if cachedStationsResponse == nil {
             if let sampleDataURL = NSBundle.mainBundle().URLForResource("sample-data", withExtension: "json") {
-                let sampleData = NSData(contentsOfURL: sampleDataURL)
+                let sampleData = NSData(contentsOfURL: sampleDataURL)!
                 let options = NSJSONReadingOptions(0)
                 cachedStationsResponse = NSJSONSerialization.JSONObjectWithData(sampleData, options: options, error: nil) as? [AnyObject]
             }

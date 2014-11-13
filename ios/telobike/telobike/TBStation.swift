@@ -136,14 +136,14 @@ class TBStation: NSObject {
 extension TBStation {
     var markerImage: UIImage {
         switch state {
-        case StationOK.value: return UIImage(named: "map-green.png")
-        case StationEmpty.value: return UIImage(named:"map-redempty.png");
-        case StationFull.value: return UIImage(named:"map-redfull.png");
-        case StationInactive.value: return UIImage(named:"map-gray.png");
-        case StationMarginal.value: return UIImage(named:"map-yellow.png");
-        case StationMarginalFull.value: return UIImage(named: "map-yellowfull.png");
+        case StationOK.value: return UIImage(named: "map-green.png")!
+        case StationEmpty.value: return UIImage(named:"map-redempty.png")!
+        case StationFull.value: return UIImage(named:"map-redfull.png")!
+        case StationInactive.value: return UIImage(named:"map-gray.png")!
+        case StationMarginal.value: return UIImage(named:"map-yellow.png")!
+        case StationMarginalFull.value: return UIImage(named: "map-yellowfull.png")!
         case StationUnknown.value: fallthrough
-        default: return UIImage(named: "map-black.png");
+        default: return UIImage(named: "map-black.png")!
         }
     }
 }
