@@ -5,14 +5,42 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
-			<key>IASKSubtitle</key>
-			<string>Open in Settings App</string>
-			<key>Type</key>
-			<string>IASKOpenURLSpecifier</string>
 			<key>Title</key>
 			<string>Settings</string>
-			<key>File</key>
-			<string>app-settings:</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Station Names</string>
+			<key>Key</key>
+			<string>stationsLanguage</string>
+			<key>DefaultValue</key>
+			<string>auto</string>
+			<key>Titles</key>
+			<array>
+				<string>Automatic</string>
+				<string>Hebrew</string>
+				<string>English</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>auto</string>
+				<string>he</string>
+				<string>en</string>
+			</array>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>show_bicycle_routes</string>
+			<key>Title</key>
+			<string>Bicycle Routes on Map</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
 		</dict>
 		<dict>
 			<key>Type</key>

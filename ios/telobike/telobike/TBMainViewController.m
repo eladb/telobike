@@ -49,7 +49,6 @@
     self.timerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"timer"];
     self.settingsViewController = [[IASKAppSettingsViewController alloc] init];
     self.settingsViewController.showCreditsFooter = NO;
-    self.settingsViewController.neverShowPrivacySettings = YES;
     
     // load nibs
     [self.mapViewController view];
