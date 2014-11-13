@@ -58,9 +58,6 @@
 		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
 		F4AF49831896B4C00045612D /* TBSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49821896B4C00045612D /* TBSearchResultTableViewCell.xib */; };
 		F4AF49861896B4D30045612D /* TBSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF49851896B4D30045612D /* TBSearchResultTableViewCell.m */; };
-		F4AF49901896C4E40045612D /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AF498A1896C4E40045612D /* libTestFlight.a */; };
-		F4AF49911896C4E40045612D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F4AF498B1896C4E40045612D /* README.md */; };
-		F4AF49921896C4E40045612D /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = F4AF498C1896C4E40045612D /* release_notes.md */; };
 		F4AF49961896C9100045612D /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49931896C9100045612D /* bikebell.wav */; };
 		F4AF49971896C9100045612D /* TBTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF49951896C9100045612D /* TBTimerViewController.m */; };
 		F4AF49991896C91E0045612D /* NoFavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49981896C91E0045612D /* NoFavoritesView.xib */; };
@@ -163,12 +160,6 @@
 		F4AF49821896B4C00045612D /* TBSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		F4AF49841896B4D30045612D /* TBSearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSearchResultTableViewCell.h; sourceTree = "<group>"; };
 		F4AF49851896B4D30045612D /* TBSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSearchResultTableViewCell.m; sourceTree = "<group>"; };
-		F4AF498A1896C4E40045612D /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		F4AF498B1896C4E40045612D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		F4AF498C1896C4E40045612D /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		F4AF498D1896C4E40045612D /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		F4AF498E1896C4E40045612D /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		F4AF498F1896C4E40045612D /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		F4AF49931896C9100045612D /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/bikebell.wav; sourceTree = "<group>"; };
 		F4AF49941896C9100045612D /* TBTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBTimerViewController.h; path = telobike/TBTimerViewController.h; sourceTree = "<group>"; };
 		F4AF49951896C9100045612D /* TBTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBTimerViewController.m; path = telobike/TBTimerViewController.m; sourceTree = "<group>"; };
@@ -195,7 +186,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4AF49901896C4E40045612D /* libTestFlight.a in Frameworks */,
 				F40672D9185B43940078860B /* CoreAudio.framework in Frameworks */,
 				F47B5CF117F6D9BB00D88614 /* QuartzCore.framework in Frameworks */,
 				F47B5CE117F6C97100D88614 /* MessageUI.framework in Frameworks */,
@@ -451,7 +441,6 @@
 			isa = PBXGroup;
 			children = (
 				F4ED06A8189A4617000CA56B /* Crashlytics.framework */,
-				F4AF49891896C4DA0045612D /* TestFlightSDK */,
 				F498A0A61851B44A003BD3A6 /* JNJGoogleMapsActivity */,
 			);
 			path = external;
@@ -467,19 +456,6 @@
 			);
 			name = JNJGoogleMapsActivity;
 			path = JNJGoogleMapsActivity/JNJGoogleMapsActivity;
-			sourceTree = "<group>";
-		};
-		F4AF49891896C4DA0045612D /* TestFlightSDK */ = {
-			isa = PBXGroup;
-			children = (
-				F4AF498A1896C4E40045612D /* libTestFlight.a */,
-				F4AF498B1896C4E40045612D /* README.md */,
-				F4AF498C1896C4E40045612D /* release_notes.md */,
-				F4AF498D1896C4E40045612D /* TestFlight.h */,
-				F4AF498E1896C4E40045612D /* TestFlight+AsyncLogging.h */,
-				F4AF498F1896C4E40045612D /* TestFlight+ManualSessions.h */,
-			);
-			name = TestFlightSDK;
 			sourceTree = "<group>";
 		};
 		F4EE1E7317FEF582002F8A62 /* KMLParser */ = {
@@ -583,8 +559,6 @@
 				F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */,
 				F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */,
 				F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */,
-				F4AF49921896C4E40045612D /* release_notes.md in Resources */,
-				F4AF49911896C4E40045612D /* README.md in Resources */,
 				F470EBFA17F11589006FD464 /* Main.storyboard in Resources */,
 				F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */,
 				F4EE1E4817FEEE86002F8A62 /* routes.kml in Resources */,
