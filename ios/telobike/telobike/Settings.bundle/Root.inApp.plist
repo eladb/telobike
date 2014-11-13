@@ -96,7 +96,7 @@
 			<key>Key</key>
 			<string>version</string>
 			<key>DefaultValue</key>
-			<string>2.0.3</string>
+			<string>2.1</string>
 		</dict>
 		<dict>
 			<key>Type</key>
