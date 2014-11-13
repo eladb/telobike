@@ -83,11 +83,15 @@ class TBServer: NSObject, CLLocationManagerDelegate {
         return self.locationManager.location
     }
     
+    func currentDistanceFromLocation(location: CLLocation) -> CLLocationDistance {
+        let currentLocation = self.currentLocation ?? TBServer.instance.city?.cityCenter
+        return location.distanceFromLocation(currentLocation)
+    }
+    
     func sortStationsByDistance(stations: [TBStation]) -> [TBStation] {
-        let location = self.currentLocation ?? TBServer.instance.city?.cityCenter
         return sorted(stations) { (s1, s2) -> Bool in
-            let d1 = s1.location.distanceFromLocation(location)
-            let d2 = s2.location.distanceFromLocation(location)
+            let d1 = self.currentDistanceFromLocation(s1.location)
+            let d2 = self.currentDistanceFromLocation(s2.location)
             return d1 > d2
         }
     }
