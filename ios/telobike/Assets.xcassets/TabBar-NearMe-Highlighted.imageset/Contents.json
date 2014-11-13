@@ -7,11 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "NearMe-Highlighted.png"
+      "filename" : "TabBar-NearMe-Highlighted@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "TabBar-NearMe-Highlighted@3x.png"
     }
   ],
   "info" : {
