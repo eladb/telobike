@@ -16,7 +16,6 @@
 #import "TBMapViewController.h"
 #import "UIColor+Style.h"
 #import "NSBundle+View.h"
-#import "TBNavigationController.h"
 #import "KMLParser.h"
 #import "TBStationAnnotationView.h"
 #import "TBAvailabilityView.h"

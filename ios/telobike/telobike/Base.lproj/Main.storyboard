@@ -8,7 +8,7 @@
         <!--Telobike-->
         <scene sceneID="mVB-5S-aYc">
             <objects>
-                <navigationController title="Telobike" definesPresentationContext="YES" id="5QG-au-E4T" customClass="TBNavigationController" sceneMemberID="viewController">
+                <navigationController title="Telobike" definesPresentationContext="YES" id="5QG-au-E4T" customClass="TBNavigationController" customModule="telobike" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z3N-AQ-teV">
                         <autoresizingMask key="autoresizingMask"/>
@@ -360,8 +360,8 @@
     <resources>
         <image name="BackButton" width="13" height="22"/>
         <image name="TabBar-Favorites" width="25" height="24"/>
-        <image name="TabBar-Map" width="25" height="25"/>
-        <image name="TabBar-NearMe" width="24" height="25"/>
+        <image name="TabBar-Map" width="24" height="25"/>
+        <image name="TabBar-NearMe" width="25" height="25"/>
         <image name="TabBar-Timer" width="24" height="25"/>
         <image name="station-favorite-unselected" width="25" height="25"/>
         <image name="station-navigation" width="25" height="25"/>
