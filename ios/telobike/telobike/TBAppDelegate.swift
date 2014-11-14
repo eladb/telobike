@@ -22,7 +22,7 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
         Appirater.setDebug(false)
 
         // location services
-//        self.requestLocationServices()
+        self.requestLocationServices()
         
         // analytics
         GAI.sharedInstance().dispatchInterval = 20
@@ -85,24 +85,24 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
     
     // - Location Services
     
-//    private func requestLocationServices() {
-//        if self.locationManager == nil {
-//            self.locationManager = CLLocationManager()
-//            self.locationManager?.delegate = self
-//        }
-//        
-//        self.locationManager?.requestWhenInUseAuthorization()
-//        self.locationManager?.startUpdatingLocation()
-//    }
-//    
-//    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-//        manager.stopUpdatingLocation()
-//        if error.code == CLError.Denied.rawValue {
-//            self.showAlert(
-//                title: NSLocalizedString("Location Services Disabled for Telobike", comment: ""),
-//                message: NSLocalizedString("Go to the Settings app and under Privacy -> Location Services, enable Telobike", comment: ""))
-//        }
-//    }
+    private func requestLocationServices() {
+        if self.locationManager == nil {
+            self.locationManager = CLLocationManager()
+            self.locationManager?.delegate = self
+        }
+        
+        self.locationManager?.requestWhenInUseAuthorization()
+        self.locationManager?.startUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        manager.stopUpdatingLocation()
+        if error.code == CLError.Denied.rawValue {
+            self.showAlert(
+                title: NSLocalizedString("Location Services Disabled for Telobike", comment: ""),
+                message: NSLocalizedString("Go to the Settings app and under Privacy -> Location Services, enable Telobike", comment: ""))
+        }
+    }
     
     // - Push Notifications
     
