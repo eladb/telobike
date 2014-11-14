@@ -20,7 +20,9 @@ class TBListViewController: UITableViewController {
         
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         
-        self.stationsObserver = TBObserver.observerForObject(TBServer.instance, keyPath: "stationsUpdateTime") {
+        let server = TBServer.instance
+        
+        self.stationsObserver = TBObserver.observerForObject(server, keyPath: "stationsUpdateTime") {
             self.sortedStations = TBServer.instance.sortStationsByDistance(TBServer.instance.stations)
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
@@ -38,7 +40,7 @@ class TBListViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        TBServer.instance.reloadStations()
+        TBServer.instance.reloadStations(force: false)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -68,6 +70,6 @@ class TBListViewController: UITableViewController {
     // MARK: Operations
     
     func refresh(sender: UIRefreshControl?) {
-        TBServer.instance.reloadStations()
+        TBServer.instance.reloadStations(force: true)
     }
 }

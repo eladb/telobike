@@ -29,12 +29,12 @@
 		F44061DD19CCB33B00A069C5 /* TBServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44061DC19CCB33B00A069C5 /* TBServer.swift */; };
 		F44061DF19CCC5B900A069C5 /* TBFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44061DE19CCC5B900A069C5 /* TBFavorites.swift */; };
 		F44061E219CCEAE500A069C5 /* TBObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44061E119CCEAE500A069C5 /* TBObserver.swift */; };
+		F45E9EC31A15789D00ED2721 /* TBAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E9EC21A15789D00ED2721 /* TBAppDelegate.swift */; };
 		F470EBE717F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
 		F470EBE917F11589006FD464 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE817F11589006FD464 /* CoreGraphics.framework */; };
 		F470EBEB17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
 		F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F470EBEF17F11589006FD464 /* InfoPlist.strings */; };
 		F470EBF317F11589006FD464 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBF217F11589006FD464 /* main.m */; };
-		F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBF617F11589006FD464 /* TBAppDelegate.m */; };
 		F470EBFA17F11589006FD464 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F470EBF817F11589006FD464 /* Main.storyboard */; };
 		F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBFF17F11589006FD464 /* TBMapViewController.m */; };
 		F470EC0917F11589006FD464 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EC0817F11589006FD464 /* XCTest.framework */; };
@@ -114,6 +114,7 @@
 		F44061DC19CCB33B00A069C5 /* TBServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBServer.swift; sourceTree = "<group>"; };
 		F44061DE19CCC5B900A069C5 /* TBFavorites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBFavorites.swift; sourceTree = "<group>"; };
 		F44061E119CCEAE500A069C5 /* TBObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBObserver.swift; sourceTree = "<group>"; };
+		F45E9EC21A15789D00ED2721 /* TBAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBAppDelegate.swift; sourceTree = "<group>"; };
 		F470EBE317F11589006FD464 /* telobike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telobike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F470EBE617F11589006FD464 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F470EBE817F11589006FD464 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,8 +123,6 @@
 		F470EBF017F11589006FD464 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F470EBF217F11589006FD464 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F470EBF417F11589006FD464 /* telobike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telobike-Prefix.pch"; sourceTree = "<group>"; };
-		F470EBF517F11589006FD464 /* TBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBAppDelegate.h; sourceTree = "<group>"; };
-		F470EBF617F11589006FD464 /* TBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBAppDelegate.m; sourceTree = "<group>"; };
 		F470EBF917F11589006FD464 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F470EBFE17F11589006FD464 /* TBMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBMapViewController.h; sourceTree = "<group>"; };
 		F470EBFF17F11589006FD464 /* TBMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMapViewController.m; sourceTree = "<group>"; };
@@ -293,8 +292,7 @@
 				F4D6FA8A17FC8442000D0F2A /* sample-data.json */,
 				F4EE1E4717FEEE86002F8A62 /* routes.kml */,
 				F470EBF817F11589006FD464 /* Main.storyboard */,
-				F470EBF517F11589006FD464 /* TBAppDelegate.h */,
-				F470EBF617F11589006FD464 /* TBAppDelegate.m */,
+				F45E9EC21A15789D00ED2721 /* TBAppDelegate.swift */,
 				F4141EB81855E67600918F71 /* TBMainViewController.h */,
 				F4141EB91855E67600918F71 /* TBMainViewController.m */,
 				F47B5CD617F6B37F00D88614 /* TBNavigationController.h */,
@@ -646,11 +644,11 @@
 				F47B5CD817F6B37F00D88614 /* TBNavigationController.m in Sources */,
 				F437D5CC1858896F00E1381B /* TBGradientBackgroundView.m in Sources */,
 				C8B5981619EF80B30065B752 /* TBStationTableViewCell.swift in Sources */,
-				F470EBF717F11589006FD464 /* TBAppDelegate.m in Sources */,
 				F44061DF19CCC5B900A069C5 /* TBFavorites.swift in Sources */,
 				F47B5CE417F6CAF200D88614 /* MFMailComposeViewController+Feedback.m in Sources */,
 				F40E345919CD15CE00825D00 /* TBListViewController.swift in Sources */,
 				F42E60BB17F123590099A1D0 /* Utils.m in Sources */,
+				F45E9EC31A15789D00ED2721 /* TBAppDelegate.swift in Sources */,
 				F4AF499F189904790045612D /* NSUserDefaults+OneOff.m in Sources */,
 				F47B5CEF17F6D43C00D88614 /* NSBundle+View.m in Sources */,
 				F44061E219CCEAE500A069C5 /* TBObserver.swift in Sources */,
@@ -815,6 +813,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/external",
 				);
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "telobike/telobike-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

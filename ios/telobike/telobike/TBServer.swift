@@ -14,8 +14,9 @@ class TBServer: NSObject, CLLocationManagerDelegate {
     
     var stations: [TBStation] = []
     var city: TBCity? = nil
+    private var reloading = false
     
-    dynamic var stationsUpdateTime = NSDate()
+    dynamic var stationsUpdateTime = NSDate.distantPast() as NSDate
     dynamic var cityUpdateTime = NSDate()
     
     class var instance: TBServer {
@@ -42,20 +43,33 @@ class TBServer: NSObject, CLLocationManagerDelegate {
         }
         
         self.parseStationsResponse(cachedStationsResponse)
-        self.reloadStations()
+        self.reloadStations(force: true)
         self.reloadCity()
     }
 
-    func reloadStations(completion: () -> () = {}) {
+    func reloadStations(#force: Bool) {
+        if self.reloading {
+            println("reload - in progress")
+            return; // already reloading
+        }
+        
+        if !force && abs(self.stationsUpdateTime.timeIntervalSinceNow) < 30 {
+            // if update time is less than 30s, dont do anything
+            println("reload - skip \(abs(self.stationsUpdateTime.timeIntervalSinceNow))s")
+            return;
+        }
+        
+        println("reload")
+        self.reloading = true
         self.server.GET("/tlv/stations", parameters: nil, success: { (_, responseObject) in
             self.parseStationsResponse(responseObject)
             NSUserDefaults.standardUserDefaults().setObject(responseObject, forKey: "stations")
             NSUserDefaults.standardUserDefaults().synchronize()
             self.stationsUpdateTime = NSDate()
-            completion()
+            self.reloading = false
         }, { (_, error) in
             println("error loading stations: \(error)")
-            completion()
+            self.reloading = false
         })
     }
     

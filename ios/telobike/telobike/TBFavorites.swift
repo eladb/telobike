@@ -9,9 +9,18 @@
 import Foundation
 
 class TBFavorites: NSObject {
+    private var favorites = [String:Bool]()
+    private let defaultsKey = "favorites"
+    
     class var instance: TBFavorites {
         struct Singleton { static let instance = TBFavorites() }
         return Singleton.instance
+    }
+    
+    override init() {
+        if let dict = NSUserDefaults.standardUserDefaults().dictionaryForKey(defaultsKey) {
+            self.favorites = dict as [String:Bool]
+        }
     }
     
     private func defaultsKeyForStationID(stationID: String) -> String {
@@ -19,13 +28,15 @@ class TBFavorites: NSObject {
     }
 
     func isFavoriteStationID(stationID: String) -> Bool {
-        NSUserDefaults.standardUserDefaults().synchronize()
-        return NSUserDefaults.standardUserDefaults().boolForKey(self.defaultsKeyForStationID(stationID))
+        return self.favorites[stationID] ?? false
     }
     
     func setStationID(stationID: String, favorite isFavorite: Bool) {
-        NSUserDefaults.standardUserDefaults().setBool(isFavorite, forKey: self.defaultsKeyForStationID(stationID))
-        NSUserDefaults.standardUserDefaults().synchronize()
+        self.favorites[stationID] = isFavorite
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            NSUserDefaults.standardUserDefaults().setObject(self.favorites, forKey: self.defaultsKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
     }
 }
 

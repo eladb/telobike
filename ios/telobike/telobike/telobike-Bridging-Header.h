@@ -11,3 +11,6 @@
 #import "TBMapViewController.h"
 #import "TBTintedView.h"
 #import "TBAvailabilityView.h"
+#import <Appirater.h>
+#import <GoogleAnalytics-iOS-SDK/GAI.h>
+#import <Crashlytics/Crashlytics.h>

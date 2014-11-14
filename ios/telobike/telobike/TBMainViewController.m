@@ -16,8 +16,8 @@
 #import "TBTimerViewController.h"
 #import "telobike-Swift.h"
 #import "UIColor+Style.h"
-#import "TBAppDelegate.h"
 #import "TBSearchResultTableViewCell.h"
+#import "TBMapViewController.h"
 
 @interface TBMainViewController () <UITabBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UINavigationControllerDelegate>
 

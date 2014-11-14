@@ -48,7 +48,7 @@ class TBFavoritesViewController: UITableViewController {
     // MARK: Data
     
     @IBAction func refresh(sender: UIRefreshControl) {
-        TBServer.instance.reloadStations {}
+        TBServer.instance.reloadStations(force: true)
     }
 
     func updateFavoritesWithReload(reload:Bool) {

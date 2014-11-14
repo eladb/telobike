@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "TBAppDelegate.h"
+#import "Telobike-Swift.h"
 
 int main(int argc, char * argv[])
 {
