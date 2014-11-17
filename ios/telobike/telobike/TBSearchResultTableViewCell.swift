@@ -10,9 +10,9 @@ import Foundation
 
 class TBSearchResultTableViewCell: UITableViewCell {
     
-    @IBOutlet private var iconView: UIImageView!
-    @IBOutlet private var resultTitleLabel: UILabel!
-    @IBOutlet private var distanceLabel: UILabel!
+    @IBOutlet private weak var iconView: UIImageView!
+    @IBOutlet private weak var resultTitleLabel: UILabel!
+    @IBOutlet private weak var distanceLabel: UILabel!
     
     var icon: UIImage? {
         didSet {

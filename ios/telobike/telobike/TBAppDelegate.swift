@@ -52,14 +52,6 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
         NSNotificationCenter.defaultCenter().postNotificationName("didReceiveLocalNotification", object: notification)
     }
     
-    // - MARK: Utils
-    
-    private func showAlert(#title: String, message: String? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: nil))
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-    }
-    
     // - MARK: Disclaimer Alert
     
     private func observeDisclaimerUpdates() {
@@ -77,7 +69,7 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
             }
 
             if let d = discl {
-                self.showAlert(title: d)
+                TBAlerts.showAlert(title: d)
                 NSUserDefaults.standardUserDefaults().setObject(discl, forKey: defaultsKey)
             }
         }
@@ -98,7 +90,7 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         manager.stopUpdatingLocation()
         if error.code == CLError.Denied.rawValue {
-            self.showAlert(
+            TBAlerts.showAlert(
                 title: NSLocalizedString("Location Services Disabled for Telobike", comment: ""),
                 message: NSLocalizedString("Go to the Settings app and under Privacy -> Location Services, enable Telobike", comment: ""))
         }
@@ -121,7 +113,7 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? NSString {
-                self.showAlert(
+                TBAlerts.showAlert(
                     title: NSLocalizedString("Telobike", comment: ""),
                     message: alert)
             }

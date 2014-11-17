@@ -36,7 +36,6 @@
 		F470EBF117F11589006FD464 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F470EBEF17F11589006FD464 /* InfoPlist.strings */; };
 		F470EBF317F11589006FD464 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBF217F11589006FD464 /* main.m */; };
 		F470EBFA17F11589006FD464 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F470EBF817F11589006FD464 /* Main.storyboard */; };
-		F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F470EBFF17F11589006FD464 /* TBMapViewController.m */; };
 		F470EC0917F11589006FD464 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EC0817F11589006FD464 /* XCTest.framework */; };
 		F470EC0A17F11589006FD464 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBE617F11589006FD464 /* Foundation.framework */; };
 		F470EC0B17F11589006FD464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470EBEA17F11589006FD464 /* UIKit.framework */; };
@@ -64,6 +63,8 @@
 		F4B081BF1853D43C00DC272A /* TBPlacemarkAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */; };
 		F4C0B7E41A19C6E0009D0495 /* TBSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7E31A19C6E0009D0495 /* TBSearchResultTableViewCell.swift */; };
 		F4C0B7E61A19C972009D0495 /* TBTintedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7E51A19C972009D0495 /* TBTintedView.swift */; };
+		F4C0B7E81A19CB2E009D0495 /* TBMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7E71A19CB2E009D0495 /* TBMapViewController.swift */; };
+		F4C0B7EA1A19DAAE009D0495 /* TBAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7E91A19DAAE009D0495 /* TBAlerts.swift */; };
 		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
 		F4ED06A9189A4617000CA56B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4ED06A8189A4617000CA56B /* Crashlytics.framework */; };
@@ -123,8 +124,6 @@
 		F470EBF217F11589006FD464 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F470EBF417F11589006FD464 /* telobike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telobike-Prefix.pch"; sourceTree = "<group>"; };
 		F470EBF917F11589006FD464 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F470EBFE17F11589006FD464 /* TBMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBMapViewController.h; sourceTree = "<group>"; };
-		F470EBFF17F11589006FD464 /* TBMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMapViewController.m; sourceTree = "<group>"; };
 		F470EC0717F11589006FD464 /* telobikeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telobikeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F470EC0817F11589006FD464 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F470EC1017F11589006FD464 /* telobikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "telobikeTests-Info.plist"; sourceTree = "<group>"; };
@@ -166,6 +165,8 @@
 		F4B081BE1853D43C00DC272A /* TBPlacemarkAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPlacemarkAnnotation.m; sourceTree = "<group>"; };
 		F4C0B7E31A19C6E0009D0495 /* TBSearchResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBSearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		F4C0B7E51A19C972009D0495 /* TBTintedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBTintedView.swift; sourceTree = "<group>"; };
+		F4C0B7E71A19CB2E009D0495 /* TBMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMapViewController.swift; sourceTree = "<group>"; };
+		F4C0B7E91A19DAAE009D0495 /* TBAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBAlerts.swift; sourceTree = "<group>"; };
 		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
 		F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GAI.m"; sourceTree = "<group>"; };
 		F4CF885619C6BFAC0073FB8D /* telobike-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telobike-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -374,6 +375,7 @@
 				F4AF499B189902F30045612D /* UIAlertView+Blocks.m */,
 				F4AF499D189904790045612D /* NSUserDefaults+OneOff.h */,
 				F4AF499E189904790045612D /* NSUserDefaults+OneOff.m */,
+				F4C0B7E91A19DAAE009D0495 /* TBAlerts.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -396,8 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				F4EE1E7317FEF582002F8A62 /* KMLParser */,
-				F470EBFE17F11589006FD464 /* TBMapViewController.h */,
-				F470EBFF17F11589006FD464 /* TBMapViewController.m */,
+				F4C0B7E71A19CB2E009D0495 /* TBMapViewController.swift */,
 				F421E304180D8BB100213902 /* TBStationAnnotationView.h */,
 				F421E305180D8BB100213902 /* TBStationAnnotationView.m */,
 				F4B081BD1853D43C00DC272A /* TBPlacemarkAnnotation.h */,
@@ -622,13 +623,14 @@
 				F44061D719CBDA2F00A069C5 /* TBStationSearch.swift in Sources */,
 				F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */,
 				C8B5981419EF6E9B0065B752 /* TBFavoritesViewController.swift in Sources */,
-				F470EC0017F11589006FD464 /* TBMapViewController.m in Sources */,
+				F4C0B7E81A19CB2E009D0495 /* TBMapViewController.swift in Sources */,
 				F44061D419CB4C4B00A069C5 /* TBStation.swift in Sources */,
 				F44061DA19CBF0D000A069C5 /* TBCity.swift in Sources */,
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
 				F4AF49971896C9100045612D /* TBTimerViewController.m in Sources */,
 				F45E9EC51A16847900ED2721 /* TBNavigationController.swift in Sources */,
 				F40E345B19CD16C700825D00 /* TBMySwiftViewController.swift in Sources */,
+				F4C0B7EA1A19DAAE009D0495 /* TBAlerts.swift in Sources */,
 				F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */,
 				F4AF499C189902F30045612D /* UIAlertView+Blocks.m in Sources */,
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,

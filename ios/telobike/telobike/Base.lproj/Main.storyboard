@@ -125,7 +125,7 @@
         <!--Map-->
         <scene sceneID="ot8-2e-RuS">
             <objects>
-                <viewController storyboardIdentifier="map" title="Map" id="QUy-BD-bpt" customClass="TBMapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="map" title="Map" id="QUy-BD-bpt" customClass="TBMapViewController" customModule="telobike" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VDn-gC-H17"/>
                         <viewControllerLayoutGuide type="bottom" id="xXe-n4-Ljh"/>

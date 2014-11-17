@@ -10,12 +10,10 @@
 
 #import <SVGeocoder.h>
 #import <InAppSettingsKit/IASKAppSettingsViewController.h>
-
 #import "TBMainViewController.h"
 #import "TBTimerViewController.h"
-#import "telobike-Swift.h"
 #import "UIColor+Style.h"
-#import "TBMapViewController.h"
+#import "telobike-Swift.h"
 
 @interface TBMainViewController () <UITabBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UINavigationControllerDelegate>
 
@@ -191,7 +189,7 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.mapViewController deselectAllAnnoations];
+    [self.mapViewController deselectAllAnnotations];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
