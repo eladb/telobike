@@ -55,7 +55,6 @@
 		F49D8E851850DAF300D7413E /* TBStationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */; };
 		F4AF49831896B4C00045612D /* TBSearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49821896B4C00045612D /* TBSearchResultTableViewCell.xib */; };
 		F4AF49961896C9100045612D /* bikebell.wav in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49931896C9100045612D /* bikebell.wav */; };
-		F4AF49971896C9100045612D /* TBTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF49951896C9100045612D /* TBTimerViewController.m */; };
 		F4AF49991896C91E0045612D /* NoFavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AF49981896C91E0045612D /* NoFavoritesView.xib */; };
 		F4AF499C189902F30045612D /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF499B189902F30045612D /* UIAlertView+Blocks.m */; };
 		F4AF499F189904790045612D /* NSUserDefaults+OneOff.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF499E189904790045612D /* NSUserDefaults+OneOff.m */; };
@@ -65,6 +64,7 @@
 		F4C0B7EA1A19DAAE009D0495 /* TBAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7E91A19DAAE009D0495 /* TBAlerts.swift */; };
 		F4C0B7EC1A19E431009D0495 /* TBPlacemarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7EB1A19E431009D0495 /* TBPlacemarkAnnotation.swift */; };
 		F4C0B7EE1A19E54E009D0495 /* TBStationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7ED1A19E54E009D0495 /* TBStationAnnotationView.swift */; };
+		F4C0B7F01A19EA46009D0495 /* TBTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7EF1A19EA46009D0495 /* TBTimerViewController.swift */; };
 		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
 		F4ED06A9189A4617000CA56B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4ED06A8189A4617000CA56B /* Crashlytics.framework */; };
@@ -152,8 +152,6 @@
 		F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStationTableViewCell.xib; sourceTree = "<group>"; };
 		F4AF49821896B4C00045612D /* TBSearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		F4AF49931896C9100045612D /* bikebell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bikebell.wav; path = telobike/bikebell.wav; sourceTree = "<group>"; };
-		F4AF49941896C9100045612D /* TBTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBTimerViewController.h; path = telobike/TBTimerViewController.h; sourceTree = "<group>"; };
-		F4AF49951896C9100045612D /* TBTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBTimerViewController.m; path = telobike/TBTimerViewController.m; sourceTree = "<group>"; };
 		F4AF49981896C91E0045612D /* NoFavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoFavoritesView.xib; path = telobike/NoFavoritesView.xib; sourceTree = "<group>"; };
 		F4AF499A189902F30045612D /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		F4AF499B189902F30045612D /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
@@ -165,6 +163,7 @@
 		F4C0B7E91A19DAAE009D0495 /* TBAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBAlerts.swift; sourceTree = "<group>"; };
 		F4C0B7EB1A19E431009D0495 /* TBPlacemarkAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBPlacemarkAnnotation.swift; sourceTree = "<group>"; };
 		F4C0B7ED1A19E54E009D0495 /* TBStationAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStationAnnotationView.swift; sourceTree = "<group>"; };
+		F4C0B7EF1A19EA46009D0495 /* TBTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBTimerViewController.swift; sourceTree = "<group>"; };
 		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
 		F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GAI.m"; sourceTree = "<group>"; };
 		F4CF885619C6BFAC0073FB8D /* telobike-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telobike-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -219,8 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				F4AF49931896C9100045612D /* bikebell.wav */,
-				F4AF49941896C9100045612D /* TBTimerViewController.h */,
-				F4AF49951896C9100045612D /* TBTimerViewController.m */,
+				F4C0B7EF1A19EA46009D0495 /* TBTimerViewController.swift */,
 			);
 			name = timer;
 			path = ..;
@@ -623,7 +621,6 @@
 				F44061D419CB4C4B00A069C5 /* TBStation.swift in Sources */,
 				F44061DA19CBF0D000A069C5 /* TBCity.swift in Sources */,
 				F47B5CDF17F6C7E100D88614 /* TBFeedbackActionSheet.m in Sources */,
-				F4AF49971896C9100045612D /* TBTimerViewController.m in Sources */,
 				F45E9EC51A16847900ED2721 /* TBNavigationController.swift in Sources */,
 				F40E345B19CD16C700825D00 /* TBMySwiftViewController.swift in Sources */,
 				F4C0B7EA1A19DAAE009D0495 /* TBAlerts.swift in Sources */,
@@ -651,6 +648,7 @@
 				F44061DD19CCB33B00A069C5 /* TBServer.swift in Sources */,
 				F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */,
 				F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */,
+				F4C0B7F01A19EA46009D0495 /* TBTimerViewController.swift in Sources */,
 				F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

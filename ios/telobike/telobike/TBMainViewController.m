@@ -11,7 +11,6 @@
 #import <SVGeocoder.h>
 #import <InAppSettingsKit/IASKAppSettingsViewController.h>
 #import "TBMainViewController.h"
-#import "TBTimerViewController.h"
 #import "UIColor+Style.h"
 #import "telobike-Swift.h"
 

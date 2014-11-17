@@ -307,7 +307,7 @@
         <!--Timer-->
         <scene sceneID="TQ1-0B-ggg">
             <objects>
-                <viewController storyboardIdentifier="timer" title="Timer" id="d2H-A7-Ize" customClass="TBTimerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="timer" title="Timer" id="d2H-A7-Ize" customClass="TBTimerViewController" customModule="telobike" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qIB-H1-CWI"/>
                         <viewControllerLayoutGuide type="bottom" id="Vmu-rD-VlJ"/>
