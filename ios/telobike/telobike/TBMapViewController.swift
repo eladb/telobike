@@ -87,10 +87,12 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
         // delete any existing placemark annotations
         let placemarks = self.mapView.annotations.filter { $0.isKindOfClass(TBPlacemarkAnnotation) }
         self.mapView.removeAnnotations(placemarks)
-        
-        let newAnnotation = TBPlacemarkAnnotation(placemark: placemark)
-        self.mapView.addAnnotation(newAnnotation)
-        self.mapView.selectAnnotation(newAnnotation, animated: true)
+
+        if let pm = placemark {
+            let newAnnotation = TBPlacemarkAnnotation(placemark: pm)
+            self.mapView.addAnnotation(newAnnotation)
+            self.mapView.selectAnnotation(newAnnotation, animated: true)
+        }
     }
     
     func deselectAllAnnotations() {
