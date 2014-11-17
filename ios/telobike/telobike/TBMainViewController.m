@@ -15,7 +15,6 @@
 #import "TBTimerViewController.h"
 #import "telobike-Swift.h"
 #import "UIColor+Style.h"
-#import "TBSearchResultTableViewCell.h"
 #import "TBMapViewController.h"
 
 @interface TBMainViewController () <UITabBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UINavigationControllerDelegate>
@@ -79,7 +78,7 @@
     // search
     self.searchDisplayController.searchBar.alpha = 0.0f;
     self.searchDisplayController.searchBar.tintColor = [UIColor tintColor];
-    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:NSStringFromClass([TBSearchResultTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"TBSearchResultTableViewCell"];
+    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"TBSearchResultTableViewCell" bundle:nil] forCellReuseIdentifier:@"TBSearchResultTableViewCell"];
 
     self.distanceFormatter = [[MKDistanceFormatter alloc] init];
     self.distanceFormatter.units = MKDistanceFormatterUnitsMetric;
@@ -321,7 +320,7 @@
     
     TBSearchResultTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"TBSearchResultTableViewCell"];
     cell.title = title;
-    cell.image = image;
+    cell.icon = image;
     if (distance != -1.0f) {
         cell.detail = [self.distanceFormatter stringFromDistance:distance];
     }
