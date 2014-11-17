@@ -63,18 +63,15 @@ class TBAvailabilityView: UIView {
                 x = rect.size.width / 2.0 - (CGFloat(totalSlots) * (slotSize + spacing)) / 2.0
             }
             
-            let fullSlotColor = station.fullSlotColor
-            let emptySlotColor = station.emptySlotColor
-            
             for var i = 0; i < totalSlots; ++i {
                 if i < availBike {
                     CGContextSetLineWidth(ctx, 1.0)
-                    CGContextSetStrokeColorWithColor(ctx, fullSlotColor.CGColor)
-                    CGContextSetFillColorWithColor(ctx, fullSlotColor.CGColor)
+                    CGContextSetStrokeColorWithColor(ctx, station.fullSlotColor.CGColor)
+                    CGContextSetFillColorWithColor(ctx, station.fullSlotColor.CGColor)
                 }
                 else {
                     CGContextSetLineWidth(ctx, 1.0)
-                    CGContextSetStrokeColorWithColor(ctx, emptySlotColor.CGColor)
+                    CGContextSetStrokeColorWithColor(ctx, station.emptySlotColor.CGColor)
                     CGContextSetFillColorWithColor(ctx, UIColor.clearColor().CGColor)
                 }
                 
@@ -84,6 +81,8 @@ class TBAvailabilityView: UIView {
                 path.stroke()
                 
                 x += slotSize + spacing
+                
+                // line wrap
                 if x + slotSize > rect.size.width {
                     x = startX
                     y += slotSize + spacing
