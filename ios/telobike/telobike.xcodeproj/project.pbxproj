@@ -16,7 +16,6 @@
 		F40E345919CD15CE00825D00 /* TBListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E60AD17F11A2C0099A1D0 /* TBListViewController.swift */; };
 		F40E345B19CD16C700825D00 /* TBMySwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40E345A19CD16C700825D00 /* TBMySwiftViewController.swift */; };
 		F4141EBA1855E67600918F71 /* TBMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4141EB91855E67600918F71 /* TBMainViewController.m */; };
-		F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F421E305180D8BB100213902 /* TBStationAnnotationView.m */; };
 		F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F42E60AF17F11AF60099A1D0 /* Assets.xcassets */; };
 		F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E60B117F11C5A0099A1D0 /* MapKit.framework */; };
 		F42E60BB17F123590099A1D0 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60BA17F123590099A1D0 /* Utils.m */; };
@@ -65,6 +64,7 @@
 		F4C0B7E81A19CB2E009D0495 /* TBMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7E71A19CB2E009D0495 /* TBMapViewController.swift */; };
 		F4C0B7EA1A19DAAE009D0495 /* TBAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7E91A19DAAE009D0495 /* TBAlerts.swift */; };
 		F4C0B7EC1A19E431009D0495 /* TBPlacemarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7EB1A19E431009D0495 /* TBPlacemarkAnnotation.swift */; };
+		F4C0B7EE1A19E54E009D0495 /* TBStationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7ED1A19E54E009D0495 /* TBStationAnnotationView.swift */; };
 		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
 		F4ED06A9189A4617000CA56B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4ED06A8189A4617000CA56B /* Crashlytics.framework */; };
@@ -96,8 +96,6 @@
 		F40E345A19CD16C700825D00 /* TBMySwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMySwiftViewController.swift; sourceTree = "<group>"; };
 		F4141EB81855E67600918F71 /* TBMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMainViewController.h; sourceTree = "<group>"; };
 		F4141EB91855E67600918F71 /* TBMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMainViewController.m; sourceTree = "<group>"; };
-		F421E304180D8BB100213902 /* TBStationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStationAnnotationView.h; sourceTree = "<group>"; };
-		F421E305180D8BB100213902 /* TBStationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStationAnnotationView.m; sourceTree = "<group>"; };
 		F42E60AD17F11A2C0099A1D0 /* TBListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBListViewController.swift; sourceTree = "<group>"; };
 		F42E60AF17F11AF60099A1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		F42E60B117F11C5A0099A1D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -166,6 +164,7 @@
 		F4C0B7E71A19CB2E009D0495 /* TBMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBMapViewController.swift; sourceTree = "<group>"; };
 		F4C0B7E91A19DAAE009D0495 /* TBAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBAlerts.swift; sourceTree = "<group>"; };
 		F4C0B7EB1A19E431009D0495 /* TBPlacemarkAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBPlacemarkAnnotation.swift; sourceTree = "<group>"; };
+		F4C0B7ED1A19E54E009D0495 /* TBStationAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStationAnnotationView.swift; sourceTree = "<group>"; };
 		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
 		F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GAI.m"; sourceTree = "<group>"; };
 		F4CF885619C6BFAC0073FB8D /* telobike-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telobike-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -398,9 +397,8 @@
 			children = (
 				F4EE1E7317FEF582002F8A62 /* KMLParser */,
 				F4C0B7E71A19CB2E009D0495 /* TBMapViewController.swift */,
-				F421E304180D8BB100213902 /* TBStationAnnotationView.h */,
-				F421E305180D8BB100213902 /* TBStationAnnotationView.m */,
 				F4C0B7EB1A19E431009D0495 /* TBPlacemarkAnnotation.swift */,
+				F4C0B7ED1A19E54E009D0495 /* TBStationAnnotationView.swift */,
 			);
 			name = map;
 			sourceTree = "<group>";
@@ -619,7 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44061D719CBDA2F00A069C5 /* TBStationSearch.swift in Sources */,
-				F421E306180D8BB100213902 /* TBStationAnnotationView.m in Sources */,
+				F4C0B7EE1A19E54E009D0495 /* TBStationAnnotationView.swift in Sources */,
 				C8B5981419EF6E9B0065B752 /* TBFavoritesViewController.swift in Sources */,
 				F4C0B7E81A19CB2E009D0495 /* TBMapViewController.swift in Sources */,
 				F44061D419CB4C4B00A069C5 /* TBStation.swift in Sources */,
