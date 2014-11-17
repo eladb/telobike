@@ -8,7 +8,6 @@
 
 #import "UIViewController+GAI.h"
 #import "TBMainViewController.h"
-#import "TBAvailabilityView.h"
 #import <Appirater.h>
 #import <GoogleAnalytics-iOS-SDK/GAI.h>
 #import <Crashlytics/Crashlytics.h>

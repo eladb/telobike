@@ -19,7 +19,6 @@
 		F42E60B017F11AF60099A1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F42E60AF17F11AF60099A1D0 /* Assets.xcassets */; };
 		F42E60B217F11C5A0099A1D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E60B117F11C5A0099A1D0 /* MapKit.framework */; };
 		F42E60BB17F123590099A1D0 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E60BA17F123590099A1D0 /* Utils.m */; };
-		F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */; };
 		F437D5CC1858896F00E1381B /* TBGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */; };
 		F44061D419CB4C4B00A069C5 /* TBStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF885719C6BFAC0073FB8D /* TBStation.swift */; };
 		F44061D719CBDA2F00A069C5 /* TBStationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44061D619CBDA2F00A069C5 /* TBStationSearch.swift */; };
@@ -65,6 +64,7 @@
 		F4C0B7EC1A19E431009D0495 /* TBPlacemarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7EB1A19E431009D0495 /* TBPlacemarkAnnotation.swift */; };
 		F4C0B7EE1A19E54E009D0495 /* TBStationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7ED1A19E54E009D0495 /* TBStationAnnotationView.swift */; };
 		F4C0B7F01A19EA46009D0495 /* TBTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7EF1A19EA46009D0495 /* TBTimerViewController.swift */; };
+		F4C0B7F21A1A2FCA009D0495 /* TBAvailabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B7F11A1A2FCA009D0495 /* TBAvailabilityView.swift */; };
 		F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */; };
 		F4D6FA8B17FC8442000D0F2A /* sample-data.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D6FA8A17FC8442000D0F2A /* sample-data.json */; };
 		F4ED06A9189A4617000CA56B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4ED06A8189A4617000CA56B /* Crashlytics.framework */; };
@@ -101,8 +101,6 @@
 		F42E60B117F11C5A0099A1D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F42E60B917F123590099A1D0 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		F42E60BA17F123590099A1D0 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
-		F42FCA0917FD6A3F00E24D50 /* TBAvailabilityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAvailabilityView.h; sourceTree = "<group>"; };
-		F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAvailabilityView.m; sourceTree = "<group>"; };
 		F437D5CA1858896F00E1381B /* TBGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGradientBackgroundView.h; sourceTree = "<group>"; };
 		F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGradientBackgroundView.m; sourceTree = "<group>"; };
 		F44061D519CB7B0700A069C5 /* TBStationState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStationState.h; sourceTree = "<group>"; };
@@ -164,6 +162,7 @@
 		F4C0B7EB1A19E431009D0495 /* TBPlacemarkAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBPlacemarkAnnotation.swift; sourceTree = "<group>"; };
 		F4C0B7ED1A19E54E009D0495 /* TBStationAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStationAnnotationView.swift; sourceTree = "<group>"; };
 		F4C0B7EF1A19EA46009D0495 /* TBTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBTimerViewController.swift; sourceTree = "<group>"; };
+		F4C0B7F11A1A2FCA009D0495 /* TBAvailabilityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBAvailabilityView.swift; sourceTree = "<group>"; };
 		F4C3484C185CC7B900C0EF4D /* UIViewController+GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GAI.h"; sourceTree = "<group>"; };
 		F4C3484D185CC7B900C0EF4D /* UIViewController+GAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GAI.m"; sourceTree = "<group>"; };
 		F4CF885619C6BFAC0073FB8D /* telobike-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "telobike-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -382,10 +381,9 @@
 				F42E60AD17F11A2C0099A1D0 /* TBListViewController.swift */,
 				C8B5981519EF80B30065B752 /* TBStationTableViewCell.swift */,
 				F49D8E841850DAF300D7413E /* TBStationTableViewCell.xib */,
-				F42FCA0917FD6A3F00E24D50 /* TBAvailabilityView.h */,
-				F42FCA0A17FD6A3F00E24D50 /* TBAvailabilityView.m */,
 				F40E345A19CD16C700825D00 /* TBMySwiftViewController.swift */,
 				F4C0B7E51A19C972009D0495 /* TBTintedView.swift */,
+				F4C0B7F11A1A2FCA009D0495 /* TBAvailabilityView.swift */,
 			);
 			name = list;
 			sourceTree = "<group>";
@@ -625,6 +623,7 @@
 				F40E345B19CD16C700825D00 /* TBMySwiftViewController.swift in Sources */,
 				F4C0B7EA1A19DAAE009D0495 /* TBAlerts.swift in Sources */,
 				F4EE1E7617FEF58C002F8A62 /* KMLParser.m in Sources */,
+				F4C0B7F21A1A2FCA009D0495 /* TBAvailabilityView.swift in Sources */,
 				F4AF499C189902F30045612D /* UIAlertView+Blocks.m in Sources */,
 				F47B5CE717F6CC3000D88614 /* TBFeedbackMailComposeViewController.m in Sources */,
 				F498A02B1851450F003BD3A6 /* TBTransparentToolbar.m in Sources */,
@@ -646,7 +645,6 @@
 				F498A0AB1851B44A003BD3A6 /* JNJGoogleMapsActivity.m in Sources */,
 				F47B5D0217F797DA00D88614 /* UIColor+Style.m in Sources */,
 				F44061DD19CCB33B00A069C5 /* TBServer.swift in Sources */,
-				F42FCA0B17FD6A3F00E24D50 /* TBAvailabilityView.m in Sources */,
 				F4C3484E185CC7B900C0EF4D /* UIViewController+GAI.m in Sources */,
 				F4C0B7F01A19EA46009D0495 /* TBTimerViewController.swift in Sources */,
 				F40C94401858CFF800B64908 /* TBGoogleMapsRouting.m in Sources */,

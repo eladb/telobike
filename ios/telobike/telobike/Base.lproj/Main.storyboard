@@ -184,7 +184,7 @@
                                             <constraint firstAttribute="height" constant="47" id="Zim-G1-QdH"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-oF-ZUd" customClass="TBAvailabilityView" customModule="telobike" customModuleProvider="target">
                                         <rect key="frame" x="20" y="60" width="280" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="ZUf-he-Na3"/>

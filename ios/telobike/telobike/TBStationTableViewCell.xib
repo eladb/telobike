@@ -39,7 +39,7 @@
                             <constraint firstAttribute="height" constant="0.5" id="kqW-6u-vAj"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1N-re-G2k" userLabel="availabilityView" customClass="TBAvailabilityView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1N-re-G2k" userLabel="availabilityView" customClass="TBAvailabilityView" customModule="telobike" customModuleProvider="target">
                         <rect key="frame" x="26" y="54" width="253" height="12"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
