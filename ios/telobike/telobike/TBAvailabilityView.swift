@@ -63,7 +63,7 @@ class TBAvailabilityView: UIView {
                 x = rect.size.width / 2.0 - (CGFloat(totalSlots) * (slotSize + spacing)) / 2.0
             }
             
-            for var i = 0; i < totalSlots; ++i {
+            for i in 0..<totalSlots {
                 if i < availBike {
                     CGContextSetLineWidth(ctx, 1.0)
                     CGContextSetStrokeColorWithColor(ctx, station.fullSlotColor.CGColor)
