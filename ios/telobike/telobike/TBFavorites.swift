@@ -9,7 +9,7 @@
 import Foundation
 
 class TBFavorites: NSObject {
-    private var favorites = [String:Bool]()
+    private var favorites = NSMutableDictionary()
     private let defaultsKey = "favorites"
     
     class var instance: TBFavorites {
@@ -19,8 +19,9 @@ class TBFavorites: NSObject {
     
     override init() {
         if let dict = NSUserDefaults.standardUserDefaults().dictionaryForKey(defaultsKey) {
-            self.favorites = dict as [String:Bool]
+            self.favorites = (dict as NSDictionary).mutableCopy() as NSMutableDictionary
         }
+        
     }
     
     private func defaultsKeyForStationID(stationID: String) -> String {
@@ -28,7 +29,7 @@ class TBFavorites: NSObject {
     }
 
     func isFavoriteStationID(stationID: String) -> Bool {
-        return self.favorites[stationID] ?? false
+        return self.favorites[stationID]?.boolValue ?? false
     }
     
     func setStationID(stationID: String, favorite isFavorite: Bool) {
