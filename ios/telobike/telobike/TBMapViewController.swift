@@ -43,9 +43,11 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
         }
         
         self.cityObserver = TBObserver.observerForObject(self.server, keyPath: "cityUpdateTime") {
-            self.setMapRegion(MKCoordinateRegion(center: (self.server.city?.cityCenter.coordinate)!, span: MKCoordinateSpanMake(0.05, 0.05)),
-                animated: true,
-                withoutDeselection: true)
+            if let center = self.server.city?.cityCenter.coordinate {
+                self.setMapRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpanMake(0.05, 0.05)),
+                    animated: true,
+                    withoutDeselection: true)
+            }
         }
 
         // map view
