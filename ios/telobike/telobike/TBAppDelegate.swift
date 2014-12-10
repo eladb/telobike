@@ -32,9 +32,14 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
         Crashlytics.startWithAPIKey("d164a3f45648ccbfa001f8958d403135d23a4dbf")
         
         // push notifications
-        let settings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+        if application.respondsToSelector("registerUserNotificationSettings:") {
+            let settings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        }
+        else {
+            application.registerForRemoteNotificationTypes(.Alert | .Badge | .Sound)
+        }
 
         Appirater.appLaunched(true)
 
@@ -83,8 +88,13 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
             self.locationManager?.delegate = self
         }
         
-        self.locationManager?.requestWhenInUseAuthorization()
-        self.locationManager?.startUpdatingLocation()
+        if let locationManager = self.locationManager {
+            if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
+                locationManager.requestWhenInUseAuthorization()
+            }
+            
+            locationManager.startUpdatingLocation()
+        }
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {

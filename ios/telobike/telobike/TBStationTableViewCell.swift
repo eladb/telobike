@@ -37,7 +37,9 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
         // Initialization code
         
         self.locationManager = CLLocationManager()
-        self.locationManager.requestWhenInUseAuthorization()
+        if self.locationManager.respondsToSelector("requestWhenInUseAuthorization") {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
         self.locationManager.startUpdatingLocation()
         self.locationManager.delegate = self;
         
