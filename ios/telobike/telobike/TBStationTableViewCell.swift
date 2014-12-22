@@ -62,17 +62,16 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
         
         if (self.locationManager.location != nil) {
             var distance = self.station.location.distanceFromLocation(self.locationManager.location)
-
-            var desc = NSMutableAttributedString()
-            
             if (distance < 100_000) {
-                desc.appendAttributedString(NSAttributedString(string: self.distanceFormatter.stringFromDistance(distance), attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()]))
+                self.subtitleLabel.text = self.distanceFormatter.stringFromDistance(distance)
             }
             else {
-                desc.appendAttributedString(NSAttributedString(string: NSLocalizedString("far", comment: "title when station is further than 100,000m"), attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()]))
+                self.subtitleLabel.attributedText = nil
+                #if DEBUG
+                    self.subtitleLabel.text = self.distanceFormatter.stringFromDistance(distance)
+                #endif
             }
             
-            self.subtitleLabel.attributedText = desc
             self.subtitleLabel.hidden = false
         }
         else {

@@ -9,6 +9,7 @@
 import Foundation
 
 class TBListViewController: UITableViewController {
+    private let dateFormatter = NSDateFormatter()
 
     var sortedStations: [TBStation] = []
     var stationsObserver: TBObserver?
@@ -18,12 +19,16 @@ class TBListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.dateFormatter.dateStyle = .ShortStyle
+        self.dateFormatter.timeStyle = .ShortStyle
+        
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         
         let server = TBServer.instance
         
         self.stationsObserver = TBObserver.observerForObject(server, keyPath: "stationsUpdateTime") {
             self.sortedStations = TBServer.instance.sortStationsByDistance(TBServer.instance.stations)
+            self.renderLastUpdateTime()
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         }
@@ -71,5 +76,19 @@ class TBListViewController: UITableViewController {
     
     func refresh(sender: UIRefreshControl?) {
         TBServer.instance.reloadStations(force: true)
+    }
+    
+    func renderLastUpdateTime() {
+        if let station = self.sortedStations.first as TBStation? {
+            if let lastUpdate = station.lastFetchTime {
+                let formattedTime = self.dateFormatter.stringFromDate(lastUpdate)
+                self.refreshControl?.attributedTitle = NSAttributedString(
+                    string: "Updated at \(formattedTime)",
+                    attributes: [ NSForegroundColorAttributeName: UIColor.lightGrayColor() ])
+            }
+        }
+        else {
+            self.refreshControl?.attributedTitle = nil
+        }
     }
 }

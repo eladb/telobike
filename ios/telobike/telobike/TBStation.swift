@@ -28,6 +28,7 @@ class TBStation: NSObject {
     var state = StationUnknown.value
     
     var stringsIndex: [String] // strings for keyword lookup
+    var lastFetchTime: NSDate?
 
     dynamic var lastUpdateTime: NSDate? // KVO this
     
@@ -76,6 +77,7 @@ class TBStation: NSObject {
         else { return false }
         
         let lastUpdate = dict.jsonDateForKey("last_update")
+        self.lastFetchTime = lastUpdate
         let freshness = lastUpdate?.timeIntervalSinceNow
         let isOnline = lastUpdate != nil && freshness < kFreshnessTimeInterval
         let isActive = !isOnline || availBike > 0 || availSpace > 0
