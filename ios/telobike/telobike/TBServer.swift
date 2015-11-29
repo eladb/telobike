@@ -9,6 +9,7 @@
 import Foundation
 
 class TBServer: NSObject, CLLocationManagerDelegate {
+    private let rootURL = NSURL(string: "https://s3-eu-west-1.amazonaws.com/telobike/tlv")!
     private let locationManager = CLLocationManager()
     private let server = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://telobike.citylifeapps.com"))
     
@@ -69,16 +70,47 @@ class TBServer: NSObject, CLLocationManagerDelegate {
         })
     }
     
+    func getJSON(relativeURL: String, completion: ((NSError?, AnyObject?) -> ())) {
+        let url = rootURL.URLByAppendingPathComponent(relativeURL)
+        let prefix = "[\(relativeURL)]"
+        
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            let httpResponse = response as! NSHTTPURLResponse
+            
+            if let error = error {
+                print("\(prefix) Network error: \(error)")
+                completion(nil, nil)
+            }
+            
+            print("\(prefix) Response code: \(httpResponse.statusCode)")
+            
+            if let data = data {
+                do {
+                    let object = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
+                    completion(nil, object)
+                }
+                catch let error as NSError {
+                    print("\(prefix) Serialization error: \(error)")
+                    completion(error, nil)
+                }
+            }
+        }.resume()
+    
+    }
+    
     func reloadCity(completion: () -> () = {}) {
-        self.server.GET("/cities/tlv", parameters: nil, success: { (_, responseObject) in
-            self.parseCityResponse(responseObject)
-            NSUserDefaults.standardUserDefaults().setObject(responseObject, forKey: "city")
+        getJSON("city.json") { (error, city) in
+            if error != nil {
+                print("Error loading city: \(error)")
+                completion()
+            }
+            
+            self.parseCityResponse(city)
+            NSUserDefaults.standardUserDefaults().setObject(city, forKey: "city")
             NSUserDefaults.standardUserDefaults().synchronize()
-            completion();
-        }, failure: { (_, error) in
-            print("error loading city: \(error)")
-            completion();
-        })
+            completion()
+
+        }
     }
 
     func postPushToken(token: String, completion: () ->() = {}) {
@@ -124,7 +156,7 @@ class TBServer: NSObject, CLLocationManagerDelegate {
                     // if station already exists, just update its data
                     if let existingStation = stationByID[station.sid] {
                         let mutableDict = NSMutableDictionary()
-                        mutableDict.addEntriesFromDictionary(dict as [NSObject : AnyObject])
+                        mutableDict.addEntriesFromDictionary(dict as! [NSObject : AnyObject])
                         mutableDict["available_bike"] = 1
                         existingStation.updateDictionary(dict)
                     }
