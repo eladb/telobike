@@ -45,6 +45,7 @@ function render_stations(callback) {
 
   return telofun_api(function(err, updated_stations) {
     if (err || !updated_stations) {
+      if (!err) err = new Error('stations array is empty');
       last_read_status.api = 'Error: ' + err.message;
       console.error('error: unable to read telofun stations:', err);
       return callback(err);
@@ -57,7 +58,7 @@ function render_stations(callback) {
     var mapped_stations = updated_stations.map(telofun_mapper);
 
     // update cached stations
-    stations = {};    
+    stations = { };    
     mapped_stations.forEach(function(s) {
       if(s.IsActive !== '0'){
         stations[s.sid] = s;
@@ -72,11 +73,11 @@ function render_stations(callback) {
         last_read_status.overrides = 'Success. Loaded ' + Object.keys(all_overrides).length.toString() + ' overrides';
 
         // merge overrides
-        merge_overrides(mapped_stations, all_overrides);
+        merge_overrides(stations, all_overrides);
       }
 
       // write stations to S3
-      upload_to_s3(mapped_stations, function(err) {
+      upload_to_s3(stations, function(err) {
         if (err) {
           console.error('ERROR: upload to s3 failed:', err);
           last_read_status.s3 = 'Error: ' + err.message;
@@ -85,7 +86,7 @@ function render_stations(callback) {
         last_read_status.s3 = 'Uploaded';
       });
 
-      return callback(null, mapped_stations);
+      return callback(null, stations);
     });
   });
 }
@@ -100,7 +101,7 @@ function merge_overrides(stations, all_overrides) {
   for (var sid in stations) {
     var s = stations[sid];
 
-    var overrides = all_overrides;
+    var overrides = all_overrides[sid];
     if (overrides) {
       console.log('found overrides for', sid);
       for (var k in overrides) {
