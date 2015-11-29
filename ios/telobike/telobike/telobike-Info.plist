@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.citylifeapps.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -22,8 +22,17 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1256</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location is used to show nearby stations and current location on the map</string>
 	<key>UIMainStoryboardFile</key>

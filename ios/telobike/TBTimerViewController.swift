@@ -80,8 +80,7 @@ class TBTimerViewController: UIViewController {
         }
         
         if let notification = note.object as? UILocalNotification {
-            if let soundName = notification.soundName {
-                let pathURL = NSBundle.mainBundle().URLForResource(soundName, withExtension: nil)
+            if let soundName = notification.soundName, pathURL = NSBundle.mainBundle().URLForResource(soundName, withExtension: nil) {
                 var audioEffect = SystemSoundID(0)
                 AudioServicesCreateSystemSoundID(pathURL, &audioEffect)
                 AudioServicesPlaySystemSound(audioEffect)

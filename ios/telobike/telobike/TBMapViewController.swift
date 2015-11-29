@@ -110,11 +110,11 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
     private func reloadAnnotations() {
         // add stations that are not already defined as annoations
         let newAnnotations = NSMutableSet(array: self.server.stations)
-        newAnnotations.minusSet(NSSet(array: self.mapView.annotations))
-        self.mapView.addAnnotations(newAnnotations.allObjects)
+        newAnnotations.minusSet(NSSet(array: self.mapView.annotations) as Set<NSObject>)
+        self.mapView.addAnnotations(newAnnotations.allObjects as! [MKAnnotation])
     }
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation.isKindOfClass(TBPlacemarkAnnotation) {
             let placemarkReuseID = "placemark"
             var view = mapView.dequeueReusableAnnotationViewWithIdentifier(placemarkReuseID)
@@ -126,7 +126,7 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
                 v.canShowCallout = true
             }
             
-            view.annotation = annotation
+            view!.annotation = annotation
             return view
         }
         
@@ -136,7 +136,7 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
             if view == nil {
                 view = TBStationAnnotationView(annotation: annotation, reuseIdentifier: stationReuseID)
             }
-            view.annotation = annotation
+            view!.annotation = annotation
             return view
         }
         
@@ -149,11 +149,11 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
         self.navigationItem.title = title ?? self.title
     }
     
-    func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         self.updateStationDetails(nil, animated: true)
     }
     
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         var annotationRegion: MKCoordinateRegion?
         
         if let stationAnnotation = view.annotation as? TBStation {
@@ -182,13 +182,13 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
         self.mapView.setRegion(region, animated: animated)
     }
     
-    func mapView(mapView: MKMapView!, regionWillChangeAnimated animated: Bool) {
+    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         // if region is changing for selection, do nothing
         if self.avoidDeselectionWhenChangingRegion { return; }
         self.deselectAllAnnotations()
     }
     
-    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         self.avoidDeselectionWhenChangingRegion = false
     }
     
@@ -205,7 +205,7 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
                 delay: 0.0,
                 usingSpringWithDamping: 0.6,
                 initialSpringVelocity: 8.0,
-                options: UIViewAnimationOptions(0),
+                options: UIViewAnimationOptions(rawValue: 0),
                 animations: f,
                 completion: nil)
         }
@@ -225,7 +225,7 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
                 delay: 0.0,
                 usingSpringWithDamping: 0.6,
                 initialSpringVelocity: -8.0,
-                options: UIViewAnimationOptions(0),
+                options: UIViewAnimationOptions(rawValue: 0),
                 animations: f,
                 completion: nil)
         }
@@ -240,13 +240,13 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
     
     private func availabilityTitleForStation(station: TBStation) -> String? {
         switch station.state {
-        case StationFull.value: return NSLocalizedString("No parking", comment: "")
-        case StationEmpty.value: return NSLocalizedString("No bicycles", comment: "")
-        case StationMarginal.value: return NSLocalizedString("Almost empty", comment: "")
-        case StationMarginalFull.value: return NSLocalizedString("Almost full", comment: "")
-        case StationInactive.value: return NSLocalizedString("Not operational", comment: "")
-        case StationUnknown.value: fallthrough
-        case StationOK.value: fallthrough
+        case .StationFull: return NSLocalizedString("No parking", comment: "")
+        case .StationEmpty: return NSLocalizedString("No bicycles", comment: "")
+        case .StationMarginal: return NSLocalizedString("Almost empty", comment: "")
+        case .StationMarginalFull: return NSLocalizedString("Almost full", comment: "")
+        case .StationInactive: return NSLocalizedString("Not operational", comment: "")
+        case .StationUnknown: fallthrough
+        case .StationOK: fallthrough
         default:
             return nil
         }
@@ -296,6 +296,11 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
     }
     
     @IBAction private func sendStationReport(sender: AnyObject!) {
+        // gracefully bypass if city was not loaded and we don't have an email address
+        if TBServer.instance.city == nil {
+            return
+        }
+        
         if let station = self.openedStation {
             let openMailComposer: () -> () = {
                 let vc = TBFeedbackMailComposeViewController(feedbackOption: TBFeedbackActionSheetService)
@@ -318,27 +323,15 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction private func navigateToStation(sender: AnyObject!) {
         if let station = self.openedStation {
-            let openGoogleMaps: () -> () = {
-                let dest = "\(station.coordinate.latitude),\(station.coordinate.longitude)"
-                if !TBGoogleMapsRouting.routeFromAddress("", toAddress: dest) {
-                    TBAlerts.showAlertFromViewController(self, title: NSLocalizedString("Google Maps is not installed", comment: ""))
-                }
-            }
-            
-            if NSUserDefaults.standardUserDefaults().oneOff("navigate_alert_one_off") {
-                TBAlerts.showAlertFromViewController(self,
-                    title: NSLocalizedString("Navigate to Station", comment: ""),
-                    message: NSLocalizedString("Google Maps will be used to route you from your current location to this station", comment: ""),
-                    dismissed: openGoogleMaps)
-            }
-            else {
-                openGoogleMaps()
+            let dest = "\(station.coordinate.latitude),\(station.coordinate.longitude)"
+            if !TBGoogleMapsRouting.routeFromAddress("", toAddress: dest) {
+                TBAlerts.showAlertFromViewController(self, title: NSLocalizedString("Google Maps is not installed", comment: ""))
             }
         }
     }
@@ -349,8 +342,8 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
         self.mapView.setUserTrackingMode(.Follow, animated: true)
     }
 
-    func mapView(mapView: MKMapView!, didFailToLocateUserWithError error: NSError!) {
-        println("ERROR: unable to determine user location: \(error)")
+    func mapView(mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
+        print("ERROR: unable to determine user location: \(error)")
     }
     
     // - MARK: Bicycle Routes
@@ -361,7 +354,7 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
     private func showOrHideRoutesOnMap() {
         var showRoutes = true
 
-        if let showBicycleRoutesValue = NSUserDefaults.standardUserDefaults().objectForKey("show_bicycle_routes") as NSNumber? {
+        if let showBicycleRoutesValue = NSUserDefaults.standardUserDefaults().objectForKey("show_bicycle_routes") as! NSNumber? {
             showRoutes = showBicycleRoutesValue.boolValue
         }
         
@@ -371,20 +364,20 @@ class TBMapViewController: UIViewController, MKMapViewDelegate, MFMailComposeVie
                 self.kmlParser?.parseKML()
             }
             
-            self.mapView.addOverlays(self.kmlParser!.overlays)
+            self.mapView.addOverlays(self.kmlParser!.overlays as! [MKOverlay])
             self.routesVisible = true
             return
         }
         
         if !showRoutes && self.routesVisible {
             if let kmlParser = self.kmlParser {
-                self.mapView.removeOverlays(kmlParser.overlays)
+                self.mapView.removeOverlays(kmlParser.overlays as! [MKOverlay])
             }
             self.routesVisible = false
         }
     }
     
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
-        return self.kmlParser?.rendererForOverlay(overlay)
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        return (self.kmlParser?.rendererForOverlay(overlay))!
     }
 }

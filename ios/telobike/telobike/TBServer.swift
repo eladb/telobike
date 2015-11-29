@@ -19,10 +19,7 @@ class TBServer: NSObject, CLLocationManagerDelegate {
     dynamic var stationsUpdateTime = NSDate.distantPast() as NSDate
     dynamic var cityUpdateTime = NSDate()
     
-    class var instance: TBServer {
-        struct Singleton { static let instance = TBServer() }
-        return Singleton.instance
-    }
+    static let instance = TBServer()
     
     private override init() {
         super.init()
@@ -37,8 +34,8 @@ class TBServer: NSObject, CLLocationManagerDelegate {
         if cachedStationsResponse == nil {
             if let sampleDataURL = NSBundle.mainBundle().URLForResource("sample-data", withExtension: "json") {
                 let sampleData = NSData(contentsOfURL: sampleDataURL)!
-                let options = NSJSONReadingOptions(0)
-                cachedStationsResponse = NSJSONSerialization.JSONObjectWithData(sampleData, options: options, error: nil) as? [AnyObject]
+                let options = NSJSONReadingOptions(rawValue: 0)
+                cachedStationsResponse = (try? NSJSONSerialization.JSONObjectWithData(sampleData, options: options)) as? [AnyObject]
             }
         }
         
@@ -47,19 +44,18 @@ class TBServer: NSObject, CLLocationManagerDelegate {
         self.reloadCity()
     }
 
-    func reloadStations(#force: Bool) {
+    func reloadStations(force force: Bool) {
         if self.reloading {
-            println("reload - in progress")
+            print("reload - in progress")
             return; // already reloading
         }
         
         if !force && abs(self.stationsUpdateTime.timeIntervalSinceNow) < 30 {
             // if update time is less than 30s, dont do anything
-            println("reload - skip \(abs(self.stationsUpdateTime.timeIntervalSinceNow))s")
             return;
         }
         
-        println("reload")
+        print("reload")
         self.reloading = true
         self.server.GET("/tlv/stations", parameters: nil, success: { (_, responseObject) in
             self.parseStationsResponse(responseObject)
@@ -67,8 +63,8 @@ class TBServer: NSObject, CLLocationManagerDelegate {
             NSUserDefaults.standardUserDefaults().synchronize()
             self.stationsUpdateTime = NSDate()
             self.reloading = false
-        }, { (_, error) in
-            println("error loading stations: \(error)")
+        }, failure: { (_, error) in
+            print("error loading stations: \(error)")
             self.reloading = false
         })
     }
@@ -79,17 +75,17 @@ class TBServer: NSObject, CLLocationManagerDelegate {
             NSUserDefaults.standardUserDefaults().setObject(responseObject, forKey: "city")
             NSUserDefaults.standardUserDefaults().synchronize()
             completion();
-        }, { (_, error) in
-            println("error loading city: \(error)")
+        }, failure: { (_, error) in
+            print("error loading city: \(error)")
             completion();
         })
     }
 
     func postPushToken(token: String, completion: () ->() = {}) {
         self.server.POST("/push/token=\(token)", parameters: nil, success: { (_, _) in
-            println("push token posted successfully")
-        }, { (_, error) in
-            println("error posting push token: \(error)");
+            print("push token posted successfully")
+        }, failure: { (_, error) in
+            print("error posting push token: \(error)");
         })
     }
     
@@ -98,12 +94,16 @@ class TBServer: NSObject, CLLocationManagerDelegate {
     }
     
     func currentDistanceFromLocation(location: CLLocation) -> CLLocationDistance {
-        let currentLocation = self.currentLocation ?? TBServer.instance.city?.cityCenter
-        return location.distanceFromLocation(currentLocation)
+        if let currentLocation = self.currentLocation ?? TBServer.instance.city?.cityCenter {
+            return location.distanceFromLocation(currentLocation)
+        }
+        else {
+            return CLLocationDistanceMax
+        }
     }
     
     func sortStationsByDistance(stations: [TBStation]) -> [TBStation] {
-        return sorted(stations) {
+        return stations.sort {
             let d1 = self.currentDistanceFromLocation($0.location)
             let d2 = self.currentDistanceFromLocation($1.location)
             return d1 < d2
@@ -123,8 +123,8 @@ class TBServer: NSObject, CLLocationManagerDelegate {
                 if let station = TBStation.stationFromDictionary(dict) {
                     // if station already exists, just update its data
                     if let existingStation = stationByID[station.sid] {
-                        var mutableDict = NSMutableDictionary()
-                        mutableDict.addEntriesFromDictionary(dict)
+                        let mutableDict = NSMutableDictionary()
+                        mutableDict.addEntriesFromDictionary(dict as [NSObject : AnyObject])
                         mutableDict["available_bike"] = 1
                         existingStation.updateDictionary(dict)
                     }
@@ -133,7 +133,7 @@ class TBServer: NSObject, CLLocationManagerDelegate {
                     }
                 }
                 else {
-                    println("warning: cannot parse station from dictionary: \(dict)")
+                    print("warning: cannot parse station from dictionary: \(dict)")
                 }
             }
             

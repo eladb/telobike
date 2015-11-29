@@ -32,13 +32,12 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
         Crashlytics.startWithAPIKey("d164a3f45648ccbfa001f8958d403135d23a4dbf")
         
         // push notifications
-        if application.respondsToSelector("registerUserNotificationSettings:") {
-            let settings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+        if #available(iOS 8.0, *) {
+            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
-        }
-        else {
-            application.registerForRemoteNotificationTypes(.Alert | .Badge | .Sound)
+        } else {
+            application.registerForRemoteNotificationTypes([.Alert, .Badge, .Sound])
         }
 
         Appirater.appLaunched(true)
@@ -89,7 +88,7 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
         }
         
         if let locationManager = self.locationManager {
-            if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
+            if #available(iOS 8.0, *) {
                 locationManager.requestWhenInUseAuthorization()
             }
             
@@ -97,7 +96,7 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         manager.stopUpdatingLocation()
         if error.code == CLError.Denied.rawValue {
             TBAlerts.showAlert(
@@ -114,9 +113,9 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
             .stringByReplacingOccurrencesOfString(">", withString: "")
             .stringByReplacingOccurrencesOfString(" ", withString: "")
         
-        println("device push token: \(deviceTokenString)")
+        print("device push token: \(deviceTokenString)")
         TBServer.instance.postPushToken(deviceTokenString, completion: { () -> () in
-            println("push token posted")
+            print("push token posted")
         })
     }
     
@@ -125,7 +124,7 @@ class TBAppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelega
             if let alert = aps["alert"] as? NSString {
                 TBAlerts.showAlert(
                     title: NSLocalizedString("Telobike", comment: ""),
-                    message: alert)
+                    message: alert as String)
             }
         }
     }

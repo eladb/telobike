@@ -19,7 +19,7 @@ class TBPlacemarkAnnotation: NSObject, MKAnnotation {
         return self.placemark.coordinate
     }
     
-    var title: String! {
+    var title: String? {
         return self.placemark.formattedAddress
     }
 }

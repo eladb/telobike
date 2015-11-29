@@ -24,7 +24,7 @@ class TBAvailabilityView: UIView {
             
             let ctx = UIGraphicsGetCurrentContext()
             
-            var availSpace = station.availSpace
+            let availSpace = station.availSpace
             var availBike = station.availBike
             var totalSlots = availSpace + availBike
             
@@ -33,7 +33,7 @@ class TBAvailabilityView: UIView {
             let startX: CGFloat = 1.0
             let startY: CGFloat = rect.size.height / 2.0 - slotSize / 2.0 + 1.0
             var x = startX
-            var y = startX
+            var y = startY
             
             let maxSlots = Int(rect.size.width / (slotSize + spacing))
             let percentageThreshold = 10

@@ -103,7 +103,6 @@
 		F42E60BA17F123590099A1D0 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		F437D5CA1858896F00E1381B /* TBGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBGradientBackgroundView.h; sourceTree = "<group>"; };
 		F437D5CB1858896F00E1381B /* TBGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBGradientBackgroundView.m; sourceTree = "<group>"; };
-		F44061D519CB7B0700A069C5 /* TBStationState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStationState.h; sourceTree = "<group>"; };
 		F44061D619CBDA2F00A069C5 /* TBStationSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBStationSearch.swift; sourceTree = "<group>"; };
 		F44061D919CBF0D000A069C5 /* TBCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBCity.swift; sourceTree = "<group>"; };
 		F44061DC19CCB33B00A069C5 /* TBServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBServer.swift; sourceTree = "<group>"; };
@@ -231,14 +230,6 @@
 			name = settings;
 			sourceTree = "<group>";
 		};
-		F467A17419CD2165007C88D6 /* interop */ = {
-			isa = PBXGroup;
-			children = (
-				F44061D519CB7B0700A069C5 /* TBStationState.h */,
-			);
-			name = interop;
-			sourceTree = "<group>";
-		};
 		F470EBDA17F11589006FD464 = {
 			isa = PBXGroup;
 			children = (
@@ -280,7 +271,6 @@
 		F470EBEC17F11589006FD464 /* telobike */ = {
 			isa = PBXGroup;
 			children = (
-				F467A17419CD2165007C88D6 /* interop */,
 				F42E60AF17F11AF60099A1D0 /* Assets.xcassets */,
 				F4D6FA8A17FC8442000D0F2A /* sample-data.json */,
 				F4EE1E4717FEEE86002F8A62 /* routes.kml */,
@@ -465,6 +455,7 @@
 				F470EBE117F11589006FD464 /* Resources */,
 				B2B8448F929D4572B5A2E7D3 /* Copy Pods Resources */,
 				F48870B418994B6E00AA1143 /* ShellScript */,
+				E53F24530C66BA6572147BDB /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -500,7 +491,9 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TB;
-				LastUpgradeCheck = 0500;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Elad Ben-Israel";
 				TargetAttributes = {
 					F470EBE217F11589006FD464 = {
@@ -590,6 +583,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E53F24530C66BA6572147BDB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F48870B418994B6E00AA1143 /* ShellScript */ = {
@@ -725,6 +733,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -787,6 +796,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -802,6 +812,7 @@
 					"$(SRCROOT)/external",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.citylifeapps.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "telobike/telobike-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -817,6 +828,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -831,6 +843,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/external",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.citylifeapps.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "telobike/telobike-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
@@ -853,6 +866,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "telobikeTests/telobikeTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.citylifeapps.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -871,6 +885,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "telobike/telobike-Prefix.pch";
 				INFOPLIST_FILE = "telobikeTests/telobikeTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.citylifeapps.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

@@ -32,7 +32,7 @@ extension TBStation {
 extension NSArray {
     func filteredStationsArrayWithQuery(query: String) -> NSArray {
         return self.filteredArrayUsingPredicate(NSPredicate(block: { (x, _) -> Bool in
-            let station: TBStation = x as TBStation
+            let station: TBStation = x as! TBStation
             
             if query.isEmpty {
                 return true

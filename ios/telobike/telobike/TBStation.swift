@@ -25,7 +25,7 @@ class TBStation: NSObject {
     var fullSlotColor: UIColor
     var emptySlotColor: UIColor
     
-    var state = StationUnknown.value
+    var state = TBStationState.StationUnknown
     
     var stringsIndex: [String] // strings for keyword lookup
     var lastFetchTime: NSDate?
@@ -45,7 +45,7 @@ class TBStation: NSObject {
     }
     
     class func stationFromDictionary(dict: NSDictionary) -> TBStation? {
-        var station = TBStation()
+        let station = TBStation()
         if (!station.updateDictionary(dict)) {
             return nil
         }
@@ -83,13 +83,13 @@ class TBStation: NSObject {
         let isActive = !isOnline || availBike > 0 || availSpace > 0
 
         // determine state
-        if !isOnline { self.state = StationUnknown.value }
-        else if !isActive { self.state = StationInactive.value }
-        else if self.availBike == 0 { self.state = StationEmpty.value }
-        else if self.availSpace == 0 { self.state = StationFull.value }
-        else if self.availBike <= kMarginalBikeAmount { self.state = StationMarginal.value }
-        else if self.availSpace <= kMarginalBikeAmount { self.state = StationMarginalFull.value }
-        else { self.state = StationOK.value }
+        if !isOnline { self.state = .StationUnknown }
+        else if !isActive { self.state = .StationInactive }
+        else if self.availBike == 0 { self.state = .StationEmpty }
+        else if self.availSpace == 0 { self.state = .StationFull }
+        else if self.availBike <= kMarginalBikeAmount { self.state = .StationMarginal }
+        else if self.availSpace <= kMarginalBikeAmount { self.state = .StationMarginalFull }
+        else { self.state = .StationOK }
         
         // determine colors
         let red = UIColor(red: 191.0/255.0, green:0.0, blue:0.0, alpha:1.0)
@@ -107,8 +107,8 @@ class TBStation: NSObject {
                 }
             }
 
-            var availBikeColor = colorForAvail(self.availBike)
-            var availSpaceColor = colorForAvail(self.availSpace)
+            let availBikeColor = colorForAvail(self.availBike)
+            let availSpaceColor = colorForAvail(self.availSpace)
 
             indicatorColor = {
                 switch (availBikeColor, availSpaceColor) {
@@ -125,7 +125,7 @@ class TBStation: NSObject {
 
         self.lastUpdateTime = NSDate()
 
-        for (k, v) in dict {
+        for (_, v) in dict {
             if let x = v as? String {
                 stringsIndex.append(x)
             }
@@ -135,16 +135,26 @@ class TBStation: NSObject {
     }
 }
 
+enum TBStationState {
+    case StationFull         // red (no park)
+    case StationEmpty        // red (no bike)
+    case StationOK           // green
+    case StationMarginal     // yellow
+    case StationMarginalFull // yellow full
+    case StationInactive     // gray
+    case StationUnknown      // black
+}
+
 extension TBStation {
     var markerImage: UIImage {
         switch state {
-        case StationOK.value: return UIImage(named: "map-green.png")!
-        case StationEmpty.value: return UIImage(named:"map-redempty.png")!
-        case StationFull.value: return UIImage(named:"map-redfull.png")!
-        case StationInactive.value: return UIImage(named:"map-gray.png")!
-        case StationMarginal.value: return UIImage(named:"map-yellow.png")!
-        case StationMarginalFull.value: return UIImage(named: "map-yellowfull.png")!
-        case StationUnknown.value: fallthrough
+        case .StationOK: return UIImage(named: "map-green.png")!
+        case .StationEmpty: return UIImage(named:"map-redempty.png")!
+        case .StationFull: return UIImage(named:"map-redfull.png")!
+        case .StationInactive: return UIImage(named:"map-gray.png")!
+        case .StationMarginal: return UIImage(named:"map-yellow.png")!
+        case .StationMarginalFull: return UIImage(named: "map-yellowfull.png")!
+        case .StationUnknown: fallthrough
         default: return UIImage(named: "map-black.png")!
         }
     }
@@ -155,7 +165,7 @@ extension TBStation: MKAnnotation {
         return location.coordinate
     }
     
-    var title: String {
+    var title: String? {
         return stationName ?? NSLocalizedString("untitled", comment: "untitled station name")
     }
 }

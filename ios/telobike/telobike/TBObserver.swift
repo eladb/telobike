@@ -25,7 +25,7 @@ import Foundation
         self.object.removeObserver(self, forKeyPath: self.keyPath)
     }
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         dispatch_async(dispatch_get_main_queue(), self.block)
     }
     

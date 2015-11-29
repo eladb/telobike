@@ -60,7 +60,7 @@ class TBListViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(STATION_CELL_REUSE_IDENTIFIER, forIndexPath: indexPath) as TBStationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(STATION_CELL_REUSE_IDENTIFIER, forIndexPath: indexPath) as! TBStationTableViewCell
         cell.station = self.sortedStations[indexPath.row]
         return cell
     }

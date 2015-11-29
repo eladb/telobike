@@ -12,14 +12,11 @@ class TBFavorites: NSObject {
     private var favorites = NSMutableDictionary()
     private let defaultsKey = "favorites"
     
-    class var instance: TBFavorites {
-        struct Singleton { static let instance = TBFavorites() }
-        return Singleton.instance
-    }
+    static let instance = TBFavorites()
     
     override init() {
         if let dict = NSUserDefaults.standardUserDefaults().dictionaryForKey(defaultsKey) {
-            self.favorites = (dict as NSDictionary).mutableCopy() as NSMutableDictionary
+            self.favorites = (dict as NSDictionary).mutableCopy() as! NSMutableDictionary
         }
         
     }

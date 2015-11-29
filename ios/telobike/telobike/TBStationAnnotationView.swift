@@ -33,7 +33,7 @@ class TBStationAnnotationView: MKAnnotationView {
         return r
     }
     
-    override var annotation: MKAnnotation! {
+    override var annotation: MKAnnotation? {
         didSet {
             self.markerImageObserver = TBObserver.observerForObject(self.station, keyPath: "lastUpdateTime") { [weak self] in
                 self?.layer.contents = self?.station?.markerImage.CGImage

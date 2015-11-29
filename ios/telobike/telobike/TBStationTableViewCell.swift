@@ -19,8 +19,7 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
             self.availabilityView.station = station
             self.stationNameLabel.text = station.stationName
             self.availabilityIndicatorView.fillColor = station.indicatorColor
-            
-            self.locationManager(self.locationManager, didUpdateLocations: nil)
+            self.locationManager(self.locManager, didUpdateLocations: [])
         }
     }
 
@@ -29,19 +28,19 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
     @IBOutlet private var availabilityView: TBAvailabilityView!
     @IBOutlet private var subtitleLabel: UILabel!
     @IBOutlet private var stationNameLabel: UILabel!
-    private var locationManager: CLLocationManager!
+    private var locManager: CLLocationManager!
     private var distanceFormatter: MKDistanceFormatter!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        self.locationManager = CLLocationManager()
-        if self.locationManager.respondsToSelector("requestWhenInUseAuthorization") {
-            self.locationManager.requestWhenInUseAuthorization()
+        self.locManager = CLLocationManager()
+        if #available(iOS 8.0, *) {
+            self.locManager.requestWhenInUseAuthorization()
         }
-        self.locationManager.startUpdatingLocation()
-        self.locationManager.delegate = self;
+        self.locManager.startUpdatingLocation()
+        self.locManager.delegate = self;
         
         self.distanceFormatter = MKDistanceFormatter()
         
@@ -54,14 +53,14 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
         self.subtitleLabel.hidden = true
     }
 
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // hide label if no location services
         if (CLLocationManager.authorizationStatus() != .Authorized) {
             self.subtitleLabel.hidden = true
         }
         
-        if (self.locationManager.location != nil) {
-            var distance = self.station.location.distanceFromLocation(self.locationManager.location)
+        if let location = self.locManager.location {
+            let distance = self.station.location.distanceFromLocation(location)
             if (distance < 100_000) {
                 self.subtitleLabel.text = self.distanceFormatter.stringFromDistance(distance)
             }
@@ -80,12 +79,12 @@ class TBStationTableViewCell: UITableViewCell, CLLocationManagerDelegate  {
 
     }
 
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         // hide when no location
         self.subtitleLabel.hidden = true
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if (status != .Authorized) {
             self.subtitleLabel.hidden = true
         }

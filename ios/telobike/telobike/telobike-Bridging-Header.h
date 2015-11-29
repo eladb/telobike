@@ -3,13 +3,12 @@
 //
 
 #import "Utils.h"
-#import "TBStationState.h"
 #import <AFNetworking/AFNetworking.h>
 
 #import "UIViewController+GAI.h"
 #import "TBMainViewController.h"
 #import <Appirater.h>
-#import <GoogleAnalytics-iOS-SDK/GAI.h>
+#import <GAI.h>
 #import <Crashlytics/Crashlytics.h>
 #import "UIColor+Style.h"
 #import "KMLParser.h"

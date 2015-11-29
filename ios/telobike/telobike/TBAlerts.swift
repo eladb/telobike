@@ -17,7 +17,7 @@ class TBAlerts {
             cancelButtonTitle: NSLocalizedString("OK", comment: "")).show()
     }
     
-    class func showAlert(#title: String, message: String? = nil) {
+    class func showAlert(title title: String, message: String? = nil) {
         if let vc = UIApplication.sharedApplication().keyWindow?.rootViewController {
             self.showAlertFromViewController(vc, title: title, message: message)
         }
@@ -31,7 +31,7 @@ private class AlertDelegate: NSObject, UIAlertViewDelegate {
         super.init()
         DelegateManager.ref(self)
     }
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    @objc func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         self.callback?()
         DelegateManager.unref(self)
     }

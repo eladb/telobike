@@ -25,7 +25,7 @@ class TBFavoritesViewController: UITableViewController {
             self.refreshControl?.endRefreshing()
         }
         
-        self.emptyLabel = NSBundle.mainBundle().loadNibNamed("NoFavoritesView", owner: nil, options: nil)[0] as UIView
+        self.emptyLabel = NSBundle.mainBundle().loadNibNamed("NoFavoritesView", owner: nil, options: nil)[0] as! UIView
         self.tableView.backgroundView = self.emptyLabel;
         // Do any additional setup after loading the view.
     }
@@ -75,7 +75,7 @@ class TBFavoritesViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(STATION_CELL_REUSE_IDENTIFIER, forIndexPath: indexPath) as TBStationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(STATION_CELL_REUSE_IDENTIFIER, forIndexPath: indexPath) as! TBStationTableViewCell
         
         cell.station = self.favoriteStations[indexPath.row]
         
@@ -83,7 +83,7 @@ class TBFavoritesViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var mapViewContoller = self.main().mapViewController
+        let mapViewContoller = self.main().mapViewController
         mapViewContoller.selectAnnotation(self.favoriteStations[indexPath.row] as TBStation, animated: false)
         self.navigationController?.pushViewController(mapViewContoller, animated: true)
     }
