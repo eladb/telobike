@@ -23,7 +23,7 @@
     "soap": "^0.11.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "subdomain": "telobike",
   "devDependencies": {},
