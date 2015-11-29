@@ -3,7 +3,6 @@
 //
 
 #import "Utils.h"
-#import <AFNetworking/AFNetworking.h>
 
 #import "UIViewController+GAI.h"
 #import "TBMainViewController.h"

@@ -11,7 +11,6 @@ import Foundation
 class TBServer: NSObject, CLLocationManagerDelegate {
     private let rootURL = NSURL(string: "https://s3-eu-west-1.amazonaws.com/telobike/tlv")!
     private let locationManager = CLLocationManager()
-    private let server = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://telobike.citylifeapps.com"))
     
     var stations: [TBStation] = []
     var city: TBCity? = nil
@@ -56,18 +55,19 @@ class TBServer: NSObject, CLLocationManagerDelegate {
             return;
         }
         
-        print("reload")
         self.reloading = true
-        self.server.GET("/tlv/stations", parameters: nil, success: { (_, responseObject) in
+        self.getJSON("stations.json") { (error, responseObject) in
+            self.reloading = false
+            if let error = error {
+                print("error loading stations: \(error)")
+                return
+            }
+
             self.parseStationsResponse(responseObject)
             NSUserDefaults.standardUserDefaults().setObject(responseObject, forKey: "stations")
             NSUserDefaults.standardUserDefaults().synchronize()
             self.stationsUpdateTime = NSDate()
-            self.reloading = false
-        }, failure: { (_, error) in
-            print("error loading stations: \(error)")
-            self.reloading = false
-        })
+        }
     }
     
     func getJSON(relativeURL: String, completion: ((NSError?, AnyObject?) -> ())) {
@@ -109,16 +109,11 @@ class TBServer: NSObject, CLLocationManagerDelegate {
             NSUserDefaults.standardUserDefaults().setObject(city, forKey: "city")
             NSUserDefaults.standardUserDefaults().synchronize()
             completion()
-
         }
     }
 
     func postPushToken(token: String, completion: () ->() = {}) {
-        self.server.POST("/push/token=\(token)", parameters: nil, success: { (_, _) in
-            print("push token posted successfully")
-        }, failure: { (_, error) in
-            print("error posting push token: \(error)");
-        })
+        print("post potential push token")
     }
     
     var currentLocation: CLLocation? {
