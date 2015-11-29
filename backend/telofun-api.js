@@ -18,9 +18,8 @@ module.exports = function(callback) {
       return callback(null, 
         results &&
         results.GetNearestStationsResult && 
-        results.GetNearestStationsResult.length > 0 &&
-        results.GetNearestStationsResult[0].StationsCloseBy &&
-        results.GetNearestStationsResult[0].StationsCloseBy.Station);
+        results.GetNearestStationsResult.StationsCloseBy &&
+        results.GetNearestStationsResult.StationsCloseBy.Station);
     });
   });
 };
