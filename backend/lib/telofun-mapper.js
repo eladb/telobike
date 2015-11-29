@@ -38,7 +38,8 @@
 // }
 //
 
-module.exports = function(station) {
+module.exports = function(attributes) {
+  var station = attributes.attributes;
   return {
     IsActive: station.IsActive,
     available_bike: station.IsActive && station.NumOfAvailableBikes,

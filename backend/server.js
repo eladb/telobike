@@ -55,6 +55,8 @@ function read_stations(callback) {
     // merge overrides
     merge_overrides(mapped_stations);
 
+    console.log(JSON.stringify(mapped_stations, true, 2));
+
     // write stations to S3
     upload_to_s3(mapped_stations, function(err) {
       if (err) {
