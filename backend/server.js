@@ -8,7 +8,7 @@ var telofun_api = require('./lib/telofun-api');
 var telofun_mapper = require('./lib/telofun-mapper');
 var AWS = require('aws-sdk');
 
-AWS.config.region = 'eu-west-1a';
+AWS.config.region = 'eu-west-1';
 
 var s3bucket = new AWS.S3({ params: { Bucket: 'telobike' } });
 
