@@ -4,8 +4,8 @@ var logule = require('logule');
 var cors = require('./lib/cors');
 var server = express();
 var csvdb = require('csvdb');
-var telofun_api = require('./telofun-api');
-var telofun_mapper = require('./telofun-mapper');
+var telofun_api = require('./lib/telofun-api');
+var telofun_mapper = require('./lib/telofun-mapper');
 var AWS = require('aws-sdk');
 
 AWS.config.region = 'eu-west-1a';
