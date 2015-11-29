@@ -6,10 +6,15 @@ var server = express();
 var csvdb = require('csvdb');
 var telofun_api = require('./telofun-api');
 var telofun_mapper = require('./telofun-mapper');
+var AWS = require('aws-sdk');
+
+AWS.config.region = 'eu-west-1a';
+
+var s3bucket = new AWS.S3({ params: { Bucket: 'telobike' } });
 
 console.log('telobike server is running...');
 
-var overrides_url = 'https://docs.google.com/spreadsheet/pub?key=0AuP9sJn-WbrXdFdOV1lPV09EZDBrQ2RlZzM5ZmhPb2c&output=csv';
+var overrides_url = 'https://docs.google.com/spreadsheets/d/1qjbQfj2vDWc569PIXJ-i8-2uLQk3KC1P4mz3bpGUJxI/pub?output=csv';
 var overrides_db = csvdb(overrides_url, { autofetch: 30 * 1000 }); // refresh overrides every 30s
 
 setTimeout(function() {
@@ -37,7 +42,7 @@ function read_stations(callback) {
     console.log(updated_stations.length + ' stations retrieved');
 
     // map stations from tel-o-fun protocol to tel-o-bike protocol
-    mapped_stations = updated_stations.map(telofun_mapper);
+    var mapped_stations = updated_stations.map(telofun_mapper);
 
     // update cached stations
     stations = {};    
@@ -47,8 +52,42 @@ function read_stations(callback) {
       }
     });
 
+    // merge overrides
+    merge_overrides(mapped_stations);
+
+    // write stations to S3
+    upload_to_s3(mapped_stations, function(err) {
+      if (err) {
+        console.error('ERROR: upload to s3 failed:', err);
+      }
+      console.log('Upladed to S3');
+    });
+
     return callback(null, mapped_stations);
   });
+}
+
+function upload_to_s3(stations, callback) {
+  var array = Object.keys(stations).map(function(key) { return stations[key] });
+  var params = { Key: 'tlv/stations.json', Body: JSON.stringify(array, true, 2) };
+  return s3bucket.upload(params, callback);
+}
+
+function merge_overrides(stations) {
+  for (var sid in stations) {
+    var s = stations[sid];
+
+    var overrides = overrides_db.entries[sid];
+    if (overrides) {
+      console.log('found overrides for', sid);
+      for (var k in overrides) {
+        var val = overrides[k];
+        if (val) {
+          s[k] = val;
+        }
+      }
+    }  
+  }
 }
 
 setInterval(read_stations, 30*1000); // update station info every 30 seconds
@@ -65,24 +104,10 @@ function get_stations(req, res) {
     return res.end('no stations information from tel-o-fun');
   }
 
-  var result = [];
-
-  for (var sid in stations) {
-    var s = stations[sid];
-
-    var overrides = overrides_db.entries[sid];
-    if (overrides) {
-      console.log('found overrides for', sid);
-      for (var k in overrides) {
-        var val = overrides[k];
-        if (val) {
-          s[k] = val;
-        }
-      }
-    }
-
-    result.push(s);
-  }
+  // convert to hash
+  var result = Object.keys(stations).map(function(key) {
+    return stations[key];
+  });
 
   return res.send(result);
 }

@@ -10,18 +10,20 @@
     "node": "~0.6.10"
   },
   "dependencies": {
-    "express": "3.0.3",
     "async": "0.1.22",
+    "aws-sdk": "^2.2.19",
+    "csvdb": "0.0.3",
+    "express": "3.0.3",
     "jsdom": "0.2.15",
+    "logule": "0.6.1",
     "memory-cache": "0.0.4",
     "memstream": "0.0.1",
     "mkdirp": "0.3.4",
     "request": "2.9.202",
-    "logule": "0.6.1",
-    "csvdb": "0.0.3"
+    "soap": "^0.11.0"
   },
   "scripts": {
-      "start": "server.js"
+    "start": "node server.js"
   },
   "subdomain": "telobike",
   "devDependencies": {},
