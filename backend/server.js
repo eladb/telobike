@@ -69,7 +69,7 @@ function read_stations(callback) {
 
 function upload_to_s3(stations, callback) {
   var array = Object.keys(stations).map(function(key) { return stations[key] });
-  var params = { Key: 'tlv/stations.json', Body: JSON.stringify(array, true, 2) };
+  var params = { Key: 'tlv/stations.json', Body: JSON.stringify(array, true, 2), ACL: 'public-read' };
   return s3bucket.upload(params, callback);
 }
 
