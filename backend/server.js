@@ -153,16 +153,6 @@ server.post('/push', function(req, res, next) {
   return res.send('OK');
 });
 
-server.post('/_deploy_dskfjh484jk09k', function(req, res) {
-  var backoff_sec = Math.round(5 + Math.random() * 35); // between 5s and 30s
-  console.log('deployment request. Exit in', backoff_sec + 's');
-  setTimeout(function() {
-    console.log('Bye');
-    process.exit(0);
-  }, backoff_sec * 1000);
-  res.end('OK');
-});
-
 setInterval(function() {
   var mb = Math.round(process.memoryUsage().heapTotal / 1024);
   logule.trace(mb + ' kb');
